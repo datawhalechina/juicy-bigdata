@@ -19,7 +19,7 @@
 
 ## 大数据处理技术目录
 
-* [第一章：大数据概述](ch1%20大数据概述.md)
+* [第一章：大数据概述](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述.md)
   - [x] [1.1 大数据时代](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_1-1-大数据时代)
   - [x] [1.2 大数据的概念](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_12-大数据的概念)
   - [x] [1.3大数据的应用](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_13-大数据的应用)
