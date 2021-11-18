@@ -1,14 +1,14 @@
 - 目录
-  - [第一章：大数据概述](https://github.com/shenhao-stu/Big-Data/#/docs/ch1%20大数据概述.md)
+  - [第一章：大数据概述](ch1%20大数据概述.md)
     - 1.1 大数据时代
     - 1.2 大数据的概念
     - 1.3大数据的应用
     - 1.4 大数据关键技术
-  - [第二章：Hadoop](https://github.com/shenhao-stu/Big-Data/#/docs/ch2%20Hadoop.md)
+  - [第二章：Hadoop](ch2%20Hadoop.md)
     - 2.1 概述
     - 2.2 Hadoop生态系统
     - 2.3 Hadoop的安装与使用
-  - [第三章：HDFS](https://github.com/shenhao-stu/Big-Data/#/docs/ch3%20HDFS.md)
+  - [第三章：HDFS](ch3%20HDFS.md)
     - 3.1 概述
     - 3.2 HDFS的体系结构
     - 3.3 HDFS的存储原理

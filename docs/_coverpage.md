@@ -1,6 +1,7 @@
 <div align=center>
-<img src="../doc_imgs/logo.png" width="250">
+<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Big-Data/logo.png" width="250">
 </div>
+
 
 # Big-Data <small>1.0 version</small>
 
