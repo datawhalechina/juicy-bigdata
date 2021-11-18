@@ -1,6 +1,7 @@
 <div align=center>
-<img src="doc_imgs/logo.png" width="250">
+<img src="../doc_imgs/logo.png" width="250">
 </div>
+
 
 # 大数据处理技术 Big Data
 
