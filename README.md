@@ -19,20 +19,20 @@
 
 ## 大数据处理技术目录
 
-* 第一章：大数据概述
-  - [x] [1.1 大数据时代] 
-  - [x] [1.2 大数据的概念]
-  - [x] [1.3大数据的应用]
-  - [x] [1.4 大数据关键技术]
-* 第二章：Hadoop
-  - [x] [2.1 概述] 
-  - [x] [2.2 Hadoop生态系统]
-  - [x] [2.3 Hadoop的安装与使用]
-* 第三章：HDFS
-  - [x] [3.1 概述] 
-  - [x] [3.2 HDFS的体系结构]
-  - [x] [3.3 HDFS的存储原理]
-  - [x] [3.4 HDFS编程实战]
+* [第一章：大数据概述](https://github.com/shenhao-stu/Big-Data/blob/master/docs/ch1%20大数据概述.md)
+  - [x] 1.1 大数据时代
+  - [x] 1.2 大数据的概念
+  - [x] 1.3大数据的应用
+  - [x] 1.4 大数据关键技术
+* [第二章：Hadoop](https://github.com/shenhao-stu/Big-Data/blob/master/docs/ch2%20Hadoop.md)
+  - [x] 2.1 概述
+  - [x] 2.2 Hadoop生态系统
+  - [x] 2.3 Hadoop的安装与使用
+* [第三章：HDFS](https://github.com/shenhao-stu/Big-Data/blob/master/docs/ch3%20HDFS.md)
+  - [x] 3.1 概述
+  - [x] 3.2 HDFS的体系结构
+  - [x] 3.3 HDFS的存储原理
+  - [x] 3.4 HDFS编程实战
 * 第四章：HBase
 * 第五章：Hive
 * 第六章：MapReduce理解（待定）
