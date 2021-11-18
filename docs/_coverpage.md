@@ -14,4 +14,4 @@
 
 [GitHub](https://github.com/shenhao-stu/Big-Data)
 [Zhihu](https://www.zhihu.com/people/shenhao-63)
-[Get Started](https://shenhao-stu.github.io/Big-Data/#/?id=Big-Data)
+[Get Started](README.md)
