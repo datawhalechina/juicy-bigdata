@@ -47,7 +47,11 @@
   - [x] [3.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_35-%e6%9c%ac%e7%ab%a0%e5%b0%8f%e7%bb%93)
 * 第四章：HBase
 * 第五章：Hive
-* 第六章：MapReduce理解（待定）
+* [第六章：MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce)
+  - [x] [6.0 洋葱辣椒酱与MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_60-%e6%b4%8b%e8%91%b1%e8%be%a3%e6%a4%92%e9%85%b1%e4%b8%8emapreduce)
+  - [x] [6.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_61-%e6%a6%82%e8%bf%b0)
+  - [x] [6.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_62-mapreduce%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
+  - [x] [6.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_63-%e4%bb%a5wordcount%e4%b8%ba%e4%be%8b%e7%90%86%e8%a7%a3mapreduce)
 * 第七章：Spark（待定）
 
 > 第二章以后的章节都配置有实验内容，即linux上的实操
