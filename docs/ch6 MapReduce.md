@@ -20,7 +20,7 @@
 妻子： 好吧。
 ```
 
-<img src="../doc_imgs/ch6.0.1.png" alt="image-20211124165723078" style="zoom: 67%;" />
+<img src="../doc_imgs/ch6.0.1.png" style="zoom: 67%;" />
 
 ```html
 我：现在，假设你想用薄荷、洋葱、番茄、辣椒、大蒜弄一瓶混合辣椒酱。你会怎么做呢？
@@ -38,7 +38,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 我： 你可以说是，也可以说不是。 其实这只是MapReduce的一部分，MapReduce的强大在于分布式计算。
 ```
 
-<img src="../doc_imgs/ch6.0.2.png" alt="image-20211124165930899" style="zoom:67%;" />                     	<img src="../doc_imgs/ch6.0.3.png" alt="image-20211124170808606" style="zoom:67%;" />
+<img src="../doc_imgs/ch6.0.2.png" style="zoom:67%;" />                     	<img src="../doc_imgs/ch6.0.3.png" style="zoom:67%;" />
 
 ```html
 妻子： 分布式计算？ 那是什么？请给我解释下吧。
@@ -62,11 +62,11 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 我：现在你会看到MapReduce遗漏的阶段—搅拌阶段。MapReduce将所有输出的蔬菜碎都搅拌在了一起，这些蔬菜碎都是在以key为基础的 map操作下产生的。搅拌将自动完成，你可以假设key是一种原料的名字，就像洋葱一样。 所以全部的洋葱keys都会搅拌在一起，并转移到研磨洋葱的研磨器里。这样，你就能得到洋葱辣椒酱了。同样地，所有的番茄也会被转移到标记着番茄的研磨器里，并制造出番茄辣椒酱。
 ```
 
-<img src="../doc_imgs/ch6.0.4.png" alt="image-20211125194048917" style="zoom: 67%;" />
+<img src="../doc_imgs/ch6.0.4.png" style="zoom: 67%;" />
 
 > 小故事讲完啦，相信大家对MapReduce都有了个初步的了解，下面正式进入MapReduce的学习！！！大家冲冲冲，这部分知识是满满的干货
 
-<img src="../doc_imgs/ch6.0.5.png" alt="image-20211125211204564" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.0.5.png" style="zoom:80%;" />
 
 ## 6.1 概述
 
@@ -78,7 +78,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ​		分布式并行编程与传统的程序开发方式有很大的区别。传统的程序都是以单指令、单数据流的方式顺序执行，虽然这种方式比较符合人类的思维习惯，但是，这种程序的性能受到单台机器性能的限制，可扩展性较差。**分布式并行程序可以运行在由大量计算机构成的集群上，从而可以充分利用集群的并行处理能力，同时，通过向集群中增加新的计算节点，就可以很容易实现集群计算能力的扩充。**
 
-<img src="../doc_imgs/ch6.1.1.png" alt="image-20211125190703383" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.1.1.png" style="zoom:80%;" />
 
 ​		谷歌公司最先提出了分布式并行编程模型MapReduce，Hadoop MapReduce是它的开源实现。谷歌的 MapReduce运行在分布式文件系统GFS上，与谷歌类似，Hadoop MapReduce运行在分布式文件系统HDFS上。相对而言，**Hadoop MapReduce要比谷歌MapReduce 的使用门槛低很多,程序员即使没有任何分布式程序开发经验，也可以很轻松地开发出分布式程序并部署到计算机集群中。**
 
@@ -90,7 +90,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ​		MapReduce设计的一个理念就是**“计算向数据靠拢”**，而不是“数据向计算靠拢",因为数据需要***大量的网络传输开销***，尤其是在大规模数据环境下，这种开销尤为惊人，所以，移动计算要比移动数据更加经济。在这种理念下，一个集群中，只要有可能，**MapReduce框架就会将Map程序就近地在HDFS数据所在的节点运行，即将计算节点和存储节点放在一起运行，从而减少了节点间的数据移动开销。**
 
-<img src="../doc_imgs/ch6.1.2.png" alt="image-20211125191944311" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.1.2.png" style="zoom:80%;" />
 
 ​		MapReduce框架采用了 Master/Slave架构，包括一个 Master和若干个 Slave **Master**上运行**JobTracker**，**Slave**上运行 **TaskTracker**。用户提交的每个计算作业，会被划分成若干个任务。
 
@@ -118,15 +118,15 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > **这里看起来好枯燥		╮(╯▽╰)╭         举个栗子方便理解啦啦啦拉拉啊拉**
 
-<img src="../doc_imgs/ch6.1.3.png" alt="image-20211125191155490" style="zoom: 67%;" />
+<img src="../doc_imgs/ch6.1.3.png" style="zoom: 67%;" />
 
 
 
-<img src="../doc_imgs/ch6.1.4.png" alt="image-20211125191209104" style="zoom:67%;" />
+<img src="../doc_imgs/ch6.1.4.png" style="zoom:67%;" />
 
 
 
-<img src="../doc_imgs/ch6.1.5.png" alt="image-20211125191247328" style="zoom: 80%;" />
+<img src="../doc_imgs/ch6.1.5.png" style="zoom: 80%;" />
 
 > **这里再给出一个简单WordCount实例**
 
@@ -137,7 +137,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 
 
-<img src="../doc_imgs/ch6.1.6.png" alt="image-20211125190346042" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.1.6.png" style="zoom:80%;" />
 
 
 
@@ -145,7 +145,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > ps：编者警告，以下内容十分硬核，建议买杯咖啡慎入，希望大家能坚持学下去，加油加油
 
-<img src="../doc_imgs/ch6.2.1.png" alt="image-20211125211314900" style="zoom:67%;" />
+<img src="../doc_imgs/ch6.2.1.png" style="zoom:67%;" />
 
 ### 6.2.1 工作流程概述
 
@@ -156,7 +156,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ​		然后，这些中间结果会被分发到多个Reduce任务在多台机器上**并行执行**，**具有相同key**的<key,value>会被发送到同一个Reduce任务那里，Reduce任务会对中间结果进行汇总计算得到最后结果，并输出到分布式文件系统中。
 
-![image-20210403152208757](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403152208757.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403152208757.png)
 
 > 不同的Map任务之间不会进行通信，不同的Reduce任务之间爷不会发生任何信息交换；用户不能显式地从一台机器向另一台继机器发送消息，所有的数据交换都是通过MapReduce框架自身去实现的。
 >
@@ -164,13 +164,13 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ### 6.2.2 MapReduce的各个执行阶段
 
-![image-20210403153618883](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403153618883.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403153618883.png)
 
 ---
 
 > 坚持坚持，这才刚开始，学习使我快乐！！
 
-<img src="../doc_imgs/ch6.2.2.png" alt="image-20211125211353836" style="zoom:67%;" />
+<img src="../doc_imgs/ch6.2.2.png" style="zoom:67%;" />
 
 ### 6.2.3 Shuffle过程详解
 
@@ -182,11 +182,11 @@ Shuffle过程是MapReduce整个工作流程的核心环节，理解Shuffle过程
 
 所谓Shuffle,是指对Map输出结果进行分区、排序、合并等处理并交给Reduce的过程。因此，**Shuffle过程**分为**Map端的操作**和**Reduce端的操作**。
 
-![image-20210403154046928](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403154046928.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403154046928.png)
 
 ①在Map端的Shuffle过程。Map的输出结果首先被写入缓存，当缓存满时，就启动溢写操作，把缓存中的数据写入磁盘文件，并清空缓存。当启动溢写操作时，首先需要把缓存中的数据进行分区，然后对每个分区的数据进行排序（Sort）和合并（Combine），之后再写入磁盘文件。每次溢写操作会生成一个新的磁盘文件，随着Map任务的执行，磁盘中就会生成多个溢写文件。在Map任务全部结束之前，这些溢写文件会被归并（Merge）成一个大的磁盘文件，然后，通知相应的Reduce任务来领取属于自己处理的数据。
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403154521609.png" alt="image-20210403154521609" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403154521609.png" style="zoom:50%;" />
 
 ②在Reduce端的Shuffle过程。Reduce任务从Map 端的不同 Map 机器领回属于自己处理的那部分数据，然后，对数据进行归并（Merge）后交给Reduce处理。
 
@@ -237,7 +237,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 > 如果把这段知识肝完，请自称为肝帝        ╮(╯▽╰)╭
 
-<img src="../doc_imgs/ch6.2.3.png" alt="image-20211125211605666" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.2.3.png" style="zoom:80%;" />
 
 
 
@@ -245,7 +245,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 ​       相对于Map端而言，Reduce端的Shuffle过程非常简单，只需要从Map端读取Map结果，然后执行归并操作，最后输送给Reduce任务进行处理。
 
-![image-20210403162040361](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403162040361.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403162040361.png)
 
 (1) “领取”数据
 
@@ -271,11 +271,11 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 
 
-![image-20210403163316845](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403163316845.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403163316845.png)
 
 > emmmmmmm，编者吐槽，以上内容实在是太太太太太硬核了，估计今天吃完饭憋得上厕所都难受，大家都是打工人，自然感同身受。没事没事没事，下面Wordcount的例子就有很多生动形象的图啦，很好理解的！！！大家坚持住，看完睡个好觉红红火火恍恍惚惚哈哈哈。
 
-<img src="../doc_imgs/ch6.2.4.png" alt="image-20211125210942655" style="zoom:67%;" />
+<img src="../doc_imgs/ch6.2.4.png" style="zoom:67%;" />
 
 
 
@@ -293,7 +293,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 ### 6.3.1 首先放一张wordcount实现过程图来控场
 
-<img src="../doc_imgs/ch6.3.1.png" alt="image-20211125200557652" style="zoom: 80%;" />
+<img src="../doc_imgs/ch6.3.1.png" style="zoom: 80%;" />
 
 那么问题来了，MapReduce是如何对这些**大批量的数据**进行处理计算的呢？
 
@@ -301,7 +301,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 看到这里不知道朋友们有没有回想起HDFS的知识呢？  还记得NameNode和DataNode吗？
 
-<img src="../doc_imgs/ch6.3.2.png" alt="image-20211125200834062" style="zoom:67%;" />
+<img src="../doc_imgs/ch6.3.2.png" style="zoom:67%;" />
 
 
 
@@ -309,13 +309,13 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 
 
-<img src="../doc_imgs/ch6.3.3.png" alt="image-20211125201225901" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.3.png" style="zoom:80%;" />
 
 
 
 ### 6.3.3 数据分片
 
-<img src="../doc_imgs/ch6.3.4.png" alt="image-20211125201431512" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.4.png" style="zoom:80%;" />
 
 MapReduce的工作流程：
 
@@ -328,35 +328,35 @@ MapReduce的工作流程：
 
 **1. wordcount的数据分片**
 
-<img src="../doc_imgs/ch6.3.5.png" alt="image-20211125201730809" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.5.png" style="zoom:80%;" />
 
 **2. split的Map流程**
 
-<img src="../doc_imgs/ch6.3.6.png" alt="image-20211125201839210" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.6.png" style="zoom:80%;" />
 
 **3. Reduce流程**
 
-<img src="../doc_imgs/ch6.3.7.png" alt="image-20211125202028625" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.7.png" style="zoom:80%;" />
 
 **4. Wordcount的Map流程**
 
-<img src="../doc_imgs/ch6.3.8.png" alt="image-20211125202311585" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.8.png" style="zoom:80%;" />
 
 **5. Wordcount的Reduce流程**
 
-<img src="../doc_imgs/ch6.3.9.png" alt="image-20211125202511182" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.9.png" style="zoom:80%;" />
 
 **6. Shuffle过程**
 
-<img src="../doc_imgs/ch6.3.10.png" alt="image-20211125203052628" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.10.png" style="zoom:80%;" />
 
 ### 6.3.5 详细版MapReduce工作流程
 
-<img src="../doc_imgs/ch6.3.11.png" alt="image-20211125203403273" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.11.png" style="zoom:80%;" />
 
 ### 6.3.6 MapReduce的体系结构
 
-<img src="../doc_imgs/ch6.3.12.png" alt="image-20211125203428248" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.12.png" style="zoom:80%;" />
 
 #### 1. Client（客户端）
 
@@ -389,5 +389,5 @@ MapReduce的工作流程：
 >
 > ps：能够认真学完的朋友们都是超人，勇敢坚持战胜困难的人生才更美丽！！！！
 
-<img src="../doc_imgs/ch6.3.13.png" alt="image-20211125211803892" style="zoom:80%;" />
+<img src="../doc_imgs/ch6.3.13.png" style="zoom:80%;" />
 
