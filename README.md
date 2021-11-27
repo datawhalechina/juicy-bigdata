@@ -53,6 +53,7 @@
   - [x] [6.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_62-mapreduce%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
   - [x] [6.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_63-%e4%bb%a5wordcount%e4%b8%ba%e4%be%8b%e7%90%86%e8%a7%a3mapreduce)
 * 第七章：Spark（待定）
+* 第八章：Interview Q&A（待定）
 
 > 第二章以后的章节都配置有实验内容，即linux上的实操
 
@@ -108,6 +109,14 @@
     <td>
         <a href="https://blog.csdn.net/wangzhouf">CSDN</a>,
         <a href="https://github.com/wzfer">Github</a>
+    </td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王嘉鹏</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">小米数开工程师，Datawhale成员，主要贡献者</span></td>
+    <td>
+        <a href="https://blog.csdn.net/qq_29027865">CSDN</a>,
+        <a href="https://www.zhihu.com/people/wjpditing">知乎</a>
     </td>
   </tr>
 </tbody>
