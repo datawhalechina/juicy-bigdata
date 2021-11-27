@@ -6,3 +6,4 @@
   - [第五章：Hive](ch5%20Hive.md)
   - [第六章：MapReduce](ch6%20MapReduce.md)
   - [第七章：Spark（待定）](ch7%20Spark.md)
+  - [第八章：Interview Q&A](ch8%20Interview%20Q&A.md)
