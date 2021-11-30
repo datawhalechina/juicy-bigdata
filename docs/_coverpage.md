@@ -1,9 +1,10 @@
 <div align=center>
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Big-Data/logo.png" width="250">
+<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/logo.png" width="250">
 </div>
 
 
-# Big-Data <small>1.0 version</small>
+
+# Big-Data <small>2.0 version</small>
 
 > 一个高质量的大数据实战教程项目
 
