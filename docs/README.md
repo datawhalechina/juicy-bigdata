@@ -44,13 +44,13 @@
   - [x] [3.3 HDFS的存储原理](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_33-hdfs%e7%9a%84%e5%ad%98%e5%82%a8%e5%8e%9f%e7%90%86)
   - [x] [3.4 HDFS编程实战](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_34-hdfs%e7%bc%96%e7%a8%8b%e5%ae%9e%e6%88%98)
   - [x] [3.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_35-%e6%9c%ac%e7%ab%a0%e5%b0%8f%e7%bb%93)
-* 第四章：HBase
-* 第五章：Hive
-* [第六章：MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce)
-  - [x] [6.0 洋葱辣椒酱与MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_60-%e6%b4%8b%e8%91%b1%e8%be%a3%e6%a4%92%e9%85%b1%e4%b8%8emapreduce)
-  - [x] [6.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_61-%e6%a6%82%e8%bf%b0)
-  - [x] [6.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_62-mapreduce%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
-  - [x] [6.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce?id=_63-%e4%bb%a5wordcount%e4%b8%ba%e4%be%8b%e7%90%86%e8%a7%a3mapreduce)
+* [第四章：HBase](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase)
+* [第五章：MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce)
+  - [x] [5.0 洋葱辣椒酱与MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_50-%e6%b4%8b%e8%91%b1%e8%be%a3%e6%a4%92%e9%85%b1%e4%b8%8emapreduce)
+  - [x] [5.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_51-%e6%a6%82%e8%bf%b0)
+  - [x] [5.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_52-mapreduce%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
+  - [x] [5.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_53-%e4%bb%a5wordcount%e4%b8%ba%e4%be%8b%e7%90%86%e8%a7%a3mapreduce)
+* [第六章：Hive](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive)
 * 第七章：Spark（待定）
 * 第八章：Interview Q&A（待定）
 
