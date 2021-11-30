@@ -120,3 +120,5 @@ HBase提供了众多的访问方式，详见下表。
 下面用一个实例为阐释HBase的数据模型，下图为一张用来存储学生信息的 HBase 表。
 
 <img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20211127205537883.png" alt="image-20211127205537883" style="zoom:50%;" />
+
+学号作为行键来唯一标识每个学生
