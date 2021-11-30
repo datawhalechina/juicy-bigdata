@@ -1,7 +1,6 @@
 <div align=center>
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Big-Data/logo.png" width="250">
+<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/logo.png" width="250">
 </div>
-
 
 # 大数据处理技术 Big Data
 
@@ -39,19 +38,27 @@
   - [x] [2.3 Hadoop的安装与使用](https://shenhao-stu.github.io/Big-Data/#/ch2%20Hadoop?id=_23-hadoop的安装与应用)
   - [x] [2.4 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch2%20Hadoop?id=_24-本章小结)
 * [第三章：HDFS](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS)
-  - [x] [3.0 产生的背景](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_30-%e4%ba%a7%e7%94%9f%e7%9a%84%e8%83%8c%e6%99%af)
-  - [x] [3.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_31-%e6%a6%82%e8%bf%b0)
-  - [x] [3.2 HDFS的体系结构](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_32-hdfs%e7%9a%84%e4%bd%93%e7%b3%bb%e7%bb%93%e6%9e%84)
-  - [x] [3.3 HDFS的存储原理](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_33-hdfs%e7%9a%84%e5%ad%98%e5%82%a8%e5%8e%9f%e7%90%86)
-  - [x] [3.4 HDFS编程实战](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_34-hdfs%e7%bc%96%e7%a8%8b%e5%ae%9e%e6%88%98)
-  - [x] [3.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_35-%e6%9c%ac%e7%ab%a0%e5%b0%8f%e7%bb%93)
+  - [x] [3.0 产生的背景](https://shenhao-stu.github.io/Big-Data/#/ch3 HDFS?id=_30-产生的背景)
+  - [x] [3.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch3 HDFS?id=_31-概述)
+  - [x] [3.2 HDFS的体系结构](https://shenhao-stu.github.io/Big-Data/#/ch3 HDFS?id=_32-hdfs的体系结构)
+  - [x] [3.3 HDFS的存储原理](https://shenhao-stu.github.io/Big-Data/#/ch3 HDFS?id=_33-hdfs的存储原理)
+  - [x] [3.4 HDFS编程实战](https://shenhao-stu.github.io/Big-Data/#/ch3 HDFS?id=_34-hdfs编程实战)
+  - [x] [3.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch3 HDFS?id=_35-本章小结)
 * [第四章：HBase](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase)
+  - [x] [4.0 产生的背景](https://shenhao-stu.github.io/Big-Data/#/ch4 HBase?id=_40-产生的背景)
+  - [x] [4.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch4 HBase?id=_41-概述)
+  - [x] [4.2 HBase 数据模型](https://shenhao-stu.github.io/Big-Data/#/ch4 HBase?id=_42-hbase-数据模型)
 * [第五章：MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch6%20MapReduce)
-  - [x] [5.0 洋葱辣椒酱与MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_50-%e6%b4%8b%e8%91%b1%e8%be%a3%e6%a4%92%e9%85%b1%e4%b8%8emapreduce)
-  - [x] [5.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_51-%e6%a6%82%e8%bf%b0)
-  - [x] [5.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_52-mapreduce%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%b5%81%e7%a8%8b)
-  - [x] [5.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_53-%e4%bb%a5wordcount%e4%b8%ba%e4%be%8b%e7%90%86%e8%a7%a3mapreduce)
+  - [x] [5.0 洋葱辣椒酱与MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5 MapReduce?id=_50-洋葱辣椒酱与mapreduce)
+  - [x] [5.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch5 MapReduce?id=_51-概述)
+  - [x] [5.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch5 MapReduce?id=_52-mapreduce的工作流程)
+  - [x] [5.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5 MapReduce?id=_53-以wordcount为例理解mapreduce)
 * [第六章：Hive](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive)
+  - [x] [6.1 数据仓库](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_61-数据仓库)
+  - [x] [6.2 数仓建模](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_62-数仓建模)
+  - [x] [6.3 Hive基本概念](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_63-hive基本概念)
+  - [x] [6.4 核心概念](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_64-核心概念)
+  - [x] [6.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_65-本章小结)
 * 第七章：Spark（待定）
 * 第八章：Interview Q&A（待定）
 
