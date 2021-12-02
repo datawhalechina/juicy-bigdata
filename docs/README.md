@@ -1,9 +1,14 @@
 <div align=center>
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="250">
 </div>
-
-
 # 大数据处理技术 Big Data
+
+[![](https://img.shields.io/github/watchers/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/watchers)
+[![](https://img.shields.io/github/stars/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/stargazers)
+[![](https://img.shields.io/github/forks/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/network/members)
+[![](https://img.shields.io/github/issues-pr-closed-raw/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/issues)
+![](https://img.shields.io/github/repo-size/shenhao-stu/Big-Data.svg?style=flat)
+[![](https://github.com/shenhao-stu/Big-Data/actions/workflows/Sync.yml/badge.svg?branch=master)](https://github.com/shenhao-stu/Big-Data/actions/workflows/CI.yml)
 
 本项目《大数据处理技术》是Datawhale:whale:数据科学小组近期推动的一个重点项目。
 
@@ -43,12 +48,16 @@
   - [x] [3.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_31-概述)
   - [x] [3.2 HDFS的体系结构](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_32-hdfs的体系结构)
   - [x] [3.3 HDFS的存储原理](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_33-hdfs的存储原理)
-  - [x] [3.4 HDFS编程实战](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_34-hdfs编程实战)
-  - [x] [3.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_35-本章小结)
+  - [x] [3.4 HDFS的数据读写过程](https://shenhao-stu.github.io/Big-Data/#/ch3 HDFS?id=_34-hdfs的数据读写过程)
+  - [x] [3.5 HDFS编程实战](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_35-hdfs编程实战)
+  - [x] [3.6 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_36-本章小结)
 * [第四章：HBase](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase)
   - [x] [4.0 产生的背景](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_40-产生的背景)
   - [x] [4.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_41-概述)
   - [x] [4.2 HBase 数据模型](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_42-hbase-数据模型)
+  - [x] [4.3 HBase 的实现原理](https://shenhao-stu.github.io/Big-Data/#/ch4 HBase?id=_43-hbase-的实现原理)
+  - [x] [4.4 HBase 运行机制](https://shenhao-stu.github.io/Big-Data/#/ch4 HBase?id=_44-hbase-运行机制)
+  - [x] [4.5 HBase 编程实战](https://shenhao-stu.github.io/Big-Data/#/ch4 HBase?id=_45-hbase-编程实战)
 * [第五章：MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce)
   - [x] [5.0 洋葱辣椒酱与MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_50-洋葱辣椒酱与mapreduce)
   - [x] [5.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_51-概述)
