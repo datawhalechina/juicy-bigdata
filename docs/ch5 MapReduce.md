@@ -399,3 +399,8 @@ MapReduce的工作流程：
 
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.13.png" style="zoom:80%;" />
 
+## 5.4 本章小结
+
+在本章的学习中，我们了解了 MapReduce 模型的具体工作原理，并以单词统计为实例学习了 MapReduce 程序设计方法，通过编程实践，加深了内容的理解。 
+
+🤗 笔者本章内容认为**十分硬核也十分重要**，需要好好理解。🧐
