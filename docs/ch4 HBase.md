@@ -68,7 +68,7 @@ HBase旨在提供对大量结构化数据的快速随机访问。它利用Hadoop
 
 在Hadoop生态系统中，HBase 利用 Hadoop MapReduce来处理 HBase 中的海量数据，实现高性能计算；利用 ZooKeeper 作为协同服务，实现稳定服务和失败恢复；使用 HDFS 作为高可靠的底层存储，利用廉价集群提供海量数据存储能力。（当然，HBase 也可以直接使用本地文件系统而不用 HDFS 作为底层数据存储方式。）Sqoop 为 HBase 提供了高效、便捷的 RDBMS 数据导入功能，Pig 和 Hive 为 HBase 提供了高层语言支持。
 
-<img src="C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.1.1.png" alt="Hadoop生态系统" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.1.1.png" alt="Hadoop生态系统" style="zoom:50%;" />
 
 ### 4.1.2 HBase 访问接口
 
@@ -119,7 +119,7 @@ HBase提供了众多的访问方式，详见下表。
 
 下面用一个实例为阐释HBase的数据模型，下图为一张用来存储学生信息的 HBase 表。
 
-<img src="C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.2.2.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.2.png" style="zoom:50%;" />
 
 学号作为行键来唯一标识每个学生，表中设计了列族 Info 来保存学生相关信息，列族Info中包含3个列——name、major和email，分别用来保存学生的姓名、专业和电子邮件信息。
 
@@ -131,7 +131,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 如果把所有坐标看成一个整体，视为“键”，把四维坐标对应的单元格中的数据视为“值”，那么，HBase可以看成一个键值数据库。
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.2.3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.3.png)
 
 ### 4.2.4 概念视图
 
@@ -146,7 +146,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 可以看出，在一个HBase表的概念视图中，每个行都包含相同的列族，尽管行不需要在每个列族里存储数据。从这个角度来说，HBase表是一个稀疏的映射关系，即里面存在很多空的单元格。
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.2.4.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.4.png)
 
 ### 4.2.5 物理视图
 
@@ -156,13 +156,13 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 > 注意：在概念视图中，我们可以发现，有些列是空的。但是在物理视图中， 这些空的列不会被存储。如果请求这些空白的单元格的时候，会返回 null 值。
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.2.5.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.5.png)
 
 ### 4.2.6 面向列的存储
 
 我们通过一个简单例子，看看列式存储与行式存储方式的具体差别。
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.2.6.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.6.png)
 
 #### **传统行式数据库**
 
@@ -197,7 +197,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 ### 4.3.1  HBase 功能组件
 
- **HBase ** 的实现包括**三个主要的功能组件** ：
+ **HBase 的实现包括三个主要的功能组件** ：
 
 - 库函数：链接到每个客户端
 - 一个Master主服务器
@@ -220,7 +220,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 > Region包含了位于某个值域区间内的所有数据，是负载均衡和数据分发的基本单位。
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.3.2_1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_1.png)
 
 **生成Region的过程**
 
@@ -228,7 +228,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 - 随着表中行的数量继续增加，就会分裂出越来越多的Region。
 - Region拆分操作非常快，因为拆分之后的Region读取的仍然是原存储文件，直到“合并”过程把存储文件异步地写到独立的文件之后，才会读取新文件
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.3.2_2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_2.png)
 
 - 每个Region默认大小是100MB到200MB（2006年以前的硬件配置)
 
@@ -262,7 +262,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 综上所述，HBase 使用类似B+树的三层结构来保存Region位置信息，详见下图。
 
-<img src="C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.3.3.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.3.png" style="zoom:50%;" />
 
 > - 为了加快访问速度，.META.表的全部Region都会被保存在内存中
 > - 客户端访问数据时的“三级寻址”
@@ -275,7 +275,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 ### 4.4.1 HBase 系统架构
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.4.1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.1.png)
 
 #### 客户端
 
@@ -287,7 +287,7 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 
 - Zookeeper是一个很好的集群管理工具，被大量用于分布式计算，提供配置维护、域名服务、分布式同步、组服务等。
 
-  ![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.4.1_zookeeper.png)
+  ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.1_zookeeper.png)
 
 #### Master
 
@@ -336,7 +336,7 @@ Region 服务器的工作原理分为三个阶段：
 
 StoreFile的合并和分裂过程见下图
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4.4.3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.3.png)
 
 ### 4.4.4 HLog工作原理
 
@@ -405,7 +405,7 @@ Linux Centos 7
 
 安装包解压成功后，在“/opt”目录下将会产生"hbase-2.3.5"目录。
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.1.png)
 
 运行下面命令，将hbase-2.3.5目录更名为hbase
 
@@ -513,7 +513,7 @@ dolphin@tools:~$ jps
 2444 HRegionServer
 ```
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.2.png)
 
 如果HMaster、HRegionServer和HQuorumPeer进程都出现了，说明HBase安装成功。
 
@@ -542,7 +542,7 @@ Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
 hbase(main):001:0>
 ```
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.3.png)
 
 ##### 10.创建表
 
@@ -559,7 +559,7 @@ hbase(main):001:0>
 => Hbase::Table - student
 ```
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.4.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.4.png)
 
 ##### 11.put添加数据
 
@@ -575,7 +575,7 @@ hbase中的put命令用于向表中添加数据，下面我们向student表中�
 
 执行后显示如下：
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.5.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.5.png)
 
 ##### 12.查看表内容
 
@@ -595,7 +595,7 @@ ROW                   COLUMN+CELL
 2 row(s) in 0.0200 seconds
 ```
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.6.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.6.png)
 
 ##### 13.查询
 
@@ -614,7 +614,7 @@ info:name            timestamp=1531207642229, value=zeno
 3 row(s) in 0.0480 seconds
 ```
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.7.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.7.png)
 
 ##### 14.修改内容
 
@@ -641,16 +641,16 @@ info:name            timestamp=1531207642229, value=zeno
 3 row(s) in 0.0520 seconds
 ```
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.8.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.8.png)
 
 ##### 15.添加列族
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.9.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.9.png)
 **这里可以指定NAME => 'nation' or 'NAME' => 'nation'**
 
 ##### 16.删除列族
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.10.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.10.png)
 
 ##### 17.删除表
 
@@ -674,4 +674,4 @@ hbase(main):019:0> drop 'student'
 0 row(s) in 2.2770 seconds
 ```
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex1.11.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.11.png)
