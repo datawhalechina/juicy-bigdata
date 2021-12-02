@@ -145,7 +145,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > ps：编者警告，以下内容十分硬核，建议买杯咖啡慎入，希望大家能坚持学下去，加油加油
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.1.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.0.png" style="zoom:67%;" />
 
 ### 5.2.1 工作流程概述
 
@@ -156,7 +156,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ​		然后，这些中间结果会被分发到多个Reduce任务在多台机器上**并行执行**，**具有相同key**的<key,value>会被发送到同一个Reduce任务那里，Reduce任务会对中间结果进行汇总计算得到最后结果，并输出到分布式文件系统中。
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403152208757.png)
+![image-20211202203840694](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.1.png)
 
 > 不同的Map任务之间不会进行通信，不同的Reduce任务之间爷不会发生任何信息交换；用户不能显式地从一台机器向另一台继机器发送消息，所有的数据交换都是通过MapReduce框架自身去实现的。
 >
@@ -164,13 +164,21 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ### 5.2.2 MapReduce的各个执行阶段
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403153618883.png)
+下面是一个MapReduce算法的执行过程。
+①  MapReduce 框架使用 InputFormat 模块做 Map 前的预处理，比如，验证输入的格式是否符合输入定义；然后，将输入文件切分为逻辑上的多个 InputSplit ， InputSplit 是 MapReduce 对文件进行处理和运算的输入单位，只是一个逻辑概念，每个InputSplit并没有对文件进行实际切割，只是记录了要处理的数据的位置和长度。
+② 因为 InputSplit 是逻辑切分而非物理切分，所以，还需要通过 RecordReader（RR）根据 InputSplit 中的信息来处理 InputSplit 中的具体记录，加载数据并转换为适合 Map 任务读取的键值对，输入给 Map 任务。
+③ Map 任务会根据用户自定义的映射规则，输出一系列的<key,value>作为中间结果。
+④ 为了让 Reduce 可以并行处理 Map 的结果，需要对 Map 的输出进行一定的分区、排序（Sort）、合并（Combine）、归并（Merge）等操作，得到<key,value-list>形式的中间结果，再交给对应的 Reduce 进行处理，这个过程称为 Shuffle 。
+⑤ Reduce 以一系列<key,value-list>中间结果作为输入，执行用户定义的逻辑，输出结果给 OutputFormat 模块。
+⑥ OutputFormat 模块会验证输出目录是否已经存在以及输出结果类型是否符合配置文件中的配置类型，如果都满足，就输出 Reduce 的结果到分布式文件系统。
+
+![img](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.2.png)
 
 ---
 
 > 坚持坚持，这才刚开始，学习使我快乐！！
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.2.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.2_emoji.png" style="zoom:67%;" />
 
 ### 5.2.3 Shuffle过程详解
 
@@ -182,11 +190,11 @@ Shuffle过程是MapReduce整个工作流程的核心环节，理解Shuffle过程
 
 所谓Shuffle,是指对Map输出结果进行分区、排序、合并等处理并交给Reduce的过程。因此，**Shuffle过程**分为**Map端的操作**和**Reduce端的操作**。
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403154046928.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3.1.1.png)
 
 ①在Map端的Shuffle过程。Map的输出结果首先被写入缓存，当缓存满时，就启动溢写操作，把缓存中的数据写入磁盘文件，并清空缓存。当启动溢写操作时，首先需要把缓存中的数据进行分区，然后对每个分区的数据进行排序（Sort）和合并（Combine），之后再写入磁盘文件。每次溢写操作会生成一个新的磁盘文件，随着Map任务的执行，磁盘中就会生成多个溢写文件。在Map任务全部结束之前，这些溢写文件会被归并（Merge）成一个大的磁盘文件，然后，通知相应的Reduce任务来领取属于自己处理的数据。
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403154521609.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3.1.2.png" style="zoom:50%;" />
 
 ②在Reduce端的Shuffle过程。Reduce任务从Map 端的不同 Map 机器领回属于自己处理的那部分数据，然后，对数据进行归并（Merge）后交给Reduce处理。
 
@@ -237,7 +245,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 > 如果把这段知识肝完，请自称为肝帝        ╮(╯▽╰)╭
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3_emoji1.png" style="zoom:80%;" />
 
 
 
@@ -245,7 +253,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 ​       相对于Map端而言，Reduce端的Shuffle过程非常简单，只需要从Map端读取Map结果，然后执行归并操作，最后输送给Reduce任务进行处理。
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403162040361.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3.3.1.png)
 
 (1) “领取”数据
 
@@ -271,11 +279,11 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210403163316845.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3.3.2.png)
 
 > emmmmmmm，编者吐槽，以上内容实在是太太太太太硬核了，估计今天吃完饭憋得上厕所都难受，大家都是打工人，自然感同身受。没事没事没事，下面Wordcount的例子就有很多生动形象的图啦，很好理解的！！！大家坚持住，看完睡个好觉红红火火恍恍惚惚哈哈哈。
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.4.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3_emoji2.png" style="zoom:67%;" />
 
 
 
