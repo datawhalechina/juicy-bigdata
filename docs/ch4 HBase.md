@@ -674,7 +674,7 @@ hbase(main):019:0> drop 'student'
 0 row(s) in 2.2770 seconds
 ```
 
-## ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.11.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.11.png)
 
 ## 4.6 本章小结
 

@@ -65,7 +65,7 @@
   - [x] [5.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_51-概述)
   - [x] [5.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_52-mapreduce的工作流程)
   - [x] [5.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_53-以wordcount为例理解mapreduce)
-  - [x] [5.4 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=54-本章小结)
+  - [x] [5.4 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_54-本章小结)
 * [第六章：Hive](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive)
   - [x] [6.1 数据仓库](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_61-数据仓库)
   - [x] [6.2 数仓建模](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_62-数仓建模)
