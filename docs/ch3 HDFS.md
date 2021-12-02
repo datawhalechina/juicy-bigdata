@@ -25,11 +25,11 @@
 
 ​		分布式文件系统在**物理结构**上是由计算机集群中的多个节点构成的，如下图所示，这些节点分为两类：一类叫“**主节点**”（Master Node），或者也被称为“**名称节点**"（NameNode）；另一类叫“**从节点**"（Worker Node），或者也被称为“**数据节点**"（DataNode）：
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3.1.1.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.1.1.png" style="zoom:50%;" />
 
 - **名称节点**负责文件和目录的创建、删除和重命名等，同时管理着数据节点和文件块的映射关系，因此客户端只有访问名称节点才能找到请求的文件块所在的位置，进而到相应位置读取所需文件块；
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3.1.1_namenode.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.1.1_namenode.png" style="zoom:50%;" />
 
 - **数据节点**负责数据的存储和读取，在存储时，由名称节点分配存储位置，然后由客户端把数据直接写入相应数据节点，在读取时，客户端从名称节点获得数据节点和文件块的映射关系，然后就可以到相应位置访问文件块。数据节点也要根据名称节点的命令创建、删除数据块和冗余复制。
 
@@ -69,7 +69,7 @@
 
 ​		用户在使用HDFS时，仍然可以像在普通文件系统中那样，使用文件名去存储和访问文件。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3.2.png" style="zoom: 50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.2.png" style="zoom: 50%;" />
 
 ​		实际上，在系统内部，一个文件会被切分成若干个数据块，这些数据块被分布存储到若干个数据节点上。当客户端需要访问一个文件时，首先把文件名发送给名称节点，名称节点根据文件名找到对应的数据块（一个文件可能包括多个数据块），再根据每个数据块信息找到实际存储各个数据块的数据节点的位置，并把数据节点位置发送给客户端，最后客户端直接访问这些数据节点获取数据。在整个访问过程中，名称节点并不参与数据的传输。这种设计方式，使得个文件的数据能够在不同的数据节点上实现并发访问，大大提高了数据访问速度。
 
@@ -80,7 +80,7 @@
 
 ​		为了保证系统的**容错性**和**可用性**，HDFS 采用了**多副本方式**对数据进行冗余存储，通常***一个数据块的多个副本会被分布到不同的数据节点上***。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3.3.1.png" style="zoom: 67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.3.1.png" style="zoom: 67%;" />
 
 这种多副本方式具有以下 3 个优点：
 
@@ -104,7 +104,7 @@ HDFS 默认每个数据节点都是在不同机架上的，这样有一个缺点
 
 ​		**HDFS 默认的冗余复制因子是 3**，每一个文件会被同时保存到 3 个地方，其中两份副本放在同一个机架的不同机器上面，第三个副本放在不同机架的机器上面。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3.3.2.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.3.2.png" style="zoom:50%;" />
 
 HDFS 副本的存放策略是：
 
@@ -159,9 +159,9 @@ Hadoop 采用两种机制来确保名称节点的安全：
 
 ### 3.4.1 读数据的过程
 
-<img src="C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.1_read.png" style="zoom:33%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.1_read.png" style="zoom:33%;" />
 
-![img](C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.1.png)
+![img](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.1.png)
 
 > 具体流程：
 >
@@ -175,9 +175,9 @@ Hadoop 采用两种机制来确保名称节点的安全：
 
 ### 3.4.2 写数据的过程
 
-<img src="C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.2_write.png" style="zoom:33%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.2_write.png" style="zoom:33%;" />
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.2.png)
 
 > 具体流程：
 >
@@ -190,19 +190,19 @@ Hadoop 采用两种机制来确保名称节点的安全：
 
 ### 3.4.3 HDFS故障类型和其检测方法
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.3.png)
 
 #### 读写故障的处理
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.3_2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.3_2.png)
 
 #### DataNode 故障处理
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.3_3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.3_3.png)
 
 #### 副本布局策略
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch3.4.3_4.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.3_4.png)
 
 ## 3.5 HDFS编程实战
 
@@ -229,13 +229,13 @@ Linux Centos 7
 
 `./start-dfs.sh`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.1.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.1.png" style="zoom:50%;" />
 
 ##### 2. 用jps查看HDFS是否启动
 
 `jps`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.2.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.2.png" style="zoom:50%;" />
 
 我们可以看到相关进程，都已经启动。
 
@@ -249,7 +249,7 @@ Linux Centos 7
 
 `hadoop fs -ls /`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.3.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.3.png" style="zoom:50%;" />
 
 ##### 4. ls 命令
 
@@ -261,7 +261,7 @@ Linux Centos 7
 
 `hadoop fs -ls -R /`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.4.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.4.png" style="zoom:50%;" />
 
 ##### 5. put 命令
 
@@ -279,7 +279,7 @@ Linux Centos 7
 
 `hadoop fs -ls /`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.5.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.5.png" style="zoom:50%;" />
 
 如果拷贝文件和目录成功，你将会看到 /logs 和 /REAME.txt
 
@@ -301,7 +301,7 @@ Linux Centos 7
 
 如果拷贝文件和目录成功，你将会看到 /logs 和 /NOTICE.txt
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.6.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.6.png" style="zoom:50%;" />
 
 ##### 7. get 命令
 
@@ -325,7 +325,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `ls -l`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.7.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.7.png" style="zoom:50%;" />
 
 如果拷贝文件和目录成功，你将会看到 logs 和 NOTICE.txt
 
@@ -373,7 +373,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -ls /myhadoop2`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.8.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.8.png" style="zoom:50%;" />
 
 如果创建目录成功，你将会看到 /myhadoop1/test 和 /myhadoop2/test
 
@@ -405,7 +405,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -ls /myhadoop1`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.9.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.9.png" style="zoom:50%;" />
 
 如果拷贝成功，你将会看到 LICENSE.txt 文件
 
@@ -433,7 +433,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 如果拷贝成功，你将会看到 /myhadoop2/LICENSE.txt 文件
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.10.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.10.png" style="zoom:50%;" />
 
 ##### 12. count 命令
 
@@ -447,9 +447,9 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `1 8 128199 /myhadoop1/logs`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.11.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.11.png" style="zoom:50%;" />
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.12.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.12.png" style="zoom:50%;" />
 
 ##### 13. du 命令
 
@@ -473,7 +473,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -du -s -h /myhadoop2`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.13.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.13.png" style="zoom:50%;" />
 
 >第一列标示该目录下总文件大小
 >
@@ -481,7 +481,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 >
 >第三列标示你查询的目录
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.14.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.14.png" style="zoom:50%;" />
 
 ##### 14. setrep 命令
 
@@ -493,7 +493,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -setrep -R 3 /myhadoop1`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.15.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.15.png" style="zoom:50%;" />
 
 ##### 15. stat 命令
 
@@ -517,7 +517,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 显示为文件大小， 如下：
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.16.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.16.png" style="zoom:50%;" />
 
 ##### 16. balancer 命令
 
@@ -543,7 +543,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hdfs dfsadmin -report`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.17.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.17.png" style="zoom:50%;" />
 
 **hdfs dfsadmin -safemode < enter | leave | get | wait >**
 
@@ -557,11 +557,11 @@ wait：等待离开安全模式
 
 `hdfs dfsadmin -safemode enter`
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.18.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.18.png" style="zoom:50%;" />
 
 ##### 18. 其他 命令
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.19.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.19.png)
 
 ###### 18.1 cat 命令
 
@@ -574,7 +574,7 @@ wait：等待离开安全模式
 
 > hadoop fs -tail -f **根据文件描述符进行追踪，当文件改名或被删除，追踪停止**
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.20.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.20.png)
 
 ###### 18.2 appendToFile 命令
 
@@ -584,7 +584,7 @@ wait：等待离开安全模式
 hadoop fs -appendToFile /本地文件 /hdfs中的文件
    ```
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch3_ex1.21.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.21.png" style="zoom:50%;" />
 
 ###### 18.3 chown 命令
 

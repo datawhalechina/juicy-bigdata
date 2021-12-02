@@ -16,7 +16,7 @@
 
 ​		数据不会说谎，这家98年才成立的高科技公司，用了十几年，做出了几十年的成绩。伟大需要用时间去评判，需要影响力的积累，Google现在可能不能被称之为伟大。**但是我们有理由相信，如果Google一直坚持不作恶的原则，未来一定会在人类科技及生活的发展历史上画下浓墨重彩的一笔。**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.1.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.1.png" style="zoom:67%;" />
 
 ------
 
@@ -24,7 +24,7 @@
 
 ​		Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便在目标系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎，Lucene在全文检索领域是一个经典的祖先，现在很多检索引擎都是在其基础上创建的，思想是相通的。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.2.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.2.png" style="zoom:67%;" />
 
 ​															左为**Doug Cutting**，右为**Lucene**的LOGO
 
@@ -32,7 +32,7 @@
 
 ​		早期的时候，这个项目被发布在**Doug Cutting**的个人网站和**SourceForge**（一个开源软件网站）。后来，**2001**年底，**Lucene**成为**Apache**软件基金会**jakarta**项目的一个子项目。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.3.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.3.png" style="zoom:67%;" />
 
 ​													**Apache**软件基金会的LOGO，搞IT的应该都认识
 
@@ -48,7 +48,7 @@
 
 ​		**Nutch**是一个建立在**Lucene**核心之上的网页搜索应用程序，可以下载下来直接使用。它在**Lucene**的基础上加了网络爬虫和一些网页相关的功能，目的就是从一个简单的站内检索推广到全球网络的搜索上，就像**Google**一样。**Nutch**在业界的影响力比**Lucene**更大。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.4.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.4.png" style="zoom:67%;" />
 
 ​		相对于那些商用的搜索引擎, Nutch作为开放源代码 搜索引擎将会更加透明, 从而更值得大家信赖。所有主要的搜索引擎都采用私有的排序算法, 而不会解释为什么一个网页会排在一个特定的位置。除此之外, 有的搜索引擎依照网站所付的费用, 而不是根据它们本身的价值进行排序。与它们不同, Nutch没有什么需要隐瞒, 也没有 动机去扭曲搜索的结果。Nutch将尽自己最大的努力为用户提供最好的搜索结果。（比如百度搜索时，有时候前几条全是广告QAQ哈哈哈哈）
 
@@ -56,7 +56,7 @@
 
 ​		随着时间的推移，无论是**Google**还是**Nutch**，都面临搜索对象“体积”不断增大的问题。尤其是**Google**，作为互联网搜索引擎，需要存储大量的网页，并不断优化自己的搜索算法，提升搜索效率。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.5.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.5.png" style="zoom:67%;" />
 
 ### 后来的后来~~~~
 
@@ -66,13 +66,13 @@
 
 ​		第二年，也就是**2004**年，**Doug Cutting**基于**Google**的**GFS**论文，实现了**分布式文件存储系统**，并将它命名为**NDFS**（**Nutch** **Distributed File System**）。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.6.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.6.png" style="zoom:67%;" />
 
 ​		还是**2004**年，**Google**又发表了一篇技术学术论文，介绍自己的**MapReduce**编程模型。这个编程模型，用于大规模数据集（大于**1TB**）的并行分析运算。
 
 ​		第二年（**2005**年），**Doug Cutting**又基于**MapReduce**，在**Nutch**搜索引擎实现了该功能。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.7.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.7.png" style="zoom:67%;" />
 
 ​		**2006**年，当时依然很厉害的**Yahoo**（雅虎）公司，招安了**Doug Cutting**。
 
@@ -90,11 +90,11 @@
 
 ​		这个，就是后来大名鼎鼎的大数据框架系统**——Hadoop**的由来。而**Doug Cutting**，则被人们称为**Hadoop**之父。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.8.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.8.png)
 
 ​		**Hadoop**这个名字，实际上是**Doug Cutting**他儿子的黄色玩具大象的名字。所以，**Hadoop**的**Logo**，就是一只奔跑的黄色大象。突然感觉到技术大牛的生活就是如此的枯燥且朴实。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.9.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.9.png" style="zoom:67%;" />
 
 ------
 
@@ -106,13 +106,13 @@
 
 ​		**Doug Cutting**当然没有放过，在自己的**hadoop**系统里面，引入了**BigTable**，并命名为**HBase**。、
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.10.png" style="zoom: 80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.10.png" style="zoom: 80%;" />
 
 ​		好吧，反正就是紧跟**Google**时代步伐，你出什么，我学什么。
 
 ​		所以，**Hadoop**的核心部分，基本上都有**Google**的影子。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.11.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.11.png" style="zoom:80%;" />
 
 
 
@@ -130,7 +130,7 @@
 >
 > 其他的关于Hadoop的版本、历程、花边故事等等凑字数行为就不多介绍了，废话少说，直接上干货。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.0.12.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png)
 
 
 
@@ -189,7 +189,7 @@ Hadoop是一个能够对大量数据进行分布式处理的软件框架，并�
 
 经过多年发展，Hadoop项目不断完善和成熟，目前已经包含多个子项目，逐渐形成一个丰富的Hadoop生态系统。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.2.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.2.png" style="zoom:50%;" />
 
 - Common
 
@@ -248,7 +248,7 @@ Hadoop是一个能够对大量数据进行分布式处理的软件框架，并�
 > 学了这么多理论，终于要实操了吗，大伙儿冲冲冲啊！！！！
 >
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch2.3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.3.png)
 
 ​		在开始具体操作之前，需要首先选择一个合适的操作系统。尽管 Hadoop本身可以运行在Linux、Windows 以及其他一些类 UNIX系统(如FreeBSD、OpenBSD、Solaris等）之上，但是**,Hadoop官方真正支持的作业平台只有 Linux**。这就导致其他平台在运行Hadoop时，往往需要安装很多其他的包来提供一些Linux操作系统的功能，以配合 Hadoop的执行。例如，Windows在运行Hadoop时,需要安装Cygwin等软件。我们这里选择Linux作为系统平台,来演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然,其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的用户,可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。在 Linux发行版的选择上，我们倾向于使用企业级的、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE 和 RedHat等发行版，最终选择免费的CentOS 发行版作为推荐的操作系统,读者可以到网络上下载CentOS系统镜像文件(www.centos.org/download）进行安装。
 

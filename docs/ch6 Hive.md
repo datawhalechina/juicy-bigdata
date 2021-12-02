@@ -3,7 +3,7 @@
 ## 6.1 数据仓库
 ### 6.1.1 为什么要有数据仓库
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.1.1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.1.1.png)
 数据的作用有两个：操作型记录的保存和分析型决策的制定。
 
 1. 操作型记录的保存通常不必维护历史数据，只需修改数据以反映最新的状态；
@@ -12,7 +12,7 @@
 基于后者分析型决策的优化，需要高性能的完成用户的查询，因此引出了数据仓库的概念。
 
 ### 6.1.2 数据仓库的主要特征
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.1.2-1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.1.2-1.png)
 
 数据仓库的主要特征是：主题性、集成性、非易失性、时变性的数据集合，用以支持管理决策。
 
@@ -23,7 +23,7 @@
 
    拿零售业务的过程来举例：
 
-   ![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.1.2-2.png)
+   ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.1.2-2.png)
 
 2.  集成性
 
@@ -33,7 +33,7 @@
 
    拿零售业务过程中的订单主题来举例，对于订单主题，通常会包括三个业务过程：订单、发货和发票。这些过程会产生一些新的指标，如：销售额、发票收入等。
 
-   ![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.1.2-3.png)
+   ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.1.2-3.png)
 
 3. 非易失性
 
@@ -45,7 +45,7 @@
    数仓是根据业务需要来建立的，其是一个项目，更代表了一个业务过程。因此数据仓库分析的结果只能反映过去的业务情况，当业务变化后，数据仓库需要跟随业务的变化而改变，以适应决策的需要。
 
 ## 6.2 数仓建模
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.png)
 所有的数仓建模都围绕着两个目的：
 
 1. 提供高效的查询性能；
@@ -74,47 +74,47 @@
 
 根据学生的行为情况，对于大学教育业务可以分为以下四个核心过程：学生选课、课程注册、设施使用和学生考勤。接下来分别对这四个业务做简要说明。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.2.2-1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.2-1.png)
 
 ① 学生选课
 
 学生选课的过程可以看作是一个漏斗，从最初的查询课程、提交申请、完成选课、选课更改。希望按照每个阶段的不同特点来分析学生的情况。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.2.2-2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.2-2.png)
 
 ② 课程注册
 
 用事实表来跟踪学生课程注册的情况，事实表粒度是按每个学生每学期的注册课程为一行。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.2.2-3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.2-3.png)
 
 ③ 设备使用
 
 大学回对设备进行投资，因此也需要了解每个学期中每天每个小时哪个设备被用于什么目的，统计的字段可以是：哪个设备使用率最高？设备的平均使用率是多少？周五时由于多数人不想来上课是否会导致设备使用率下降？
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.2.2-4.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.2-4.png)
 
 ④ 学生考勤
 
 针对于学生考勤的需求，需要去了解学期中哪门课程的出勤率最低？哪个学生参加哪门课程？以及哪个老师的课最受学生欢迎等等需求。考勤的粒度可以是每天上课的学生为一行。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.2.2-5.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.2-5.png)
 
 通过这样几个场景的案例，我们应该大致可以了解数仓的作用，以及建模的基本流程。
 
 ## 6.3 Hive基本概念
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.png)
 ### 6.3.1 概述
 
 **Hive是建立在Hadoop之上的一种数仓工具**。工具的用处是将结构化、半结构化的数据文件映射为一张数据库表，基于表提供了一种类似SQL的查询模型（HQL），用于访问和分析存储在Hadoop文件中的大型数据集。
 
 Hive本身并不具备存储功能，其核心是将HQL转换为MapReduce程序，然后将程序提交到Hadoop集群执行。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.3.1_1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.1_1.png)
 
 ### 6.3.2 产生背景
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.3.1_2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.1_2.png)
 
 Hive的产生背景主要有两块：
 
@@ -130,13 +130,13 @@ hive利用hdfs存储数据，利用mapreduce查询分析数据。将sql转换为
 
 **需求**：在HDFS文件系统上有一个文件，其内容如下：
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.3.3_1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_1.png)
 
 需要来设计hive，要求是通过这个hive，能够实现用户编写sql语句，来处理位于HDFS上结构化的数据，从而统计**来自北京**的**年龄大于20**的人数。
 
 **分析**：写sql的前提是，对表进行操作，而不能是针对文件。那么需要记录文件和表之间的对应关系。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.3.3_2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_2.png)
 
 要实现如上所示文件和表的对应关系，关键在于**实现表和文件的映射**，那么需要记录的信息包括：
 
@@ -165,7 +165,7 @@ metastore是**元数据服务**：指的是hive操作管理访问元数据的一
 1. 元数据把数据保存在关系数据库中，Hive做了元数据服务，能够访问操作元数据的，只有自己这个服务，对外暴漏一个服务地址，让客户端连接；
 2. 支持多个客户端的连接，而客户端无需关心数据存在哪里，实现了解耦操作。
 
-![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.4.1_1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.4.1_1.png)
 
 
 
@@ -174,7 +174,7 @@ metastore是**元数据服务**：指的是hive操作管理访问元数据的一
 1. **内嵌模式**
    metastore**默认的**部署模式，是metastore元数据服务和hive服务融合在一起。
 
-   ![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.4.1_2.png)
+   ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.4.1_2.png)
 
    在这种模式下，Hive服务（Hive驱动本身）、元数据服务Metastore，元数据metadata（存储映射信息的）都在同一个JVM进程中，元数据存储在内置的**Derby数据库**。当启动HiveServer进程时，Derby和metastore都会启动，不需要额外的启Metastore服务。
    • **缺点**：一次只能支持一个活动用户，适合测试使用
@@ -182,14 +182,14 @@ metastore是**元数据服务**：指的是hive操作管理访问元数据的一
 2. **本地模式**
    本地模式与内嵌模式的区别在于：把元数据提取出来，让Metastore服务与主HiveServer进程在同一JVM进程中运行，存储元数据的数据库在单独的进程中运行。元数据一般存储在MySQL关系型数据库中。
 
-   ![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.4.1_3.png)
+   ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.4.1_3.png)
 
    • **缺点**：每启动一个hive服务，都会启动一个metastore服务。多个人使用时，会启用多个metastore服务没有统一。
 
 3. **远程模式**
    既然可以把元数据存储给提取出来，考虑把metastore给提取出来变为单独一个。把metastore单独的配置，单独的对它进行启动，让它自己单独的在一个JVM上运行，保证全局唯一，从而保证数据访问的安全性。（不随hive的启动而启动）
 
-   ![](https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch6.4.1_4.png)
+   ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.4.1_4.png)
 
    • **优点**：把MetaStore服务独立出来，安装到远程的服务器集群里，从而解耦Hive服务和MetaStore服务，保证Hive运行的稳定性
 

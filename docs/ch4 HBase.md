@@ -41,7 +41,7 @@ Hadoop 可以通过 HDFS 来存储**结构化**、**半结构**甚至**非结构
 
 **补充了那么多冷知识，那我们来看一下为什么传统数据库不能适应如今大数据的时代呢？**
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgsch2.0.12.png" alt="ch2.0.12" style="zoom: 67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png" alt="ch2.0.12" style="zoom: 67%;" />
 
 
 

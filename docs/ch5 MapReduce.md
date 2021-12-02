@@ -20,7 +20,7 @@
 妻子： 好吧。
 ```
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.0.1.png" style="zoom: 67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.1.png" style="zoom: 67%;" />
 
 ```html
 我：现在，假设你想用薄荷、洋葱、番茄、辣椒、大蒜弄一瓶混合辣椒酱。你会怎么做呢？
@@ -38,7 +38,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 我： 你可以说是，也可以说不是。 其实这只是MapReduce的一部分，MapReduce的强大在于分布式计算。
 ```
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.0.2.png" style="zoom:67%;" />                     	<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.0.3.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.2.png" style="zoom:67%;" />                     	<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.3.png" style="zoom:67%;" />
 
 ```html
 妻子： 分布式计算？ 那是什么？请给我解释下吧。
@@ -62,11 +62,11 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 我：现在你会看到MapReduce遗漏的阶段—搅拌阶段。MapReduce将所有输出的蔬菜碎都搅拌在了一起，这些蔬菜碎都是在以key为基础的 map操作下产生的。搅拌将自动完成，你可以假设key是一种原料的名字，就像洋葱一样。 所以全部的洋葱keys都会搅拌在一起，并转移到研磨洋葱的研磨器里。这样，你就能得到洋葱辣椒酱了。同样地，所有的番茄也会被转移到标记着番茄的研磨器里，并制造出番茄辣椒酱。
 ```
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.0.4.png" style="zoom: 67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.4.png" style="zoom: 67%;" />
 
 > 小故事讲完啦，相信大家对MapReduce都有了个初步的了解，下面正式进入MapReduce的学习！！！大家冲冲冲，这部分知识是满满的干货
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.0.5.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.5.png" style="zoom:80%;" />
 
 ## 5.1 概述
 
@@ -78,7 +78,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ​		分布式并行编程与传统的程序开发方式有很大的区别。传统的程序都是以单指令、单数据流的方式顺序执行，虽然这种方式比较符合人类的思维习惯，但是，这种程序的性能受到单台机器性能的限制，可扩展性较差。**分布式并行程序可以运行在由大量计算机构成的集群上，从而可以充分利用集群的并行处理能力，同时，通过向集群中增加新的计算节点，就可以很容易实现集群计算能力的扩充。**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.1.1.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.1.png" style="zoom:80%;" />
 
 ​		谷歌公司最先提出了分布式并行编程模型MapReduce，Hadoop MapReduce是它的开源实现。谷歌的 MapReduce运行在分布式文件系统GFS上，与谷歌类似，Hadoop MapReduce运行在分布式文件系统HDFS上。相对而言，**Hadoop MapReduce要比谷歌MapReduce 的使用门槛低很多,程序员即使没有任何分布式程序开发经验，也可以很轻松地开发出分布式程序并部署到计算机集群中。**
 
@@ -90,7 +90,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ​		MapReduce设计的一个理念就是**“计算向数据靠拢”**，而不是“数据向计算靠拢",因为数据需要***大量的网络传输开销***，尤其是在大规模数据环境下，这种开销尤为惊人，所以，移动计算要比移动数据更加经济。在这种理念下，一个集群中，只要有可能，**MapReduce框架就会将Map程序就近地在HDFS数据所在的节点运行，即将计算节点和存储节点放在一起运行，从而减少了节点间的数据移动开销。**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.1.2.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.2.png" style="zoom:80%;" />
 
 ​		MapReduce框架采用了 Master/Slave架构，包括一个 Master和若干个 Slave **Master**上运行**JobTracker**，**Slave**上运行 **TaskTracker**。用户提交的每个计算作业，会被划分成若干个任务。
 
@@ -118,15 +118,15 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > **这里看起来好枯燥		╮(╯▽╰)╭         举个栗子方便理解啦啦啦拉拉啊拉**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.1.3.png" style="zoom: 67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.3.png" style="zoom: 67%;" />
 
 
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.1.4.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.4.png" style="zoom:67%;" />
 
 
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.1.5.png" style="zoom: 80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.5.png" style="zoom: 80%;" />
 
 > **这里再给出一个简单WordCount实例**
 
@@ -137,7 +137,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.1.6.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.6.png" style="zoom:80%;" />
 
 
 
@@ -145,7 +145,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > ps：编者警告，以下内容十分硬核，建议买杯咖啡慎入，希望大家能坚持学下去，加油加油
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.2.1.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.1.png" style="zoom:67%;" />
 
 ### 5.2.1 工作流程概述
 
@@ -170,7 +170,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > 坚持坚持，这才刚开始，学习使我快乐！！
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.2.2.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.2.png" style="zoom:67%;" />
 
 ### 5.2.3 Shuffle过程详解
 
@@ -237,7 +237,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 > 如果把这段知识肝完，请自称为肝帝        ╮(╯▽╰)╭
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.2.3.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.3.png" style="zoom:80%;" />
 
 
 
@@ -275,7 +275,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 > emmmmmmm，编者吐槽，以上内容实在是太太太太太硬核了，估计今天吃完饭憋得上厕所都难受，大家都是打工人，自然感同身受。没事没事没事，下面Wordcount的例子就有很多生动形象的图啦，很好理解的！！！大家坚持住，看完睡个好觉红红火火恍恍惚惚哈哈哈。
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.2.4.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.2.4.png" style="zoom:67%;" />
 
 
 
@@ -293,7 +293,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 ### 5.3.1 首先放一张wordcount实现过程图来控场
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.1.png" style="zoom: 80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.1.png" style="zoom: 80%;" />
 
 那么问题来了，MapReduce是如何对这些**大批量的数据**进行处理计算的呢？
 
@@ -301,7 +301,7 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 看到这里不知道朋友们有没有回想起HDFS的知识呢？  还记得NameNode和DataNode吗？
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.2.png" style="zoom:67%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.2.png" style="zoom:67%;" />
 
 
 
@@ -309,13 +309,13 @@ min.num.spills.for.combine的值时（默认值是3,用户可以修改这个值�
 
 
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.3.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.3.png" style="zoom:80%;" />
 
 
 
 ### 5.3.3 数据分片
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.4.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.4.png" style="zoom:80%;" />
 
 MapReduce的工作流程：
 
@@ -328,35 +328,35 @@ MapReduce的工作流程：
 
 **1. wordcount的数据分片**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.5.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.5.png" style="zoom:80%;" />
 
 **2. split的Map流程**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.6.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.6.png" style="zoom:80%;" />
 
 **3. Reduce流程**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.7.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.7.png" style="zoom:80%;" />
 
 **4. Wordcount的Map流程**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.8.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.8.png" style="zoom:80%;" />
 
 **5. Wordcount的Reduce流程**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.9.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.9.png" style="zoom:80%;" />
 
 **6. Shuffle过程**
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.10.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.10.png" style="zoom:80%;" />
 
 ### 5.3.5 详细版MapReduce工作流程
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.11.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.11.png" style="zoom:80%;" />
 
 ### 5.3.6 MapReduce的体系结构
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.12.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.12.png" style="zoom:80%;" />
 
 #### 1. Client（客户端）
 
@@ -389,5 +389,5 @@ MapReduce的工作流程：
 >
 > ps：能够认真学完的朋友们都是超人，勇敢坚持战胜困难的人生才更美丽！！！！
 
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/ch5.3.13.png" style="zoom:80%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.3.13.png" style="zoom:80%;" />
 
