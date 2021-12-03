@@ -12,6 +12,10 @@
 
 ​		谷歌公司开发了**第一个大规模商业化应用的分布式文件系统GFS**，而Hadoop分布式文件系统是针对GFS的开源实现，它就是Hadoop两大核心组成部分之一**HDFS**！！由于其良好的容错能力，使得用户能在廉价服务器集群中存储大规模数据，实现大流量和大数据量的读写。
 
+> ps：这一部分可是重点哈，敲黑板敲黑板！！！！都支棱起来支棱起来，好好学习冲冲冲~~~
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.0.png" style="zoom: 67%;" />
+
 ## 3.1 概述
 
 ### 3.1.1 分布式文件系统简介
@@ -153,7 +157,13 @@ Hadoop 采用两种机制来确保名称节点的安全：
 
 当客户端读取文件的时候，会先读取该信息文件，然后，利用该信息文件对每个读取的数据块进行校验。如果校验出错，客户端就会请求到另外一个数据节点读取该文件块，并且向名称节点报告这个文件块有错误，名称节点会定期检查并且重新复制这个块。
 
+
+
 ## 3.4 HDFS的数据读写过程
+
+> ps：读写过程很重要哟，大家注意点又到重点啦，敲黑板✖2
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.1_emoij.png" style="zoom:80%;" />
 
 > 说明：以下图片引用自博客：[翻译经典 HDFS 原理讲解漫画](https://blog.csdn.net/hudiefenmu/article/details/37655491)
 
@@ -376,6 +386,10 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.8.png" style="zoom:50%;" />
 
 如果创建目录成功，你将会看到 /myhadoop1/test 和 /myhadoop2/test
+
+> ps:命令好多，不过都很硬核，嘤嘤嘤，各位看官，要坚持看下去哟
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.8_emoji.png" style="zoom:80%;" />
 
 ##### 10. cp 命令
 
@@ -600,6 +614,10 @@ hadoop fs -chmod 777 /shenhao
 
 
 
+
+
+
+
 ### 实验二：HDFS的进阶命令
 
 #### 实验环境
@@ -741,3 +759,10 @@ dolphin@tools:~$ hadoop fs -stat /test.txt
 
 ​		同时在本章的最后，也通过Linux代码，进一步熟悉了HDFS分布式文件系统的使用。
 
+
+
+> ps：看到内容量大家应该也知道这节课很硬核了对吧，的确如此，HDFS是Hadoop的基石之一，希望大家能够好好理解其中的理论解释，并在此基础上进行编程实践，好记性不如烂笔头，好好敲代码做编程才是正道！！！，也希望大家别怕命令多，多敲敲就会了。
+>
+> 嘿嘿，这边又有一个看网课敲代码学傻的人~~~
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.5.png" style="zoom:80%;" />

@@ -6,6 +6,12 @@
 
 在介绍HBase之前，我们首先来思考一下Hadoop的局限？
 
+> ps：奇怪的冷知识又增加了，勤思考，多动脑，不仅预防老年痴呆，而且还能升职加薪
+>
+> HBase给我冲冲冲！！！！！
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.0.png" style="zoom:80%;" />
+
 ### 4.0.1 Hadoop的局限
 
 Hadoop 可以通过 HDFS 来存储**结构化**、**半结构**甚至**非结构化**的数据，它是传统数据库的补充，是海量数据存储的最佳方法，它针对大文件的存储，批量访问和流式访问都做了优化，同时也通过多副本解决了容灾问题。
@@ -186,6 +192,10 @@ HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐
 - 缺陷：执行链接操作时需要昂贵的元组重构代价
 
 
+
+> ps：乍一看HBase这玩意是挺好的，但是他内部是如何实现工作的呢，且听下面分说
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2_emoji.png" style="zoom:80%;" />
 
 ## 4.3 HBase 的实现原理
 
@@ -517,6 +527,18 @@ dolphin@tools:~$ jps
 
 如果HMaster、HRegionServer和HQuorumPeer进程都出现了，说明HBase安装成功。
 
+
+
+> ps：代码敲多了，感觉女人都没意思了哈哈哈，手动狗头QAQ
+>
+> 谈恋爱哪有学习敲代码香啊，给我继续敲！！代码使我变强，对象使我牵挂
+>
+> 不慌，继续学！！
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.2_emoji.png" style="zoom:80%;" />
+
+
+
 ##### 9.启动HBase Shell
 
 运行下面的命令，启动HBase Shell
@@ -681,3 +703,12 @@ hbase(main):019:0> drop 'student'
 在本章的学习中，我们了解到了HBase的由来及其和传统数据库的区别，其次介绍 HBase 访问接口、数据模型、实现原理和运行机制，并在最后介绍 HBase 编程实践方面的知识。
 
 在下一章中，我们将学习到分布式并行编程模型MapReduce， 💥💥💥 **硬核+高能预警**！！💥💥💥
+
+> ps：MapReduce，Hadoop生态系统的又一大基石，兄弟们，上高地的时候到了，准备冲冲冲
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.6.1.png" style="zoom:80%;" />
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.6.2.png" style="zoom:80%;" />
+
+
+
