@@ -581,7 +581,7 @@ wait：等待离开安全模式
 
 查看hdfs中的文本文件内容
 
-```
+```shell
  hadoop fs -cat /demo.txt
  hadoop fs -tail -f /demo.txt
 ```
@@ -594,7 +594,7 @@ wait：等待离开安全模式
 
 追加内容到已存在的文件
 
-   ```
+   ```shell
 hadoop fs -appendToFile /本地文件 /hdfs中的文件
    ```
 
@@ -611,10 +611,6 @@ hadoop fs -chmod 777 /shenhao
 
 - `chown`定义谁拥有文件。
 - `chmod`定义谁可以做什么。
-
-
-
-
 
 
 
@@ -641,7 +637,7 @@ Linux Centos 7
 
   运行后显示如下，根据日志显示，分别启动了NameNode、DataNode、Secondary NameNode：
 
-```
+```shell
 dolphin@tools:~$ /apps/hadoop/sbin/start-dfs.sh 
 Starting namenodes on [localhost]
 localhost: Warning: Permanently added 'localhost' (ECDSA) to the list of known hosts.
@@ -658,7 +654,7 @@ tools.hadoop.fs.init: Warning: Permanently added 'tools.hadoop.fs.init,172.22.0.
 
   运行后显示如下，表明NameNode、DataNode、Secondary NameNode已经成功启动
 
-```
+```shell
 dolphin@tools:~$ jps
 484 DataNode
 663 SecondaryNameNode
@@ -682,7 +678,7 @@ dolphin@tools:~$ jps
 
   运行后显示如下，1 1 306 分别是根目录下文件数、目录数、和文件的大小
 
-```
+```shell
 dolphin@tools:~$ hadoop fs -count -h /
 	1      1        306
 ```
@@ -695,7 +691,7 @@ dolphin@tools:~$ hadoop fs -count -h /
 
   运行后如下：
 
-```
+```shell
 dolphin@tools:~$ hadoop fs -find / -name *.txt
 /test.txt
 ```
@@ -708,7 +704,7 @@ dolphin@tools:~$ hadoop fs -find / -name *.txt
 
   运行后显示如下：
 
-```
+```shell
 dolphin@tools:~$ hadoop fs -setrep -w 1 /test.txt
 Replication 1 set: /test.txt
 Waiting for /test.txt ... done
@@ -727,7 +723,7 @@ Waiting for /test.txt ... done
 
   运行后显示如下，返回1表明不存在zeno.txt文件：
 
-```
+```shell
 dolphin@tools:~$ echo $?
 1
 ```
@@ -740,7 +736,7 @@ dolphin@tools:~$ echo $?
 
   运行后显示如下：
 
-```
+```shell
 dolphin@tools:~$ hadoop fs -stat /test.txt
 2019-11-28 16:20:30
 ```

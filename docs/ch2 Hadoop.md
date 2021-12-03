@@ -283,20 +283,20 @@ Hadoop是一个能够对大量数据进行分布式处理的软件框架，并�
 ​		对于 Hadoop 的伪分布和全分布而言，Hadoop名称节点(NameNode)需要启动集群中所有机器的Hadoop守护进程，这个过程可以通过SSH登录来实现。Hadoop并没有提供SSH输入密码登录的形式，因此，为了能够顺利登录每台机器，需要将所有机器配置为名称节点，可以无密码登录它们。
 ​		为了实现SSH无密码登录方式，首先需要让名称节点生成自己的SSH密钥，命令如下。
 
-```c
+```shell
 ssh-keygen -t rsa -p ''  //在后面选择存放位置时，按照默认位置，会存放在用户目录的.ssh/路径下
 ```
 
 ​		名称节点生成自己的密钥之后，需要将它的公共密钥发送给集群中的其他机器。我们可以将id_dsa.pub中的内容添加到需要匿名登录的机器的“~/ssh/authorized_keys”目录下，然后，在理论上名称节点就可以无密码登录这台机器了。对于无密码登录本机而言，可以采用以下代码。
 
-```c
+```shell
 cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
 ```
 
 ​		这时可以通过ssh localhost命令来检测一下是否需要输入密码。对于 Ubuntu而言,到这里SSH就配置好了。但是，由于CentOS7具有更为严格的安全措施，因此，还需要修改两个地方。
 (1）修改“/etc/ssh/sshd_config”文件，将其中以下几行注释去掉。
 
-```c
+```shell
 RSAAuthentication yes
 PubkeyAuthentication yes
 AuthorizedKeysFile		.ssh/authorized_keys
@@ -312,19 +312,19 @@ AuthorizedKeysFile		.ssh/authorized_keys
 ​		将该文件夹解压后，可以放置到自己喜欢的位置,如“/usr/local/hadoop”文件夹下,注意,文件夹的用户和组必须都为hadoop。
 ​		在 Hadoop 的文件夹中，“conf”目录下面放置了配置文件，对于单机安装，首先需要更改hadoop-env.sh 文件，以配置Hadoop运行的环境变量，这里只需要将JAVA_HOME环境变量指定到本机的JDK目录就可以了，命令如下。
 
-```c
+```shell
 [hadoop@localhost hadoop] $ export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk
 ```
 
 ​		完成之后,我们可以试着查看Hadoop的版本信息,可以运行如下命令。
 
-```c
+```shell
 [hadoopelocalhost hadoop] $ ./bin/hadoop version
 ```
 
 ​		此时，应该得到如下提示。
 
-```c
+```shell
 Hadoop 1.2.1
 .......
 This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
@@ -333,20 +333,20 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 ​		Hadoop文档中还附带了一些例子来供我们测试，我们可以运行"WordCount "的例子检测一下Hadoop安装是否成功。
 ​		首先，在 hadoop目录下新建input文件夹，用来存放输入数据;然后,将"conf "文件夹下的配置文件拷贝input文件夹中;接下来，在hadoop目录下新建output文件夹,用来存放输出数据;最后,执行如下代码。
 
-```c
+```shell
 [hadoop(localhost hadoop]$./bin/hadoop jar hadoop-examples-1.2.1.jar grep inputoutput 'dfs[a-z.]+'
 ```
 
 ​		执行之后，我们执行以下命令查看输出数据的内容。
 
-```c
+```shell
 [hadoop@localhost hadoop] $cat ./output/*
 ```
 
 
 ​		运行上面命令后,可以得到以下结果。
 
-```c
+```shell
 1 dfsadmin
 ```
 
@@ -360,7 +360,7 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 
 ​		对于伪分布式配置,我们需要修改core-site.xml 、hdfs-site.xml和 mapred-site.xml这3个文件。修改后的core-site.xml文件如下。
 
-```c
+```html
 <configuration>
 	<property>
 		<name>fs.default.name</name>
@@ -372,7 +372,7 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 ​		可以看出, core-site.xml配置文件的格式十分简单，<name>标签代表了配置项的名字,<value>项设置的是配置的值。对于core-site.xml文件，我们只需要在其中指定HDFS 的地址和端口号，端口号按照官方文档设置为9000即可。
 ​		修改后的hdfs-site.xml文件如下。
 
-```c
+```html
 <configuration>
 	<property>
 		<name>dfs.replication</name>
@@ -384,7 +384,7 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 ​		对于hdfs-site.xml文件，我们设置replication值为1，这也是Hadoop运行的默认最小值，它限制了HDFS 文件系统中同一份数据的副本数量。
 ​		修改后的 mapred-site.xml文件如下。
 
-```c
+```html
 <configuration>
 	<property>
 		<name>mapred.job.tracker</name>
@@ -397,7 +397,7 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 ​		对于本书的实验，我们这样配置后就已经满足运行要求了。这里再给出一个官方文档的详细地址,感兴趣的读者可以查看文档配置的其他项目,网址如下: http:/hadoop.apache.org/docs/stable。
 ​		在配置完成后，首先需要初始化文件系统，由于 Hadoop 的很多工作是在自带的 HDFS 文件系统上完成的，因此，需要将文件系统初始化之后才能进一步执行计算任务。执行初始化的命令如下。
 
-```c
+```shell
 15/01/14 18:04:15 INFO namenode.NameNode: STARTUP_MSG:/***迩******************冰****零*****************************
 STARTUP_MSG:Starting NameNode
 STARTUP_MSG: 	host = localhost.localdomain/127.0.0.1
@@ -425,13 +425,13 @@ SHUTDOWN MSG: Shutting down NameNode at localhost.localdomain/127.0.0.1
 
 ​		然后，用如下命令启动所有进程，可以通过提示信息得知所有的启动信息都写人对应的日志文件。如果出现启动错误，则可以在日志中查看错误原因。
 
-```c
+```shell
 [hadoop@localhost hadoop] $ ./bin/start-all.sh
 ```
 
 ​		运行之后，输入jps 指令可以查看所有的Java进程。在正常启动时，可以得到如下类似结果。
 
-```c
+```shell
 [hadoopelocalhost conf]$ jps
 18271 JobTracker
 18860 Jps
@@ -444,27 +444,27 @@ SHUTDOWN MSG: Shutting down NameNode at localhost.localdomain/127.0.0.1
 ​		此时，可以访问Web界面（http://localhost:50070）来查看Hadoop 的信息。
 ​		接下来，我们执行如下命令在 HDFS 中创建存储数据的input文件夹。
 
-```c
+```shell
 [hadoop@localhost hadoop] $ ./bin/hadoop dfs -mkdir input
 ```
 
 ​		在前面的安装单机Hadoop内容中，我们曾经在本地hadoop文件夹下创建了input文件夹,并把 conf文件夹下的配置文件复制到input文件夹，作为实验所需的文本文件。现在，我们需要将这些本地的文本文件(配置文件)“上传”到分布式文件系统HDFS 中的 input文件夹。当然，这里的“上传”并不意味着数据通过网络传输，实际上，在我们这里介绍的伪分布式 Hadoop环境下，本地的input文件夹和HDFS中的input文件夹都在同一台机器上，并不需要通过网络传输数据。我们可以执行如下命令，将本地input 文件夹中的数据上传到HDFS 的 input文件夹。
 
-```c
+```shell
 [ hadoop@localhost hadoop] $./bin/hadoop dfs -put ./input/ input
 ```
 
 
 ​		接着,运行如下命令来执行字数统计测试样例。
 
-```c
+```shell
 [hadoop@localhost hadoop]$ ./bin/hadoop jar hadoop-examples-1.2.1.jar wordcount inputoutput
 ```
 
 
 ​		在计算完成后，系统会自动在 HDFS 中生成output文件夹来存储计算结果。大家可以输入下面命令查看最终结果。
 
-```c
+```shell
 [hadoop@localhost hadoop]$./bin/hadoop fs -cat output/*
 ```
 

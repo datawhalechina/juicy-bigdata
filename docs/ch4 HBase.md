@@ -433,7 +433,7 @@ Linux Centos 7
 
 在新弹出的记事本窗口的最底部添加如下内容，再保存退出。
 
-```
+```shell
 export HBASE_HOME=/opt/hbase/
 export PATH=$PATH:$HBASE_HOME/bin
 ```
@@ -450,7 +450,7 @@ export PATH=$PATH:$HBASE_HOME/bin
 
 其余的内容删掉。
 
-```
+```html
 <property>
 <name>hbase.cluster.distributed</name>
 <value>true</value>
@@ -487,7 +487,7 @@ export PATH=$PATH:$HBASE_HOME/bin
 
 执行上述命令后，显示如下：
 
-```
+```shell
 dolphin@tools:/opt/hadoop/sbin$ jps
 2261 Jps
 1317 DataNode
@@ -511,7 +511,7 @@ dolphin@tools:/opt/hadoop/sbin$ jps
 
 执行上述命令后，显示如下：
 
-```
+```shell
 dolphin@tools:~$ jps
 1552 NodeManager
 1010 SecondaryNameNode
@@ -543,14 +543,14 @@ dolphin@tools:~$ jps
 
 运行下面的命令，启动HBase Shell
 
-```
-    cd /opt/hbase/bin
-    hbase shell
+```shell
+cd /opt/hbase/bin
+hbase shell
 ```
 
 启动后，进入hbase命令行模式，显示如下
 
-```
+```shell
 dolphin@tools:~$ hbase shell
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/opt/hbase/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -574,8 +574,8 @@ hbase(main):001:0>
 
 创建后显示如下
 
-```
-    hbase(main):009:0> create 'student','info','addr'
+```shell
+hbase(main):009:0> create 'student','info','addr'
 0 row(s) in 2.2840 seconds
  
 => Hbase::Table - student
@@ -607,7 +607,7 @@ hbase中的scan命令用于扫描表内容，下面我们看看student表有哪�
 
 执行后显示如下：
 
-```
+```shell
 hbase(main):014:0> scan 'student'
 ROW                   COLUMN+CELL
 1                    column=addr:city, timestamp=1531207679298, value=hefei
@@ -627,7 +627,7 @@ hbase中的get命令用于查询数据，下面我们查询一下student表中ro
 
 执行后显示如下：
 
-```
+```shell
 hbase(main):015:0> get 'student','1'
 COLUMN                CELL
 addr:city            timestamp=1531207679298, value=hefei
@@ -648,13 +648,13 @@ hbase中严格来说，没有修改数据的概念，只有覆盖数据，也是
 
 执行后显示如下：
 
-```
+```shell
 hbase(main):016:0> put 'student','1','info:age','18'
 ```
 
 再查询一下，查看修改结果
 
-```
+```shell
 hbase(main):017:0> get 'student','1'
 COLUMN                CELL
 addr:city            timestamp=1531207679298, value=hefei
@@ -682,7 +682,7 @@ hbase中的表不能直接删除，需要禁用(disable 命令)后，才能删�
 
 执行后显示如下：
 
-```
+```shell
 hbase(main):018:0> disable 'student'
 0 row(s) in 2.2950 seconds
 ```
@@ -691,12 +691,83 @@ hbase(main):018:0> disable 'student'
 
 执行后显示如下：
 
-```
+```shell
 hbase(main):019:0> drop 'student'
 0 row(s) in 2.2770 seconds
 ```
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.11.png)
+
+
+
+## 实验二：常用的HBase操作
+
+#### 实验环境
+
+Linux Centos 7
+
+前提条件：
+
+1）Hadoop 3.0.0 的单点部署完成  
+2）Java 运行环境部署完成
+
+#### 实验内容
+
+#### 1、编程实现以下指定功能，并用Hadoop提供的HBase Shell命令完成相同的任务。
+
+##### （1）列出HBase所有的表的相关信息，如表名、创建时间等：
+
+`list`
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.1.png)
+
+##### （2） 在终端打印出指定的表的所有记录数据：
+
+`scan`
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.2.png)
+
+##### （3） 向已经创建好的表添加和删除指定的列族或列：
+
+###### 添加列族：
+
+`alter` 
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.3_add.png)
+
+###### 删除列族：
+
+` alter '表名','列族',METHOD=>'delete'`
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.3_del.png)
+
+##### （4） 清空指定的表的所有记录数据：
+
+`truncate`
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.4.png)
+
+##### （5） 统计表的行数
+
+`count`
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.5.png)
+
+#### 2、现有以下关系型数据库中的表和数据，要求将其转换为适合于HBase存储的表并插入数据：
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_stu.png)
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_stu_answer.png)
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_course.png)
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_course_answer.png)
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_SCpng)
+
+![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_SC_answer.png)
+
+
 
 ## 4.6 本章小结
 
