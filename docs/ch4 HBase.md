@@ -755,6 +755,8 @@ Linux Centos 7
 
 #### 2、现有以下关系型数据库中的表和数据，要求将其转换为适合于HBase存储的表并插入数据：
 
+> ⚠：请根据给定的表，自主完成插入数据的操作，不提供代码。
+
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu.png)
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu_answer.png)
