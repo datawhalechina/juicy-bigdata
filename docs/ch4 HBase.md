@@ -719,13 +719,13 @@ Linux Centos 7
 
 `list`
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.1.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.1.png)
 
 ##### （2） 在终端打印出指定的表的所有记录数据：
 
 `scan`
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.2.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.2.png)
 
 ##### （3） 向已经创建好的表添加和删除指定的列族或列：
 
@@ -733,39 +733,39 @@ Linux Centos 7
 
 `alter` 
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.3_add.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.3_add.png)
 
 ###### 删除列族：
 
 ` alter '表名','列族',METHOD=>'delete'`
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.3_del.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.3_del.png)
 
 ##### （4） 清空指定的表的所有记录数据：
 
 `truncate`
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.4.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.4.png)
 
 ##### （5） 统计表的行数
 
 `count`
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.1.5.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.5.png)
 
 #### 2、现有以下关系型数据库中的表和数据，要求将其转换为适合于HBase存储的表并插入数据：
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_stu.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu.png)
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_stu_answer.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu_answer.png)
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_course.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_course.png)
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_course_answer.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_course_answer.png)
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_SCpng)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_SC.png)
 
-![](C:\Users\56550\Desktop\Big Data\doc_imgs\ch4_ex2.2_SC_answer.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_SC_answer.png)
 
 
 
