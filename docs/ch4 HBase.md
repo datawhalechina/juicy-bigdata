@@ -700,7 +700,7 @@ hbase(main):019:0> drop 'student'
 
 
 
-## 实验二：常用的HBase操作
+### 实验二：常用的HBase操作
 
 #### 实验环境
 
