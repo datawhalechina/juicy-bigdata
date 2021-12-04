@@ -517,8 +517,7 @@ cat output/*
 vim /opt/hadoop/etc/hadoop/core-site.xml
 ```
 
-添加下面配置到
-`<configuration>与</configuration>`标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```html
 <configuration>
@@ -539,8 +538,7 @@ vim /opt/hadoop/etc/hadoop/core-site.xml
 vim /opt/hadoop/etc/hadoop/hdfs-site.xml
 ```
 
-添加下面配置到
-`<configuration>与</configuration>`标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```html
 <configuration>
@@ -561,8 +559,7 @@ vim /opt/hadoop/etc/hadoop/hdfs-site.xml
 vim /opt/hadoop/etc/hadoop/mapred-site.xml
 ```
 
-添加下面配置到
-`<configuration>与</configuration>`标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 修改后的 mapred-site.xml文件如下。
 
@@ -586,8 +583,7 @@ vim /opt/hadoop/etc/hadoop/mapred-site.xml
 vim /opt/hadoop/etc/hadoop/yarn-site.xml
 ```
 
-添加下面配置到
-`<configuration>与</configuration>`标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```html
     <property>

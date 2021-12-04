@@ -138,7 +138,7 @@ This command was run using /opt/hadoop/share/hadoop/common/hadoop-common-3.0.0.j
 #### 5.修改hadoop hadoop-env.sh文件配置
 
 ```
-leafpad  /opt/hadoop/etc/hadoop/hadoop-env.sh
+leafpad /opt/hadoop/etc/hadoop/hadoop-env.sh
 ```
 
 末端添加如下内容：
@@ -152,12 +152,10 @@ export JAVA_HOME=/opt/java/
 #### 6.修改hadoop core-site.xml文件配置
 
 ```
-leafpad  /opt/hadoop/etc/hadoop/core-site.xml
+leafpad /opt/hadoop/etc/hadoop/core-site.xml
 ```
 
-添加下面配置到
-<configuration>与</configuration>
-标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```
 <property>
@@ -171,12 +169,10 @@ leafpad  /opt/hadoop/etc/hadoop/core-site.xml
 #### 7.修改hadoop hdfs-site.xml文件配置
 
 ```
-leafpad  /opt/hadoop/etc/hadoop/hdfs-site.xml
+leafpad /opt/hadoop/etc/hadoop/hdfs-site.xml
 ```
 
-添加下面配置到
-<configuration>与</configuration>
-标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```
 <property>
@@ -190,12 +186,10 @@ leafpad  /opt/hadoop/etc/hadoop/hdfs-site.xml
 #### 8.修改hadoop yarn-site.xml文件配置
 
 ```
-leafpad  /opt/hadoop/etc/hadoop/yarn-site.xml
+leafpad /opt/hadoop/etc/hadoop/yarn-site.xml
 ```
 
-添加下面配置到
-<configuration>与</configuration>
-标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```
 <property>
@@ -213,12 +207,10 @@ leafpad  /opt/hadoop/etc/hadoop/yarn-site.xml
 #### 9.mapred-site.xml文件配置
 
 ```
-leafpad  /opt/hadoop/etc/hadoop/mapred-site.xml
+leafpad /opt/hadoop/etc/hadoop/mapred-site.xml
 ```
 
-添加下面配置到
-<configuration>与</configuration>
-标签之间。
+添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```
 <property>
@@ -232,7 +224,7 @@ leafpad  /opt/hadoop/etc/hadoop/mapred-site.xml
 #### 10.修改hadoop workers文件配置
 
 ```
-leafpad  /opt/hadoop/etc/hadoop/workers
+leafpad /opt/hadoop/etc/hadoop/workers
 ```
 
 覆盖写入主节点映射名和从节点映射名：
