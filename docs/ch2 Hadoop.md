@@ -250,7 +250,7 @@ Hadoop是一个能够对大量数据进行分布式处理的软件框架，并�
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.3.png)
 
-​		在开始具体操作之前，需要首先选择一个合适的操作系统。尽管 Hadoop本身可以运行在Linux、Windows 以及其他一些类 UNIX系统(如FreeBSD、OpenBSD、Solaris等）之上，但是**,Hadoop官方真正支持的作业平台只有 Linux**。这就导致其他平台在运行Hadoop时，往往需要安装很多其他的包来提供一些Linux操作系统的功能，以配合 Hadoop的执行。例如，Windows在运行Hadoop时,需要安装Cygwin等软件。我们这里选择Linux作为系统平台,来演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然,其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的用户,可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。在 Linux发行版的选择上，我们倾向于使用企业级的、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE 和 RedHat等发行版，最终选择免费的CentOS 发行版作为推荐的操作系统,读者可以到网络上下载CentOS系统镜像文件(www.centos.org/download）进行安装。
+在开始具体操作之前，需要首先选择一个合适的操作系统。尽管 Hadoop本身可以运行在Linux、Windows 以及其他一些类 UNIX系统(如FreeBSD、OpenBSD、Solaris等）之上，但是**,Hadoop官方真正支持的作业平台只有 Linux**。这就导致其他平台在运行Hadoop时，往往需要安装很多其他的包来提供一些Linux操作系统的功能，以配合 Hadoop的执行。例如，Windows在运行Hadoop时,需要安装Cygwin等软件。我们这里选择Linux作为系统平台,来演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然,其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的用户,可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。在 Linux发行版的选择上，我们倾向于使用企业级的、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE 和 RedHat等发行版，最终选择免费的CentOS 发行版作为推荐的操作系统,读者可以到网络上下载CentOS系统镜像文件(www.centos.org/download）进行安装。
 
 ### 实验环境
 
@@ -272,35 +272,120 @@ Linux Centos 7
 
 #### 1.创建Hadoop用户
 
-​		为方便操作，我们创建一个名为“hadoop”的用户来运行程序，这样可以使不同用户之间有明确的权限区别，同时，也可以使针对Hadoop 的配置操作不影响具他用尸的便用。头协上，于一些大的软件（如 MySQL)，在企业中也常常为其单独创建一个用户。
-​		创建用户的命令是useradd,设置密码的命令为passwd。此外，可能部分系统还需要为用户创建文件夹,在这里不再详细说明。
+为方便操作，我们创建一个名为“datawhale”的用户来运行程序，这样可以使不同用户之间有明确的权限区别，同时，也可以使针对Hadoop 的配置操作不影响具他用户的使用。对于一些大的软件（如 MySQL)，在企业中也常常为其单独创建一个用户。
+创建用户的命令是useradd，设置密码的命令为passwd。此外，可能部分系统还需要为用户创建文件夹，在这里不再详细说明。
 
+```shell
+useradd datawhale # 创建datawhale用户
+passwd datawhale # 设置密码
+```
 
+更改用户为datawhale用户，在该用户环境下进行操作。
+
+```shell
+su datawhale # 更改为datawhale用户
+```
 
 #### 2.Java的安装
 
-​		由于Hadoop本身是使用Java语言编写的,因此,Hadoop 的开发和运行都需要Java的支持,一般要求Java 6或者更新的版本。对于CentOS7本身，系统上可能已经预装了Java7，它的JDK版本为openjdk，路径为“/usr/lib/jvm/java-1.7.0-openjdk”，后文中需要配置的 JAVA_HOME 环境变量就可以设置为这个值。
-​		对于Hadoop而言，采用更为广泛应用的Oracle公司的Java版本，在功能上可能会更稳定一些，因此，用户也可以根据自己的爱好，安装Oracle版本的 Java。在安装过程中，请记录 JDK的路径，即 JAVA_HOME的位置，这个路径的设置将用在后文Hadoop 的配置文件中，目的是让Hadoop程序可以找到相关的Java工具。
+由于 Hadoop 本身是使用 Java 语言编写的，因此，Hadoop 的开发和运行都需要Java的支持,一般要求 Java 6 或者更新的版本。对于CentOS7本身，系统上可能已经预装了Java7 ，它的JDK版本为openjdk，路径为“/usr/lib/jvm/java-1.7.0-openjdk”，后文中需要配置的 `JAVA_HOME` 环境变量就可以设置为这个值。
+对于 Hadoop 而言，采用更为广泛应用的Oracle公司的 Java 版本，在功能上可能会更稳定一些，因此，用户也可以根据自己的爱好，安装Oracle版本的 Java 。在安装过程中，请记录 JDK 的路径，即 `JAVA_HOME` 的位置，这个路径的设置将用在后文 Hadoop 的配置文件中，目的是让Hadoop程序可以找到相关的 Java 工具。
 
+比如我们在`/data/hadoop`目录中下载了`jdk-8u161-linux-x64.tar.gz`。
 
+##### 1.安装jdk
 
-#### 3.SSH登录权限设置
-
-​		对于 Hadoop 的伪分布和全分布而言，Hadoop名称节点(NameNode)需要启动集群中所有机器的Hadoop守护进程，这个过程可以通过SSH登录来实现。Hadoop并没有提供SSH输入密码登录的形式，因此，为了能够顺利登录每台机器，需要将所有机器配置为名称节点，可以无密码登录它们。
-​		为了实现SSH无密码登录方式，首先需要让名称节点生成自己的SSH密钥，命令如下。
-
-```shell
-ssh-keygen -t rsa -p ''  //在后面选择存放位置时，按照默认位置，会存放在用户目录的.ssh/路径下
-```
-
-​		名称节点生成自己的密钥之后，需要将它的公共密钥发送给集群中的其他机器。我们可以将id_dsa.pub中的内容添加到需要匿名登录的机器的“~/ssh/authorized_keys”目录下，然后，在理论上名称节点就可以无密码登录这台机器了。对于无密码登录本机而言，可以采用以下代码。
+将/data/hadoop目录下jdk-8u161-linux-x64.tar.gz 解压缩到/opt目录下。
 
 ```shell
-cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+sudo tar -xzvf /data/hadoop/jdk-8u161-linux-x64.tar.gz -C /opt
 ```
 
-​		这时可以通过ssh localhost命令来检测一下是否需要输入密码。对于 Ubuntu而言,到这里SSH就配置好了。但是，由于CentOS7具有更为严格的安全措施，因此，还需要修改两个地方。
-(1）修改“/etc/ssh/sshd_config”文件，将其中以下几行注释去掉。
+其中，`tar -xzvf` 对文件进行解压缩，-C 指定解压后，将文件放到/opt目录下。
+
+> 注意：如果sudo无法使用，请直接切换到root用户，`su root`或`sudo -i`。但要注意，有些地方的操作需要切换到datawhale用户中进行。
+>
+> - 3.ssh登录权限设置。
+> - 5.Hadoop伪分布安装中的5、6、7、8、9步骤。
+
+下面将jdk1.8.0_161目录重命名为java，执行：
+
+```shell
+sudo mv /opt/jdk1.8.0_161/ /opt/java
+```
+
+修改java目录的所属用户：
+
+```shell
+sudo chown -R datawhale:datawhale /opt/java
+```
+
+##### 2.下面来修改环境变量
+
+```shell
+sudo vim /etc/profile
+```
+
+末端添加如下内容：
+
+```shell
+#java
+export JAVA_HOME=/opt/java
+export PATH=$JAVA_HOME/bin:$PATH
+```
+
+保存并关闭编辑器
+
+让环境变量生效。
+
+```shell
+source /etc/profile
+```
+
+刷新环境变量后，可以通过java的家目录找到java可使用的命令。 利用java查看版本号命令验证是否安装成功：
+
+```shell
+java -version
+```
+
+正常结果显示如下
+
+```shell
+java version "1.8.0_161"
+Java(TM) SE Runtime Environment (build 1.8.0_161-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.161-b12, mixed mode)
+```
+
+#### 3.SSH登录权限设置(在datawhale用户下进行操作)
+
+> 须知，我们需要确保用户以及更改为datawhale用户！！
+
+```shell
+su datawhale # 更改为datawhale用户
+```
+
+对于 Hadoop 的伪分布和全分布而言，Hadoop名称节点(NameNode)需要启动集群中所有机器的Hadoop守护进程，这个过程可以通过SSH登录来实现。Hadoop并没有提供SSH输入密码登录的形式，因此，为了能够顺利登录每台机器，需要将所有机器配置为名称节点，可以无密码登录它们。
+为了实现SSH无密码登录方式，首先需要让名称节点生成自己的SSH密钥，命令如下。
+
+```shell
+ssh-keygen -t rsa -p '' -f ~/.ssh/id_rsa //在后面选择存放位置时，按照默认位置，会存放在用户目录的.ssh/路径下
+```
+
+名称节点生成自己的密钥之后，需要将它的公共密钥发送给集群中的其他机器。我们可以将id_dsa.pub中的内容添加到需要匿名登录的机器的“~/ssh/authorized_keys”目录下，然后，在理论上名称节点就可以无密码登录这台机器了。对于无密码登录本机而言，可以采用以下代码。
+
+```shell
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+或者
+
+```shell
+cat /home/datawhale/.ssh/id_rsa.pub >> /home/datawhale/.ssh/authorized_keys
+```
+
+这时可以通过ssh localhost命令来检测一下是否需要输入密码。对于 Ubuntu而言，到这里SSH就配置好了。但是，由于CentOS7具有更为严格的安全措施，因此，还需要修改两个地方。
+
+(1) 修改“/etc/ssh/sshd_config”文件，将其中以下几行注释去掉。
 
 ```shell
 RSAAuthentication yes
@@ -308,75 +393,154 @@ PubkeyAuthentication yes
 AuthorizedKeysFile		.ssh/authorized_keys
 ```
 
-(2）确认“~/.ssh/authorized_keys”目录的权限为600。这样配置之后,对于CentOS7而言，SSH 的配置就完成了。
+(2) 确认“~/.ssh/authorized_keys”目录的权限为600。这样配置之后,对于CentOS7而言，SSH 的配置就完成了。
 
+```shell
+chmod 600 ~/.ssh/authorized_keys
+```
 
+(3) 测试ssh连接，看到 `sucessful login` 即为成功。
+
+```shell
+ssh localhost
+```
 
 #### 4.安装单机版Hadoop
 
-​		这里使用的Hadoop版本为1.2.1，虽然Hadoop目前最新版本已经为2.6.0。但是,由于新的功能在这里并不会用到，因此，这里选择1.2.1版本，下载地址为http://mirrors.hust.edu.cn/apachel/hadoop/common/hadoop-1.2.1，在目录中选择hadoop-1.2.1.tar.gz进行下载即可。
-​		将该文件夹解压后，可以放置到自己喜欢的位置,如“/usr/local/hadoop”文件夹下，注意，文件夹的用户和组必须都为hadoop。
-​		在 Hadoop 的文件夹中，“conf”目录下面放置了配置文件，对于单机安装，首先需要更改hadoop-env.sh 文件，以配置Hadoop运行的环境变量，这里只需要将JAVA_HOME环境变量指定到本机的JDK目录就可以了，命令如下。
+这里使用的Hadoop版本为3.0.0。下载地址为http://archive.apache.org/dist/hadoop/core/hadoop-3.0.0/hadoop-3.0.0.tar.gz。
+​将该文件夹解压后，可以放置到自己喜欢的位置,如“/data/hadoop”文件夹下，注意，文件夹的用户和组必须都为hadoop。
+
+##### 1.安装hadoop
+
+将hadoop-3.0.0.tar.gz解压缩到/opt目录下。
 
 ```shell
-[hadoop@localhost hadoop] $ export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk
+sudo tar -xzvf /data/hadoop/hadoop-3.0.0.tar.gz -C /opt/
 ```
 
-​		完成之后,我们可以试着查看Hadoop的版本信息,可以运行如下命令。
+为了便于操作，我们也将hadoop-3.0.0重命名为hadoop。
 
 ```shell
-[hadoopelocalhost hadoop] $ ./bin/hadoop version
+sudo mv /opt/hadoop-3.0.0/ /opt/hadoop
 ```
 
-​		此时，应该得到如下提示。
+修改hadoop目录的所属用户和所属组：
 
 ```shell
-Hadoop 1.2.1
-.......
-This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
+sudo chown -R datawhale:datawhale /opt/hadoop
 ```
 
-​		Hadoop文档中还附带了一些例子来供我们测试，我们可以运行"WordCount "的例子检测一下Hadoop安装是否成功。
-​		首先，在 hadoop目录下新建input文件夹，用来存放输入数据;然后,将"conf "文件夹下的配置文件拷贝input文件夹中；接下来，在hadoop目录下新建output文件夹，用来存放输出数据;最后,执行如下代码。
+##### 2.下面来修改环境变量
 
 ```shell
-[hadoop(localhost hadoop]$./bin/hadoop jar hadoop-examples-1.2.1.jar grep inputoutput 'dfs[a-z.]+'
+sudo vim /etc/profile
 ```
 
-​		执行之后，我们执行以下命令查看输出数据的内容。
+末端添加如下内容：
 
 ```shell
-[hadoop@localhost hadoop] $cat ./output/*
+#hadoop
+export HADOOP_HOME=/opt/hadoop
+export PATH=$HADOOP_HOME/bin:$PATH
 ```
 
+保存并关闭编辑器。
 
-​		运行上面命令后,可以得到以下结果。
+让环境变量生效。
 
 ```shell
-1 dfsadmin
+source /etc/profile
 ```
 
-​		这意味着，在所有的配置文件中，只有一个符合正则表达式的单词，结果正确。
+利用hadoop查看版本号命令验证是否安装成功：
 
+```shell
+hadoop version
+```
 
+正常结果显示如下：
+
+```shell
+Hadoop 3.0.0
+Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r c25427ceca461ee979d30edd7a4b0f50718e6533
+Compiled by andrew on 2017-12-08T19:16Z
+Compiled with protoc 2.5.0
+From source with checksum 397832cb5529187dc8cd74ad54ff22
+This command was run using /opt/hadoop/share/hadoop/common/hadoop-common-3.0.0.jar
+```
+
+##### 3.修改hadoop hadoop-env.sh文件配置
+
+对于单机安装，首先需要更改hadoop-env.sh 文件，以配置Hadoop运行的环境变量。
+
+```shell
+cd /opt/hadoop/
+vim etc/hadoop/hadoop-env.sh
+```
+
+末端添加如下内容：
+
+```shell
+export JAVA_HOME=/opt/java/
+```
+
+保存并关闭编辑器。
+
+Hadoop文档中还附带了一些例子来供我们测试，我们可以运行"WordCount "的例子检测一下Hadoop安装是否成功。 首先，在 `/opt/hadoop/` 目录下新建 `input` 文件夹，用来存放输入数据；然后,将 `etc/hadoop/` 文件夹下的配置文件拷贝 `input` 文件夹中；接下来，在hadoop目录下新建 `output` 文件夹，用来存放输出数据。最后，查看输出数据的内容。
+
+代码如下：
+
+```shell
+mkdir input
+cp etc/hadoop/*.xml input
+bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar grep input output 'dfs[a-z.]+'
+cat output/*
+```
+
+输出结果：
+
+```shell
+1    dfsadmin
+```
+
+ 这意味着，在所有的配置文件中，只有一个符合正则表达式的单词，结果正确。
 
 #### 5.Hadoop伪分布式安装
 
-​		伪分布式安装是指在一台机器上模拟一个小的集群。当Hadoop应用于集群时，不论是伪分布式还是真正的分布式运行，都需要通过配置文件对各组件的协同工作进行设置。
+伪分布式安装是指在一台机器上模拟一个小的集群。当Hadoop应用于集群时，不论是伪分布式还是真正的分布式运行，都需要通过配置文件对各组件的协同工作进行设置。
 
-​		对于伪分布式配置，我们需要修改core-site.xml 、hdfs-site.xml和 mapred-site.xml这3个文件。修改后的core-site.xml文件如下。
+对于伪分布式配置，我们需要修改core-site.xml 、hdfs-site.xml、mapred-site.xml和yarn-site.xml这4个文件。修改后的core-site.xml文件如下。
+
+##### 1.修改hadoop core-site.xml文件配置
+
+```shell
+vim /opt/hadoop/etc/hadoop/core-site.xml
+```
+
+添加下面配置到
+`<configuration>与</configuration>`标签之间。
 
 ```html
 <configuration>
-	<property>
-		<name>fs.default.name</name>
-		<value>hdfs://localhost: 9000</value>
-	</property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
 </configuration>
 ```
 
-​		可以看出, core-site.xml配置文件的格式十分简单，<name>标签代表了配置项的名字,<value>项设置的是配置的值。对于core-site.xml文件，我们只需要在其中指定HDFS 的地址和端口号，端口号按照官方文档设置为9000即可。
-​		修改后的hdfs-site.xml文件如下。
+保存并关闭编辑器。		
+
+可以看出，core-site.xml配置文件的格式十分简单，`<name>`标签代表了配置项的名字，`<value>`项设置的是配置的值。对于core-site.xml文件，我们只需要在其中指定HDFS 的地址和端口号，端口号按照官方文档设置为9000即可。
+
+##### 2.修改hadoop hdfs-site.xml文件配置
+
+```shell
+vim /opt/hadoop/etc/hadoop/hdfs-site.xml
+```
+
+添加下面配置到
+`<configuration>与</configuration>`标签之间。
 
 ```html
 <configuration>
@@ -387,98 +551,159 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 </configuration>
 ```
 
-​		对于hdfs-site.xml文件，我们设置replication值为1，这也是Hadoop运行的默认最小值，它限制了HDFS 文件系统中同一份数据的副本数量。
-​		修改后的 mapred-site.xml文件如下。
+保存并关闭编辑器
+
+对于hdfs-site.xml文件，我们设置replication值为1，这也是Hadoop运行的默认最小值，它限制了HDFS 文件系统中同一份数据的副本数量。
+
+##### 3.修改mapred-site.xml文件配置
+
+```shell
+vim /opt/hadoop/etc/hadoop/mapred-site.xml
+```
+
+添加下面配置到
+`<configuration>与</configuration>`标签之间。
+
+修改后的 mapred-site.xml文件如下。
 
 ```html
 <configuration>
-	<property>
-		<name>mapred.job.tracker</name>
-		<value>localhost; 9001</value>
-	</property>
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+    <property>
+        <name>mapreduce.application.classpath</name>
+        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+    </property>
 </configuration>
 ```
+保存并关闭编辑器修改。
 
-​		对于mapred-site.xml文件，我们在其中设置JobTracker 的地址和端口信息，把端口配置为9001。
-​		对于本书的实验，我们这样配置后就已经满足运行要求了。这里再给出一个官方文档的详细地址,感兴趣的读者可以查看文档配置的其他项目,网址如下: http:/hadoop.apache.org/docs/stable。
-​		在配置完成后，首先需要初始化文件系统，由于 Hadoop 的很多工作是在自带的 HDFS 文件系统上完成的，因此，需要将文件系统初始化之后才能进一步执行计算任务。执行初始化的命令如下。
-
-```shell
-15/01/14 18:04:15 INFO namenode.NameNode: STARTUP_MSG:/***迩******************冰****零*****************************
-STARTUP_MSG:Starting NameNode
-STARTUP_MSG: 	host = localhost.localdomain/127.0.0.1
-STARTUP_MSG: 	args = [-format]
-STARTUP MSG:	version =1.2.1
-STARTUP_MSG: 	build=
-https://svn.apache.org/repos/asf/hadoop/ common/branches/branch-1.2 -r 1503152;compiled
-by 'mattf' on Mon Jul 2215:23:09 PDT 2013
-STARTUP_MSG:	java = 1.7.0_71
-************************************************************************* 
-15/01/14 18:04:15 INFO util.GSet: Computing capacity for map BlocksMap
-15/01/14 18:04:15 INFO util.GSet: VM type		= 64-bit
-15/01/14 18:04:15 INFO util.GSet: 2.0% max memory = 932184064
-15/01/14 18:04:15 INFO util.GSet: capacity 		=2^21 = 2097152 entries
-...........
-15/01/14 18:04:16 INFO common.storage:storage directory
-file:/usr/local/hadoop/hadoop_hadoop/dfs/name has been successfully formatted.
-15/01/14 18:04:16 INFO namenode.NameNode: SHUTDOWN_MSG:
-/*****************************************************************************
-SHUTDOWN MSG: Shutting down NameNode at localhost.localdomain/127.0.0.1
-**************************************************
-```
-
-​		在看到运行结果中出现“successfully formatted”之后，就说明初始化成功了。
-
-​		然后，用如下命令启动所有进程，可以通过提示信息得知所有的启动信息都写人对应的日志文件。如果出现启动错误，则可以在日志中查看错误原因。
+##### 4.修改hadoop yarn-site.xml文件配置
 
 ```shell
-[hadoop@localhost hadoop] $ ./bin/start-all.sh
+vim /opt/hadoop/etc/hadoop/yarn-site.xml
 ```
 
-​		运行之后，输入jps 指令可以查看所有的Java进程。在正常启动时，可以得到如下类似结果。
+添加下面配置到
+`<configuration>与</configuration>`标签之间。
+
+```html
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+       <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+```
+
+保存并关闭编辑器修改。
+
+对于本书的实验，我们这样配置后就已经满足运行要求了。这里再给出一个官方文档的详细地址，感兴趣的读者可以查看文档配置的其他项<网址如下: [https://hadoop.apache.org/docs/stable](https://hadoop.apache.org/docs/stable)。>
+
+##### 5.格式化分布式文件系统
+
+⚠切换到datawhale用户
 
 ```shell
-[hadoopelocalhost conf]$ jps
-18271 JobTracker
-18860 Jps
-17998 DataNode
-17854 NameNode
-18431 TaskTracker
-18171 SecondaryNameNode
+su datawhale
 ```
 
-​		此时，可以访问Web界面（http://localhost:50070）来查看Hadoop 的信息。
-​		接下来，我们执行如下命令在 HDFS 中创建存储数据的input文件夹。
+在配置完成后，首先需要初始化文件系统，由于 Hadoop 的很多工作是在自带的 HDFS 文件系统上完成的，因此，需要将文件系统初始化之后才能进一步执行计算任务。执行初始化的命令如下。
 
 ```shell
-[hadoop@localhost hadoop] $ ./bin/hadoop dfs -mkdir input
+hdfs namenode -format
 ```
 
-​		在前面的安装单机Hadoop内容中，我们曾经在本地hadoop文件夹下创建了input文件夹,并把 conf文件夹下的配置文件复制到input文件夹，作为实验所需的文本文件。现在，我们需要将这些本地的文本文件(配置文件)“上传”到分布式文件系统HDFS 中的 input文件夹。当然，这里的“上传”并不意味着数据通过网络传输，实际上，在我们这里介绍的伪分布式 Hadoop环境下，本地的input文件夹和HDFS中的input文件夹都在同一台机器上，并不需要通过网络传输数据。我们可以执行如下命令，将本地input 文件夹中的数据上传到HDFS 的 input文件夹。
+在看到运行结果中出现“successfully formatted”之后，就说明初始化成功了。
+
+##### 6.启动Hadoop
+
+然后，用如下命令启动所有进程，可以通过提示信息得知所有的启动信息都写人对应的日志文件。如果出现启动错误，则可以在日志中查看错误原因。
 
 ```shell
-[ hadoop@localhost hadoop] $./bin/hadoop dfs -put ./input/ input
+/opt/hadoop/sbin/start-all.sh
 ```
 
+##### 7.查看Hadoop进程
 
-​		接着,运行如下命令来执行字数统计测试样例。
+运行之后，输入 `jps` 指令可以查看所有的Java进程。在正常启动时，可以得到如下类似结果。
 
 ```shell
-[hadoop@localhost hadoop]$ ./bin/hadoop jar hadoop-examples-1.2.1.jar wordcount inputoutput
+2072524 SecondaryNameNode
+2073019 ResourceManager
+2072169 NameNode
+2073158 NodeManager
+2072291 DataNode
+2073923 Jps
 ```
 
+##### 8.Hadoop WebUI管理界面
 
-​		在计算完成后，系统会自动在 HDFS 中生成output文件夹来存储计算结果。大家可以输入下面命令查看最终结果。
+此时，可以访问Web界面（http://localhost:8088）来查看Hadoop 的信息。
+
+##### 9.测试HDFS集群以及MapReduce任务程序
+
+利用Hadoop自带的WordCount示例程序进行检查集群；在主节点进行如下操作，创建HDFS目录：
 
 ```shell
-[hadoop@localhost hadoop]$./bin/hadoop fs -cat output/*
+hadoop fs -mkdir /datawhale
+hadoop fs -mkdir input
 ```
 
-​		最后需要指出的是，当需要重新运行程序时，首先需将HDFS 中的output文件夹删除。
+创建测试文件
+
+```shell
+vim /home/datawhale/test
+```
+
+添加下面文字
+
+`Hello world!`
+
+保存并关闭编辑器
+
+将测试文件上传到到Hadoop HDFS集群目录：
+
+```shell
+hadoop fs -put /home/datawhale/test /input
+```
+
+执行wordcount程序：
+
+```shell
+hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar wordcount /input/ /out/
+```
+
+查看执行结果：
+
+```shell
+hadoop fs -ls /out/
+```
+
+```shell
+Found 2 items
+-rw-r--r--    1 root supergroup       0 time /out/_SUCCESS
+-rw-r--r--    1 root supergroup      17 time /out/part-r-00000 
+```
+
+如果列表中结果包含 `"_SUCCESS"` 文件，代码集群运行成功。
+
+查看具体的执行结果，可以用如下命令：
+
+```shell
+Hello   1
+world!  1
+```
 
 ### Tips
 
-✅**Hadoop3.0.0集群模式**安装请参考 [Hadoop集群模式安装.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装.md) 和 [Hadoop集群模式安装节点.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装节点.md)。	
+✅ **Hadoop3.0.0集群模式**安装请参考： [Hadoop集群模式安装.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装.md) 和 [Hadoop集群模式安装节点.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装节点.md)。	
+
+✅ **官网安装**请参考：[Hadoop单节点集群安装](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Execution)
 
 ## 2.4 本章小结
 
