@@ -409,7 +409,7 @@ Linux Centos 7
 
 我们已为您预先下载了hbase的安装包，可直接运行下面的命令，解压安装包 。
 
-`sudo tar -zxvf /data/hadoop/ hbase-2.3.5-bin.tar.gz -C /opt/`
+`sudo tar -zxvf /data/hadoop/hbase-2.3.5-bin.tar.gz -C /opt/`
 
 ##### 3.更改文件夹名和所属用户
 

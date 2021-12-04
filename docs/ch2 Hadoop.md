@@ -252,6 +252,14 @@ Hadoop是一个能够对大量数据进行分布式处理的软件框架，并�
 
 ​		在开始具体操作之前，需要首先选择一个合适的操作系统。尽管 Hadoop本身可以运行在Linux、Windows 以及其他一些类 UNIX系统(如FreeBSD、OpenBSD、Solaris等）之上，但是**,Hadoop官方真正支持的作业平台只有 Linux**。这就导致其他平台在运行Hadoop时，往往需要安装很多其他的包来提供一些Linux操作系统的功能，以配合 Hadoop的执行。例如，Windows在运行Hadoop时,需要安装Cygwin等软件。我们这里选择Linux作为系统平台,来演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然,其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的用户,可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。在 Linux发行版的选择上，我们倾向于使用企业级的、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE 和 RedHat等发行版，最终选择免费的CentOS 发行版作为推荐的操作系统,读者可以到网络上下载CentOS系统镜像文件(www.centos.org/download）进行安装。
 
+### 实验环境
+
+Linux Centos 7
+
+### 实验内容
+
+在Linux系统的虚拟机上，安装Hadoop。
+
 **Hadoop基本安装配置主要包括以下几个步骤。**
 
 1. **创建Hadoop用户。**
@@ -260,25 +268,23 @@ Hadoop是一个能够对大量数据进行分布式处理的软件框架，并�
 4. **单机安装配置。**
 5. **伪分布式安装配置。**
 
-下面将分别介绍每个步骤的具体实现方法，这里使用的操作系统是CentOS7.
+### 实验步骤
 
-
-
-### 2.3.1 创建Hadoop用户
+#### 1.创建Hadoop用户
 
 ​		为方便操作，我们创建一个名为“hadoop”的用户来运行程序，这样可以使不同用户之间有明确的权限区别，同时，也可以使针对Hadoop 的配置操作不影响具他用尸的便用。头协上，于一些大的软件（如 MySQL)，在企业中也常常为其单独创建一个用户。
 ​		创建用户的命令是useradd,设置密码的命令为passwd。此外，可能部分系统还需要为用户创建文件夹,在这里不再详细说明。
 
 
 
-### 2.3.2 Java的安装
+#### 2.Java的安装
 
 ​		由于Hadoop本身是使用Java语言编写的,因此,Hadoop 的开发和运行都需要Java的支持,一般要求Java 6或者更新的版本。对于CentOS7本身，系统上可能已经预装了Java7，它的JDK版本为openjdk，路径为“/usr/lib/jvm/java-1.7.0-openjdk”，后文中需要配置的 JAVA_HOME 环境变量就可以设置为这个值。
 ​		对于Hadoop而言，采用更为广泛应用的Oracle公司的Java版本，在功能上可能会更稳定一些，因此，用户也可以根据自己的爱好，安装Oracle版本的 Java。在安装过程中，请记录 JDK的路径，即 JAVA_HOME的位置，这个路径的设置将用在后文Hadoop 的配置文件中，目的是让Hadoop程序可以找到相关的Java工具。
 
 
 
-### 2.3.3 SSH登录权限设置
+#### 3.SSH登录权限设置
 
 ​		对于 Hadoop 的伪分布和全分布而言，Hadoop名称节点(NameNode)需要启动集群中所有机器的Hadoop守护进程，这个过程可以通过SSH登录来实现。Hadoop并没有提供SSH输入密码登录的形式，因此，为了能够顺利登录每台机器，需要将所有机器配置为名称节点，可以无密码登录它们。
 ​		为了实现SSH无密码登录方式，首先需要让名称节点生成自己的SSH密钥，命令如下。
@@ -306,10 +312,10 @@ AuthorizedKeysFile		.ssh/authorized_keys
 
 
 
-### 2.3.4 安装单机版Hadoop
+#### 4.安装单机版Hadoop
 
 ​		这里使用的Hadoop版本为1.2.1，虽然Hadoop目前最新版本已经为2.6.0。但是,由于新的功能在这里并不会用到，因此，这里选择1.2.1版本，下载地址为http://mirrors.hust.edu.cn/apachel/hadoop/common/hadoop-1.2.1，在目录中选择hadoop-1.2.1.tar.gz进行下载即可。
-​		将该文件夹解压后，可以放置到自己喜欢的位置,如“/usr/local/hadoop”文件夹下,注意,文件夹的用户和组必须都为hadoop。
+​		将该文件夹解压后，可以放置到自己喜欢的位置,如“/usr/local/hadoop”文件夹下，注意，文件夹的用户和组必须都为hadoop。
 ​		在 Hadoop 的文件夹中，“conf”目录下面放置了配置文件，对于单机安装，首先需要更改hadoop-env.sh 文件，以配置Hadoop运行的环境变量，这里只需要将JAVA_HOME环境变量指定到本机的JDK目录就可以了，命令如下。
 
 ```shell
@@ -331,7 +337,7 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 ```
 
 ​		Hadoop文档中还附带了一些例子来供我们测试，我们可以运行"WordCount "的例子检测一下Hadoop安装是否成功。
-​		首先，在 hadoop目录下新建input文件夹，用来存放输入数据;然后,将"conf "文件夹下的配置文件拷贝input文件夹中;接下来，在hadoop目录下新建output文件夹,用来存放输出数据;最后,执行如下代码。
+​		首先，在 hadoop目录下新建input文件夹，用来存放输入数据;然后,将"conf "文件夹下的配置文件拷贝input文件夹中；接下来，在hadoop目录下新建output文件夹，用来存放输出数据;最后,执行如下代码。
 
 ```shell
 [hadoop(localhost hadoop]$./bin/hadoop jar hadoop-examples-1.2.1.jar grep inputoutput 'dfs[a-z.]+'
@@ -354,11 +360,11 @@ This command was run using /usr/local/hadoop/hadoop-core-1.2.1.jar
 
 
 
-### 2.3.5 Hadoop伪分布式安装
+#### 5.Hadoop伪分布式安装
 
 ​		伪分布式安装是指在一台机器上模拟一个小的集群。当Hadoop应用于集群时，不论是伪分布式还是真正的分布式运行，都需要通过配置文件对各组件的协同工作进行设置。
 
-​		对于伪分布式配置,我们需要修改core-site.xml 、hdfs-site.xml和 mapred-site.xml这3个文件。修改后的core-site.xml文件如下。
+​		对于伪分布式配置，我们需要修改core-site.xml 、hdfs-site.xml和 mapred-site.xml这3个文件。修改后的core-site.xml文件如下。
 
 ```html
 <configuration>
@@ -470,7 +476,9 @@ SHUTDOWN MSG: Shutting down NameNode at localhost.localdomain/127.0.0.1
 
 ​		最后需要指出的是，当需要重新运行程序时，首先需将HDFS 中的output文件夹删除。
 
+### Tips
 
+✅**Hadoop3.0.0集群模式**安装请参考 [Hadoop集群模式安装.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装.md) 和 [Hadoop集群模式安装节点.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装节点.md)。	
 
 ## 2.4 本章小结
 
