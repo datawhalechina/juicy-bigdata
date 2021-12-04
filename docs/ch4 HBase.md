@@ -423,7 +423,7 @@ Linux Centos 7
 
 运行下面命令，改变hbase目录所属用户和用户组
 
-`sudo chown -R dolphin:dolphin /opt/hbase/`
+`sudo chown -R datawhale:datawhale /opt/hbase/`
 
 ##### 4.设置HBASE_HOME环境变量
 
@@ -446,7 +446,7 @@ export PATH=$PATH:$HBASE_HOME/bin
 
 `sudo vim /opt/hbase/conf/hbase-site.xml`
 
-在新弹出的记事本窗口找到<configuration>标签，在<configuration>和</configuration>之间添加以下内容：
+在新弹出的记事本窗口找到`<configuration>`标签，在`<configuration>`和`</configuration>`之间添加以下内容：
 
 其余的内容删掉。
 
@@ -488,7 +488,6 @@ export PATH=$PATH:$HBASE_HOME/bin
 执行上述命令后，显示如下：
 
 ```shell
-dolphin@tools:/opt/hadoop/sbin$ jps
 2261 Jps
 1317 DataNode
 2086 NodeManager
@@ -512,7 +511,6 @@ dolphin@tools:/opt/hadoop/sbin$ jps
 执行上述命令后，显示如下：
 
 ```shell
-dolphin@tools:~$ jps
 1552 NodeManager
 1010 SecondaryNameNode
 659 NameNode

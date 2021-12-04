@@ -542,10 +542,10 @@ vim /opt/hadoop/etc/hadoop/hdfs-site.xml
 
 ```html
 <configuration>
-	<property>
-		<name>dfs.replication</name>
-		<value>1</value>
-	</property>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
 </configuration>
 ```
 
@@ -586,14 +586,16 @@ vim /opt/hadoop/etc/hadoop/yarn-site.xml
 添加下面配置到`<configuration>与</configuration>`标签之间。
 
 ```html
+<configuration>
     <property>
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
     <property>
         <name>yarn.nodemanager.env-whitelist</name>
-       <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
     </property>
+</configuration>
 ```
 
 保存并关闭编辑器修改。
@@ -643,10 +645,11 @@ hdfs namenode -format
 
 ##### 9.测试HDFS集群以及MapReduce任务程序
 
-利用Hadoop自带的WordCount示例程序进行检查集群；在主节点进行如下操作，创建HDFS目录：
+利用Hadoop自带的WordCount示例程序进行检查集群；在主节点进行如下操作，创建执行MapReduce任务所需的HDFS目录:：
 
 ```shell
-hadoop fs -mkdir /datawhale
+hadoop fs -mkdir /user
+hadoop fs -mkdir /user/datawhale
 hadoop fs -mkdir input
 ```
 
@@ -665,19 +668,19 @@ vim /home/datawhale/test
 将测试文件上传到到Hadoop HDFS集群目录：
 
 ```shell
-hadoop fs -put /home/datawhale/test /input
+hadoop fs -put /home/datawhale/test input
 ```
 
 执行wordcount程序：
 
 ```shell
-hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar wordcount /input/ /out/
+hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar wordcount input out
 ```
 
 查看执行结果：
 
 ```shell
-hadoop fs -ls /out/
+hadoop fs -ls out
 ```
 
 ```shell
@@ -689,6 +692,10 @@ Found 2 items
 如果列表中结果包含 `"_SUCCESS"` 文件，代码集群运行成功。
 
 查看具体的执行结果，可以用如下命令：
+
+```shell
+hadoop fs -text out/part-r-00000
+```
 
 ```shell
 Hello   1
