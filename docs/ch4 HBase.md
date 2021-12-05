@@ -531,9 +531,11 @@ export PATH=$PATH:$HBASE_HOME/bin
 >
 > 如果HMaster启动后瞬间消失，查看/opt/hbase/logs。
 >
-> 如果是`connection failed`，注意虚拟机环回IP的通信问题！！！
+> 如果是`connection failed`，注意虚拟机环回IP的通信问题以及防火墙是否关闭！！！
 >
 > 1. 关闭防火墙
+>
+> ⚠ 如果熟悉Linux操作，可以不用关闭防火墙，只需要开放9000端口就行。但是为了避免这类问题，建议直接关闭防火墙。
 >
 > centos: `systemctl disable firewalld.service`
 >
