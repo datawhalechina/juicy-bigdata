@@ -708,6 +708,10 @@ world!  1
 
 ✅ **官网安装**请参考：[Hadoop单节点集群安装](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Execution)
 
+✅ **安装问题**：[Hadoop中DataNode没有启动](https://www.cnblogs.com/mtime2004/p/10008325.html)  
+
+>`VERSION`参考目录：`tmp/hadoop-datawhale/dfs/data/current/VERSION`
+
 ## 2.4 本章小结
 
 ​		Hadoop被视为事实上的大数据处理标准，本章介绍了Hadoop的发展历程，并阐述了Hadoop的高可靠性、高效性、高可扩展性、高容错性、成本低、运行在Linux平台上、支持多种编程语言等特性。

@@ -409,6 +409,8 @@ Linux Centos 7
 
 我们已为您预先下载了hbase的安装包，可直接运行下面的命令，解压安装包 。
 
+✅**官网下载地址**：[HBase下载](https://hbase.apache.org/downloads.html)
+
 `sudo tar -zxvf /data/hadoop/hbase-2.3.5-bin.tar.gz -C /opt/`
 
 ##### 3.更改文件夹名和所属用户
@@ -457,7 +459,7 @@ export PATH=$PATH:$HBASE_HOME/bin
 </property>
 <property>
 <name>hbase.rootdir</name>
-<value>hdfs://localhost:8020/hbase</value>
+<value>hdfs://localhost:9000/hbase</value>
 </property>
 ```
 
@@ -524,6 +526,34 @@ export PATH=$PATH:$HBASE_HOME/bin
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.2.png)
 
 如果HMaster、HRegionServer和HQuorumPeer进程都出现了，说明HBase安装成功。
+
+> **Tips：**
+>
+> 如果HMaster启动后瞬间消失，查看/opt/hbase/logs。
+>
+> 如果是`connection failed`，注意虚拟机环回IP的通信问题！！！
+>
+> 1. 修改`/etc/hosts`文件
+>
+> `sudo vim /etc/hosts`
+>
+> 添加以下内容：
+>
+> ```shell
+> 127.0.1.1 虚拟机的名称
+> ```
+>
+> 2. 修改`/opt/hbase/conf/regionservers`文件
+>
+> `vim /opt/hbase/conf/regionservers`
+>
+> 添加以下内容：
+>
+> ```shell
+> 虚拟机的名称
+> ```
+>
+> ✅**官方HBase安装指南**：[HBase伪集群分布安装](https://hbase.apache.org/book.html#quickstart_pseudo)
 
 
 
