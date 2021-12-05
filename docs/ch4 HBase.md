@@ -533,7 +533,13 @@ export PATH=$PATH:$HBASE_HOME/bin
 >
 > 如果是`connection failed`，注意虚拟机环回IP的通信问题！！！
 >
-> 1. 修改`/etc/hosts`文件
+> 1. 关闭防火墙
+>
+> centos: `systemctl disable firewalld.service`
+>
+> Ubuntu: `sudo ufw disable`
+>
+> 2. 修改`/etc/hosts`文件
 >
 > `sudo vim /etc/hosts`
 >
@@ -543,7 +549,7 @@ export PATH=$PATH:$HBASE_HOME/bin
 > 127.0.1.1 虚拟机的名称
 > ```
 >
-> 2. 修改`/opt/hbase/conf/regionservers`文件
+> 3. 修改`/opt/hbase/conf/regionservers`文件
 >
 > `vim /opt/hbase/conf/regionservers`
 >
