@@ -436,6 +436,7 @@ Linux Centos 7
 在新弹出的记事本窗口的最底部添加如下内容，再保存退出。
 
 ```shell
+#hbase
 export HBASE_HOME=/opt/hbase/
 export PATH=$PATH:$HBASE_HOME/bin
 ```
@@ -469,7 +470,7 @@ export PATH=$PATH:$HBASE_HOME/bin
 
 `sudo vim /opt/hbase/conf/hbase-env.sh`
 
-在新弹出的记事本窗口找到 # export JAVA_HOME=/usr/java/jdk1.6.0/一行，并改为以下内容：
+在新弹出的记事本窗口找到 `# export JAVA_HOME=/usr/java/jdk1.9.0/` 一行，并改为以下内容：
 
 `export JAVA_HOME=/opt/java/`
 

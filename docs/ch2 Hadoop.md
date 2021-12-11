@@ -650,7 +650,7 @@ hdfs namenode -format
 ```shell
 hadoop fs -mkdir /user
 hadoop fs -mkdir /user/datawhale
-hadoop fs -mkdir input
+hadoop fs -mkdir /input
 ```
 
 创建测试文件
@@ -668,19 +668,19 @@ vim /home/datawhale/test
 将测试文件上传到到Hadoop HDFS集群目录：
 
 ```shell
-hadoop fs -put /home/datawhale/test input
+hadoop fs -put /home/datawhale/test /input
 ```
 
 执行wordcount程序：
 
 ```shell
-hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar wordcount input out
+hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar wordcount /input /out
 ```
 
 查看执行结果：
 
 ```shell
-hadoop fs -ls out
+hadoop fs -ls /out
 ```
 
 ```shell
@@ -694,7 +694,7 @@ Found 2 items
 查看具体的执行结果，可以用如下命令：
 
 ```shell
-hadoop fs -text out/part-r-00000
+hadoop fs -text /out/part-r-00000
 ```
 
 ```shell
@@ -710,7 +710,7 @@ world!  1
 
 ✅ **安装问题**：[Hadoop中DataNode没有启动](https://www.cnblogs.com/mtime2004/p/10008325.html)  
 
->`VERSION`参考目录：`tmp/hadoop-datawhale/dfs/data/current/VERSION`
+>`VERSION`参考查询目录：`tmp/hadoop-datawhale/dfs/data/current/VERSION`
 
 ## 2.4 本章小结
 
