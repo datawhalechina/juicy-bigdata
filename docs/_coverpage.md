@@ -4,7 +4,7 @@
 
 
 
-# Big-Data <small>2.0 version</small>
+# Big-Data <small>.0 version</small>
 
 > 一个高质量的大数据实战教程项目
 

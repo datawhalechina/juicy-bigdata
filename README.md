@@ -2,7 +2,7 @@
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="250">
 </div>
 
-# 大数据处理技术 Big Data
+# 大数据处理技术导论 Big Data
 
 [![](https://img.shields.io/github/watchers/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/watchers)
 [![](https://img.shields.io/github/stars/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/stargazers)
@@ -11,7 +11,7 @@
 ![](https://img.shields.io/github/repo-size/shenhao-stu/Big-Data.svg?style=flat)
 [![](https://github.com/shenhao-stu/Big-Data/actions/workflows/Sync.yml/badge.svg?branch=master)](https://github.com/shenhao-stu/Big-Data/actions/workflows/CI.yml)
 
-本项目《大数据处理技术》是Datawhale:whale:数据科学小组近期推动的一个重点项目。
+本项目《大数据处理技术导论》是Datawhale:whale:数据科学小组近期推动的一个重点项目。
 
 当今的时代处处充斥着大数据的影子，大数据技术也为信息技术发展带来了重大的变革，并深刻影响着人们生活的方方面面。而我们旨在带领大家走进大数据时代的浪潮中，理解并能够使用目前主流的大数据处理架构Hadoop解决相应的问题，从小白到实践者。
 
@@ -32,7 +32,7 @@
 - 一周Hive                               11.21-11.27
 - MapReduce和Spark待定
 
-## 大数据处理技术目录
+## 大数据处理技术导论目录
 
 * [第一章：大数据概述](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述.md)
   - [x] [1.1 大数据时代](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_1-1-大数据时代)
@@ -73,7 +73,7 @@
   - [x] [6.4 核心概念](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_64-核心概念)
   - [x] [6.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_65-本章小结)
 * 第七章：Spark（待定）
-* 第八章：Interview Q&A（待定）
+* 第八章：大数据完结篇（待定）
 
 > 第二章以后的章节都配置有实验内容，即linux上的实操
 
@@ -92,6 +92,11 @@
 1. 《大数据处理技术原理与应用 第三版》——林子雨
 2. Big Data US SanDiego
 3. 《Hadoop权威指南》
+3. 《Hive编程指南》
+2. 《维度建模权威指南(第3版)》
+3. 《大数据处理之道》
+4. 《Spark快速大数据分析》
+5. 《Spark SQL内核剖析》
 
 ## 致谢
 
@@ -139,11 +144,20 @@
         <a href="https://www.zhihu.com/people/wjpditing">知乎</a>
     </td>
   </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">胡锐锋</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">国网大数据平台研发工程师，Datawhale成员，主要贡献者</span></td>
+    <td>
+        <a href="https://github.com/Relph1119">Github</a>
+    </td>
+  </tr>
 </tbody>
 </table> 
+
 
 
 ## 关注我们
 
 > "Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。"
 
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg)

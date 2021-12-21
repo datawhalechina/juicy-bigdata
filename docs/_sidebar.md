@@ -6,5 +6,5 @@
   - [第四章：HBase](ch4%20HBase.md)
   - [第五章：MapReduce](ch5%20MapReduce.md)
   - [第六章：Hive](ch6%20Hive.md)
-  - [第七章：Spark（待定）](ch7%20Spark.md)
-  - [第八章：Interview Q&A](ch8%20Interview%20Q&A.md)
+  - [第七章：Spark](ch7%20Spark.md)
+  - [第八章：大数据完结篇](ch8%20大数据完结篇.md)
