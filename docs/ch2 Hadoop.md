@@ -1,6 +1,6 @@
 # Chapter2 大数据处理架构Hadoop
 
-> 王洲烽
+> 王洲烽 shenhao
 
 ## 2.0 Hadoop的前世今生
 
