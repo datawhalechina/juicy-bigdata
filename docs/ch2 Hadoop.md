@@ -168,7 +168,7 @@
 - Zookeeper  
     &emsp;&emsp;Zookeeper是一个为分布式应用所涉及的开源协调服务，主要为用户**提供同步、配置管理、分组和命名等服务**，减轻分布式应用程序所承担的协调任务，Zookeeper的文件系统使用了我们所熟悉的**目录树结构**，Zookeeper是主要使用Java语言编写，同时支持C语言。
 
-## 2.3 实验：Hadoop的安装与应用
+## 2.3 Hadoop的安装与应用
 
 > 学了这么多理论，终于要实操了吗，大伙儿冲冲冲啊！！！！
 
@@ -182,12 +182,13 @@
 
 ### 2.3.2 实验内容
 
-**实验环境：**Linux Centos 7
+**实验环境：**Linux CentOS 7
 
 **实验要求：**在Linux系统的虚拟机上安装Hadoop软件，基本安装配置主要包括以下几个步骤：
+
 1. 创建Hadoop用户
 2. 安装Java
-3. 设置 SSH登录权限。
+3. 设置SSH登录权限。
 4. 单机安装配置。
 5. 伪分布式安装配置。
 
@@ -314,7 +315,7 @@ ssh localhost
 &emsp;&emsp;这里使用的Hadoop版本为3.0.0。下载地址为http://archive.apache.org/dist/hadoop/core/hadoop-3.0.0/hadoop-3.0.0.tar.gz  
 &emsp;&emsp;将该文件夹解压后，可以放置到自己喜欢的位置，如`/data/hadoop`文件夹下，注意，文件夹的用户和组必须都为hadoop。
 
-##### 1.安装hadoop
+##### 1.安装Hadoop
 
 &emsp;&emsp;将`hadoop-3.0.0.tar.gz`解压缩到`/opt`目录下，命令如下：
 ```shell
@@ -366,7 +367,7 @@ From source with checksum 397832cb5529187dc8cd74ad54ff22
 This command was run using /opt/hadoop/share/hadoop/common/hadoop-common-3.0.0.jar
 ```
 
-##### 3.修改hadoop hadoop-env.sh文件配置
+##### 3.修改hadoop-env.sh文件配置
 
 &emsp;&emsp;对于单机安装，首先需要更改`hadoop-env.sh`文件，用于配置Hadoop运行的环境变量，命令如下：
 ```shell
@@ -407,7 +408,7 @@ cat output/*
 &emsp;&emsp;伪分布式安装是指在一台机器上模拟一个小的集群。当Hadoop应用于集群时，不论是伪分布式还是真正的分布式运行，都需要通过配置文件对各组件的协同工作进行设置。  
 &emsp;&emsp;对于伪分布式配置，我们需要修改`core-site.xml`、`hdfs-site.xml`、`mapred-site.xml`和`yarn-site.xml`这4个文件。
 
-##### 1.修改hadoop core-site.xml文件配置
+##### 1.修改core-site.xml文件配置
 
 &emsp;&emsp;打开`core-site.xml`文件，命令如下：
 ```shell
@@ -427,7 +428,7 @@ vim /opt/hadoop/etc/hadoop/core-site.xml
 
 &emsp;&emsp;可以看出，`core-site.xml`配置文件的格式十分简单，`<name>`标签代表了配置项的名字，`<value>`项设置的是配置的值。对于该文件，我们只需要在其中指定HDFS的地址和端口号，端口号按照官方文档设置为9000即可。
 
-##### 2.修改hadoop hdfs-site.xml文件配置
+##### 2.修改hdfs-site.xml文件配置
 
 &emsp;&emsp;打开`hdfs-site.xml`文件，命令如下：
 ```shell
@@ -469,7 +470,7 @@ vim /opt/hadoop/etc/hadoop/mapred-site.xml
 ```
 保存并关闭编辑器修改。
 
-##### 4.修改hadoop yarn-site.xml文件配置
+##### 4.修改yarn-site.xml文件配置
 
 ```shell
 vim /opt/hadoop/etc/hadoop/yarn-site.xml
@@ -515,7 +516,7 @@ hdfs namenode -format
 
 ##### 7.查看Hadoop进程
 
-&emsp;&emsp;运行之后，输入`jps`指令可以查看所有的`Java`进程。正常启动后，可以得到如下类似结果：
+&emsp;&emsp;运行之后，输入`jps`命令可以查看所有的`Java`进程。正常启动后，可以得到如下类似结果：
 ```long
 2072524 SecondaryNameNode
 2073019 ResourceManager
