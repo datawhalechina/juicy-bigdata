@@ -517,7 +517,7 @@ hdfs namenode -format
 ##### 7.查看Hadoop进程
 
 &emsp;&emsp;运行之后，输入`jps`命令可以查看所有的`Java`进程。正常启动后，可以得到如下类似结果：
-```long
+```log
 2072524 SecondaryNameNode
 2073019 ResourceManager
 2072169 NameNode
