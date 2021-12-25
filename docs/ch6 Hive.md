@@ -4,7 +4,7 @@
 
 ## 6.0 数据仓库
 
-&emsp;&emsp;Hive 是一个基于 Hadoop 的**数据仓库**工具，可以对存储在 Hadoop 文件中的数据集进行**数据整理、特殊查询和分析处理**。具体来说，它可以将结构化的数据文件映射成表，并提供类似于关系数据库 SQL 的查询语言—— **HiveQL** 。当采用 MapReduce 作为执行引擎时，Hive 自身可以将用于查询的 HiveQL 语句转换为 MapReduce 作业，然后提交到 Hadoop 上运行。
+&emsp;&emsp;Hive是一个基于Hadoop的**数据仓库**工具，可以对存储在 Hadoop 文件中的数据集进行**数据整理、特殊查询和分析处理**。具体来说，它可以将结构化的数据文件映射成表，并提供类似于关系数据库 SQL 的查询语言—— **HiveQL** 。当采用 MapReduce 作为执行引擎时，Hive 自身可以将用于查询的 HiveQL 语句转换为 MapReduce 作业，然后提交到 Hadoop 上运行。
 
 &emsp;&emsp;首先，我们先简单的引入一下数据仓库的概念！！
 
