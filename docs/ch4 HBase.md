@@ -312,7 +312,7 @@ HBase提供了众多的访问方式，详见下表。
 
 ##### 1.解压安装包
 
-&emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[HBase下载](https://hbase.apache.org/downloads.html)），可下载了hbase 2.3.5的安装包，运行下面的命令，解压安装包至`/opt`目录下：
+&emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[HBase下载](https://hbase.apache.org/downloads.html)），在下载了hbase 2.3.5的安装包后，运行下面的命令，解压安装包至`/opt`目录下：
 ```shell
 sudo tar -zxvf /data/hadoop/hbase-2.3.5-bin.tar.gz -C /opt/
 ```
