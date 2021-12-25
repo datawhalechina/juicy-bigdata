@@ -74,7 +74,7 @@
 - 无法有效处理不同类型的数据
 - 计算和处理能力不足
 
-## 6.1 Hive基本概念
+## 6.1 Hive 基本概念
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.1.png" style="zoom:33%;" />
 
 ### 6.1.1 概述
@@ -157,7 +157,7 @@
 &emsp;&emsp;完成了表和文件的映射后，`Hive`需要对用户编写的`SQL`语句进行语法校验，并且根据记录的元数据信息对`SQL`进行解析，制定执行计划，并将执行计划转化为`MapReduce`程序来执行，最终将执行的结果封装返回给用户。  
 &emsp;&emsp;接下来，在`Hive`的核心概念中，我们进一步了解一下表和文件的映射信息。
 
-## 6.2 核心概念
+## 6.2 Hive 核心概念
 
 ### 6.2.1 元数据
 
@@ -275,11 +275,13 @@
 
 基于上述前提条件，完成hive的安装部署和管理。
 
+✅**官网参考教程**：[GettingStarted](https://cwiki.apache.org/confluence/display/Hive/GettingStarted)
+
 #### 6.4.1.3 实验步骤
 
 ##### 1.解压安装包
 
-我们已为您预先下载了Hive的安装包，可直接运行下面的命令，解压安装包 。
+&emsp;通过官网下载地址（✅**官网下载地址**：[Hive下载](https://dlcdn.apache.org/hive/)），下载hive 2.3.2的安装包到本地指定目录，如/data/hadoop/下。运行下面的命令，解压安装包至`/opt`目录下：
 
 `sudo tar -zxvf /data/hadoop/apache-hive-2.3.2-bin.tar.gz -C /opt/`
 
@@ -315,6 +317,8 @@ export PATH=$PATH:$HIVE_HOME/bin
 ##### 4.导入MySql jdbc jar包到hive/lib目录下
 
 复制jar包到/app/hive/lib目录下
+
+https://dev.mysql.com/downloads/connector/j/
 
 `sudo cp /data/hadoop/mysql-connector-java-5.1.7-bin.jar /opt/hive/lib/`
 
