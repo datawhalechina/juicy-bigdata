@@ -173,7 +173,7 @@ HDFS副本的存放策略是：
 
 ### 3.4.3 HDFS故障类型和其检测方法
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.3.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3.4.3_1.png)
 
 #### 3.4.3.1 读写故障的处理
 
