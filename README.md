@@ -2,7 +2,7 @@
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="250">
 </div>
 
-# 大数据处理技术导论 Big Data
+# 大数据处理技术导论 Big Data {docsify-ignore-all}
 
 [![](https://img.shields.io/github/watchers/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/watchers)
 [![](https://img.shields.io/github/stars/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/stargazers)
@@ -67,13 +67,24 @@
   - [x] [5.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_53-以wordcount为例理解mapreduce)
   - [x] [5.4 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_54-本章小结)
 * [第六章：Hive](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive)
-  - [x] [6.1 数据仓库](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_61-数据仓库)
-  - [x] [6.2 数仓建模](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_62-数仓建模)
-  - [x] [6.3 Hive基本概念](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_63-hive基本概念)
-  - [x] [6.4 核心概念](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_64-核心概念)
+  - [x] [6.0 数据仓库](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_60-数据仓库)
+  - [x] [6.1 Hive 基本概念](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_61-hive-基本概念)
+  - [x] [6.2 Hive 核心概念](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_62-Hive-核心概念)
+  - [x] [6.3 Hive 系统结构](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_63-hive-系统结构)
+  - [x] [6.4 Hive 编程实战](https://shenhao-stu.github.io/Big-Data/#/ch6 Hive?id=_64-hive-编程实战)
   - [x] [6.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_65-本章小结)
-* 第七章：Spark（待定）
-* 第八章：大数据完结篇（待定）
+* [第七章：Spark](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark)
+  - [x] [7.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch7 Spark?id=_71-大数据技术框架综述)
+  - [x] [7.2 Spark概述](https://shenhao-stu.github.io/Big-Data/#/ch7 Spark?id=_72-spark概述)
+  - [x] [7.3 Spark本地模式](https://shenhao-stu.github.io/Big-Data/#/ch7 Spark?id=_73-spark本地模式)
+  - [x] [7.4 Spark Standalone集群](https://shenhao-stu.github.io/Big-Data/#/ch7 Spark?id=_74-spark-standalone集群)
+  - [ ] [7.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch7 Spark?id=_75-本章小结)
+* [第八章：大数据处理技术总结](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结)
+  - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch8 大数据处理技术总结?id=_81-大数据技术框架综述)
+  - [x] [8.2 大数据分析引擎的发展简史](https://shenhao-stu.github.io/Big-Data/#/ch8 大数据处理技术总结?id=_82-大数据分析引擎的发展简史)
+  - [x] [8.3 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch8 大数据处理技术总结?id=_83-本章小结)
+
+
 
 > 第二章以后的章节都配置有实验内容，即linux上的实操
 
@@ -157,7 +168,6 @@
 
 
 ## 关注我们
-
 <div style="text-align: center;"><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg"></div>
 
 &emsp;&emsp;Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。
