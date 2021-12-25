@@ -2,12 +2,8 @@
 
 > 王嘉鹏，shenhao
 
+
 ## 6.0 数据仓库
-
-&emsp;&emsp;Hive 是一个基于 Hadoop 的**数据仓库**工具，可以对存储在 Hadoop 文件中的数据集进行**数据整理、特殊查询和分析处理**。具体来说，它可以将结构化的数据文件映射成表，并提供类似于关系数据库 SQL 的查询语言—— **HiveQL** 。当采用 MapReduce 作为执行引擎时，Hive 自身可以将用于查询的 HiveQL 语句转换为 MapReduce 作业，然后提交到 Hadoop 上运行。
-
-&emsp;&emsp;首先，我们先简单的引入一下数据仓库的概念！！
-
 > ps：到了数据仓库啦，崭新的饱满的和知识相濡以沫的一天，又开始啦！！！！
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.0.png)
@@ -269,7 +265,6 @@
 
 1. 完成Java运行环境部署（详见第2章Java安装）
 2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
-3. MySQL数据库安装完成
 
 #### 6.4.1.2 实验内容
 
@@ -281,157 +276,211 @@
 
 ##### 1.解压安装包
 
-&emsp;通过官网下载地址（✅**官网下载地址**：[Hive下载](https://dlcdn.apache.org/hive/)），下载hive 2.3.2的安装包到本地指定目录，如/data/hadoop/下。运行下面的命令，解压安装包至`/opt`目录下：
+&emsp;通过官网下载地址（✅**官网下载地址**：[Hive下载](https://dlcdn.apache.org/hive/)），下载hive 2.3.9的安装包到本地指定目录，如`/data/hadoop/`下。运行下面的命令，解压安装包至`/opt`目录下：
 
-`sudo tar -zxvf /data/hadoop/apache-hive-2.3.2-bin.tar.gz -C /opt/`
+```shell
+sudo tar -zxvf /data/hadoop/apache-hive-2.3.9-bin.tar.gz -C /opt/
+```
 
-解压后，在/opt目录下产生了apache-hive-2.3.2-bin文件夹
+解压后，在`/opt`目录下产生了apache-hive-2.3.9-bin文件夹
 
 ##### 2.更改文件夹名和所属用户
 
 更改文件夹名
 
-`sudo mv /opt/apache-hive-2.3.2-bin/ /opt/hive`
+```shell
+sudo mv /opt/apache-hive-2.3.9-bin/ /opt/hive
+```
 
 更改所属用户和用户组
 
-`sudo chown -R datawhale:datawhale /opt/hive/`
+```shell
+sudo chown -R datawhale:datawhale /opt/hive/
+```
 
 ##### 3.设置HIVE_HOME环境变量
 
-将"/opt/hive"设置到HIVE_HOME环境变量，作为工作目录
+将`/opt/hive`设置到HIVE_HOME环境变量，作为工作目录
 
-`sudo vim ~/.bashrc`
+```shell
+sudo vim /etc/profile
+```
 
 在新弹出的编辑器的最下面添加以下内容：
 
-```
+```shell
 export HIVE_HOME=/opt/hive
 export PATH=$PATH:$HIVE_HOME/bin
 ```
 
-运行下面命令使环境变量生效
+使用`Shift+:`，输入`wq`后回车，保存退出。运行下面命令使环境变量生效：
+```shell
+source /etc/profile
+```
 
-`source ~/.bashrc`
+##### 4.安装MySQL
 
-##### 4.导入MySql jdbc jar包到hive/lib目录下
+Ubuntu在20.04版本中，源仓库中MySQL的默认版本已经更新到8.0。因此可以直接安装。
 
-复制jar包到/app/hive/lib目录下
+```shell
+sudo apt-get update  #更新软件源
+sudo apt-get install mysql-server  #安装mysql
+```
 
-https://dev.mysql.com/downloads/connector/j/
+默认是启动的，可以通下面`netstat -tap|grep mysql`或`systemctl status mysql`查看（下面给出开启，关闭，重启命令）
 
-`sudo cp /data/hadoop/mysql-connector-java-5.1.7-bin.jar /opt/hive/lib/`
+```bash
+sudo netstat -tap | grep mysql    #mysql节点处于LISTEN状态表示启动成功
+sudo service mysql start    #开启
+sudo service mysql stop     #关闭
+sudo service mysql restart  #重启
+```
+
+
+
+看到上面的信息就说明MySQL已经安装好并运行起来了。
+
+> 注意安装时没有提示输入root账户密码，默认是空，可以执行以下命令设置密码为123456。
+> ```bash
+> sudo mysql -u root -p    #密码按Enter即可进入mysql shell,空格也可以，普通用户一定sudo
+> ```
+
+
+##### 5.创建MySQL hive用户
+
+```shell
+mysql -u root -p #登陆shell界面，请先确认已经启动
+```
+
+```sql
+create user 'datawhale'@'localhost' identified by '123456'; -- 创建datawhale用户，密码是123456，必须与hive-site.xml配置的user,password相同
+grant all on *.* to 'datawhale'@'localhost'; -- 将所有数据库的所有表的所有权限赋给datawhale
+flush privileges;  -- 刷新mysql系统权限关系表
+```
+
+##### 6.下载安装MySQL JDBC
+
+✅**官网下载地址**：[MySQL JDBC下载](https://dev.mysql.com/downloads/connector/j/)
+
+选择合适的系统以及系统版本，会自动出现最新的安装包，注意下载的是deb格式的，可以使用cpkg命令安装。
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.2.png" style="zoom: 33%;" />
+
+下载MySQL JDBC到本地的目录下，如`~/下载`
+
+```shell
+cd ~/下载  #切换到你的文件所在目录下
+sudo dpkg -i mysql-connector-java_8.0.27-1ubuntu20.04_all.deb  #安装mysql-connector-java
+```
+
+##### 7.导入MySQL JDBC jar包到`hive/lib`目录下
+
+复制 jar 包到`/opt/hive/lib`目录下
+
+```shell
+sudo cp /usr/share/java/mysql-connector-java-8.0.27.jar /opt/hive/lib/
+```
+
+> 注意：你可能不知道安装到哪里了，别急，在`/usr/share/java/`
+>
+> 验证路径的方法：打开deb文件，提取文件，看到.tar.xz文件，用xz -d解压，tar -xvf解包，出来的文件目录路径就是在系统中的路径。
 
 更改jar包所属用户和用户组
 
-`sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-java-5.1.7-bin.jar`
+```shell
+sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-8.0.27.jar
+```
 
-##### 5.修改hive配置文件
+##### 8.修改hive配置文件
 
 进入/opt/hive/conf目录下
 
-`cd /opt/hive/conf`
+```shell
+cd /opt/hive/conf
+```
 
 将hive-default.xml.template文件重命名为hive-default.xml
 
-`sudo mv hive-default.xml.template hive-default.xml`
+```shell
+sudo mv hive-default.xml.template hive-default.xml
+```
 
 创建hive-site.xml文件
 
-`sudo touch hive-site.xml`
+```shell
+sudo touch hive-site.xml
+```
 
 执行后，会在/opt/hive/conf/下产生hive-site.xml文件
 
 修改hive-site.xml文件
 
-`sudo vim hive-site.xml`
+```shell
+sudo vim hive-site.xml
+```
 
 在弹出的编辑器中添加以下内容：
-（提示：可以将桌面上的hive-site.txt中的内容复制到hive-site.xml文件中）
 
-```
+```html
 <configuration>
 <property>
 <name>javax.jdo.option.ConnectionURL</name>
 <value>jdbc:mysql://localhost:3306/hive_metadata?createDatabaseIfNotExist=true</value>
+<description>JDBC connect string for a JDBC metastore</description>
 </property>
 <property>
 <name>javax.jdo.option.ConnectionDriverName</name>
-<value>com.mysql.jdbc.Driver</value>
+<value>com.mysql.cj.jdbc.Driver</value>
+<description>Driver class name for a JDBC metastore</description>
 </property>
 <property>
 <name>javax.jdo.option.ConnectionUserName</name>
-<value>root</value>
+<value>datawhale</value>
+<description>username to use against metastore database</description>
 </property>
 <property>
 <name>javax.jdo.option.ConnectionPassword</name>
 <value>123456</value>
+<description>password to use against metastore database</description>
 </property>
 </configuration>
 ```
 
 至此，hive的配置已经完成
 
-##### 6.启动MySQL
+##### 9.启动MySQL
 
-hive的元数据需要存储在关系型数据库中，这里我们选择了Mysql
-本实验平台已经提前安装好了MySql（账户名root，密码123456），这里只需要启动MySql服务即可
-
-`sudo /etc/init.d/mysql start`
-
-启动成功显示如下
-
-```
-datawhale@tools:~$ sudo /etc/init.d/mysql start
-* Starting MySQL database server mysqld
-No directory, logging in with HOME=/
-[ OK ]
+```shell
+sudo service mysql start
 ```
 
-##### 7.指定元数据数据库类型并初始化Schema
+##### 10.指定元数据数据库类型并初始化Schema
 
 `schematool -initSchema -dbType mysql`
 
 初始化成功后，效果如下：
 
-```dolphin@tools:/opt/hive/conf$ schematool -initSchema -dbType mysql
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-Metastore connection URL:    jdbc:mysql://localhost:3306/hive_metadata?createDatabaseIfNotExist=true
-Metastore Connection Driver :    com.mysql.jdbc.Driver
-Metastore connection User:   root
-Starting metastore schema initialization to 2.3.0
-Initialization script hive-schema-2.3.0.mysql.sql
-Initialization script completed
-schemaTool completed
-```
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.3.png)
 
 ##### 8.启动Hadoop
 
 进入/opt/hadoop/bin目录
 
-`cd /opt/hadoop/sbin`
+```shell
+cd /opt/hadoop/sbin
+```
 
 执行启动脚本
 
-`./start-all.sh`
+```shell
+./start-all.sh
+```
 
 检验hadoop是否启动成功
 
 `jps`
 
-```
-datawhale@tools:/opt/hadoop/sbin$ jps
-2258 ResourceManager
-2020 SecondaryNameNode
-1669 NameNode
-1787 DataNode
-2731 Jps
-2556 NodeManager
-```
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.4.png)
 
 如上6个进程都启动，表明Hadoop启动成功
 
@@ -441,29 +490,20 @@ datawhale@tools:/opt/hadoop/sbin$ jps
 
 启动成功后，显示效果如下
 
-```
-datawhale@tools:/opt/hadoop/sbin$ hive
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
- 
-Logging initialized using configuration in jar:file:/opt/hive/lib/hive-common-2.3.3.jar!/hive-log4j2.properties Async: true
-Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
-hive>
-```
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.5.png)
 
-##### 10.检验hive能否使用
+##### 10.检验hive
 
-在hive命令行下执行show databases;命令，用于显示有哪些数据库，显示效果如下
+在hive命令行下执行`show databases;`命令，用于显示有哪些数据库，显示效果如下
 
-```
+```shell
 hive> show databases;
 OK
 default
 Time taken: 3.06 seconds, Fetched: 1 row(s)
 ```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.6.png)
 
 如上表明hive安装部署成功，本次实验结束啦！
 
@@ -494,13 +534,9 @@ Time taken: 3.06 seconds, Fetched: 1 row(s)
 
 ##### 1.启动MySQL
 
-本实验平台已经提前安装好了MySql（账户名root，密码123456），这里只需要启动MySql服务即可
-
-`sudo /etc/init.d/mysql start`
-
-启动成功显示如下
-
-![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113111.png)
+```shell
+sudo service mysql start
+```
 
 ##### 2.指定元数据数据库类型并初始化Schema
 
@@ -508,33 +544,13 @@ Time taken: 3.06 seconds, Fetched: 1 row(s)
 
 初始化成功后，效果如下：
 
-```
-datawhale@tools:~$ schematool -initSchema -dbType mysql
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/apps/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/apps/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-Metastore connection URL:    jdbc:mysql://localhost:3306/hive_metadata?createDatabaseIfNotExist=true
-Metastore Connection Driver :    com.mysql.jdbc.Driver
-Metastore connection User:   root
-Starting metastore schema initialization to 2.3.0
-Initialization script hive-schema-2.3.0.mysql.sql
-Initialization script completed
-schemaTool completed
-```
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/ch6_ex1.3.png)
 
 ##### 3.启动Hadoop
 
-进入/apps/hadoop/bin目录
-
-`cd /apps/hadoop/sbin`
-
 执行启动脚本
 
-`./start-all.sh`
-
-注意，如果终端显示Are you sure you want to continue connecting (yes/no)? 提示，我们需要输入yes，再按回车即可。
+`/opt/hadoop/sbin/start-all.sh`
 
 检验hadoop是否启动成功
 
@@ -542,7 +558,7 @@ schemaTool completed
 
 如下，6个进程都出现了，表明Hadoop启动成功
 
-![image-20210507113338055](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113338.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/ch6_ex1.4.png)
 
 ##### 4.启动hive
 
@@ -550,18 +566,7 @@ schemaTool completed
 
 启动成功后，显示效果如下
 
-```
-datawhale@tools:~$ hive
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/apps/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/apps/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
- 
-Logging initialized using configuration in jar:file:/apps/hive/lib/hive-common-2.3.3.jar!/hive-log4j2.properties Async: true
-Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
-hive>
-```
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/ch6_ex1.5.png)
 
 此时，终端显示hive>，表明已经进入hive的命令行模式。
 
@@ -571,7 +576,7 @@ hive>
 
 执行后显示如下：
 
-![image-20210507113505481](C:/Users/56550/AppData/Roaming/Typora/typora-user-images/image-20210507113505481.png)
+![image-20211226000610322](/home/shenhao/桌面/Big Data/docs/image-20211226000610322.png)
 
 ##### 6.查看已有的数据库,并使用datawhale数据库
 
@@ -579,7 +584,7 @@ hive>
 
 执行后显示如下：
 
-![image-20210507113547926](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/image-20210507113547926.png)
+![image-20211226000712689](/home/shenhao/桌面/Big Data/docs/image-20211226000712689.png)
 
 `use datawhale;`
 
@@ -662,7 +667,7 @@ fields terminated by ',';
 
 创建动态分区表partition_table1
 
-```
+```sql
 create table partition_table1(id int,name string)
 partitioned by(city string)
 row format delimited
@@ -823,7 +828,7 @@ alter table partition_table2 drop partition(city="beijing");
 
 ##### 17.在HDFS查看两张表格的数据
 
-```
+```shell
 hadoop fs -ls /user/hive/warehouse/datawhale.db/partition_table1/
 hadoop fs -ls /user/hive/warehouse/datawhale.db/partition_table2/
 ```
@@ -871,8 +876,6 @@ hadoop fs -ls /user/hive/warehouse/datawhale.db/partition_table2/
 ![image-20210512011158613](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011158.png)
 
 所以外部表应该也是移动了一份数据到user/hive/warehouse/datawhale.db/外部表目录中。
-
-
 
 ## 6.5 本章小结
 

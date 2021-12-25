@@ -342,7 +342,7 @@ sudo vim /etc/profile
 &emsp;&emsp;在文件末尾，添加如下内容：
 ```shell
 #hbase
-export HBASE_HOME=/opt/hbase/
+export HBASE_HOME=/opt/hbase
 export PATH=$PATH:$HBASE_HOME/bin
 ```
 
