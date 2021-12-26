@@ -2,12 +2,8 @@
 
 > 王嘉鹏，shenhao
 
+
 ## 6.0 数据仓库
-
-&emsp;&emsp;Hive是一个基于Hadoop的**数据仓库**工具，可以对存储在 Hadoop 文件中的数据集进行**数据整理、特殊查询和分析处理**。具体来说，它可以将结构化的数据文件映射成表，并提供类似于关系数据库 SQL 的查询语言—— **HiveQL** 。当采用 MapReduce 作为执行引擎时，Hive 自身可以将用于查询的 HiveQL 语句转换为 MapReduce 作业，然后提交到 Hadoop 上运行。
-
-&emsp;&emsp;首先，我们先简单的引入一下数据仓库的概念！！
-
 > ps：到了数据仓库啦，崭新的饱满的和知识相濡以沫的一天，又开始啦！！！！
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.0.png)
@@ -159,41 +155,56 @@
 
 ## 6.2 Hive 核心概念
 
-### 6.2.1 元数据
+### 6.2.1 Hive 数据类型
 
-- **metadata**  
-&emsp;&emsp;上面所介绍的`Hive`表和文件的映射信息，被称为**元数据**。元数据表示**描述数据的数据**，对于`Hive`来说，元数据就是用来描述`HDFS`文件和表的各种对应关系（位置关系、顺序关系、分隔符）。`Hive`的元数据存储在**关系数据库**中（`Hive`内置的是`Derby`、第三方的是`MySQL`），`HDFS`中存储的是数据。
+**基本数据类型**
 
-- **metastore**  
-&emsp;&emsp;`metastore`是**元数据服务**：表示`Hive`操作管理访问元数据的一个服务。用于访问元数据，`metastore`对外提供一个服务地址，使客户端能够连接`Hive`。使用`metastore`的好处如下：
-- 元数据把数据保存在关系数据库中，`Hive`提供元数据服务，通过对外的服务地址，用户能够使用客户端连接Hive，访问并操作元数据；
-- 支持多个客户端的连接，而客户端无需关心数据的存储地址，实现了数据访问层面的解耦操作。
+Hive 表中的列支持以下基本数据类型：
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.1_1.png" style="zoom: 50%;" />
+| 大类                                | 类型                                                         |
+| :---------------------------------- | :----------------------------------------------------------- |
+| Integers（整型）                    | TINYINT — 1 字节的有符号整数；SMALLINT — 2 字节的有符号整数；INT — 4 字节的有符号整数；BIGINT — 8 字节的有符号整数 |
+| Boolean（布尔型）                   | BOOLEAN — TRUE/FALSE                                         |
+| Floating point numbers（浮点型）    | FLOAT — 单精度浮点型；DOUBLE — 双精度浮点型                  |
+| Fixed point numbers（定点数）       | DECIMAL — 用户自定义精度定点数，比如 DECIMAL(7,2)            |
+| String types（字符串）              | STRING — 指定字符集的字符序列；VARCHAR — 具有最大长度限制的字符序列；CHAR — 固定长度的字符序列 |
+| Date and time types（日期时间类型） | TIMESTAMP — 时间戳；TIMESTAMP WITH LOCAL TIME ZONE — 时间戳，纳秒精度；DATE — 日期类型 |
+| Binary types（二进制类型）          | BINARY — 字节序列                                            |
 
-- `metastore`管理元数据的方式
-1. **内嵌模式**  
-&emsp;&emsp;`metastore`**默认的**部署模式是`metastore`元数据服务和`Hive`服务融合在一起。
+>  TIMESTAMP 和 TIMESTAMP WITH LOCAL TIME ZONE 的区别如下：
+>
+> - **TIMESTAMP WITH LOCAL TIME ZONE**：用户提交时间给数据库时，会被转换成数据库所在的时区来保存。查询时则按照查询客户端的不同，转换为查询客户端所在时区的时间。
+> - **TIMESTAMP** ：提交什么时间就保存什么时间，查询时也不做任何转换。
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.1_2.png" style="zoom:50%;" />
+**隐式转换**
 
-&emsp;&emsp;在这种模式下，`Hive`服务（即`Hive`驱动本身）、元数据服务`Metastore`，元数据`metadata`（用于存储映射信息）都在同一个`JVM`进程中，元数据存储在内置的**Derby数据库**。当启动`HiveServer`进程时，`Derby`和`metastore`都会启动，不需要额外启动`metastore`服务。但是，一次只能支持一个用户访问，适用于测试场景。
-    
-2. **本地模式**  
-&emsp;&emsp;本地模式与内嵌模式的区别在于：把元数据提取出来，让`metastore`服务与`HiveServer`主进程在同一个`JVM`进程中运行，存储元数据的数据库在单独的进程中运行。元数据一般存储在`MySQL`关系型数据库中。
+Hive 中基本数据类型遵循以下的层次结构，按照这个层次结构，子类型到祖先类型允许隐式转换。例如 INT 类型的数据允许隐式转换为 BIGINT 类型。额外注意的是：按照类型层次结构允许将 STRING 类型隐式转换为 DOUBLE 类型。
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.1_3.png" style="zoom:50%;" />
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.1.png" style="zoom:33%;" />
 
-&emsp;&emsp;但是，每启动一个`Hive`服务，都会启动一个`metastore`服务。多个人使用时，会启用多个`metastore`服务。
-    
-3. **远程模式**  
-&emsp;&emsp;既然可以把元数据存储给提取出来，也可以考虑把`metastore`给提取出来变为单独一个进程。把`metastore`单独进行配置，并在单独的进程中运行，可以保证全局唯一，从而保证数据访问的安全性。（即不随`Hive`的启动而启动）
+**复杂类型**
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.2.1_4.png" style="zoom:50%;" />
+| 类型   | 描述                                                         | 示例                                   |
+| ------ | ------------------------------------------------------------ | -------------------------------------- |
+| STRUCT | 类似于对象，是字段的集合，字段的类型可以不同，可以使用 `名称.字段名` 方式进行访问 | STRUCT ('xiaoming', 12 , '2018-12-12') |
+| MAP    | 键值对的集合，可以使用 `名称[key]` 的方式访问对应的值        | map('a', 1, 'b', 2)                    |
+| ARRAY  | 数组是一组具有相同类型和名称的变量的集合，可以使用 `名称[index]` 访问对应的值 | ARRAY('a', 'b', 'c', 'd')              |
 
-&emsp;&emsp;其优点是把`metaStore`服务独立出来，可以安装到远程的服务器集群里，从而解耦`Hive`服务和`metaStore`服务，保证`Hive`的稳定运行。
+**示例**
 
-### 6.2.2 Hive数据模型
+如下给出一个基本数据类型和复杂数据类型的使用示例：
+
+```sql
+CREATE TABLE students(
+  name      STRING,   -- 姓名
+  age       INT,      -- 年龄
+  subject   ARRAY<STRING>,   -- 学科
+  score     MAP<STRING,FLOAT>,  -- 各个学科考试成绩
+  address   STRUCT<houseNumber:int, street:STRING, city:STRING, province:STRING>  -- 家庭居住地址
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t";
+```
+
+### 6.2.2 Hive 数据模型
 
 &emsp;&emsp;`Hive`的数据都是存储在`HDFS`上的，默认有一个根目录，在`hive-site.xml`中可以进行配置数据的存储路径。`Hive`数据模型的含义是，描述`Hive`组织、管理和操作数据的方式。`Hive`包含如下4种数据模型：
 
@@ -239,11 +250,40 @@
 
 ### 6.3.3 元数据存储模块
 
-&emsp;&emsp;元数据存储模块（Metastore）是一个独立的关系数据库，通常是与 MySQL 数据库连接后创建的一个 MySQL 实例，也可以是 Hive 自带的 derby 数据库实例。元数据存储模块中主要保存表模式和其他系统元数据，如表的名称、表的列及其属性、表的分区及其属性、表的属性、表中数据所在位置信息等。
+元数据（metadata）是**描述数据的数据**，对于`Hive`来说，元数据就是用来描述`HDFS`文件和表的各种对应关系（位置关系、顺序关系、分隔符）。`Hive`的元数据存储在**关系数据库**中（`Hive`内置的是`Derby`、第三方的是`MySQL`），`HDFS`中存储的是数据。在 Hive 中，所有的元数据默认存储在 Hive 内置的 derby 数据库中，但由于 derby 只能有一个实例，也就是说不能有多个命令行客户端同时访问，所以在实际生产环境中，通常使用 MySQL 代替 derby。
 
-&emsp;&emsp;在 Hive 中，所有的元数据默认存储在 Hive 内置的 derby 数据库中，但由于 derby 只能有一个实例，也就是说不能有多个命令行客户端同时访问，所以在实际生产环境中，通常使用 MySQL 代替 derby。
+&emsp;&emsp;元数据存储模块（Metastore）是一个独立的关系数据库，通常是与 MySQL 数据库连接后创建的一个 MySQL 实例，也可以是 Hive 自带的 derby 数据库实例，提供**元数据服务**。元数据存储模块中主要保存表模式和其他系统元数据，如表的名称、表的列及其属性、表的分区及其属性、表的属性、表中数据所在位置信息等。它提供给`Hive`操作管理访问元数据的一个服务，具体操作为`metastore`对外提供一个服务地址，使客户端能够连接`Hive`，以此来对元数据进行访问。使用`metastore`的好处如下：
 
-&emsp;&emsp;Hive 进行的是统一的元数据管理，就是说你在 Hive 上创建了一张表，然后在 presto／impala／sparksql 中都是可以直接使用的，它们会从 Metastore 中获取统一的元数据信息，同样的你在 presto／impala／sparksql 中创建一张表，在 Hive 中也可以直接使用。
+- 元数据把数据保存在关系数据库中，`Hive`提供元数据服务，通过对外的服务地址，用户能够使用客户端连接`Hive`，访问并操作元数据；
+- 支持多个客户端的连接，而客户端无需关心数据的存储地址，实现了数据访问层面的解耦操作。
+- 因此如果你在 Hive 上创建了一张表，然后在 presto／impala／sparksql 中都是可以直接使用的，它们会从 Metastore 中获取统一的元数据信息，同样的你在 presto／impala／sparksql 中创建一张表，在 Hive 中也可以直接使用。
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_1.png" style="zoom: 50%;" />
+
+`metastore`管理元数据的方式
+
+1. **内嵌模式**  
+   &emsp;&emsp;`metastore`**默认的**部署模式是`metastore`元数据服务和`Hive`服务融合在一起。
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_2.png" style="zoom:50%;" />
+
+&emsp;&emsp;在这种模式下，`Hive`服务（即`Hive`驱动本身）、元数据服务`Metastore`，元数据`metadata`（用于存储映射信息）都在同一个`JVM`进程中，元数据存储在内置的**Derby数据库**。当启动`HiveServer`进程时，`Derby`和`metastore`都会启动，不需要额外启动`metastore`服务。但是，一次只能支持一个用户访问，适用于测试场景。
+    
+
+2. **本地模式**  
+   &emsp;&emsp;本地模式与内嵌模式的区别在于：把元数据提取出来，让`metastore`服务与`HiveServer`主进程在同一个`JVM`进程中运行，存储元数据的数据库在单独的进程中运行。元数据一般存储在`MySQL`关系型数据库中。
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_3.png" style="zoom:50%;" />
+
+&emsp;&emsp;但是，每启动一个`Hive`服务，都会启动一个`metastore`服务。多个人使用时，会启用多个`metastore`服务。
+    
+
+3. **远程模式**  
+   &emsp;&emsp;既然可以把元数据存储给提取出来，也可以考虑把`metastore`给提取出来变为单独一个进程。把`metastore`单独进行配置，并在单独的进程中运行，可以保证全局唯一，从而保证数据访问的安全性。（即不随`Hive`的启动而启动）
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_4.png" style="zoom:50%;" />
+
+&emsp;&emsp;其优点是把`metaStore`服务独立出来，可以安装到远程的服务器集群里，从而解耦`Hive`服务和`metaStore`服务，保证`Hive`的稳定运行。
 
 ### 6.3.4 HQL的执行流程
 
@@ -269,7 +309,6 @@
 
 1. 完成Java运行环境部署（详见第2章Java安装）
 2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
-3. MySQL数据库安装完成
 
 #### 6.4.1.2 实验内容
 
@@ -281,157 +320,219 @@
 
 ##### 1.解压安装包
 
-&emsp;通过官网下载地址（✅**官网下载地址**：[Hive下载](https://dlcdn.apache.org/hive/)），下载hive 2.3.2的安装包到本地指定目录，如/data/hadoop/下。运行下面的命令，解压安装包至`/opt`目录下：
+&emsp;通过官网下载地址（✅**官网下载地址**：[Hive下载](https://dlcdn.apache.org/hive/)），下载hive 2.3.9的安装包到本地指定目录，如`/data/hadoop/`下。运行下面的命令，解压安装包至`/opt`目录下：
 
-`sudo tar -zxvf /data/hadoop/apache-hive-2.3.2-bin.tar.gz -C /opt/`
+```shell
+sudo tar -zxvf /data/hadoop/apache-hive-2.3.9-bin.tar.gz -C /opt/
+```
 
-解压后，在/opt目录下产生了apache-hive-2.3.2-bin文件夹
+解压后，在`/opt`目录下产生了apache-hive-2.3.9-bin文件夹
 
 ##### 2.更改文件夹名和所属用户
 
 更改文件夹名
 
-`sudo mv /opt/apache-hive-2.3.2-bin/ /opt/hive`
+```shell
+sudo mv /opt/apache-hive-2.3.9-bin/ /opt/hive
+```
 
 更改所属用户和用户组
 
-`sudo chown -R datawhale:datawhale /opt/hive/`
+```shell
+sudo chown -R datawhale:datawhale /opt/hive/
+```
 
 ##### 3.设置HIVE_HOME环境变量
 
-将"/opt/hive"设置到HIVE_HOME环境变量，作为工作目录
+将`/opt/hive`设置到HIVE_HOME环境变量，作为工作目录
 
-`sudo vim ~/.bashrc`
+```shell
+sudo vim /etc/profile
+```
 
 在新弹出的编辑器的最下面添加以下内容：
 
-```
+```shell
 export HIVE_HOME=/opt/hive
 export PATH=$PATH:$HIVE_HOME/bin
 ```
 
-运行下面命令使环境变量生效
+使用`Shift+:`，输入`wq`后回车，保存退出。运行下面命令使环境变量生效：
+```shell
+source /etc/profile
+```
 
-`source ~/.bashrc`
+##### 4.安装MySQL
 
-##### 4.导入MySql jdbc jar包到hive/lib目录下
+Ubuntu在20.04版本中，源仓库中MySQL的默认版本已经更新到8.0。因此可以直接安装。
 
-复制jar包到/app/hive/lib目录下
+```shell
+sudo apt-get update  #更新软件源
+sudo apt-get install mysql-server  #安装mysql
+```
 
-https://dev.mysql.com/downloads/connector/j/
+默认是启动的，可以通下面`netstat -tap|grep mysql`或`systemctl status mysql`查看（下面给出开启，关闭，重启命令）
 
-`sudo cp /data/hadoop/mysql-connector-java-5.1.7-bin.jar /opt/hive/lib/`
+```shell
+sudo netstat -tap | grep mysql    #mysql节点处于LISTEN状态表示启动成功
+sudo service mysql start    #开启
+sudo service mysql stop     #关闭
+sudo service mysql restart  #重启
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.1.png)
+
+看到上面的信息就说明MySQL已经安装好并运行起来了。
+
+> 注意安装时没有提示输入root账户密码，默认是空，可以执行以下命令设置密码为123456。
+> ```bash
+> sudo mysql -u root -p  #密码按Enter即可进入mysql shell，空格也可以，普通用户一定sudo
+> ```
+
+
+##### 5.创建MySQL hive用户
+
+```shell
+mysql -u root -p #登陆shell界面，请先确认已经启动
+```
+
+```sql
+create user 'datawhale'@'localhost' identified by '123456'; -- 创建datawhale用户，密码是123456，必须与hive-site.xml配置的user,password相同
+grant all on *.* to 'datawhale'@'localhost'; -- 将所有数据库的所有表的所有权限赋给datawhale
+flush privileges;  -- 刷新mysql系统权限关系表
+```
+
+##### 6.下载安装MySQL JDBC
+
+✅**官网下载地址**：[MySQL JDBC下载](https://dev.mysql.com/downloads/connector/j/)
+
+选择合适的系统以及系统版本，会自动出现最新的安装包，注意下载的是deb格式的，可以使用cpkg命令安装。
+
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.2.png" style="zoom: 33%;" />
+
+下载MySQL JDBC到本地的目录下，如`~/下载`
+
+```shell
+cd ~/下载  #切换到你的文件所在目录下
+sudo dpkg -i mysql-connector-java_8.0.27-1ubuntu20.04_all.deb  #安装mysql-connector-java
+```
+
+##### 7.导入MySQL JDBC jar包到`hive/lib`目录下
+
+复制 jar 包到`/opt/hive/lib`目录下
+
+```shell
+sudo cp /usr/share/java/mysql-connector-java-8.0.27.jar /opt/hive/lib/
+```
+
+> 注意：你可能不知道安装到哪里了，别急，在`/usr/share/java/`
+>
+> 验证路径的方法：打开deb文件，提取文件，看到.tar.xz文件，用xz -d解压，tar -xvf解包，出来的文件目录路径就是在系统中的路径。
 
 更改jar包所属用户和用户组
 
-`sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-java-5.1.7-bin.jar`
+```shell
+sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-8.0.27.jar
+```
 
-##### 5.修改hive配置文件
+##### 8.修改hive配置文件
 
 进入/opt/hive/conf目录下
 
-`cd /opt/hive/conf`
+```shell
+cd /opt/hive/conf
+```
 
 将hive-default.xml.template文件重命名为hive-default.xml
 
-`sudo mv hive-default.xml.template hive-default.xml`
+```shell
+sudo mv hive-default.xml.template hive-default.xml
+```
 
 创建hive-site.xml文件
 
-`sudo touch hive-site.xml`
+```shell
+sudo touch hive-site.xml
+```
 
 执行后，会在/opt/hive/conf/下产生hive-site.xml文件
 
 修改hive-site.xml文件
 
-`sudo vim hive-site.xml`
+```shell
+sudo vim hive-site.xml
+```
 
 在弹出的编辑器中添加以下内容：
-（提示：可以将桌面上的hive-site.txt中的内容复制到hive-site.xml文件中）
 
-```
+```html
 <configuration>
 <property>
 <name>javax.jdo.option.ConnectionURL</name>
 <value>jdbc:mysql://localhost:3306/hive_metadata?createDatabaseIfNotExist=true</value>
+<description>JDBC connect string for a JDBC metastore</description>
 </property>
 <property>
 <name>javax.jdo.option.ConnectionDriverName</name>
-<value>com.mysql.jdbc.Driver</value>
+<value>com.mysql.cj.jdbc.Driver</value>
+<description>Driver class name for a JDBC metastore</description>
 </property>
 <property>
 <name>javax.jdo.option.ConnectionUserName</name>
-<value>root</value>
+<value>datawhale</value>
+<description>username to use against metastore database</description>
 </property>
 <property>
 <name>javax.jdo.option.ConnectionPassword</name>
 <value>123456</value>
+<description>password to use against metastore database</description>
 </property>
 </configuration>
 ```
 
 至此，hive的配置已经完成
 
-##### 6.启动MySQL
+##### 9.启动MySQL
 
-hive的元数据需要存储在关系型数据库中，这里我们选择了Mysql
-本实验平台已经提前安装好了MySql（账户名root，密码123456），这里只需要启动MySql服务即可
-
-`sudo /etc/init.d/mysql start`
-
-启动成功显示如下
-
-```
-datawhale@tools:~$ sudo /etc/init.d/mysql start
-* Starting MySQL database server mysqld
-No directory, logging in with HOME=/
-[ OK ]
+```shell
+sudo service mysql start
 ```
 
-##### 7.指定元数据数据库类型并初始化Schema
+查看MySQL是否启动
+
+```shell
+systemctl status mysql
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.1.png)
+
+##### 10.指定元数据数据库类型并初始化Schema
 
 `schematool -initSchema -dbType mysql`
 
 初始化成功后，效果如下：
 
-```dolphin@tools:/opt/hive/conf$ schematool -initSchema -dbType mysql
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-Metastore connection URL:    jdbc:mysql://localhost:3306/hive_metadata?createDatabaseIfNotExist=true
-Metastore Connection Driver :    com.mysql.jdbc.Driver
-Metastore connection User:   root
-Starting metastore schema initialization to 2.3.0
-Initialization script hive-schema-2.3.0.mysql.sql
-Initialization script completed
-schemaTool completed
-```
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.3.png)
 
 ##### 8.启动Hadoop
 
 进入/opt/hadoop/bin目录
 
-`cd /opt/hadoop/sbin`
+```shell
+cd /opt/hadoop/sbin
+```
 
 执行启动脚本
 
-`./start-all.sh`
+```shell
+./start-all.sh
+```
 
 检验hadoop是否启动成功
 
 `jps`
 
-```
-datawhale@tools:/opt/hadoop/sbin$ jps
-2258 ResourceManager
-2020 SecondaryNameNode
-1669 NameNode
-1787 DataNode
-2731 Jps
-2556 NodeManager
-```
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.4.png)
 
 如上6个进程都启动，表明Hadoop启动成功
 
@@ -441,33 +542,24 @@ datawhale@tools:/opt/hadoop/sbin$ jps
 
 启动成功后，显示效果如下
 
-```
-datawhale@tools:/opt/hadoop/sbin$ hive
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
- 
-Logging initialized using configuration in jar:file:/opt/hive/lib/hive-common-2.3.3.jar!/hive-log4j2.properties Async: true
-Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
-hive>
-```
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.5.png)
 
-##### 10.检验hive能否使用
+##### 10.检验hive
 
-在hive命令行下执行show databases;命令，用于显示有哪些数据库，显示效果如下
+在hive命令行下执行`show databases;`命令，用于显示有哪些数据库，显示效果如下
 
-```
+```shell
 hive> show databases;
 OK
 default
 Time taken: 3.06 seconds, Fetched: 1 row(s)
 ```
 
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.6.png)
+
 如上表明hive安装部署成功，本次实验结束啦！
 
-### 6.4.2 实验二：操作分区表
+### 6.4.2 实验二：Hive 常用的DDL操作
 
 #### 6.4.2.1 实验准备
 
@@ -481,60 +573,31 @@ Time taken: 3.06 seconds, Fetched: 1 row(s)
 
 #### 6.4.2.2 实验内容
 
-基于上述前提条件， 使用Hive完成以下实验：
+基于上述前提条件， 使用Hive完成一些常见的DDL操作
 
-1. 创建数据库
-
-2. 创建内、外分区表，并导入数据
-
-3. 创建动态分区表
-4. 删除分区表
+✅**官方参考内容**：[LanguageManual DDL](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL)
 
 #### 6.4.2.3 实验步骤
 
 ##### 1.启动MySQL
 
-本实验平台已经提前安装好了MySql（账户名root，密码123456），这里只需要启动MySql服务即可
-
-`sudo /etc/init.d/mysql start`
-
-启动成功显示如下
-
-![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113111.png)
-
-##### 2.指定元数据数据库类型并初始化Schema
-
-`schematool -initSchema -dbType mysql`
-
-初始化成功后，效果如下：
-
-```
-datawhale@tools:~$ schematool -initSchema -dbType mysql
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/apps/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/apps/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
-Metastore connection URL:    jdbc:mysql://localhost:3306/hive_metadata?createDatabaseIfNotExist=true
-Metastore Connection Driver :    com.mysql.jdbc.Driver
-Metastore connection User:   root
-Starting metastore schema initialization to 2.3.0
-Initialization script hive-schema-2.3.0.mysql.sql
-Initialization script completed
-schemaTool completed
+```shell
+sudo service mysql start
 ```
 
-##### 3.启动Hadoop
+查看MySQL是否启动
 
-进入/apps/hadoop/bin目录
+```shell
+systemctl status mysql
+```
 
-`cd /apps/hadoop/sbin`
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.1.png)
+
+##### 2.启动Hadoop
 
 执行启动脚本
 
-`./start-all.sh`
-
-注意，如果终端显示Are you sure you want to continue connecting (yes/no)? 提示，我们需要输入yes，再按回车即可。
+`/opt/hadoop/sbin/start-all.sh`
 
 检验hadoop是否启动成功
 
@@ -542,337 +605,466 @@ schemaTool completed
 
 如下，6个进程都出现了，表明Hadoop启动成功
 
-![image-20210507113338055](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113338.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/ch6_ex1.4.png)
 
-##### 4.启动hive
+##### 3.启动hive
 
 `hive`
 
 启动成功后，显示效果如下
 
-```
-datawhale@tools:~$ hive
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/apps/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/apps/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
- 
-Logging initialized using configuration in jar:file:/apps/hive/lib/hive-common-2.3.3.jar!/hive-log4j2.properties Async: true
-Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
-hive>
-```
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/ch6_ex1.5.png)
 
 此时，终端显示hive>，表明已经进入hive的命令行模式。
 
-##### 5.创建名为datawhale的数据库
+##### 5.数据库操作
 
-`create database if not exists datawhale;`
+###### 5.1 查看数据列表
 
-执行后显示如下：
-
-![image-20210507113505481](C:/Users/56550/AppData/Roaming/Typora/typora-user-images/image-20210507113505481.png)
-
-##### 6.查看已有的数据库,并使用datawhale数据库
-
-`show databases;`
-
-执行后显示如下：
-
-![image-20210507113547926](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/image-20210507113547926.png)
-
-`use datawhale;`
-
-执行后显示如下：
-
-```
-hive> use datawhale;
-OK
-Time taken: 0.101 seconds
+```sql
+show databases;
 ```
 
-##### 7.创建内部静态分区表
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.1.png)
 
-**partition_table**表中一共有3个字段id，name，city，并以","为分割符
+###### 5.2 使用数据库
 
-```
-create table partition_table(id int,name string)
-partitioned by(city string)
-row format delimited
-fields terminated by ',';
+```sql
+use database_name;
 ```
 
-![image-20210511190445268](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190448.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.2.png)
 
-##### 8.向分区表partition_table导入数据
+###### 5.3 新建数据库
 
-我们已经在本地准备好数据集dome1.txt，输入以下命令，回车
-
-![image-20210511190711419](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190711.png)
-
-`load data local inpath '/home/datawhale/Desktop/dome1.txt' into table partition_table partition(city="beijing");`
-
-执行后显示如下：
-
-![image-20210511190820190](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190820.png)
-
-查看partition_table表中的数据，输入以下命令，回车
-
-`select * from partition_table;`
-
-执行后显示如下：
-
-![image-20210511190936935](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190936.png)
-
-##### 9.增加分区
-
-给partition_table增加一个分区，以字段值city="hangzhou"为新增分区
-
-`alter table partition_table add partition(city="hangzhou");`
-
-查看partition_table的分区，输入以下命令，回车
-
-`show partitions partition_table;`
-
-执行后显示如下：
-
-![image-20210511191110704](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191202.png)
-
-导入**新增**的分区数据，输入以下命令，回车，如果没导入数据执行select * from partition_table不会出现hangzhou，和原先的一样。
-
-![image-20210511230227815](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511230227.png)
-
-![image-20210511191308382](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191308.png)
-
-`load data local inpath '/home/datawhale/Desktop/dome2.txt' into table partition_table partition(city="hangzhou");`
-
-`select * from partition_table;`
-
-执行后显示如下：
-
-![image-20210511191558304](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191558.png)
-
-##### 10.创建名为partition_table1的动态分区表
-
-首先，修改hive的默认配置，开启动态分区，输入以下命令，回车
-
-`set hive.exec.dynamici.partition=true; #开启动态分区，默认是false`
-
-`set hive.exec.dynamic.partition.mode=nonstrict; #开启允许所有分区都是动态的，否则必须要有静态分区才能使用。`
-
-创建动态分区表partition_table1
-
-```
-create table partition_table1(id int,name string)
-partitioned by(city string)
-row format delimited
-fields terminated by ',';
+```sql
+CREATE (DATABASE|SCHEMA) [IF NOT EXISTS] database_name   -- DATABASE|SCHEMA 是等价的
+  [COMMENT database_comment] -- 数据库注释
+  [LOCATION hdfs_path] -- 存储在HDFS上的位置
+  [WITH DBPROPERTIES (property_name=property_value, ...)]; -- 指定额外属性
 ```
 
-执行后显示如下：
-
-![image-20210511192724689](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511192724.png)
-
-查看此时partition_table1的分区，输入以下命令，回车
-
-`show partitions partition_table1;`
-
-执行后显示如下：
-
-![image-20210511192855681](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511192855.png)
-
-向表partition_table1导入数据
-
-`insert into table partition_table1 partition (city) select id,name,city from partition_table;`
-
-注意：hive此时会执行Mapreduce任务，等待任务结束。 部分日志如下
-
-![image-20210511193043986](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193044.png)
-
-##### 11.查看动态分区表partition_table1
-
-查看partition_table1分区
-
-`show partitions partition_table1;`
-
-执行后显示如下：
-
-![image-20210511193117701](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193117.png)
-
-查看partition_table1的数据
-
-`select * from partition_table1;`
-
-执行后显示如下：
-
-![image-20210511193143435](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193143.png)
-
-##### 12.在HDFS上查看partition_table1的数据
-
-新打开一个命令终端，输入如下命令，回车
-
-`hadoop fs -ls /user/hive/warehouse/datawhale.db`
-
-执行后显示如下：
-
-![image-20210511193351558](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193351.png)
-
-查看**hive的分区数据**在HDFS上的状态
-
-`hadoop fs -ls /user/hive/warehouse/datawhale.db/partition_table1`
-
-执行后显示如下：
-
-![image-20210511193510586](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193510.png)
-
-查看**partition_table1表在“beijing”分区**的数据
-
-`hadoop fs -cat /user/hive/warehouse/datawhale.db/partition_table1/city=beijing/000000_0`
-
-执行后显示如下：
-
-![image-20210511193618044](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193618.png)
-
-##### 13.创建一个外部分区表partition_table2
-
-```
-create external table partition_table2(id int,name string)
-partitioned by(city string)
-row format delimited
-fields terminated by ',';
+示例：
+```sql
+CREATE DATABASE IF NOT EXISTS hive_test
+  COMMENT 'hive database for test'
+  WITH DBPROPERTIES ('create'='datawhale');
 ```
 
-执行后显示如下：
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.3.png)
 
-![image-20210511194123431](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194123.png)
+###### 5.4 查看数据库信息
 
-导入数据：
-
-`insert into table partition_table2 partition (country) select * from partition_table;`
-
-BUG的问题：插入分区字段名必须跟创建表分区字段名相同。
-
-**修改为以下两种都可以：**
-
-`insert into table partition_table2 partition (city) select * from partition_table;`
-
-`insert into table partition_table2 partition (city) select id,name,city from partition_table;`
-
-执行后部分日志显示如下：
-
-![image-20210511194650192](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194650.png)
-
-查看数据：
-
-`select * from partition_table2;`
-
-执行后显示如下：
-
-![image-20210511194738708](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194738.png)
-
-##### 14.删除内部分区表和外部分区表
-
-```
-alter table partition_table1 drop partition(city="beijing");
-alter table partition_table2 drop partition(city="beijing");
+```sql
+DESC DATABASE [EXTENDED] db_name; -- EXTENDED 表示是否显示额外属性
 ```
 
-执行后显示如下：
+示例：
 
-![image-20210511194957908](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194957.png)
-
-##### 15.查看表的数据
-
-`select * from partition_table1;`
-
-`select * from partition_table2;`
-
-执行后显示如下：
-
-![image-20210511195114927](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195114.png)
-
-##### 16.查看表的分区信息
-
-更新表的信息，输入如下命令
-
-`msck repair table partition_table1;`
-
-`msck repair table partition_table2;`
-
-执行后显示如下：
-
-![image-20210511195219306](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195219.png)
-
-查看表分区信息
-
-`show partitions partition_table1;`
-
-`show partitions partition_table2;` （如果不更新表的信息，不将原始数据重写会metastore那么只是显示hangzhou）
-
-执行后显示如下：
-
-![image-20210511195449248](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195449.png)
-
-`select * from partition_table2;`
-
-![image-20210511233510771](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511233510.png)
-
-##### 14-16总结操作
-
-![image-20210511233433242](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511233433.png)
-
-##### 17.在HDFS查看两张表格的数据
-
-```
-hadoop fs -ls /user/hive/warehouse/datawhale.db/partition_table1/
-hadoop fs -ls /user/hive/warehouse/datawhale.db/partition_table2/
+```sql
+DESC DATABASE EXTENDED hive_test;
 ```
 
-执行后显示如下：
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.4.png)
 
-![image-20210511195614791](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195614.png)
+###### 5.5 删除数据库
 
-`hadoop fs -cat /user/hive/warehouse/datawhale.db/partition_table2/city=beijing/000000_0`
+```sql
+DROP (DATABASE|SCHEMA) [IF EXISTS] database_name [RESTRICT|CASCADE];
+```
 
-执行后显示如下：
+默认行为是 RESTRICT，如果数据库中存在表则删除失败。要想删除库及其中的表，可以使用 CASCADE 级联删除。
 
-![image-20210511195705559](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195705.png)
+示例：
 
-##### 结论
+```sql
+DROP DATABASE IF EXISTS hive_test CASCADE;
+```
 
-对比partition_table1和partition_table2两种表，我们发现在进行内部表和外部表的修改时，如果我们进行的操作时删除分区，那么对于外部表而言并没有删除数据源的内容，即hdfs文件系统中的数据源，只是删除了元数据中的分区内容，导致在hive中，分区被删除，但是在hdfs文件系统中，分区依旧存在。
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.5.png)
 
-##### 个人思考
+##### 6.创建表
 
-**Q**：问题是partition_table2的数据是从partition_table中导入的，相当于table2 load hdfs文件系统中/user/hive/warehouse/datawhale.db/partition_table/目录下的数据。那么出现在/user/hive/warehouse/datawhale.db/partition_table2/目录下的数据是否和定义一样时前者目录文件的链接呢？
+###### 6.1 建表语法
 
-**A**：应该不是，是复制/移动了一份到warehouse/datawhale.db/partition_table2/中。
+```sql
+CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     -- 表名
+  [(col_name data_type [COMMENT col_comment],
+    ... [constraint_specification])]  -- 列名 列数据类型
+  [COMMENT table_comment]   -- 表描述
+  [PARTITIONED BY (col_name data_type [COMMENT col_comment], ...)]  -- 分区表分区规则
+  [
+    CLUSTERED BY (col_name, col_name, ...) 
+   [SORTED BY (col_name [ASC|DESC], ...)] INTO num_buckets BUCKETS
+  ]  -- 分桶表分桶规则
+  [SKEWED BY (col_name, col_name, ...) ON ((col_value, col_value, ...), (col_value, col_value, ...), ...)  
+   [STORED AS DIRECTORIES] 
+  ]  -- 指定倾斜列和值
+  [
+   [ROW FORMAT row_format]    
+   [STORED AS file_format]
+     | STORED BY 'storage.handler.class.name' [WITH SERDEPROPERTIES (...)]  
+  ]  -- 指定行分隔符、存储文件格式或采用自定义存储格式
+  [LOCATION hdfs_path]  -- 指定表的存储位置
+  [TBLPROPERTIES (property_name=property_value, ...)]  -- 指定表的属性
+  [AS select_statement];   -- 从查询结果创建表
+```
 
-**Q**：即修改partition_table的内容是否会导致partition_table2的内容改变。结果是不会的，Why？
+###### 6.2 内部表
 
-**A**：因为table和table2没有联系，在hive中进行的操作不会影响warehouse/datawhale.db/partition_table2/下的数据，只会改变metastore。如果执行`msck repair table partition_table2;`，那么**metastore（元数据）**会恢复到warehouse下的状态。
+雇员表：emp
 
+| 字段名称 |   字段类型   |   说明   |
+| :------: | :----------: | :------: |
+|  empno   |     INT      | 员工编号 |
+|  ename   |    STRING    | 员工姓名 |
+|   job    |    STRING    | 员工工作 |
+|   mgr    |     INT      | 领导编号 |
+| hiredate |  TIMESTAMP   | 入职日期 |
+|   sal    | DECIMAL(7,2) |   月薪   |
+|   comm   | DECIMAL(7,2) |   奖金   |
+|  deptno  |     INT      | 部门编号 |
 
-##### 小实验
+```sql
+CREATE TABLE emp(
+  empno INT,
+  empname STRING,
+  job STRING,
+  mgr INT,
+  hiredate TIMESTAMP,
+  sal DECIMAL(7,2),
+  comm DECIMAL(7,2),
+  deptno INT)
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t";
+```
 
-- data3为外部表通过insert一个内部表的数据
-- data2为外部表直接load文件（内部表也是直接load同样的文件）
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.6.png)
 
-![image-20210512011049832](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011206.png)
+hdfs中的存储位置如下所示：
 
-内部表删除的时候，user/hive/warehouse/datawhale.db/内部表目录也删除了
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.7.png)
 
-![image-20210512011143487](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011143.png)
+###### 6.3 外部表
 
-外部表删除的时候，目录和文件都没有删除。
+```sql
+CREATE EXTERNAL TABLE emp_external(
+  empno INT,
+  ename STRING,
+  job STRING,
+  mgr INT,
+  hiredate TIMESTAMP,
+  sal DECIMAL(7,2),
+  comm DECIMAL(7,2),
+  deptno INT)
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t"
+  LOCATION '/datawhale/emp_external';
+```
 
-如果外部表是用内部表的data进行insert的，即使内部表被删除了，user/hive/warehouse/datawhale.db/外部表数据依旧存在。
+使用 `desc emp_external` 命令可以查看表的详细信息如下：
 
-![image-20210512011158613](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011158.png)
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.8.png)
 
-所以外部表应该也是移动了一份数据到user/hive/warehouse/datawhale.db/外部表目录中。
+hdfs中的存储位置如下所示：
 
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.9.png)
 
+###### 6.4 分区表
+
+```sql
+CREATE EXTERNAL TABLE emp_partition(
+  empno INT,
+  ename STRING,
+  job STRING,
+  mgr INT,
+  hiredate TIMESTAMP,
+  sal DECIMAL(7,2),
+  comm DECIMAL(7,2)
+  )
+  PARTITIONED BY (deptno INT)   -- 按照部门编号进行分区
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t"
+  LOCATION '/datawhale/emp_partition';
+```
+
+hdfs中的存储位置如下所示：
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.10.png)
+
+###### 6.5 分桶表
+
+```sql
+CREATE EXTERNAL TABLE emp_bucket(
+  empno INT,
+  ename STRING,
+  job STRING,
+  mgr INT,
+  hiredate TIMESTAMP,
+  sal DECIMAL(7,2),
+  comm DECIMAL(7,2),
+  deptno INT)
+  CLUSTERED BY(empno) SORTED BY(empno ASC) INTO 4 BUCKETS  -- 按照员工编号散列到四个 bucket 中
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t"
+  LOCATION '/datawhale/emp_bucket';
+```
+
+hdfs中的存储位置如下所示：
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.10.png)
+
+###### 6.6 倾斜表
+
+通过指定一个或者多个列经常出现的值（严重偏斜），Hive 会自动将涉及到这些值的数据拆分为单独的文件。在查询时，如果涉及到倾斜值，它就直接从独立文件中获取数据，而不是扫描所有文件，这使得性能得到提升。
+
+```sql
+CREATE EXTERNAL TABLE emp_skewed(
+  empno INT,
+  ename STRING,
+  job STRING,
+  mgr INT,
+  hiredate TIMESTAMP,
+  sal DECIMAL(7,2),
+  comm DECIMAL(7,2)
+  )
+  SKEWED BY (empno) ON (66,88,100)  -- 指定 empno 的倾斜值 66,88,100
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t"
+  LOCATION '/datawhale/emp_skewed';   
+```
+
+hdfs中的存储位置如下所示：
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.10.png)
+
+###### 6.7 临时表
+
+临时表仅对当前 session 可见，临时表的数据将存储在用户的暂存目录中，并在会话结束后删除。如果临时表与永久表表名相同，则对该表名的任何引用都将解析为临时表，而不是永久表。临时表还具有以下两个限制：
+
+- 不支持分区列；
+- 不支持创建索引。
+
+```sql
+CREATE TEMPORARY TABLE emp_temp(
+  empno INT,
+  ename STRING,
+  job STRING,
+  mgr INT,
+  hiredate TIMESTAMP,
+  sal DECIMAL(7,2),
+  comm DECIMAL(7,2)
+  )
+  ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t";
+```
+
+###### 6.8 CTAS创建表
+
+支持从查询语句的结果创建表：
+
+```sql
+CREATE TABLE emp_copy AS SELECT * FROM emp WHERE deptno='20';
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.11.png)
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.12.png)
+
+hdfs中的存储位置如下所示：
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.13.png)
+
+###### 6.9 复制表结构
+
+```sql
+CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name  -- 创建表表名
+   LIKE existing_table_or_view_name  -- 被复制表的表名
+   [LOCATION hdfs_path]; -- 存储位置
+```
+
+示例：
+
+```sql
+CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS emp_co LIKE emp
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.14.png)
+
+> 临时表不存储在hdfs中
+
+###### 6.10 加载数据到表
+
+加载数据到表中属于 DML 操作，这里为了方便大家测试，先简单介绍一下加载本地数据到表中：
+
+```sql
+-- 加载数据到 emp 表中
+load data local inpath "/home/datawhale/emp.txt" into table emp;
+```
+
+其中 emp.txt 的内容如下，你可以直接复制使用，也可以到本仓库的[resources](https://github.com/shenhao-stu/Big-Data/tree/master/resources) 目录下载：
+
+```
+7369	SMITH	CLERK	7902	1980-12-17 00:00:00	800.00		20
+7499	ALLEN	SALESMAN	7698	1981-02-20 00:00:00	1600.00	300.00	30
+7521	WARD	SALESMAN	7698	1981-02-22 00:00:00	1250.00	500.00	30
+7566	JONES	MANAGER	7839	1981-04-02 00:00:00	2975.00		20
+7654	MARTIN	SALESMAN	7698	1981-09-28 00:00:00	1250.00	1400.00	30
+7698	BLAKE	MANAGER	7839	1981-05-01 00:00:00	2850.00		30
+7782	CLARK	MANAGER	7839	1981-06-09 00:00:00	2450.00		10
+7788	SCOTT	ANALYST	7566	1987-04-19 00:00:00	1500.00		20
+7839	KING	PRESIDENT		1981-11-17 00:00:00	5000.00		10
+7844	TURNER	SALESMAN	7698	1981-09-08 00:00:00	1500.00	0.00	30
+7876	ADAMS	CLERK	7788	1987-05-23 00:00:00	1100.00		20
+7900	JAMES	CLERK	7698	1981-12-03 00:00:00	950.00		30
+7902	FORD	ANALYST	7566	1981-12-03 00:00:00	3000.00		20
+7934	MILLER	CLERK	7782	1982-01-23 00:00:00	1300.00		10
+```
+
+加载后可使用`select * from emp`查询表中数据：
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.15.png)
+
+分区表加载数据需要增加字段`partition(deptno=30)`，或者可以修改hive的默认配置配置为动态分区，可以**参考**[Hive数仓：操作分区表](https://github.com/shenhao-stu/Big-Data/tree/master/experiments/Hive数仓：操作分区表.md)。
+
+```sql
+load data local inpath "/home/datawhale/emp.txt" into table emp_partition partition(deptno=30);
+```
+
+hdfs中的存储位置如下所示：
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.16.png)
+
+##### 7.修改表
+
+###### 7.1 重命名表
+
+```sql
+ALTER TABLE table_name RENAME TO new_table_name;
+```
+
+示例：
+
+```sql
+ALTER TABLE emp_temp RENAME TO new_emp; -- 把 emp_temp 表重命名为 new_emp
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.17.png)
+
+###### 7.2 修改列
+
+```sql
+ALTER TABLE table_name [PARTITION partition_spec] CHANGE [COLUMN] col_old_name col_new_name column_type
+  [COMMENT col_comment] [FIRST|AFTER column_name] [CASCADE|RESTRICT];
+```
+
+示例：
+
+```sql
+-- 修改字段名和类型
+ALTER TABLE new_emp CHANGE empno empno_new INT;
+ 
+-- 修改字段 sal 的名称 并将其放置到 empno 字段后
+ALTER TABLE new_emp CHANGE sal sal_new decimal(7,2) AFTER ename;
+
+-- 为字段增加注释
+ALTER TABLE new_emp CHANGE mgr mgr_new INT COMMENT 'this is column mgr';
+```
+
+###### 7.3 新增列
+
+示例：
+
+```sql
+ALTER TABLE new_emp ADD COLUMNS (address STRING COMMENT 'home address');
+```
+
+##### 8.清空表/删除表
+
+###### 8.1 清空表
+
+```sql
+-- 清空整个表或表指定分区中的数据
+TRUNCATE TABLE table_name [PARTITION (partition_column = partition_col_value,  ...)];
+```
+
+目前只有内部表才能执行 TRUNCATE 操作，外部表执行时会抛出异常`Cannot truncate non-managed table`。
+
+示例：
+
+```sql
+TRUNCATE TABLE emp_partition PARTITION (deptno=30);
+```
+
+###### 8.2 删除表
+
+```sql
+DROP TABLE [IF EXISTS] table_name [PURGE]; 
+```
+
+- 内部表：不仅会删除表的元数据，同时会删除 HDFS 上的数据；
+- 外部表：只会删除表的元数据，不会删除 HDFS 上的数据；
+- 删除视图引用的表时，不会给出警告（但视图已经无效了，必须由用户删除或重新创建）。
+
+##### 9.其他命令
+
+###### 9.1 Describe
+
+查看数据库：
+
+```sql
+DESCRIBE|Desc DATABASE [EXTENDED] db_name;  -- EXTENDED 是否显示额外属性
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.18.png)
+
+查看表：
+
+```sql
+DESCRIBE|Desc [EXTENDED|FORMATTED] table_name -- FORMATTED 以友好的展现方式查看表详情
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.19.png)
+
+###### 9.2 Show
+
+**1. 查看数据库列表**
+
+```sql
+-- 语法
+SHOW (DATABASES|SCHEMAS) [LIKE 'identifier_with_wildcards'];
+
+-- 示例：
+SHOW DATABASES like 'datawhale*';
+```
+
+LIKE 子句允许使用正则表达式进行过滤，但是 SHOW 语句当中的 LIKE 子句只支持 `*`（通配符）和 `|`（条件或）两个符号。例如 `employees`，`emp *`，`emp * | * ees`，所有这些都将匹配名为 `employees` 的数据库。
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.20.png)
+
+**2. 查看表的列表**
+
+```sql
+-- 语法
+SHOW TABLES [IN database_name] ['identifier_with_wildcards'];
+
+-- 示例
+SHOW TABLES IN default;
+```
+
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.21.png)
+
+**3. 查看视图列表**
+
+```sql
+SHOW VIEWS [IN/FROM database_name] [LIKE 'pattern_with_wildcards'];  -- 仅支持 Hive 2.2.0 +
+```
+
+**4. 查看表的分区列表**
+
+```sql
+SHOW PARTITIONS table_name;
+```
+
+**5. 查看表/视图的创建语句**
+
+```sql
+SHOW CREATE TABLE ([db_name.]table_name|view_name);
+```
 
 ## 6.5 本章小结
 
