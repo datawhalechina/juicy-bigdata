@@ -178,12 +178,11 @@
 
 &emsp;&emsp;在开始具体操作之前，首先需要选择一个合适的操作系统。尽管Hadoop本身可以运行在Linux、Windows以及其他一些类UNIX系统（如FreeBSD、OpenBSD、Solaris等）之上，但是，**Hadoop官方真正支持的运行平台只有Linux**。这就导致其他平台在运行Hadoop时，往往需要安装很多其他的包来提供一些Linux操作系统的功能，以配合Hadoop的执行。例如，Windows在运行Hadoop时，需要安装Cygwin等软件。  
 &emsp;&emsp;我们这里选择Linux作为Hadoop的运行平台，用于演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然，其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的小伙伴，可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。  
-&emsp;&emsp;在Linux发行版的选择上，我们倾向于使用企业级、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE和RedHat等发行版，最终选择免费的CentOS发行版作为推荐的操作系统，大家可以到网络上下载CentOS系统镜像文件进行安装（系统镜像下载地址：www.centos.org/download ）
+&emsp;&emsp;在Linux发行版的选择上，我们倾向于使用企业级、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE和RedHat等发行版，最终选择免费的Ubuntu发行版作为推荐的操作系统，大家可以到网络上下载Ubuntu系统镜像文件进行安装（系统镜像下载地址：https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64）
 
 ### 2.3.2 实验内容
 
-**实验环境：**Linux CentOS 7
-
+**实验环境：**Linux Ubuntu 20.04  
 **实验要求：**在Linux系统的虚拟机上安装Hadoop软件，基本安装配置主要包括以下几个步骤：
 
 1. 创建Hadoop用户
@@ -210,7 +209,7 @@ su datawhale # 切换到datawhale用户
 
 #### 2.3.3.2 Java的安装
 
-&emsp;&emsp;由于Hadoop本身是使用Java语言编写的，因此Hadoop的开发和运行都需要Java的支持，一般要求Java 6或者更新的版本。对于CentOS 7本身，系统上可能已经预装了Java 7，JDK版本为openjdk，路径为`/usr/lib/jvm/java-1.7.0-openjdk`，后文中需要配置的 `JAVA_HOME` 环境变量就可以设置为这个值。  
+&emsp;&emsp;由于Hadoop本身是使用Java语言编写的，因此Hadoop的开发和运行都需要Java的支持，一般要求Java 6或者更新的版本。对于Ubuntu 20.04本身，系统上可能已经预装了Java 7，JDK版本为openjdk，路径为`/usr/lib/jvm/java-1.7.0-openjdk`，后文中需要配置的 `JAVA_HOME` 环境变量就可以设置为这个值。  
 &emsp;&emsp;对于Hadoop而言，采用更为广泛应用的Oracle公司的Java版本，在功能上可能会更稳定一些，因此用户也可以根据自己的爱好安装Oracle版本的Java。在安装过程中，请记住JDK的文件路径，即`JAVA_HOME`的位置，这个路径的设置将用在后文Hadoop的配置文件中，目的是让Hadoop程序可以找到相关的Java工具。  
 &emsp;&emsp;比如我们在`/data/hadoop`目录中下载了`jdk-8u161-linux-x64.tar.gz`。
 
@@ -292,20 +291,7 @@ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 cat /home/datawhale/.ssh/id_rsa.pub >> /home/datawhale/.ssh/authorized_keys
 ```
 
-&emsp;&emsp;这时可以通过`ssh localhost`命令来检测一下是否需要输入密码。对于 `Ubuntu`而言，到这里SSH就配置好了。但是，由于CentOS 7具有更为严格的安全措施，因此，还需要修改两个地方：  
-1. 修`/etc/ssh/sshd_config`文件，将以下几行注释去掉
-```shell
-# RSAAuthentication yes
-# PubkeyAuthentication yes
-# AuthorizedKeysFile		.ssh/authorized_keys
-```
-
-2. 确认`~/.ssh/authorized_keys`目录的权限为600。这样配置之后，对于CentOS 7而言，SSH的配置就完成了
-```shell
-chmod 600 ~/.ssh/authorized_keys
-```
-
-3. 测试ssh连接，看到“sucessful login”，则配置成功
+&emsp;&emsp;这时可以通过`ssh localhost`命令来检测一下是否需要输入密码。 测试ssh连接，看到“sucessful login”，则配置成功，命令如下：  
 ```shell
 ssh localhost
 ```
