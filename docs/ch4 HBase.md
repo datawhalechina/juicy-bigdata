@@ -299,7 +299,7 @@ HBase提供了众多的访问方式，详见下表。
 
 #### 4.5.1.1 实验准备
 
-**实验环境：**Linux CentOS 7  
+**实验环境：**Linux Ubuntu 20.04     
 **前提条件：**  
 1. 完成Java运行环境部署（详见第2章Java安装）
 2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
@@ -341,7 +341,7 @@ sudo vim /etc/profile
 
 &emsp;&emsp;在文件末尾，添加如下内容：
 ```shell
-#hbase
+# hbase
 export HBASE_HOME=/opt/hbase
 export PATH=$PATH:$HBASE_HOME/bin
 ```
@@ -646,7 +646,7 @@ hbase(main):019:0> drop 'student'
 
 #### 4.5.2.1 实验准备
 
-**实验环境：**Linux CentOS 7  
+**实验环境：**Linux Ubuntu 20.04   
 **前提条件：**  
 1. 完成Java运行环境部署（详见第2章Java安装）
 2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
