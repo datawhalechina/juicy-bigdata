@@ -80,9 +80,8 @@
   - [x] [7.4 Spark Standalone集群](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_74-spark-standalone集群)
   - [ ] [7.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_75-本章小结)
 * [第八章：大数据处理技术总结](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结)
-  - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch7%20大数据处理技术总结?id=_81-大数据技术框架综述)
-  - [x] [8.2 大数据分析引擎的发展简史](https://shenhao-stu.github.io/Big-Data/#/ch7%20大数据处理技术总结?id=_82-大数据分析引擎的发展简史)
-  - [x] [8.3 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch7%20大数据处理技术总结?id=_83-本章小结)
+  - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_81-大数据技术框架综述)
+  - [x] [8.2 大数据分析引擎的发展简史](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_82-大数据分析引擎的发展简史)
 
 
 
