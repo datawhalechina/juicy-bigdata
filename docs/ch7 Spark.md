@@ -11,7 +11,6 @@
 而Hadoop MapReduce出现后，使得大数据计算通用编程成为可能，只要遵循MapReduce编程模型编写业务处理代码，就可以运行在Hadoop分布式集群上，而无需关心分布式计算怎样完成。
 
 紧接着，我们经常看到的说法是：`MapReduce 虽然已经可以满足大数据的应用场景，但是其执行速度和编程复杂度并不让人们满意`。
-
 我们事后因果规律的分析上，往往容易**把结果当作了原因**--觉得是因为MapReduce执行的很慢，所以才去发明和使用Spark。
 
 但事实上，在Spark出现之前，MapReduce并没有让人怨声载道，一方面Hive这些工具将常用的MapReduce编程进行了封装，转化为了更易于编写的SQL形式；一方面MR已经将分布式编程极大的进行了简化。
@@ -21,6 +20,5 @@
 
 Spark框架发展历史中**重要的时间点**：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2_1.png)
-
+![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.1.png)
 
