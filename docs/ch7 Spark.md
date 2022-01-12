@@ -2,25 +2,23 @@
 
 > 王嘉鹏
 
-概述；数据模型；实现原理；运行机制；编程实战
-
 ## 7.0 引言
 我们再次拿出5.1章节中辣椒酱的demo（没印象的同学移步[这里]()），来简单看下Spark和MapReduce在处理问题的方式上有什么区别。
 
 在了解这个之前，必须要了解什么是内存和磁盘。**内存和磁盘两者都是存储设备**，但内存储存的是我们正在使用的资源，磁盘储存的是我们暂时用不到的资源。
 可以把磁盘理解为一个仓库，而内存是进出这个仓库的通道。仓库（磁盘）很大，而通道（内存）很小，通道就很容易塞满。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_1.png" style="zoom: 67%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_1.png" style="zoom: 80%;" /></center>
 
 假设把磁盘作为冰箱，内存为做饭时的操作台：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_2.png" style="zoom: 67%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_2.png" style="zoom: 100%;" /></center>
 
 Mapreduce每一个步骤发生在内存中但产生的中间值（溢写文件）都会写入在磁盘里，下一步操作时又会将这个中间值merge到内存中，如此循环，直到最终完成计算。
 
 而对于Spark， Spark的每个步骤也是发生在内存之中，但产生的中间值会直接进入下一个步骤，直到所有的步骤完成之后才会将最终结果保存进磁盘。所以在使用Spark做数据分析能少进行很多次相对没有意义的读写，节省大量的时间。当步骤很多时，Spark的优势就体现出来了。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_3.png" style="zoom: 67%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_3.png" style="zoom: 100%;" /></center>
 
 ## 7.1 Spark概述
 
@@ -39,7 +37,7 @@ Mapreduce每一个步骤发生在内存中但产生的中间值（溢写文件�
 
 
 附上Spark框架发展历史中**重要的时间点**：
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.1.png" style="zoom: 67%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.1.png" style="zoom: 80%;" /></center>
 
 
 
@@ -55,7 +53,7 @@ Spark在这样的背景下产生，其不像Hadoop一样采取磁盘读写，而
 
 基于以上分析，我们可以得出**结论**：Hadoop 和 Spark 两者都是大数据框架，但是各自存在的目的不尽相同。Hadoop 实质上更多是一个**分布式数据基础设施**，它将巨大的数据集分派到一个集群中的多个节点**进行存储**，也有**计算处理**的功能。Spark则是一个专门用来**对那些分布式存储的大数据进行处理的工具**，它并不会进行分布式数据的存储，可以部分看做是MapReduce的竞品（**准确的说是Spark Core**）。可以总结为下图：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.2_1.png" style="zoom: 67%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.2_1.png" style="zoom: 100%;" /></center>
 
 ### 7.1.3 Spark生态体系
 spark是一个用来实现快速而通用的集群计算的平台。
@@ -65,11 +63,84 @@ spark是一个用来实现快速而通用的集群计算的平台。
 
 以 Spark 为基础，有支持 SQL 语句的 Spark SQL，有支持流计算的 Spark Streaming，有支持机器学习的 MLlib，还有支持图计算的GraphX。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.3_1.png" style="zoom: 67%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.3_1.png" style="zoom: 100%;" /></center>
 
 利用这些产品，Spark 技术栈支撑起大数据分析、大数据机器学习等各种大数据应用场景。
 
 
+## 7.2 Spark编程模型
+### 7.2.1 RDD概述
+
+RDD 是 Spark 的核心概念，是弹性数据集（Resilient Distributed Datasets）的缩写。RDD 既是 Spark 面向开发者的编程模型，又是 Spark 自身架构的核心元素。
+
+大数据计算就是在大规模的数据集上进行一系列的数据计算处理。类比MapReduce，针对输入数据，R将计算过程分为两个阶段，一个 Map 阶段，一个 Reduce 阶段，可以理解成是**面向过程**的大数据计算。我们在用MapReduce 编程的时候，思考的是，如何将计算逻辑用 Map 和 Reduce 两个阶段实现，map 和 reduce 函数的输入和输出是什么。
+
+而 Spark 则直接针对数据进行编程，将大规模数据集合抽象成一个 RDD 对象，然后在这个 RDD 上进行各种计算处理，得到一个新的 RDD，继续计算处理，直到得到最后的结果数据。所以 **Spark 可以理解成是面向对象的大数据计算**。我们在进行 Spark 编程的时候，思考的是**一个 RDD 对象需要经过什么样的操作，转换成另一个 RDD 对象，思考的重心和落脚点都在 RDD 上**。
+
+### 7.2.2 RDD定义
+
+**RDD**是**分布式内存**的一个抽象概念，是只读的记录分区的集合，能横跨集群所有节点进行并行计算。
+
+spark建立在抽象的RDD上，使得它可用一致的方式处理大数据不同的应用场景，把所有需要处理的数据转化为RDD，然后对RDD进行一系列的算子运算，从而得到结果，且提供了丰富的API来操作数据。
+
+### 7.2.3 RDD底层存储原理
+
+每个RDD的数据都以**Block**形式分布存储在多台机器上，RDD将分布在不同机器上的Block数据块聚集在一起。
+
+每个Block块由BlockManagerSlave来管理，但是Block的元数据由Driver节点的BlockManagerMaster来保存。BlockManagerSlave生成Block后向BlockManagerMaster**注册**该block，当rdd不再需要存储时，BlockManagerMaster将向BlockManagerSlave发送指令删除相应的Block。
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.3_1.jpg" style="zoom: 100%;" /></center>
+
+RDD本质上是**数据的一个元数据结构**，存储了数据分区及逻辑结构的映射。RDD的物理分区由BlockManager管理，通过Block存储在内存或磁盘上。而逻辑分区由Partition对应相应的物理块Block。
+
+### 7.2.4 RDD 五大特性
+
+RDD共有五大特性，我们将对每一种特性进行介绍：
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.4_1.jpg" style="zoom: 100%;" /></center>
+
+**一、分区**
+
+​	    分区的含义是允许Spark将计算**以分区为单位**，分配到多个机器上进行并行计算。在某些情况下，比如从HDFS读取数据时，Spark会使用位置信息，将工作发给靠近数据的机器，减少了跨网络传输的数据量。
+
+**二、可并行计算**
+
+​        RDD的每一个分区都会被一个计算任务task处理，每个分区有计算函数（具体执行的计算算子），计算函数以分片为基本单位进行并行计算，**RDD的分区数决定着并行计算的数量**。
+
+**三、依赖关系**
+
+​	    首先**依赖关系列表**会告诉Spark如何从必要的输入来构建RDD。当遇到错误需要重算时，Spark可以根据这些依赖关系重新执行操作，以此来重建出RDD。依赖关系赋予了RDD**容错**的弹性。
+
+**四、Key-Value数据的RDD分区器**
+
+​	    想要理解分区器的概念，我们需要先来类比MapReduce任务。MR 任务的 map 阶段的处理结果会进行分片（也可以叫分区，这个分区不同于上面的分区），分片的数量就是 reduce task 的数量。而**具体分片的策略由分区器 Partitioner** 决定，Spark 目前支持 Hash 分区（默认分区）和 Range 分区，用户也可以自定义分区。
+
+​	    总结来说，Partitioner决定了RDD如何分区。通过Partitioner来决定下一步会产生多少并行的分片，及当前并行Shuffle输出的并行数据，来使得Spark可以控制数据在不同节点上分区。
+
+​	    值得注意的是，其本身**只针对于key-value的形式**（k-v形式的RDD才有Partitioner属性），Partitioner会从0到numPartitions-1区间内映射每一个key到partition ID。
+
+**五、每个分区都有一个优先位置列表**
+
+​        大数据计算的基本思想是："移动计算而非移动数据"。Spark本身在进行任务调度时，需要尽可能的将任务分配到处理数据的数据块所在的具体位置。因此在具体计算前，就需要知道它运算的数据在什么地方。故分区位置列表会存储每个Partition的优先位置，如果读的时HDFS文件，这个列表保存的就是每个分区所在的block块的位置。
 
 
 
+### 7.2.3 RDD弹性解释
+
+
+
+### 7.2.4 RDD依赖关系
+
+
+
+## 7.3 Spark DAG 逻辑视图
+
+
+
+
+
+## 7.4 通过WordCount 看Spark RDD执行
+
+
+
+## 7.5 实验
