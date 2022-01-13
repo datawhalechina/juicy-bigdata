@@ -129,7 +129,7 @@ RDD共有五大特性，我们将对每一种特性进行介绍：
 
 RDD是弹性数据集，那怎么来理解RDD的弹性？
 
-RDD的弹性主要在如下七个方面体现：
+RDD的弹性主要在如下六个方面体现：
 
 **一、内存和磁盘数据自动交换**
 
@@ -164,6 +164,24 @@ spark优先把数据放内存，内存放不下得话，再放到磁盘。如果
 ② **DAGScheduler** 是高层调度，会计算每个job的stage的DAG，然后提交Stage，用tasksets的方式启动底层**TaskScheduler**调度在集群中运行；
 
 ③ **TaskSchedulerImpl**是底层的任务调度接口**TaskScheduler**的实现，这些Schedulers从每一个Stage中的**DAGScheduler**中获取taskset 来运行。如果有故障，会进行重试，**默认重试次数为4次**。
+
+
+
+**四、 Stage 失败会自动进行特定次数的重试**
+
+Stage是Spark job运行时具有相同逻辑功能和并行计算任务的一个基本单元。其执行失败后也会进行重试，默认是4次。
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.5_3.png" style="zoom: 100%;" /></center>
+
+**五、 数据调度弹性**
+
+**Spark 将执行模型抽象有向无环图计划（ DAG ）**，这可以将多 Stage 的任务串联或并行执行，从而不需要将 Stage 中间结果输出到 HDFS 中，当发生节点运行故障时，可有其他可用节点代替该故障节点运行。
+
+**六、数据分片的弹性**
+
+Spark进行数据分片，默认将数据存到内存，内存放不下，则一部分会放到磁盘。在计算过程，会产生很多数据碎片，产生一个Partition可能很小，当一个Partition非常小时，又需要消耗一个线程处理，会降低处理效率。
+
+因此需要考虑把小的Partition合并为一个大的处理，提高效率。每个Partition的数据Block比较大，考虑把Partition变成更小的数据分片，让Spark处理更多的批次，但是不会出现OOM。
 
 
 
