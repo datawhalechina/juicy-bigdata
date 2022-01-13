@@ -185,15 +185,104 @@ Spark进行数据分片，默认将数据存到内存，内存放不下，则一
 
 
 
-### 7.2.4 RDD依赖关系
+### 7.2.6 RDD 宽窄依赖
+
+待补充
+
+### 7.2.7 RDD 的操作函数
+
+RDD的操作函数包括两种：转换（transformation）函数 和 执行（action）函数。
+
+一种是转换（transformation）函数，这种函数的返回值还是RDD；另一种是执行（action）函数，这种函数不再返回 RDD。
+
+RDD 中定义的转换操作函数有：比如有计算map(func)、过滤filter(func)、合并数据集union(otherDataset)、根据 Key 聚合reduceByKey(func, [numPartitions])、连接数据集join(otherDataset, [numPartitions])、分组groupByKey([numPartitions]) 等十几个函数。
+
+跟 MapReduce 一样，Spark 也是**对大数据进行分片计算**，Spark 分布式计算的数据分片、任务调度都是**以 RDD 为单位展开的**，每个 RDD 分片都会分配到一个执行进程去处理。
+
+RDD 上的**转换操作分成两种**：一种转换操作产生的 RDD 不会出现新的分片，比如map、filter 等，也就是说一个 RDD 数据分片，经过 map 或者 filter 转换操作后，结果还在当前分片。就像你用 map 函数对每个数据加 1，得到的还是这样一组数据，只是值不同。实际上，Spark 并不是按照代码写的操作顺序去生成 RDD，比如rdd2 =rdd1.map(func)这样的代码并不会在物理上生成一个新的 RDD。物理上，Spark 只有在产生新的 RDD 分片时候，才会真的生成一个 RDD，Spark 的这种特性也被称作惰性计算
+
+1. 一种转换操作产生的 RDD **不会出现新的分片**，比如map、filter 等。一个 RDD 数据分片，经过 map 或者 filter 转换操作后，其结果还在当前分片。就像你用 map 函数对每个数据加 1，得到的还是这样一组数据，只是值不同。实际上，Spark 并不是按照代码写的操作顺序去生成 RDD，比如rdd2 =rdd1.map(func)这样的代码并不会在物理上生成一个新的 RDD。**物理上，Spark 只有在产生新的 RDD 分片时候，才会真的生成一个 RDD**，Spark 的这种特性也被称作惰性计算。
+2. 另一种转换操作产生的 RDD 则**会产生新的分片**，比如reduceByKey，来自不同分片的相同 Key 必须聚合在一起进行操作，这样就会产生新的 RDD 分片。实际执行过程中，**是否会产生新的 RDD 分片，并不是根据转换函数名就能判断出来的。**
+
+Spark 应用程序代码中的 RDD 和 Spark 执行过程中生成的物理 RDD不是一一对应的。
 
 
 
-## 7.3 Spark DAG 逻辑视图
 
 
+## 7.3 Spark 架构原理
 
+Spark同 MapReduce一样，遵循着 **移动计算而非移动数据** 这一大数据计算基本原则。MR是通过固定的Map 与 Reduce 分阶段计算，而Spark 的计算框架通过DAG来实现计算。
 
+### 7.3.1 Spark 计算阶段
+
+MapReduce中，一个应用一次只运行一个 map 和一个 reduce，而Spark 可以根据应用的复杂程度，将过程分割成更多的计算阶段（stage），这些计算阶段组成一个有向无环图 DAG，接着 Spark 任务调度器根据 **DAG 的依赖关系** 执行计算阶段（stage）。
+
+Spark 比MapReduce 快 100 多倍。因为某些机器学习算法可能需要进行大量的迭代计算，产生数万个计算阶段，这些计算阶段在一个应用中处理完成，而不是像 MapReduce 那样需要启动数万个应用，因此极大地提高了运行效率。
+
+DAG 是有向无环图，即是说**不同阶段的依赖关系是有向**的，计算过程只能沿着依赖关系方向执行，被依赖的阶段执行完成之前，依赖的阶段不能开始执行，同时，这个依赖关系不能有环形依赖，否则就成为死循环了。下面这张图描述了一个典型的 Spark 运行DAG 的不同阶段：
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.1_1.png" style="zoom: 100%;" /></center>
+
+从图上看，整个应用被切分成 3 个阶段，阶段 3 需要依赖阶段 1 和阶段 2，阶段 1 和阶段2 互不依赖。Spark 在执行调度的时候，先执行阶段 1 和阶段 2，完成以后，再执行阶段3。如果有更多的阶段，Spark 的策略也是一样的。**Spark 大数据应用的计算过程**为：Spark会根据程序初始化 DAG，由DAG再建立依赖关系，然后根据依赖关系顺序执行各个计算阶段。
+
+**Spark 作业调度执行核心是 DAG**，由DAG可以得出 **整个应用就被切分成哪些阶段** 以及 **每个阶段的依赖关系**。之后再根据每个阶段要处理的数据量生成相应的任务集合（TaskSet），每个任务都分配一个任务进程去处理。
+
+那DAG是怎么来生成的呢？在Spark中，DAGScheduler组件负责应用 DAG 的生成和管理，DAGScheduler 根据程序代码生成 DAG，然后将程序分发到分布式计算集群，按计算阶段的先后关系调度执行。
+
+### 7.3.2 如何划分计算阶段
+
+上图例子有4个转换函数，但是只有3个阶。看起来并不是RDD上的每个转换函数都会生成一个计算阶段。那RDD的计算阶段是怎样来进行划分的呢？
+
+当 **RDD 之间的转换连接线呈现多对多交叉连接**的时候，就会产生新的阶段。
+
+一个 RDD 代表一个数据集，图中每个 RDD 里面都包含多个小块，每个小块代表 RDD 的一个分片。
+
+**一个数据集中的多个数据分片需要进行分区传输，写入到另一个数据集的不同分片中**。MapReduce的运行过程也有这种数据分区交叉传输的操作。
+
+这种从数据集跨越，由多个分区传输的过程，就是**shuffle过程**，Spark需要通过shuffle将数据进行重新组合，把相同key的数据放一起，进行聚合、关联等操作，对于每次shuffle都会产生新的计算阶段。shuffle是spark最重要的一个环节，只有通过shuffle，相关数据才能互相计算，从而构建起复杂的应用逻辑。
+
+不需要进行shuffle的依赖，叫做窄依赖。需要shuffle的依赖，叫做宽依赖。
+
+现在再来看RDD计算阶段划分的问题，可以得出：计算阶段划分的依据是Shuffle，而不是转换函数的类型，有的函数有时有shuffle，有时没有。
+
+**问题一**：为什么计算阶段会有依赖关系？
+
+- 因为其需要的数据来源于前面一个或多个计算阶段产生的数据，必须等待前面的阶段执行完毕才能进行shuffle，并得到数据。
+
+**问题二**：上图中RDD B 和 RDD F进行Join，得到了RDD G。B和F哪个RDD需要进行Shuffle？
+
+- RDD B在前一个阶段，阶段1的shuffle过程中，已经进行了数据分区，分区数目和分区key不变，就不需要进行shuffle。
+
+**问题三**：Spark进行了shuffle，为什么还可以更高效?
+
+拿Spark和mr进行比较：
+
+- 本质上：Spark可以算是一种MapReduce计算模型的不同实现，Hadoop MR根据Shuffle将大数据计算分为Map和Reduce两个阶段。而Spark 更流畅，将前一个的Reduce和后一个的Map做了连接，当作一个阶段持续来进行计算，从而形成了一个更高效流畅的计算模型。其本质仍然是Map和Reduce。但是这种多个计算阶段依赖执行的方案可以有效减少对HDFS的访问（落盘），减少作业的调度执行次数，因此执行速度也更快。
+
+- 存储方式：MR主要使用磁盘存储shuffle过程的数据，而Spark优先使用内存进行数据存储（RDD也优先存于内存）。这也是Spark性能比Hadoop高的另一个原因。
+
+### 7.3.3 Spark的作业管理
+
+本小节主要来说明 作业、计算阶段、任务的依赖和时间先后关系。
+
+Spark的RDD有两种函数：转换函数和action函数。action函数调用之后不再返回RDD。Spark的DAGScheduler 遇到shuffle时，会生成一个计算阶段，在遇到action函数时，会生成一个作业（job）。RDD里的每个数据分片，Spark都会创建一个计算任务去处理，故一个计算阶段会包含多个计算任务（task）。
+
+一个作业至少包含一个计算阶段，每个计算阶段由多个任务组成，这些任务task组成一个任务集合。
+
+DAGScheduler根据代码生成DAG图，Spark的任务调度以任务为单位进行分配，将任务分配到分布式集群的不同机器上进行执行。
+
+### 7.3.4 Spark 的执行过程
+
+Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部署方案核心功能和运行流程基本一样，只是不同组件角色命名不同。
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.4_1.png" style="zoom: 100%;" /></center>
+
+**首先**，Spark 在自己的 JVM 进程里启动应用程序，即 Driver 进程。启动后driver调用SparkContext 初始化执行配置和输入数据。再由SparkContext 启动 DAGScheduler 构造执行的 DAG 图，切分成计算任务这样的最小执行单位。
+
+**接着**Driver 向 Cluster Manager 请求计算资源，用于 DAG 的分布式计算。ClusterManager 收到请求以后，将 Driver 的主机地址等信息通知给集群的所有计算节点Worker。
+
+**最后**，Worker 收到信息以后，根据 Driver 的主机地址，跟 Driver 通信并注册，然后根据自己的空闲资源向 Driver 通报自己可以领用的任务数。Driver 根据 DAG 图开始向注册的Worker 分配任务。
 
 ## 7.4 通过WordCount 看Spark RDD执行
 
