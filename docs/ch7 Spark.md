@@ -282,10 +282,10 @@ Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部�
 
 **接着**Driver 向 Cluster Manager 请求计算资源，用于 DAG 的分布式计算。ClusterManager 收到请求以后，将 Driver 的主机地址等信息通知给集群的所有计算节点Worker。
 
-**最后**，Worker 收到信息以后，根据 Driver 的主机地址，跟 Driver 通信并注册，然后根据自己的空闲资源向 Driver 通报自己可以领用的任务数。Driver 根据 DAG 图开始向注册的Worker 分配任务。
+**最后**，Worker 收到信息以后，根据 Driver 的主机地址，跟 Driver 通信并注册，然后根据自己的空闲资源向 Driver 通报自己可以领用的任务数。Driver 根据 DAG 图开始向注册的Worker 分配任务。     
 
 ## 7.4 通过WordCount 看Spark RDD执行
 
-
+   
 
 ## 7.5 实验
