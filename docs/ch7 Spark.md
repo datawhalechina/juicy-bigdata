@@ -131,11 +131,11 @@ RDD是弹性数据集，那怎么来理解RDD的弹性？
 
 RDD的弹性主要在如下七个方面体现：
 
-一、**内存和磁盘数据自动交换**
+**一、内存和磁盘数据自动交换**
 
 spark优先把数据放内存，内存放不下得话，再放到磁盘。如果实际数据大于内存，要考虑数据放置策略。当应用程序内存不足时，spark应用程序将数据自动从内存存储切换到磁盘存储。**计算是在内存or磁盘进行？**
 
-二、**基于血缘关系的高效容错机制**
+**二、基于血缘关系的高效容错机制**
 
 为什么说基于血缘关系的容错比较高效？
 
@@ -153,7 +153,17 @@ spark优先把数据放内存，内存放不下得话，再放到磁盘。如果
 
 而RDD的容错，是由**血缘关系**实现的。血缘关系**基于RDD的依赖关系**完成（7.2.4小节介绍）。血缘关系记录粗粒度的的操作，（[粗细粒度介绍](https://spark.apache.org/docs/3.2.0/running-on-mesos.html#coarse-grained)）每个操作只关联父操作，各个分片的数据自己不受影响。当出现错误时，只要恢复单个split的特定部分即可。
 
+**三、 Task 失败会自动进行特定次数的重试**
 
+我们先考虑最底层的失败，即某一个 Task 执行失败了。我们先来简单看下task的执行过程，接下来的过程主要涉及五个概念：SparkContext、SchedulerBackend、DagScheduler、TaskScheduler和TaskSchedulerImpl，具体会在[7.3节]()进行介绍。
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.5_2.png" style="zoom: 100%;" /></center>
+
+①  [SparkContext](https://books.japila.pl/apache-spark-internals/scheduler/TaskSchedulerImpl/)是 Spark的主要入口点，用户与Spark交互，一般要首先创建SparkContext实例。当Spark应用启动时，就会创建具有**SchedulerBackend**和**Dagscheduler**。
+
+② **DAGScheduler** 是高层调度，会计算每个job的stage的DAG，然后提交Stage，用tasksets的方式启动底层**TaskScheduler**调度在集群中运行；
+
+③ **TaskSchedulerImpl**是底层的任务调度接口**TaskScheduler**的实现，这些Schedulers从每一个Stage中的**DAGScheduler**中获取taskset 来运行。如果有故障，会进行重试，**默认重试次数为4次**。
 
 
 
