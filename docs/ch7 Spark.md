@@ -288,4 +288,572 @@ Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部�
 
    
 
-## 7.5 实验
+## 7.5 Spark编程实战
+
+### 7.5.1 实验一：Spark Local模式的安装
+
+#### 7.5.1.1 实验准备
+
+**实验环境：**Linux Ubuntu 20.04  
+**前提条件：**  
+
+1. 完成Java运行环境部署（详见第2章Java安装）
+2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
+
+#### 7.5.1.2 实验内容
+
+&emsp;&emsp;基于上述前提条件，完成Spark Local模式的安装。
+
+✅**厦门大学数据库实验室参考教程**：[GettingStarted](http://dblab.xmu.edu.cn/blog/2501-2/)
+
+#### 7.5.1.3 实验步骤
+
+##### 1.解压安装包
+
+&emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[Spark下载](https://spark.apache.org/downloads.html)），下载[spark-3.2.0-bin-without-hadoop.tgz](https://www.apache.org/dyn/closer.lua/spark/spark-3.2.0/spark-3.2.0-bin-without-hadoop.tgz)。
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/image-20220116135558564.png)
+
+&emsp;&emsp;将安装包放置本地指定目录，如`/data/hadoop/`下。解压安装包至`/opt`目录下，命令如下：  
+
+```shell
+sudo tar -zxvf /data/hadoop/spark-3.2.0-bin-without-hadoop.tgz -C /opt/
+```
+
+&emsp;&emsp;解压后，在`/opt`目录下会产生`spark-3.2.0-bin-without-hadoop`文件夹。
+
+##### 2.更改文件夹名和所属用户
+
+&emsp;&emsp;使用`mv`命令，将文件名改为`hive`，命令如下：  
+
+```shell
+sudo mv /opt/spark-3.2.0-bin-without-hadoop/ /opt/spark
+```
+
+&emsp;&emsp;使用`chown`命令，更改文件夹及其下级的所有文件的所属用户和用户组，将其改为`datawhale`用户和`datawhale`用户组，命令如下：  
+
+```shell
+sudo chown -R datawhale:datawhale /opt/spark/
+```
+
+##### 3.修改Spark的配置文件spark-env.sh
+
+&emsp;&emsp;进入`/opt/spark/conf`目录下，将`spark-env.sh.template`文件拷贝一份命名为`spark-env.sh`，命令如下：  
+```shell
+cd /opt/spark/conf
+cp ./spark-env.sh.template ./spark-env.sh
+```
+
+&emsp;&emsp;编辑spark-env.sh文件，命令如下：  
+```shell
+vim spark-env.sh
+```
+
+&emsp;&emsp;在第一行添加如下配置信息：  
+```shell
+export SPARK_DIST_CLASSPATH=$(/opt/hadoop/bin/hadoop classpath)
+```
+
+&emsp;&emsp;配置完成后就可以直接使用，不需要像Hadoop运行启动命令。
+
+##### 4.检验Spark是否成功部署
+
+&emsp;&emsp;通过运行Spark自带的示例，验证Spark是否安装成功，命令如下：  
+```shell
+cd /opt/spark
+bin/run-example SparkPi
+```
+
+&emsp;&emsp;执行时会输出非常多的运行信息，输出结果不容易找到，可以通过 grep 命令进行过滤（命令中的 2>&1 可以将所有的信息都输出到 stdout 中，否则由于输出日志的性质，还是会输出到屏幕中），命令如下：  
+```shell
+cd /opt/spark
+bin/run-example SparkPi 2>&1 | grep "Pi is"
+```
+&emsp;&emsp;过滤后的运行结果如下图示，可以得到$\pi$的 5 位小数近似值：
+
+
+
+&emsp;&emsp;至此，`Spark`安装部署完成，本次实验结束啦！
+
+### 7.5.2 实验二：Spark SQL的基本使用
+
+#### 7.5.2.1 实验准备
+
+**实验环境：**Linux Ubuntu 20.04  
+**前提条件：**  
+
+1. 完成Java运行环境部署（详见第2章Java安装）
+2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
+3. 完成Spark Local模式的部署（详见本章实验一：Spark Local模式的安装）
+
+#### 7.5.2.2 实验内容
+
+&emsp;&emsp;基于上述前提条件，完成基础的Spark SQL的使用：
+
+- 创建DataFrame和Dataset
+- Columns列操作
+- 使用Structured API进行基本查询
+- 使用Spark SQL进行基本查询
+
+##### 1.启动Scala的Shell
+
+&emsp;&emsp;在命令行终端中输入下面的命令即可启动Scala Shell
+
+```shell
+spark-shell
+```
+
+&emsp;&emsp;启动后终端显示如下：
+
+&emsp;&emsp;如上出现了 Scala> 表明进入了Scala的Shell
+
+##### 2.创建DataFrame和Dataset
+
+###### 2.1 创建DataFrame
+
+&emsp;&emsp;Spark 中所有功能的入口点是 `SparkSession`，可以使用 `SparkSession.builder()` 创建。创建后应用程序就可以从现有 RDD，Hive 表或 Spark 数据源创建 DataFrame。示例如下：
+
+```scala
+// 建议在进行 spark SQL 编程前导入下面的隐式转换，因为 DataFrames 和 dataSets 中很多操作都依赖了隐式转换
+import spark.implicits._
+
+val spark = SparkSession.builder().appName("Spark-SQL").master("local[2]").getOrCreate()
+val df = spark.read.json("/home/datawhale/json/emp.json")
+df.show()
+```
+
+&emsp;&emsp;需要注意的是 `spark-shell` 启动后会自动创建一个名为 `spark` 的 `SparkSession`，在命令行中可以直接引用即可，结果显示如下：  
+
+
+
+&emsp;&emsp;其中`emp.json`的内容在本仓库的[resources](https://github.com/shenhao-stu/Big-Data/tree/master/resources) 目录下  
+
+###### 2.2 创建Dataset
+
+&emsp;&emsp;Spark 支持由内部数据集和外部数据集来创建 Dataset，其创建方式分别如下：
+
+1. 由外部数据集创建
+
+```scala
+// 1.需要导入隐式转换
+import spark.implicits._
+
+// 2.创建 case class,等价于 Java Bean
+case class Emp(ename: String, comm: Double, deptno: Long, empno: Long, 
+               hiredate: String, job: String, mgr: Long, sal: Double)
+
+// 3.由外部数据集创建 Datasets
+val ds = spark.read.json("/home/datawhale/emp.json").as[Emp]
+ds.show()
+```
+
+2. 由内部数据集创建
+
+```scala
+// 1.需要导入隐式转换
+import spark.implicits._
+
+// 2.创建 case class,等价于 Java Bean
+case class Emp(ename: String, comm: Double, deptno: Long, empno: Long, 
+               hiredate: String, job: String, mgr: Long, sal: Double)
+
+// 3.由内部数据集创建 Datasets
+val caseClassDS = Seq(Emp("ALLEN", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALESMAN", 7698, 1600.0),
+                      Emp("JONES", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALESMAN", 7698, 1600.0))
+                    .toDS()
+caseClassDS.show()
+```
+
+###### 2.3 由RDD创建DataFrame
+
+&emsp;&emsp;Spark 支持两种方式把 RDD 转换为 DataFrame，分别是使用反射推断和指定 Schema 转换：
+
+1. 使用反射推断
+
+```scala
+// 1.导入隐式转换
+import spark.implicits._
+
+// 2.创建部门类
+case class Dept(deptno: Long, dname: String, loc: String)
+
+// 3.创建 RDD 并转换为 dataSet
+val rddToDS = spark.sparkContext
+  .textFile("/home/datawhale/dept.txt")
+  .map(_.split("\t"))
+  .map(line => Dept(line(0).trim.toLong, line(1), line(2)))
+  .toDS()  // 如果调用 toDF() 则转换为 dataFrame 
+```
+
+2. 以编程方式指定Schema
+
+```scala
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types._
+
+
+// 1.定义每个列的列类型
+val fields = Array(StructField("deptno", LongType, nullable = true),
+                   StructField("dname", StringType, nullable = true),
+                   StructField("loc", StringType, nullable = true))
+
+// 2.创建 schema
+val schema = StructType(fields)
+
+// 3.创建 RDD
+val deptRDD = spark.sparkContext.textFile("/home/datawhale/dept.txt")
+val rowRDD = deptRDD.map(_.split("\t")).map(line => Row(line(0).toLong, line(1), line(2)))
+
+
+// 4.将 RDD 转换为 dataFrame
+val deptDF = spark.createDataFrame(rowRDD, schema)
+deptDF.show()
+```
+
+###### 2.4 DataFrames与Datasets互相转换
+
+&emsp;&emsp;Spark 提供了非常简单的转换方法用于 DataFrame 与 Dataset 间的互相转换，示例如下：
+
+```scala
+# DataFrames转Datasets
+scala> df.as[Emp]
+res1: org.apache.spark.sql.Dataset[Emp] = [COMM: double, DEPTNO: bigint ... 6 more fields]
+
+# Datasets转DataFrames
+scala> ds.toDF()
+res2: org.apache.spark.sql.DataFrame = [COMM: double, DEPTNO: bigint ... 6 more fields]
+```
+
+##### 3.Columns列操作
+
+###### 3.1 引用列
+
+&emsp;&emsp;Spark 支持多种方法来构造和引用列，最简单的是使用 `col() `或 `column() `函数。
+
+```scala
+col("colName")
+column("colName")
+
+// 对于 Scala 语言而言，还可以使用$"myColumn"和'myColumn 这两种语法糖进行引用。
+df.select($"ename", $"job").show()
+df.select('ename, 'job).show()
+```
+
+###### 3.2 新增列
+
+```scala
+// 基于已有列值新增列
+df.withColumn("upSal",$"sal"+1000)
+// 基于固定值新增列
+df.withColumn("intCol",lit(1000))
+```
+
+###### 3.3 删除列
+
+```scala
+// 支持删除多个列
+df.drop("comm","job").show()
+```
+
+###### 3.4 重命名列
+
+```scala
+df.withColumnRenamed("comm", "common").show()
+```
+
+&emsp;&emsp;需要说明的是新增，删除，重命名列都会产生新的 DataFrame，原来的 DataFrame 不会被改变。
+
+##### 4.使用Structured API进行基本查询
+
+```scala
+// 1.查询员工姓名及工作
+df.select($"ename", $"job").show()
+
+// 2.filter 查询工资大于 2000 的员工信息
+df.filter($"sal" > 2000).show()
+
+// 3.orderBy 按照部门编号降序，工资升序进行查询
+df.orderBy(desc("deptno"), asc("sal")).show()
+
+// 4.limit 查询工资最高的 3 名员工的信息
+df.orderBy(desc("sal")).limit(3).show()
+
+// 5.distinct 查询所有部门编号
+df.select("deptno").distinct().show()
+
+// 6.groupBy 分组统计部门人数
+df.groupBy("deptno").count().show()
+```
+
+##### 5.使用Spark SQL进行基本查询
+
+```scala
+// 1.首先需要将 DataFrame 注册为临时视图
+df.createOrReplaceTempView("emp")
+
+// 2.查询员工姓名及工作
+spark.sql("SELECT ename,job FROM emp").show()
+
+// 3.查询工资大于 2000 的员工信息
+spark.sql("SELECT * FROM emp where sal > 2000").show()
+
+// 4.orderBy 按照部门编号降序，工资升序进行查询
+spark.sql("SELECT * FROM emp ORDER BY deptno DESC,sal ASC").show()
+
+// 5.limit  查询工资最高的 3 名员工的信息
+spark.sql("SELECT * FROM emp ORDER BY sal DESC LIMIT 3").show()
+
+// 6.distinct 查询所有部门编号
+spark.sql("SELECT DISTINCT(deptno) FROM emp").show()
+
+// 7.分组统计部门人数
+spark.sql("SELECT deptno,count(ename) FROM emp group by deptno").show()
+```
+
+&emsp;&emsp;至此，Spark SQL的基本命令介绍完成，本次实验结束啦！
+
+### 7.5.3 实验三：Spark的Scala API的使用
+
+#### 7.5.3.1 实验准备
+
+**实验环境：**Linux Ubuntu 20.04  
+**前提条件：**  
+
+1. 完成Java运行环境部署（详见第2章Java安装）
+2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
+3. 完成Spark Local模式的部署（详见本章实验一：Spark Local模式的安装）
+
+#### 7.5.3.2 实验内容
+
+&emsp;&emsp;基于上述前提条件，完成Spark的Scala API的使用。
+
+#### 7.5.3.3 实验步骤
+
+##### 1.启动Scala的Shell
+
+&emsp;&emsp;在命令行终端中输入下面的命令即可启动Scala Shell
+
+```shell
+spark-shell
+```
+
+&emsp;&emsp;启动后终端显示如下：
+
+&emsp;&emsp;如上出现了 Scala> 表明进入了Scala的Shell
+
+##### 2.RDD的创建方法
+
+&emsp;&emsp;1） 由一个已经存在的Scala集合创建。
+
+```scala
+val rdd1 = sc.parallelize(Array(1,2,3,4,5,6,7,8))
+```
+
+&emsp;&emsp;2） 由外部存储系统的数据集创建，包括本地的文件系统，还有所有Hadoop支持的数据集，比如HDFS、Cassandra、HBase等
+
+```scala
+val rdd2 = sc.textFile("file:///apps/spark/README.md")
+```
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141241.png)
+
+##### 3.Transformation转换
+
+&emsp;&emsp;RDD中的所有转换都是***延迟加载***的，也就是说，它们并不会直接计算结果。相反的，它们只是***记住这些应用到基础数据集***（例如一个文件）上的转换动作。只有当发生一个==**要求返回结果给Driver的动作时，这些转换才会真正运行**==。这种设计让Spark更加有效率地运行。
+
+&emsp;&emsp;**常用的Transformation**
+
+- **map(func)**
+  返回一个新的RDD，该RDD由每一个输入元素经过func函数转换后组成
+
+- **filter(func)**
+  返回一个新的RDD，该RDD由经过func函数计算后返回值为true的输入元素组成
+- **flatMap(func)**
+  类似于map，但是每一个输入元素可以被映射为0或**多个输出**元素（所以func应该返回一个序列，而不是单一元素）
+- **union(otherDataset)**
+  对源RDD和参数RDD求并集后返回一个新的RDD
+- **intersection(otherDataset)**
+  对源RDD和参数RDD求交集后返回一个新的RDD
+- **groupByKey([numTasks])**
+  在一个(K,V)的RDD上调用，返回一个(K, Iterator[V])的RDD
+- **reduceByKey(func, [numTasks])**
+  在一个(K,V)的RDD上调用，返回一个(K,V)的RDD，使用指定的reduce函数，将相同key的值聚合到一起，与groupByKey类似，reduce任务的个数可以通过第二个可选的参数来设
+- **sortByKey([ascending], [numTasks])**
+  在一个(K,V)的RDD上调用，K必须实现Ordered接口，返回一个按照key进行排序的(K,V)的RDD
+- **join(otherDataset, [numTasks])**
+  在类型为(K,V)和(K,W)的RDD上调用，返回一个相同key对应的所有元素对在一起的(K,(V,W))的RDD
+
+##### 4.Action动作
+
+&emsp;&emsp;**常用的Action**
+
+- **reduce(func)**
+  通过func函数聚集RDD中的所有元素，这个功能必须是可交换且可并联的
+
+- **collect()**
+  在驱动程序中，以数组的形式返回数据集的所有元素
+
+- **count()**
+  返回RDD的元素个数
+
+- **first()**
+  返回RDD的第一个元素（类似于take(1)）
+- **take(n)**
+  返回一个由数据集的前n个元素组成的数组
+- **takeSample(withReplacement,num, [seed])**
+  返回一个数组，该数组由从数据集中随机采样的num个元素组成，可以选择是否用随机数替换不足的部分，seed用于指定随机数生成器种子
+- **saveAsTextFile(path)**
+  将数据集的元素以textfile的形式保存到HDFS文件系统或者其他支持的文件系统，对于每个元素，Spark将会调用toString方法，将它装换为文件中的文本
+- **saveAsSequenceFile(path)**
+  将数据集中的元素以Hadoop sequencefile的格式保存到指定的目录下，可以使HDFS或者其他Hadoop支持的文件系统。
+- **foreach(func)**
+  在数据集的每一个元素上，运行函数func进行更新。
+
+##### 5.练习1
+
+&emsp;&emsp;在Scala命令行中运行下面的代码：  
+
+```scala
+//通过并行化生成rdd
+val rdd1 = sc.parallelize(List(5, 6, 4, 7, 3, 8, 2, 9, 1, 10))
+
+//对rdd1里的每一个元素乘2然后排序
+val rdd2 = rdd1.map(_ * 2).sortBy(x => x, true)
+
+//过滤出大于等于十的元素
+val rdd3 = rdd2.filter(_ >= 10)
+
+//将元素以数组的方式在客户端显示
+rdd3.collect
+```
+
+&emsp;&emsp;运行上述代码后，显示如下：  
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141954.png)
+
+##### 6.练习2
+
+&emsp;&emsp;在Scala命令行中运行下面的代码：  
+
+```scala
+//通过并行化生成rdd
+val rdd1 = sc.parallelize(Array("a b c", "d e f", "h i j"))
+
+//将rdd1里面的每一个元素先切分在压平
+val rdd2 = rdd1.flatMap(_.split(' '))
+rdd2.collect
+```
+
+&emsp;&emsp;运行上述代码后，显示如下：  
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142258.png)
+
+##### 7.练习3
+
+&emsp;&emsp;在Scala命令行中运行下面的代码：  
+
+```scala
+//通过并行化生成rdd
+val rdd1 = sc.parallelize(List(5, 6, 4, 3))
+val rdd2 = sc.parallelize(List(1, 2, 3, 4))
+
+//求并集
+val rdd3 = rdd1.union(rdd2)
+
+//求交集
+val rdd4 = rdd1.intersection(rdd2)
+
+//去重
+rdd3.distinct.collect
+rdd4.collect
+```
+
+&emsp;&emsp;运行上述代码后，显示如下：  
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142616.png)
+
+##### 8.练习4
+
+&emsp;&emsp;在Scala命令行中运行下面的代码：  
+
+```scala
+//通过并行化生成rdd
+val rdd1 = sc.parallelize(List(("tom", 1), ("jerry", 3), ("kitty", 2)))
+val rdd2 = sc.parallelize(List(("jerry", 2), ("tom", 1), ("shuke", 2)))
+
+//求jion
+val rdd3 = rdd1.join(rdd2)
+rdd3.collect
+
+//求并集
+val rdd4 = rdd1 union rdd2
+rdd4.collect
+
+//按key进行分组
+val rdd5 = rdd4.groupByKey().map(t => (t._1, t._2.sum))
+rdd5.collect
+```
+
+&emsp;&emsp;运行上述代码后，显示如下：  
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143111.png)
+
+##### 9.练习5
+
+&emsp;&emsp;在Scala命令行中运行下面的代码：  
+
+```scala
+//通过并行化生成rdd
+val rdd1 = sc.parallelize(List(("tom", 1), ("tom", 2), ("jerry", 3), ("kitty", 2)))
+val rdd2 = sc.parallelize(List(("jerry", 2), ("tom", 1), ("shuke", 2)))
+
+//cogroup, 注意cogroup与groupByKey的区别
+val rdd3 = rdd1.cogroup(rdd2)
+rdd3.collect
+```
+
+&emsp;&emsp;运行上述代码后，显示如下：  
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143442.png)
+
+##### 10.练习6
+
+&emsp;&emsp;在Scala命令行中运行下面的代码：  
+
+```scala
+//通过并行化生成rdd
+val rdd1 = sc.parallelize(List(1, 2, 3, 4, 5))
+
+//reduce聚合
+val rdd2 = rdd1.reduce(_ + _)
+rdd2
+```
+
+&emsp;&emsp;运行上述代码后，显示如下：  
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143603.png)
+
+##### 11.练习7
+
+&emsp;&emsp;在Scala命令行中运行下面的代码：  
+
+```scala
+//通过并行化生成rdd
+val rdd1 = sc.parallelize(List(("tom", 1), ("jerry", 3), ("kitty", 2),  ("shuke", 1)))
+val rdd2 = sc.parallelize(List(("jerry", 2), ("tom", 3), ("shuke", 2), ("kitty", 5)))
+val rdd3 = rdd1.union(rdd2)
+
+//按key进行聚合
+val rdd4 = rdd3.reduceByKey(_ + _)
+rdd4.collect
+
+//按value的降序排序
+val rdd5 = rdd4.map(t => (t._2, t._1)).sortByKey(false).map(t => (t._2, t._1))
+rdd5.collect
+```
+
+&emsp;&emsp;运行上述代码后，显示如下：  
+
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610144112.png)
+
+&emsp;&emsp;至此，Spark的Scala API介绍完成，本次实验结束啦！
