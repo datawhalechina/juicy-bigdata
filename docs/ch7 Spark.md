@@ -27,7 +27,7 @@ Mapreduce每一个步骤发生在内存中但产生的中间值（溢写文件�
 
 而Hadoop MapReduce出现后，使得大数据计算通用编程成为可能，只要遵循MapReduce编程模型编写业务处理代码，就可以运行在Hadoop分布式集群上，而无需关心分布式计算怎样完成。
 
-紧接着，我们经常看到的说法是：`MapReduce 虽然已经可以满足大数据的应用场景，但是其执行速度和编程复杂度并不让人们满意。于是AMP lab的Spark应运而生`。
+紧接着，我们经常看到的说法是：**`MapReduce 虽然已经可以满足大数据的应用场景，但是其执行速度和编程复杂度并不让人们满意。于是AMP lab的Spark应运而生`。**
 
 我们事后因果规律的分析上，往往容易**把结果当作了原因**  ---觉得是因为MapReduce执行的很慢，所以才去发明和使用Spark。
 
@@ -38,6 +38,8 @@ Mapreduce每一个步骤发生在内存中但产生的中间值（溢写文件�
 
 附上Spark框架发展历史中**重要的时间点**：
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.1.png" style="zoom: 80%;" /></center>
+
+
 
 ### 7.1.2 Spark 与 Hadoop、MapReduce、HDFS的关系
 
@@ -284,7 +286,80 @@ Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部�
 
 ## 7.4 通过WordCount 看Spark RDD执行
 
-   
+WordCount在MapReduce章节已经提过。这里再通过WordCount的案例，编写单词记数代码，从数据流动的角度来看Spark RDD的数据处理过程。
+
+### 7.4.1 文本数据准备
+
+首先建立一个文本文件helloSpark ，将文本文件放到文件目录 data/wordcount/中。helloSpark 。txt文本内容如下：
+
+```
+Hello Spark Hello Scala
+Hello Hadoop
+Hello Flink
+Spark is amazing
+```
+
+**待补图**
+
+### 7.4.2 代码步骤
+
+**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为loacl，则代表Spark程序在本地运行。
+
+```scala
+val conf = new SparkConf() // 创建SparkConf对象
+conf.setAppName("First Spark App") //设置app应用名称，在程序运行的监控解面可以看到名称
+conf.setMaster("local") //本地模式运行
+```
+
+第二步：创建SparkContext对象，SparkContext是Spark程序所有功能的唯一入口。不管是使用scala，py都必须有一个SparkContext。
+
+```scala
+val sc = new SparkContext(conf) // 创建SparkContext对象，通过传入SparkConf实例来定制Spark运行的具体参数和配置信息
+```
+
+SparkContext的核心作用：初始化Spark应用程序，运行所需要的核心组件，包括DAGScheduler，TaskScheduler，SchedulerBackend，同时还会负责Spark程序往Master注册程序等，SparkContext是整个Spark应用程序中至关重要的一个对象。
+
+**第三步**：根据具体的数据来源，如HDFS，通过SparkContext来创建RDD。创建的方式有三种：根据外部数据来源，根据Scala集合，由其他的rdd操作转换。数据会被rdd划分为一系列的partitions，分配到每个Partition的数据属于一个task的处理范畴。
+
+```scala
+val lines = sc.textFile("dataq/helloSpark.txt", 1) // 读取本地文件并设置为一个Partition
+```
+
+**第四步**：对初始的rdd进行transformation级别的处理，如通过map，filter等高阶函数等的编程，进行具体的数据计算。
+
+1. 将每一行的字符串拆分为单个单词
+
+```scala
+val words = lines.flatMap{line => line.split(" ")} // 把每行字符串进行单词拆分，把拆分结果通过flat合并为一个大的单词集合
+```
+
+2. 在单词拆分的基础上对每个单词实例计数为1，也就是word-》（word， 1）
+
+```scala
+val pairs = words.map{word => (word, 1)}
+```
+
+3. 在每个单词实例计数为1基础之上统计每个单词在文件中出现的总次数。
+
+```scala
+val wordCountOdered = pairs.reduceByKey(_+_).map(pair=>(pair._2, pair._1)).sortByKey(false).map(pair => (pair._2, pair._1))
+```
+
+**第五步**：展示数据
+
+```scala
+wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + "：" + wordNumberPair._2))
+```
+
+运行程序，结果如下：
+
+**（图待补）**
+
+### 7.4.3 wordCount在RDD的运行原理
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.3_1.jpg" style="zoom: 100%;" /></center>
+
+
 
 ## 7.5 Spark编程实战
 
@@ -310,7 +385,7 @@ Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部�
 
 &emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[Spark下载](https://spark.apache.org/downloads.html)），下载[spark-3.2.0-bin-without-hadoop.tgz](https://www.apache.org/dyn/closer.lua/spark/spark-3.2.0/spark-3.2.0-bin-without-hadoop.tgz)。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex1.1.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/image-20220116135558564.png)
 
 &emsp;&emsp;将安装包放置本地指定目录，如`/data/hadoop/`下。解压安装包至`/opt`目录下，命令如下：  
 
@@ -354,29 +429,7 @@ export SPARK_DIST_CLASSPATH=$(/opt/hadoop/bin/hadoop classpath)
 
 &emsp;&emsp;配置完成后就可以直接使用，不需要像Hadoop运行启动命令。
 
-##### 4.设置Spark的环境变量
-
-&emsp;&emsp;将`SPARK_HOME`环境变量设置为`/opt/spark`，作为工作目录，打开系统环境变量配置文件，命令如下：  
-
-```shell
-sudo vim /etc/profile
-```
-
-&emsp;&emsp;在文件末尾，添加如下内容：  
-
-```shell
-# spark
-export SPARK_HOME=/opt/spark
-export PATH=$PATH:$SPARK_HOME/bin
-```
-
-&emsp;&emsp;使用`Shift+:`，输入`wq`后回车，保存退出。运行下面命令使环境变量生效：
-
-```shell
-source /etc/profile
-```
-
-##### 5.检验Spark是否成功部署
+##### 4.检验Spark是否成功部署
 
 &emsp;&emsp;通过运行Spark自带的示例，验证Spark是否安装成功，命令如下：  
 ```shell
@@ -391,7 +444,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 ```
 &emsp;&emsp;过滤后的运行结果如下图示，可以得到$\pi$的 5 位小数近似值：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex1.2.png)
+
 
 &emsp;&emsp;至此，`Spark`安装部署完成，本次实验结束啦！
 
@@ -425,33 +478,28 @@ spark-shell
 
 &emsp;&emsp;启动后终端显示如下：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex2.1.png)
-
 &emsp;&emsp;如上出现了 Scala> 表明进入了Scala的Shell
 
 ##### 2.创建DataFrame和Dataset
 
 ###### 2.1 创建DataFrame
 
-&emsp;&emsp;Spark 中所有功能的入口点是 `SparkSession`，可以使用 `SparkSession.builder()` 创建。创建后应用程序就可以从现有 RDD，Hive 表或 Spark 数据源创建 DataFrame。注意从hdfs文件系统导入时，需要先将本地文件emp.json导入到hdfs中再进行操作，同时hadoop服务也需要启动。创建DataFrame的示例如下：
+&emsp;&emsp;Spark 中所有功能的入口点是 `SparkSession`，可以使用 `SparkSession.builder()` 创建。创建后应用程序就可以从现有 RDD，Hive 表或 Spark 数据源创建 DataFrame。示例如下：
 
 ```scala
 // 建议在进行 spark SQL 编程前导入下面的隐式转换，因为 DataFrames 和 dataSets 中很多操作都依赖了隐式转换
 import spark.implicits._
 
 val spark = SparkSession.builder().appName("Spark-SQL").master("local[2]").getOrCreate()
-//从hdfs文件系统导入
 val df = spark.read.json("/home/datawhale/json/emp.json")
-//从本地文件系统导入
-val df = spark.read.json("file:///home/datawhale/emp.json")
 df.show()
 ```
 
 &emsp;&emsp;需要注意的是 `spark-shell` 启动后会自动创建一个名为 `spark` 的 `SparkSession`，在命令行中可以直接引用即可，结果显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex2.2.png)
 
-&emsp;&emsp;其中`emp.json`的内容在本仓库的[resources](https://github.com/shenhao-stu/Big-Data/tree/master/resources) 目录下 。
+
+&emsp;&emsp;其中`emp.json`的内容在本仓库的[resources](https://github.com/shenhao-stu/Big-Data/tree/master/resources) 目录下  
 
 ###### 2.2 创建Dataset
 
@@ -468,13 +516,10 @@ case class Emp(ename: String, comm: Double, deptno: Long, empno: Long,
                hiredate: String, job: String, mgr: Long, sal: Double)
 
 // 3.由外部数据集创建 Datasets
-val ds = spark.read.json("file:///home/datawhale/emp.json").as[Emp]
-
-//4.展示数据集
+val ds = spark.read.json("/home/datawhale/emp.json").as[Emp]
 ds.show()
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex2.3.png)
 2. 由内部数据集创建
 
 ```scala
@@ -486,17 +531,15 @@ case class Emp(ename: String, comm: Double, deptno: Long, empno: Long,
                hiredate: String, job: String, mgr: Long, sal: Double)
 
 // 3.由内部数据集创建 Datasets
-val caseClassDS = Seq(Emp("ALLEN", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALESMAN", 7698, 1600.0),Emp("JONES", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALESMAN", 7698, 1600.0)).toDS()
-
-//4.展示数据集
+val caseClassDS = Seq(Emp("ALLEN", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALESMAN", 7698, 1600.0),
+                      Emp("JONES", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALESMAN", 7698, 1600.0))
+                    .toDS()
 caseClassDS.show()
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex2.4.png)
-
 ###### 2.3 由RDD创建DataFrame
 
-&emsp;&emsp;Spark 支持两种方式把 RDD 转换为 DataFrame，分别是使用反射推断和指定 Schema 转换。其中`dept.txt`的内容在本仓库的[resources](https://github.com/shenhao-stu/Big-Data/tree/master/resources) 目录下 。
+&emsp;&emsp;Spark 支持两种方式把 RDD 转换为 DataFrame，分别是使用反射推断和指定 Schema 转换：
 
 1. 使用反射推断
 
@@ -509,13 +552,10 @@ case class Dept(deptno: Long, dname: String, loc: String)
 
 // 3.创建 RDD 并转换为 dataSet
 val rddToDS = spark.sparkContext
-  .textFile("file:///home/datawhale/dept.txt")
+  .textFile("/home/datawhale/dept.txt")
   .map(_.split("\t"))
   .map(line => Dept(line(0).trim.toLong, line(1), line(2)))
-  .toDS()  // 如果调用 toDF() 则转换为 dataFrame
-
-//4.展示数据集
-rddToDS.show()
+  .toDS()  // 如果调用 toDF() 则转换为 dataFrame 
 ```
 
 2. 以编程方式指定Schema
@@ -534,35 +574,36 @@ val fields = Array(StructField("deptno", LongType, nullable = true),
 val schema = StructType(fields)
 
 // 3.创建 RDD
-val deptRDD = spark.sparkContext.textFile("file:///home/datawhale/dept.txt")
+val deptRDD = spark.sparkContext.textFile("/home/datawhale/dept.txt")
 val rowRDD = deptRDD.map(_.split("\t")).map(line => Row(line(0).toLong, line(1), line(2)))
 
 
 // 4.将 RDD 转换为 dataFrame
 val deptDF = spark.createDataFrame(rowRDD, schema)
-
-//5.展示数据集
 deptDF.show()
 ```
 
 ###### 2.4 DataFrames与Datasets互相转换
 
-&emsp;&emsp;Spark 提供了非常简单的转换方法用于 DataFrame 与 Dataset 间的互相转换，命令如下：  
+&emsp;&emsp;Spark 提供了非常简单的转换方法用于 DataFrame 与 Dataset 间的互相转换，示例如下：
 
 ```scala
-//DataFrames转Datasets
-df.as[Emp]
+# DataFrames转Datasets
+scala> df.as[Emp]
+res1: org.apache.spark.sql.Dataset[Emp] = [COMM: double, DEPTNO: bigint ... 6 more fields]
 
-//Datasets转DataFrames
-ds.toDF()
+# Datasets转DataFrames
+scala> ds.toDF()
+res2: org.apache.spark.sql.DataFrame = [COMM: double, DEPTNO: bigint ... 6 more fields]
 ```
 
 ##### 3.Columns列操作
 
 ###### 3.1 引用列
 
+&emsp;&emsp;Spark 支持多种方法来构造和引用列，最简单的是使用 `col() `或 `column() `函数。
+
 ```scala
-//Spark 支持多种方法来构造和引用列，最简单的是使用 col() 或 column() 函数。
 col("colName")
 column("colName")
 
@@ -593,7 +634,7 @@ df.drop("comm","job").show()
 df.withColumnRenamed("comm", "common").show()
 ```
 
-&emsp;&emsp;需要说明的是新增，删除，重命名列都会产生新的 DataFrame ，原来的 DataFrame 不会被改变。
+&emsp;&emsp;需要说明的是新增，删除，重命名列都会产生新的 DataFrame，原来的 DataFrame 不会被改变。
 
 ##### 4.使用Structured API进行基本查询
 
@@ -671,8 +712,6 @@ spark-shell
 
 &emsp;&emsp;启动后终端显示如下：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex2.1.png)
-
 &emsp;&emsp;如上出现了 Scala> 表明进入了Scala的Shell
 
 ##### 2.RDD的创建方法
@@ -686,10 +725,10 @@ val rdd1 = sc.parallelize(Array(1,2,3,4,5,6,7,8))
 &emsp;&emsp;2） 由外部存储系统的数据集创建，包括本地的文件系统，还有所有Hadoop支持的数据集，比如HDFS、Cassandra、HBase等
 
 ```scala
-val rdd2 = sc.textFile("file:///opt/spark/README.md")
+val rdd2 = sc.textFile("file:///apps/spark/README.md")
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.1.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141241.png)
 
 ##### 3.Transformation转换
 
@@ -763,7 +802,7 @@ rdd3.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.2.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141954.png)
 
 ##### 6.练习2
 
@@ -780,7 +819,7 @@ rdd2.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.3.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142258.png)
 
 ##### 7.练习3
 
@@ -804,7 +843,7 @@ rdd4.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.4.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142616.png)
 
 ##### 8.练习4
 
@@ -830,7 +869,7 @@ rdd5.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.5.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143111.png)
 
 ##### 9.练习5
 
@@ -848,7 +887,7 @@ rdd3.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.6.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143442.png)
 
 ##### 10.练习6
 
@@ -865,7 +904,7 @@ rdd2
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.7.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143603.png)
 
 ##### 11.练习7
 
@@ -888,6 +927,6 @@ rdd5.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.8.png)
+![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610144112.png)
 
 &emsp;&emsp;至此，Spark的Scala API介绍完成，本次实验结束啦！
