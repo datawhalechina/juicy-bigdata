@@ -284,86 +284,11 @@ Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部�
 
 **最后**，Worker 收到信息以后，根据 Driver 的主机地址，跟 Driver 通信并注册，然后根据自己的空闲资源向 Driver 通报自己可以领用的任务数。Driver 根据 DAG 图开始向注册的Worker 分配任务。     
 
-## 7.4 通过WordCount 看Spark RDD执行
+## 7.4 Spark编程实战
 
-WordCount在MapReduce章节已经提过。这里再通过WordCount的案例，编写单词记数代码，从数据流动的角度来看Spark RDD的数据处理过程。
+### 7.4.1 实验一：Spark Local模式的安装
 
-### 7.4.1 文本数据准备
-
-首先建立一个文本文件helloSpark ，将文本文件放到文件目录 data/wordcount/中。helloSpark 。txt文本内容如下：
-
-```
-Hello Spark Hello Scala
-Hello Hadoop
-Hello Flink
-Spark is amazing
-```
-
-**待补图**
-
-### 7.4.2 代码步骤
-
-**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为loacl，则代表Spark程序在本地运行。
-
-```scala
-val conf = new SparkConf() // 创建SparkConf对象
-conf.setAppName("First Spark App") //设置app应用名称，在程序运行的监控解面可以看到名称
-conf.setMaster("local") //本地模式运行
-```
-
-第二步：创建SparkContext对象，SparkContext是Spark程序所有功能的唯一入口。不管是使用scala，py都必须有一个SparkContext。
-
-```scala
-val sc = new SparkContext(conf) // 创建SparkContext对象，通过传入SparkConf实例来定制Spark运行的具体参数和配置信息
-```
-
-SparkContext的核心作用：初始化Spark应用程序，运行所需要的核心组件，包括DAGScheduler，TaskScheduler，SchedulerBackend，同时还会负责Spark程序往Master注册程序等，SparkContext是整个Spark应用程序中至关重要的一个对象。
-
-**第三步**：根据具体的数据来源，如HDFS，通过SparkContext来创建RDD。创建的方式有三种：根据外部数据来源，根据Scala集合，由其他的rdd操作转换。数据会被rdd划分为一系列的partitions，分配到每个Partition的数据属于一个task的处理范畴。
-
-```scala
-val lines = sc.textFile("dataq/helloSpark.txt", 1) // 读取本地文件并设置为一个Partition
-```
-
-**第四步**：对初始的rdd进行transformation级别的处理，如通过map，filter等高阶函数等的编程，进行具体的数据计算。
-
-1. 将每一行的字符串拆分为单个单词
-
-```scala
-val words = lines.flatMap{line => line.split(" ")} // 把每行字符串进行单词拆分，把拆分结果通过flat合并为一个大的单词集合
-```
-
-2. 在单词拆分的基础上对每个单词实例计数为1，也就是word-》（word， 1）
-
-```scala
-val pairs = words.map{word => (word, 1)}
-```
-
-3. 在每个单词实例计数为1基础之上统计每个单词在文件中出现的总次数。
-
-```scala
-val wordCountOdered = pairs.reduceByKey(_+_).map(pair=>(pair._2, pair._1)).sortByKey(false).map(pair => (pair._2, pair._1))
-```
-
-**第五步**：展示数据
-
-```scala
-wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + "：" + wordNumberPair._2))
-```
-
-运行程序，结果如下：
-
-**（图待补）**
-
-### 7.4.3 wordCount在RDD的运行原理
-
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.3_1.jpg" style="zoom: 100%;" /></center>
-
-## 7.5 Spark编程实战
-
-### 7.5.1 实验一：Spark Local模式的安装
-
-#### 7.5.1.1 实验准备
+#### 7.4.1.1 实验准备
 
 **实验环境：**Linux Ubuntu 20.04  
 **前提条件：**  
@@ -371,13 +296,13 @@ wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + 
 1. 完成Java运行环境部署（详见第2章Java安装）
 2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
 
-#### 7.5.1.2 实验内容
+#### 7.4.1.2 实验内容
 
 &emsp;&emsp;基于上述前提条件，完成Spark Local模式的安装。
 
 ✅**厦门大学数据库实验室参考教程**：[GettingStarted](http://dblab.xmu.edu.cn/blog/2501-2/)
 
-#### 7.5.1.3 实验步骤
+#### 7.4.1.3 实验步骤
 
 ##### 1.解压安装包
 
@@ -468,9 +393,9 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 
 &emsp;&emsp;至此，`Spark`安装部署完成，本次实验结束啦！
 
-### 7.5.3 实验三：Spark的Scala API的使用
+### 7.4.2 实验二：通过 WordCount 看Spark RDD执行
 
-#### 7.5.3.1 实验准备
+#### 7.4.2.1 实验准备
 
 **实验环境：**Linux Ubuntu 20.04  
 **前提条件：**  
@@ -479,239 +404,85 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
 3. 完成Spark Local模式的部署（详见本章实验一：Spark Local模式的安装）
 
-#### 7.5.3.2 实验内容
+#### 7.4.2.2 实验内容
 
-&emsp;&emsp;基于上述前提条件，完成Spark的Scala API的使用。
+&emsp;&emsp;基于上述前提条件，通过 WordCount 看Spark RDD执行，进一步理解Spark RDD执行的逻辑。
 
-#### 7.5.3.3 实验步骤
+#### 7.4.2.3 实验步骤
 
-##### 1.启动Scala的Shell
+WordCount在MapReduce章节已经提过。这里再通过WordCount的案例，编写单词记数代码，从数据流动的角度来看Spark RDD的数据处理过程。
 
-&emsp;&emsp;在命令行终端中输入下面的命令即可启动Scala Shell
+##### 1.文本数据准备
 
-```shell
-spark-shell
+首先建立一个文本文件helloSpark ，将文本文件放到文件目录 data/wordcount/中。helloSpark 。txt文本内容如下：
+
+```
+Hello Spark Hello Scala
+Hello Hadoop
+Hello Flink
+Spark is amazing
 ```
 
-&emsp;&emsp;启动后终端显示如下：
+**待补图**
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex2.1.png)
+##### 2.代码步骤
 
-&emsp;&emsp;如上出现了 Scala> 表明进入了Scala的Shell
-
-##### 2.RDD的创建方法
-
-&emsp;&emsp;1） 由一个已经存在的Scala集合创建。
+**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为loacl，则代表Spark程序在本地运行。
 
 ```scala
-val rdd1 = sc.parallelize(Array(1,2,3,4,5,6,7,8))
+val conf = new SparkConf() // 创建SparkConf对象
+conf.setAppName("First Spark App") //设置app应用名称，在程序运行的监控解面可以看到名称
+conf.setMaster("local") //本地模式运行
 ```
 
-&emsp;&emsp;2） 由外部存储系统的数据集创建，包括本地的文件系统，还有所有Hadoop支持的数据集，比如HDFS、Cassandra、HBase等
+第二步：创建SparkContext对象，SparkContext是Spark程序所有功能的唯一入口。不管是使用scala，py都必须有一个SparkContext。
 
 ```scala
-val rdd2 = sc.textFile("file:///opt/spark/README.md")
+val sc = new SparkContext(conf) // 创建SparkContext对象，通过传入SparkConf实例来定制Spark运行的具体参数和配置信息
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.1.png)
+SparkContext的核心作用：初始化Spark应用程序，运行所需要的核心组件，包括DAGScheduler，TaskScheduler，SchedulerBackend，同时还会负责Spark程序往Master注册程序等，SparkContext是整个Spark应用程序中至关重要的一个对象。
 
-##### 3.Transformation转换
-
-&emsp;&emsp;RDD中的所有转换都是***延迟加载***的，也就是说，它们并不会直接计算结果。相反的，它们只是***记住这些应用到基础数据集***（例如一个文件）上的转换动作。只有当发生一个==**要求返回结果给Driver的动作时，这些转换才会真正运行**==。这种设计让Spark更加有效率地运行。
-
-&emsp;&emsp;**常用的Transformation**
-
-- **map(func)**
-  返回一个新的RDD，该RDD由每一个输入元素经过func函数转换后组成
-
-- **filter(func)**
-  返回一个新的RDD，该RDD由经过func函数计算后返回值为true的输入元素组成
-- **flatMap(func)**
-  类似于map，但是每一个输入元素可以被映射为0或**多个输出**元素（所以func应该返回一个序列，而不是单一元素）
-- **union(otherDataset)**
-  对源RDD和参数RDD求并集后返回一个新的RDD
-- **intersection(otherDataset)**
-  对源RDD和参数RDD求交集后返回一个新的RDD
-- **groupByKey([numTasks])**
-  在一个(K,V)的RDD上调用，返回一个(K, Iterator[V])的RDD
-- **reduceByKey(func, [numTasks])**
-  在一个(K,V)的RDD上调用，返回一个(K,V)的RDD，使用指定的reduce函数，将相同key的值聚合到一起，与groupByKey类似，reduce任务的个数可以通过第二个可选的参数来设
-- **sortByKey([ascending], [numTasks])**
-  在一个(K,V)的RDD上调用，K必须实现Ordered接口，返回一个按照key进行排序的(K,V)的RDD
-- **join(otherDataset, [numTasks])**
-  在类型为(K,V)和(K,W)的RDD上调用，返回一个相同key对应的所有元素对在一起的(K,(V,W))的RDD
-
-##### 4.Action动作
-
-&emsp;&emsp;**常用的Action**
-
-- **reduce(func)**
-  通过func函数聚集RDD中的所有元素，这个功能必须是可交换且可并联的
-
-- **collect()**
-  在驱动程序中，以数组的形式返回数据集的所有元素
-
-- **count()**
-  返回RDD的元素个数
-
-- **first()**
-  返回RDD的第一个元素（类似于take(1)）
-- **take(n)**
-  返回一个由数据集的前n个元素组成的数组
-- **takeSample(withReplacement,num, [seed])**
-  返回一个数组，该数组由从数据集中随机采样的num个元素组成，可以选择是否用随机数替换不足的部分，seed用于指定随机数生成器种子
-- **saveAsTextFile(path)**
-  将数据集的元素以textfile的形式保存到HDFS文件系统或者其他支持的文件系统，对于每个元素，Spark将会调用toString方法，将它装换为文件中的文本
-- **saveAsSequenceFile(path)**
-  将数据集中的元素以Hadoop sequencefile的格式保存到指定的目录下，可以使HDFS或者其他Hadoop支持的文件系统。
-- **foreach(func)**
-  在数据集的每一个元素上，运行函数func进行更新。
-
-##### 5.练习1
-
-&emsp;&emsp;在Scala命令行中运行下面的代码：  
+**第三步**：根据具体的数据来源，如HDFS，通过SparkContext来创建RDD。创建的方式有三种：根据外部数据来源，根据Scala集合，由其他的rdd操作转换。数据会被rdd划分为一系列的partitions，分配到每个Partition的数据属于一个task的处理范畴。
 
 ```scala
-//通过并行化生成rdd
-val rdd1 = sc.parallelize(List(5, 6, 4, 7, 3, 8, 2, 9, 1, 10))
-
-//对rdd1里的每一个元素乘2然后排序
-val rdd2 = rdd1.map(_ * 2).sortBy(x => x, true)
-
-//过滤出大于等于十的元素
-val rdd3 = rdd2.filter(_ >= 10)
-
-//将元素以数组的方式在客户端显示
-rdd3.collect
+val lines = sc.textFile("dataq/helloSpark.txt", 1) // 读取本地文件并设置为一个Partition
 ```
 
-&emsp;&emsp;运行上述代码后，显示如下：  
+**第四步**：对初始的rdd进行transformation级别的处理，如通过map，filter等高阶函数等的编程，进行具体的数据计算。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.2.png)
-
-##### 6.练习2
-
-&emsp;&emsp;在Scala命令行中运行下面的代码：  
+1. 将每一行的字符串拆分为单个单词
 
 ```scala
-//通过并行化生成rdd
-val rdd1 = sc.parallelize(Array("a b c", "d e f", "h i j"))
-
-//将rdd1里面的每一个元素先切分在压平
-val rdd2 = rdd1.flatMap(_.split(' '))
-rdd2.collect
+val words = lines.flatMap{line => line.split(" ")} // 把每行字符串进行单词拆分，把拆分结果通过flat合并为一个大的单词集合
 ```
 
-&emsp;&emsp;运行上述代码后，显示如下：  
-
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.3.png)
-
-##### 7.练习3
-
-&emsp;&emsp;在Scala命令行中运行下面的代码：  
+2. 在单词拆分的基础上对每个单词实例计数为1，也就是word-》（word， 1）
 
 ```scala
-//通过并行化生成rdd
-val rdd1 = sc.parallelize(List(5, 6, 4, 3))
-val rdd2 = sc.parallelize(List(1, 2, 3, 4))
-
-//求并集
-val rdd3 = rdd1.union(rdd2)
-
-//求交集
-val rdd4 = rdd1.intersection(rdd2)
-
-//去重
-rdd3.distinct.collect
-rdd4.collect
+val pairs = words.map{word => (word, 1)}
 ```
 
-&emsp;&emsp;运行上述代码后，显示如下：  
-
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.4.png)
-
-##### 8.练习4
-
-&emsp;&emsp;在Scala命令行中运行下面的代码：  
+3. 在每个单词实例计数为1基础之上统计每个单词在文件中出现的总次数。
 
 ```scala
-//通过并行化生成rdd
-val rdd1 = sc.parallelize(List(("tom", 1), ("jerry", 3), ("kitty", 2)))
-val rdd2 = sc.parallelize(List(("jerry", 2), ("tom", 1), ("shuke", 2)))
-
-//求jion
-val rdd3 = rdd1.join(rdd2)
-rdd3.collect
-
-//求并集
-val rdd4 = rdd1 union rdd2
-rdd4.collect
-
-//按key进行分组
-val rdd5 = rdd4.groupByKey().map(t => (t._1, t._2.sum))
-rdd5.collect
+val wordCountOdered = pairs.reduceByKey(_+_).map(pair=>(pair._2, pair._1)).sortByKey(false).map(pair => (pair._2, pair._1))
 ```
 
-&emsp;&emsp;运行上述代码后，显示如下：  
-
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.5.png)
-
-##### 9.练习5
-
-&emsp;&emsp;在Scala命令行中运行下面的代码：  
+**第五步**：展示数据
 
 ```scala
-//通过并行化生成rdd
-val rdd1 = sc.parallelize(List(("tom", 1), ("tom", 2), ("jerry", 3), ("kitty", 2)))
-val rdd2 = sc.parallelize(List(("jerry", 2), ("tom", 1), ("shuke", 2)))
-
-//cogroup, 注意cogroup与groupByKey的区别
-val rdd3 = rdd1.cogroup(rdd2)
-rdd3.collect
+wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + "：" + wordNumberPair._2))
 ```
 
-&emsp;&emsp;运行上述代码后，显示如下：  
+运行程序，结果如下：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.6.png)
+**（图待补）**
 
-##### 10.练习6
+##### 3.wordCount在RDD的运行原理
 
-&emsp;&emsp;在Scala命令行中运行下面的代码：  
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.3_1.jpg" style="zoom: 100%;" /></center>
 
-```scala
-//通过并行化生成rdd
-val rdd1 = sc.parallelize(List(1, 2, 3, 4, 5))
+## 7.5 本章小结
 
-//reduce聚合
-val rdd2 = rdd1.reduce(_ + _)
-rdd2
-```
-
-&emsp;&emsp;运行上述代码后，显示如下：  
-
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.7.png)
-
-##### 11.练习7
-
-&emsp;&emsp;在Scala命令行中运行下面的代码：  
-
-```scala
-//通过并行化生成rdd
-val rdd1 = sc.parallelize(List(("tom", 1), ("jerry", 3), ("kitty", 2),  ("shuke", 1)))
-val rdd2 = sc.parallelize(List(("jerry", 2), ("tom", 3), ("shuke", 2), ("kitty", 5)))
-val rdd3 = rdd1.union(rdd2)
-
-//按key进行聚合
-val rdd4 = rdd3.reduceByKey(_ + _)
-rdd4.collect
-
-//按value的降序排序
-val rdd5 = rdd4.map(t => (t._2, t._1)).sortByKey(false).map(t => (t._2, t._1))
-rdd5.collect
-```
-
-&emsp;&emsp;运行上述代码后，显示如下：  
-
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex3.8.png)
-
-&emsp;&emsp;至此，Spark的Scala API介绍完成，本次实验结束啦！
+&emsp;&emsp;在本章的学习中，主要介绍`Spark`的编程模型，`RDD`的定义、特性和操作函数，同时也简述了`Spark`的架构原理，执行的过程等等。最后通过两个实验，分别了介绍了`Spark`的安装和`WordCount`实例在`RDD`的运行原理。如果想要更多的了解Spark SQL和Scala API的内容，可以参考本仓库[experiments](https://github.com/shenhao-stu/Big-Data/tree/master/experiments)目录下的笔记[Spark SQL的基本使用](https://github.com/shenhao-stu/Big-Data/blob/master/experiments/Spark%20SQL的基本使用.md)以及[Spark的Scala API介绍](https://github.com/shenhao-stu/Big-Data/blob/master/experiments/Spark的Scala%20API介绍.md)（✅**Gitee地址**：[Spark SQL的基本使用](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Spark%20SQL的基本使用.md)以及[Spark的Scala API介绍](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Spark的Scala%20API介绍.md)）。
