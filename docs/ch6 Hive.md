@@ -884,7 +884,7 @@ ALTER TABLE table_name RENAME TO new_table_name;
 
 &emsp;&emsp;将`emp_temp`表重命名为`new_emp`表，命令如下：  
 ```sql
-ALTER TABLE emp_temp RENAME TO new_emp; -- 
+ALTER TABLE emp_temp RENAME TO new_emp;
 ```
 
 &emsp;&emsp;执行结果如下：  
