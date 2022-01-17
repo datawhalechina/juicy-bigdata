@@ -75,9 +75,9 @@
   - [x] [6.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_65-本章小结)
 * [第七章：Spark](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark)
   - [x] [7.0 引言](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_70-引言)
-  - [x] [7.1 Spark概述](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_71-spark概述)
-  - [x] [7.2 Spark编程模型](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_72-spark编程模型)
-  - [x] [7.4 Spark编程实战](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_74-spark编程实战)
+  - [x] [7.1 Spark 概述](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_71-spark-概述)
+  - [x] [7.2 Spark 编程模型](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_72-spark-编程模型)
+  - [x] [7.4 Spark 编程实战](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_74-spark-编程实战)
   - [x] [7.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_75-本章小结)
 * [第八章：大数据处理技术总结](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结)
   - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_81-大数据技术框架综述)
@@ -151,7 +151,7 @@
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">小米大数据开发工程师，Datawhale成员，主要贡献者</span></td>
     <td>
         <a href="https://blog.csdn.net/qq_29027865">CSDN</a>,
-        <a href="https://www.zhihu.com/people/wjpditing">知乎</a>
+        <a href="https://github.com/ditingdapeng">Github</a>
     </td>
   </tr>
   <tr>
@@ -163,6 +163,7 @@
   </tr>
 </tbody>
 </table> 
+
 
 
 

@@ -8,7 +8,7 @@
 在了解这个之前，必须要了解什么是内存和磁盘。**内存和磁盘两者都是存储设备**，但内存储存的是我们正在使用的资源，磁盘储存的是我们暂时用不到的资源。
 可以把磁盘理解为一个仓库，而内存是进出这个仓库的通道。仓库（磁盘）很大，而通道（内存）很小，通道就很容易塞满。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_1.png" style="zoom: 80%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_1.png" style="zoom: 50%;" /></center>
 
 假设把磁盘作为冰箱，内存为做饭时的操作台：
 
@@ -20,9 +20,9 @@ Mapreduce每一个步骤发生在内存中但产生的中间值（溢写文件�
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_3.png" style="zoom: 100%;" /></center>
 
-## 7.1 Spark概述
+## 7.1 Spark 概述
 
-### 7.1.1 Spark诞生
+### 7.1.1 Spark 诞生
 在Hadoop出现之前，分布式计算都是**专用系统**，只能用来处理某一类的计算，比如进行大规模的排序。这样的系统无法复用到其他大数据计算场景。
 
 而Hadoop MapReduce出现后，使得大数据计算通用编程成为可能，只要遵循MapReduce编程模型编写业务处理代码，就可以运行在Hadoop分布式集群上，而无需关心分布式计算怎样完成。
@@ -55,7 +55,7 @@ Spark在这样的背景下产生，其不像Hadoop一样采取磁盘读写，而
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.2_1.png" style="zoom: 100%;" /></center>
 
-### 7.1.3 Spark生态体系
+### 7.1.3 Spark 生态体系
 spark是一个用来实现快速而通用的集群计算的平台。
 
 1. 速度方面：spark的一个主要特点就是能在内存中进行计算，因此速度要比mapreduce计算模型要更加高效，可以面向海量数据进行分析处理；
@@ -68,8 +68,8 @@ spark是一个用来实现快速而通用的集群计算的平台。
 利用这些产品，Spark 技术栈支撑起大数据分析、大数据机器学习等各种大数据应用场景。
 
 
-## 7.2 Spark编程模型
-### 7.2.1 RDD概述
+## 7.2 Spark 编程模型
+### 7.2.1 RDD 概述
 
 RDD 是 Spark 的核心概念，是弹性数据集（Resilient Distributed Datasets）的缩写。RDD 既是 Spark 面向开发者的编程模型，又是 Spark 自身架构的核心元素。
 
@@ -77,7 +77,7 @@ RDD 是 Spark 的核心概念，是弹性数据集（Resilient Distributed Datas
 
 而 Spark 则直接针对数据进行编程，将大规模数据集合抽象成一个 RDD 对象，然后在这个 RDD 上进行各种计算处理，得到一个新的 RDD，继续计算处理，直到得到最后的结果数据。所以 **Spark 可以理解成是面向对象的大数据计算**。我们在进行 Spark 编程的时候，思考的是**一个 RDD 对象需要经过什么样的操作，转换成另一个 RDD 对象，思考的重心和落脚点都在 RDD 上**。
 
-### 7.2.2 RDD定义
+### 7.2.2 RDD 定义
 
 **RDD**是**分布式内存**的一个抽象概念，是只读的记录分区的集合，能横跨集群所有节点进行并行计算。
 
@@ -113,7 +113,7 @@ RDD共有五大特性，我们将对每一种特性进行介绍：
 
 ​        大数据计算的基本思想是："移动计算而非移动数据"。Spark本身在进行任务调度时，需要尽可能的将任务分配到处理数据的数据块所在的具体位置。因此在具体计算前，就需要知道它运算的数据在什么地方。故分区位置列表会存储每个Partition的优先位置，如果读的时HDFS文件，这个列表保存的就是每个分区所在的block块的位置。
 
-### 7.2.4 RDD 的操作函数
+### 7.2.4 RDD 操作函数
 
 RDD的操作函数包括两种：转换（transformation）函数 和 执行（action）函数。
 
@@ -146,7 +146,7 @@ Spark 比MapReduce 快 100 多倍。因为某些机器学习算法可能需要�
 
 DAG 是有向无环图，即是说**不同阶段的依赖关系是有向**的，计算过程只能沿着依赖关系方向执行，被依赖的阶段执行完成之前，依赖的阶段不能开始执行，同时，这个依赖关系不能有环形依赖，否则就成为死循环了。下面这张图描述了一个典型的 Spark 运行DAG 的不同阶段：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.1_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.1_1.png" style="zoom: 50%;" /></center>
 
 从图上看，整个应用被切分成 3 个阶段，阶段 3 需要依赖阶段 1 和阶段 2，阶段 1 和阶段2 互不依赖。Spark 在执行调度的时候，先执行阶段 1 和阶段 2，完成以后，再执行阶段3。如果有更多的阶段，Spark 的策略也是一样的。**Spark 大数据应用的计算过程**为：Spark会根据程序初始化 DAG，由DAG再建立依赖关系，然后根据依赖关系顺序执行各个计算阶段。
 
@@ -167,7 +167,7 @@ rddG = rddB.join(rddF)
 
 可以看到例子有4个转换函数，但是只有3个阶。看起来并不是RDD上的每个转换函数都会生成一个计算阶段。那**RDD的计算阶段是怎样来进行划分**的呢？
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 50%;" /></center>
 
 再看下上图，我们发现了一个规律，当 **RDD 之间的转换连接线呈现多对多交叉连接**的时候，就会产生新的阶段。图中每个 RDD 里面都包含多个小块，每个小块 表示 RDD 的一个分片。
 
@@ -187,7 +187,7 @@ MR把这种从数据集跨越，由多个分区传输的过程，叫做**shuffle
 
 - **存储方式**：MR主要使用磁盘存储shuffle过程的数据，而Spark优先使用内存进行数据存储（RDD也优先存于内存）。这也是Spark性能比Hadoop高的另一个原因。
 
-### 7.3.3 Spark的作业管理
+### 7.3.3 Spark 作业管理
 
 本小节主要来说明 作业、计算阶段、任务的依赖和时间先后关系。
 
@@ -197,7 +197,7 @@ Spark的RDD有两种函数：转换函数和action函数。action函数调用之
 
 DAGScheduler根据代码生成DAG图，Spark的任务调度以任务为单位进行分配，将任务分配到分布式集群的不同机器上进行执行。
 
-### 7.3.4 Spark 的执行过程
+### 7.3.4 Spark 执行过程
 
 Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部署方案核心功能和运行流程基本一样，只是不同组件角色命名不同。
 
@@ -209,7 +209,7 @@ Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部�
 
 **最后**，Worker 收到信息以后，根据 Driver 的主机地址，跟 Driver 通信并注册，然后根据自己的空闲资源向 Driver 通报自己可以领用的任务数。Driver 根据 DAG 图开始向注册的Worker 分配任务。     
 
-## 7.4 Spark编程实战
+## 7.4 Spark 编程实战
 
 ### 7.4.1 实验一：Spark Local模式的安装
 
@@ -352,7 +352,7 @@ Spark is amazing
 
 ##### 2.代码步骤
 
-**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为loacl，则代表Spark程序在本地运行。
+**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为local，则代表Spark程序在本地运行。
 
 ```scala
 val conf = new SparkConf() // 创建SparkConf对象
@@ -404,7 +404,7 @@ wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + 
 
 **（图待补）**
 
-#### 7.4.2.4 wordCount在RDD的运行原理
+#### 7.4.2.4 WordCount在RDD的运行原理
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.3_1.jpg" style="zoom: 100%;" /></center>
 

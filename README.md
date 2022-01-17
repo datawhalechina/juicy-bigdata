@@ -2,7 +2,7 @@
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="250">
 </div>
 
-# 大数据处理技术导论 Big Data
+# 大数据处理技术导论 Big Data {docsify-ignore-all}
 
 [![](https://img.shields.io/github/watchers/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/watchers)
 [![](https://img.shields.io/github/stars/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/stargazers)
@@ -75,15 +75,14 @@
   - [x] [6.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_65-本章小结)
 * [第七章：Spark](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark)
   - [x] [7.0 引言](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_70-引言)
-  - [x] [7.1 Spark概述](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_71-spark概述)
-  - [x] [7.2 Spark编程模型](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_72-spark编程模型)
-  - [x] [7.3 Spark 架构原理](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_73-spark-架构原理)
-  - [x] [7.4 Spark编程实战](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_74-spark编程实战)
+  - [x] [7.1 Spark 概述](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_71-spark-概述)
+  - [x] [7.2 Spark 编程模型](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_72-spark-编程模型)
+  - [x] [7.4 Spark 编程实战](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_74-spark-编程实战)
   - [x] [7.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_75-本章小结)
 * [第八章：大数据处理技术总结](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结)
   - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_81-大数据技术框架综述)
   - [x] [8.2 大数据分析引擎的发展简史](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_82-大数据分析引擎的发展简史)
-  
+
 
 
 > 第二章以后的章节都配置有实验内容，即linux上的实操
@@ -164,6 +163,7 @@
   </tr>
 </tbody>
 </table> 
+
 
 
 
