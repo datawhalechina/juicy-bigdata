@@ -167,7 +167,7 @@ rddG = rddB.join(rddF)
 
 可以看到例子有4个转换函数，但是只有3个阶。看起来并不是RDD上的每个转换函数都会生成一个计算阶段。那**RDD的计算阶段是怎样来进行划分**的呢？
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 50%;" /></center>
 
 再看下上图，我们发现了一个规律，当 **RDD 之间的转换连接线呈现多对多交叉连接**的时候，就会产生新的阶段。图中每个 RDD 里面都包含多个小块，每个小块 表示 RDD 的一个分片。
 
@@ -352,7 +352,7 @@ Spark is amazing
 
 ##### 2.代码步骤
 
-**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为loacl，则代表Spark程序在本地运行。
+**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为local，则代表Spark程序在本地运行。
 
 ```scala
 val conf = new SparkConf() // 创建SparkConf对象
@@ -382,7 +382,7 @@ val lines = sc.textFile("dataq/helloSpark.txt", 1) // 读取本地文件并设�
 val words = lines.flatMap{line => line.split(" ")} // 把每行字符串进行单词拆分，把拆分结果通过flat合并为一个大的单词集合
 ```
 
-2. 在单词拆分的基础上对每个单词实例计数为1，也就是word-》（word， 1）
+2. 在单词拆分的基础上对每个单词实例计数为1，也就是word => (word, 1)
 
 ```scala
 val pairs = words.map{word => (word, 1)}
@@ -404,7 +404,7 @@ wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + 
 
 **（图待补）**
 
-##### 3.wordCount在RDD的运行原理
+##### 3. WordCount 在 RDD 的运行原理
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.3_1.jpg" style="zoom: 100%;" /></center>
 
