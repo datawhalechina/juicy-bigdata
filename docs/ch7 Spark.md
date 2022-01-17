@@ -167,7 +167,7 @@ rddG = rddB.join(rddF)
 
 可以看到例子有4个转换函数，但是只有3个阶。看起来并不是RDD上的每个转换函数都会生成一个计算阶段。那**RDD的计算阶段是怎样来进行划分**的呢？
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 50%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 100%;" /></center>
 
 再看下上图，我们发现了一个规律，当 **RDD 之间的转换连接线呈现多对多交叉连接**的时候，就会产生新的阶段。图中每个 RDD 里面都包含多个小块，每个小块 表示 RDD 的一个分片。
 
@@ -318,7 +318,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 
 &emsp;&emsp;至此，`Spark`安装部署完成，本次实验结束啦！
 
-### 7.4.2 实验二：通过 WordCount 看Spark RDD执行
+### 7.4.2 实验二：通过 WordCount 看Spark RDD执行流程
 
 #### 7.4.2.1 实验准备
 
@@ -335,7 +335,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 
 #### 7.4.2.3 实验步骤
 
-WordCount在MapReduce章节已经提过。这里再通过WordCount的案例，编写单词记数代码，从数据流动的角度来看Spark RDD的数据处理过程。
+WordCount在MapReduce章节已经提过。这里再次通过WordCount的案例：编写单词记数代码，从数据流动的角度来详细看Spark RDD是如何进行数据处理的。
 
 ##### 1.文本数据准备
 
@@ -352,7 +352,7 @@ Spark is amazing
 
 ##### 2.代码步骤
 
-**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为local，则代表Spark程序在本地运行。
+**第一步**：创建Spark的配置对象SparkConf，设置Spark程序运行时的配置信息，如：通过setMaster设置程序要链接的Spark集群的master的url，如果设置为loacl，则代表Spark程序在本地运行。
 
 ```scala
 val conf = new SparkConf() // 创建SparkConf对象
@@ -366,7 +366,7 @@ conf.setMaster("local") //本地模式运行
 val sc = new SparkContext(conf) // 创建SparkContext对象，通过传入SparkConf实例来定制Spark运行的具体参数和配置信息
 ```
 
-SparkContext的核心作用：初始化Spark应用程序，运行所需要的核心组件，包括DAGScheduler，TaskScheduler，SchedulerBackend，同时还会负责Spark程序往Master注册程序等，SparkContext是整个Spark应用程序中至关重要的一个对象。
+**SparkContext的核心作用**：初始化Spark应用程序，运行所需要的核心组件，包括DAGScheduler，TaskScheduler，SchedulerBackend，同时还会负责Spark程序往Master注册程序等，SparkContext是整个Spark应用程序中至关重要的一个对象。
 
 **第三步**：根据具体的数据来源，如HDFS，通过SparkContext来创建RDD。创建的方式有三种：根据外部数据来源，根据Scala集合，由其他的rdd操作转换。数据会被rdd划分为一系列的partitions，分配到每个Partition的数据属于一个task的处理范畴。
 
@@ -382,7 +382,7 @@ val lines = sc.textFile("dataq/helloSpark.txt", 1) // 读取本地文件并设�
 val words = lines.flatMap{line => line.split(" ")} // 把每行字符串进行单词拆分，把拆分结果通过flat合并为一个大的单词集合
 ```
 
-2. 在单词拆分的基础上对每个单词实例计数为1，也就是word => (word, 1)
+2. 在单词拆分的基础上对每个单词实例计数为1，也就是word ->（word, 1）
 
 ```scala
 val pairs = words.map{word => (word, 1)}
@@ -404,7 +404,7 @@ wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + 
 
 **（图待补）**
 
-##### 3. WordCount 在 RDD 的运行原理
+#### 7.4.2.4 wordCount在RDD的运行原理
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.3_1.jpg" style="zoom: 100%;" /></center>
 
