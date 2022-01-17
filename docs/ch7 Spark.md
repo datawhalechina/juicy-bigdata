@@ -83,17 +83,7 @@ RDD 是 Spark 的核心概念，是弹性数据集（Resilient Distributed Datas
 
 spark建立在抽象的RDD上，使得它可用一致的方式处理大数据不同的应用场景，把所有需要处理的数据转化为RDD，然后对RDD进行一系列的算子运算，从而得到结果，且提供了丰富的API来操作数据。
 
-### 7.2.3 RDD底层存储原理
-
-每个RDD的数据都以**Block**形式分布存储在多台机器上，RDD将分布在不同机器上的Block数据块聚集在一起。
-
-每个Block块由BlockManagerSlave来管理，但是Block的元数据由Driver节点的BlockManagerMaster来保存。BlockManagerSlave生成Block后向BlockManagerMaster**注册**该block，当rdd不再需要存储时，BlockManagerMaster将向BlockManagerSlave发送指令删除相应的Block。
-
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.3_1.jpg" style="zoom: 100%;" /></center>
-
-RDD本质上是**数据的一个元数据结构**，存储了数据分区及逻辑结构的映射。RDD的物理分区由BlockManager管理，通过Block存储在内存或磁盘上。而逻辑分区由Partition对应相应的物理块Block。
-
-### 7.2.4 RDD 五大特性
+### 7.2.3 RDD 五大特性
 
 RDD共有五大特性，我们将对每一种特性进行介绍：
 
@@ -123,73 +113,7 @@ RDD共有五大特性，我们将对每一种特性进行介绍：
 
 ​        大数据计算的基本思想是："移动计算而非移动数据"。Spark本身在进行任务调度时，需要尽可能的将任务分配到处理数据的数据块所在的具体位置。因此在具体计算前，就需要知道它运算的数据在什么地方。故分区位置列表会存储每个Partition的优先位置，如果读的时HDFS文件，这个列表保存的就是每个分区所在的block块的位置。
 
-
-
-### 7.2.5 RDD弹性解释
-
-RDD是弹性数据集，那怎么来理解RDD的弹性？
-
-RDD的弹性主要在如下六个方面体现：
-
-**一、内存和磁盘数据自动交换**
-
-spark优先把数据放内存，内存放不下得话，再放到磁盘。如果实际数据大于内存，要考虑数据放置策略。当应用程序内存不足时，spark应用程序将数据自动从内存存储切换到磁盘存储。**计算是在内存or磁盘进行？**
-
-**二、基于血缘关系的高效容错机制**
-
-为什么说基于血缘关系的容错比较高效？
-
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.5_1.jpg" style="zoom: 100%;" /></center>
-
-首先我们想看下常规的容错方式是怎样的--常规容错的方式是通过 **数据检查点** 或者 **记录数据的更新**。
-
-1. 数据检查点
-
-   可以参考Hadoop 中 的 **SecondaryNameNode** 的机制，这个结点周期性的从 NameNode 结点上下载磁盘镜像和日志文件，在本地将日志合并到镜像中，产生新的镜像，上传到 NameNode，当 NameNode 结点重启时就会加载此最新的镜像文件。数据检查点每次的复制通过网络传输，对存储资源的消耗比较大。
-
-2. 记录数据的更新
-
-   就是每次数据变化了就记录一下，比如**MySQL中的LOG机制**。这种方式不需要重新复制一份数据。但是会比较复杂，消耗性能。
-
-而RDD的容错，是由**血缘关系**实现的。血缘关系**基于RDD的依赖关系**完成（7.2.4小节介绍）。血缘关系记录粗粒度的的操作，（[粗细粒度介绍](https://spark.apache.org/docs/3.2.0/running-on-mesos.html#coarse-grained)）每个操作只关联父操作，各个分片的数据自己不受影响。当出现错误时，只要恢复单个split的特定部分即可。
-
-**三、 Task 失败会自动进行特定次数的重试**
-
-我们先考虑最底层的失败，即某一个 Task 执行失败了。我们先来简单看下task的执行过程，接下来的过程主要涉及五个概念：SparkContext、SchedulerBackend、DagScheduler、TaskScheduler和TaskSchedulerImpl，具体会在[7.3节]()进行介绍。
-
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.5_2.png" style="zoom: 100%;" /></center>
-
-①  [SparkContext](https://books.japila.pl/apache-spark-internals/scheduler/TaskSchedulerImpl/)是 Spark的主要入口点，用户与Spark交互，一般要首先创建SparkContext实例。当Spark应用启动时，就会创建具有**SchedulerBackend**和**Dagscheduler**。
-
-② **DAGScheduler** 是高层调度，会计算每个job的stage的DAG，然后提交Stage，用tasksets的方式启动底层**TaskScheduler**调度在集群中运行；
-
-③ **TaskSchedulerImpl**是底层的任务调度接口**TaskScheduler**的实现，这些Schedulers从每一个Stage中的**DAGScheduler**中获取taskset 来运行。如果有故障，会进行重试，**默认重试次数为4次**。
-
-
-
-**四、 Stage 失败会自动进行特定次数的重试**
-
-Stage是Spark job运行时具有相同逻辑功能和并行计算任务的一个基本单元。其执行失败后也会进行重试，默认是4次。
-
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.5_3.png" style="zoom: 100%;" /></center>
-
-**五、 数据调度弹性**
-
-**Spark 将执行模型抽象有向无环图计划（ DAG ）**，这可以将多 Stage 的任务串联或并行执行，从而不需要将 Stage 中间结果输出到 HDFS 中，当发生节点运行故障时，可有其他可用节点代替该故障节点运行。
-
-**六、数据分片的弹性**
-
-Spark进行数据分片，默认将数据存到内存，内存放不下，则一部分会放到磁盘。在计算过程，会产生很多数据碎片，产生一个Partition可能很小，当一个Partition非常小时，又需要消耗一个线程处理，会降低处理效率。
-
-因此需要考虑把小的Partition合并为一个大的处理，提高效率。每个Partition的数据Block比较大，考虑把Partition变成更小的数据分片，让Spark处理更多的批次，但是不会出现OOM。
-
-
-
-### 7.2.6 RDD 宽窄依赖
-
-待补充
-
-### 7.2.7 RDD 的操作函数
+### 7.2.4 RDD 的操作函数
 
 RDD的操作函数包括两种：转换（transformation）函数 和 执行（action）函数。
 
@@ -232,35 +156,36 @@ DAG 是有向无环图，即是说**不同阶段的依赖关系是有向**的，
 
 ### 7.3.2 如何划分计算阶段
 
-上图例子有4个转换函数，但是只有3个阶。看起来并不是RDD上的每个转换函数都会生成一个计算阶段。那RDD的计算阶段是怎样来进行划分的呢？
+图上这个DAG对应的Spark伪代码可以表示为：
 
-当 **RDD 之间的转换连接线呈现多对多交叉连接**的时候，就会产生新的阶段。
+```python
+rddB = rddA.groupBy(key)
+rddD = rddC.map(func)
+rddF = rddD.union(rddE)
+rddG = rddB.join(rddF)
+```
 
-一个 RDD 代表一个数据集，图中每个 RDD 里面都包含多个小块，每个小块代表 RDD 的一个分片。
+可以看到例子有4个转换函数，但是只有3个阶。看起来并不是RDD上的每个转换函数都会生成一个计算阶段。那**RDD的计算阶段是怎样来进行划分**的呢？
 
-**一个数据集中的多个数据分片需要进行分区传输，写入到另一个数据集的不同分片中**。MapReduce的运行过程也有这种数据分区交叉传输的操作。
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 100%;" /></center>
 
-这种从数据集跨越，由多个分区传输的过程，就是**shuffle过程**，Spark需要通过shuffle将数据进行重新组合，把相同key的数据放一起，进行聚合、关联等操作，对于每次shuffle都会产生新的计算阶段。shuffle是spark最重要的一个环节，只有通过shuffle，相关数据才能互相计算，从而构建起复杂的应用逻辑。
+再看下上图，我们发现了一个规律，当 **RDD 之间的转换连接线呈现多对多交叉连接**的时候，就会产生新的阶段。图中每个 RDD 里面都包含多个小块，每个小块 表示 RDD 的一个分片。
 
-不需要进行shuffle的依赖，叫做窄依赖。需要shuffle的依赖，叫做宽依赖。
+**一个RDD表示一个数据集，一个数据集中的多个数据分片需要进行分区传输，写入到另一个数据集的不同分片中**。这种涉及到数据分区交叉传输的操作，是否在MapReduce中也有印象？我们来回忆下MapReduce的过程：
 
-现在再来看RDD计算阶段划分的问题，可以得出：计算阶段划分的依据是Shuffle，而不是转换函数的类型，有的函数有时有shuffle，有时没有。
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_2.png" style="zoom: 100%;" /></center>
 
-**问题一**：为什么计算阶段会有依赖关系？
+MR把这种从数据集跨越，由多个分区传输的过程，叫做**shuffle**。同样，Spark也需要通过shuffle将数据进行重新组合，把相同key的数据放一起。因为会进行新的聚合、关联等操作，所以Spark每次Shuffle都会产生新的计算阶段。而每次计算时，需要的数据来源于前面一个或多个计算阶段产生的数据，所以计算阶段需要依赖关系，必须等待前面的阶段执行完毕后，才能进行Shuffle。
 
-- 因为其需要的数据来源于前面一个或多个计算阶段产生的数据，必须等待前面的阶段执行完毕才能进行shuffle，并得到数据。
+**Spark中计算阶段划分的依据是Shuffle**，而不是操作函数的类型。有的函数有Shuffle，有时候没有。比如本小节第一张图中，RDD B和RDD F进行Join后，得到RDD G。**RDD B不需要Shuffle**，因为RDD B在上一个阶段中，已经进行了数据分区，分区数目和分区key不变，就不需要进行Shuffle。而RDD F得分区数目不同，就需要进行Shuffle。Spark把**不需要shuffle**的依赖，叫做**窄依赖**。**需要shuffle**的依赖，叫做**宽依赖**。shuffle是spark最重要的一个环节，只有通过shuffle，相关数据才能互相计算，从而构建起复杂的应用逻辑。
 
-**问题二**：上图中RDD B 和 RDD F进行Join，得到了RDD G。B和F哪个RDD需要进行Shuffle？
+那么Spark和MapReduce一样，都进行了shuffle，为什么Spark会比MR更高效呢？
 
-- RDD B在前一个阶段，阶段1的shuffle过程中，已经进行了数据分区，分区数目和分区key不变，就不需要进行shuffle。
+我们从**本质和存储方式**两个方面，对Spark和MR进行比较：
 
-**问题三**：Spark进行了shuffle，为什么还可以更高效?
+- **本质上**：Spark可以算是一种MapReduce计算模型的不同实现，Hadoop MR根据Shuffle将大数据计算分为Map和Reduce两个阶段。而Spark 更流畅，将前一个的Reduce和后一个的Map做了连接，当作一个阶段持续来进行计算，从而形成了一个更高效流畅的计算模型。其本质仍然是Map和Reduce。但是这种多个计算阶段依赖执行的方案可以有效减少对HDFS的访问（落盘），减少作业的调度执行次数，因此执行速度也更快。
 
-拿Spark和mr进行比较：
-
-- 本质上：Spark可以算是一种MapReduce计算模型的不同实现，Hadoop MR根据Shuffle将大数据计算分为Map和Reduce两个阶段。而Spark 更流畅，将前一个的Reduce和后一个的Map做了连接，当作一个阶段持续来进行计算，从而形成了一个更高效流畅的计算模型。其本质仍然是Map和Reduce。但是这种多个计算阶段依赖执行的方案可以有效减少对HDFS的访问（落盘），减少作业的调度执行次数，因此执行速度也更快。
-
-- 存储方式：MR主要使用磁盘存储shuffle过程的数据，而Spark优先使用内存进行数据存储（RDD也优先存于内存）。这也是Spark性能比Hadoop高的另一个原因。
+- **存储方式**：MR主要使用磁盘存储shuffle过程的数据，而Spark优先使用内存进行数据存储（RDD也优先存于内存）。这也是Spark性能比Hadoop高的另一个原因。
 
 ### 7.3.3 Spark的作业管理
 
@@ -485,4 +410,4 @@ wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + 
 
 ## 7.5 本章小结
 
-&emsp;&emsp;在本章的学习中，主要介绍`Spark`的编程模型，`RDD`的定义、特性和操作函数，同时也简述了`Spark`的架构原理，执行的过程等等。最后通过两个实验，分别了介绍了`Spark`的安装和`WordCount`实例在`RDD`的运行原理。如果想要更多的了解Spark SQL和Scala API的内容，可以参考本仓库[experiments](https://github.com/shenhao-stu/Big-Data/tree/master/experiments)目录下的笔记[Spark SQL的基本使用](https://github.com/shenhao-stu/Big-Data/blob/master/experiments/Spark%20SQL的基本使用.md)以及[Spark的Scala API介绍](https://github.com/shenhao-stu/Big-Data/blob/master/experiments/Spark的Scala%20API介绍.md)（✅**Gitee地址**：[Spark SQL的基本使用](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Spark%20SQL的基本使用.md)以及[Spark的Scala API介绍](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Spark的Scala%20API介绍.md)）。
+&emsp;&emsp;在本章的学习中，主要介绍`Spark`的编程模型：`RDD`的定义、特性和操作函数，接着从`Spark`的架构原理出发，简述了`Spark`的计算阶段、作业管理和执行过程。最后通过实验，介绍了`Spark`的安装和`WordCount`实例在`RDD`的数据流向。如果想要更多的了解Spark SQL和Scala API的内容，可以参考本仓库[experiments](https://github.com/shenhao-stu/Big-Data/tree/master/experiments)目录下的笔记[Spark SQL的基本使用](https://github.com/shenhao-stu/Big-Data/blob/master/experiments/Spark%20SQL的基本使用.md)以及[Spark的Scala API介绍](https://github.com/shenhao-stu/Big-Data/blob/master/experiments/Spark的Scala%20API介绍.md)（✅**Gitee地址**：[Spark SQL的基本使用](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Spark%20SQL的基本使用.md)以及[Spark的Scala API介绍](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Spark的Scala%20API介绍.md)）。
