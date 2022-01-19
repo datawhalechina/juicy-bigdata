@@ -354,33 +354,31 @@ wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + 
 
 #### 7.4.2.4 WordCount在RDD的运行原理
 
-ch7.4.2.4_1.png
-
 一、 **textFile**
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_1.png" style="zoom: 100%;" /></center>
 
-textFile：在textFile 操作产生了两个 RDD：**HadoopRDD** 和 **MapPartitionRDD**。
+&emsp;&emsp;textFile：在textFile 操作产生了两个 RDD：**HadoopRDD** 和 **MapPartitionRDD**。
 
 1. **HadoopRDD** 
 
-在这里之所以会先产生 HadoopRDD，是因为处理数据的第一步：我们当然是先要从 HDFS 中抓取数据了，所以会先产生 HadoopRDD。HadoopRDD 会从 HDFS 上读取分布式文件，并将输入文件以数据分片的方式存在于集群中。数据分片就是把要处理的数据分成不同的部分。
+&emsp;&emsp;在这里之所以会先产生 HadoopRDD，是因为处理数据的第一步：我们当然是先要从 HDFS 中抓取数据了，所以会先产生 HadoopRDD。HadoopRDD 会从 HDFS 上读取分布式文件，并将输入文件以数据分片的方式存在于集群中。数据分片就是把要处理的数据分成不同的部分。
 
-假如我们集群现在有 4 个节点，于是我们将数据分成 4 个数据分片 (当然，这是一种粗略的划分)，Hello Spark在第一台机器，Hello Hadoop在第二台机器，Hello Flink在第三台机器，Spark is amazing在第四台机器。HadoopRDD 会帮助我们从磁盘上读取数据，在计算的时候会将数据放在内存中，并且会以分布式的方式放在内存中。
+&emsp;&emsp;假如我们集群现在有 4 个节点，于是我们将数据分成 4 个数据分片 (当然，这是一种粗略的划分)，Hello Spark在第一台机器，Hello Hadoop在第二台机器，Hello Flink在第三台机器，Spark is amazing在第四台机器。HadoopRDD 会帮助我们从磁盘上读取数据，在计算的时候会将数据放在内存中，并且会以分布式的方式放在内存中。
 
-在默认情况下，Spark 分片的策略，分片的大小与存储数据的 block 块的大小是相同的。假设我们现在有 4 个数据分片 (partition)，每个数据分片有 128M 左右。这里描述为"左右"的原因是，分片记录可能会跨越两个Block来存储，如果最后一条数据跨了两个Block，那么分片的时候会把最后一条数据都放在前面的一个分片中，此时分片大小会大于128M（Block块大小）。
+&emsp;&emsp;在默认情况下，Spark 分片的策略，分片的大小与存储数据的 block 块的大小是相同的。假设我们现在有 4 个数据分片 (partition)，每个数据分片有 128M 左右。这里描述为"左右"的原因是，分片记录可能会跨越两个Block来存储，如果最后一条数据跨了两个Block，那么分片的时候会把最后一条数据都放在前面的一个分片中，此时分片大小会大于128M（Block块大小）。
 
 2. **MapPartitionsRDD**
 
-MapPartitionsRDD 是基于 HadoopRDD 产生的 RDD，MapPartitionsRDD 将 HadoopRDD 产生的数据分片 (partition) 去掉相应行的 key，只留 value。
+&emsp;&emsp;MapPartitionsRDD 是基于 HadoopRDD 产生的 RDD，MapPartitionsRDD 将 HadoopRDD 产生的数据分片 (partition) 去掉相应行的 key，只留 value。
 
-产生RDD的个数与操作并不一一对应。在textFile 操作产生了 2 个 RDD，Spark 中一个操作可以产生一个或多个 RDD。
+&emsp;&emsp;产生RDD的个数与操作并不一一对应。在textFile 操作产生了 2 个 RDD，Spark 中一个操作可以产生一个或多个 RDD。
 
 二、 **flatMap**
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_2.png" style="zoom: 100%;" /></center>
 
-flatMap 操作产生了一个 MapPartitionsRDD，MapPartitionsRDD 在这里面的作用：是对每个 Partition 中的每一行内容进行单词切分并合并成一个大的单词实例的集合。
+&emsp;&emsp;flatMap 操作产生了一个 MapPartitionsRDD，MapPartitionsRDD 在这里面的作用：是对每个 Partition 中的每一行内容进行单词切分并合并成一个大的单词实例的集合。
 
 三、 **Map**
 
