@@ -406,21 +406,19 @@ wordCountsOrdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + 
 
 #### 7.4.2.4 WordCount在RDD的运行原理
 
-ch7.4.2.4_1.png
-
-一、 **textFile**
+一、 textFile
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_1.png" style="zoom: 100%;" /></center>
 
-textFile：在textFile 操作产生了两个 RDD：**HadoopRDD** 和 **MapPartitionRDD**。
+在textFile 操作产生了两个 RDD：**HadoopRDD** 和 **MapPartitionRDD**。
 
 1. **HadoopRDD** 
 
-在这里之所以会先产生 HadoopRDD，是因为处理数据的第一步：我们当然是先要从 HDFS 中抓取数据了，所以会先产生 HadoopRDD。HadoopRDD 会从 HDFS 上读取分布式文件，并将输入文件以数据分片的方式存在于集群中。数据分片就是把要处理的数据分成不同的部分。
+在这里之所以会先产生 HadoopRDD，是因为处理数据的第一步：我们当然是先要从 HDFS 中抓取数据了，所以会先产生 HadoopRDD。HadoopRDD 会从 HDFS 上读取分布式文件，并将输入文件以数据分片的方式存在于集群中。数据分片就是把要处理的数据分成不同的部分。**举个例子**：
 
-假如我们集群现在有 4 个节点，于是我们将数据分成 4 个数据分片 (当然，这是一种粗略的划分)，Hello Spark在第一台机器，Hello Hadoop在第二台机器，Hello Flink在第三台机器，Spark is amazing在第四台机器。HadoopRDD 会帮助我们从磁盘上读取数据，在计算的时候会将数据放在内存中，并且会以分布式的方式放在内存中。
+假如我们集群现在有 4 个节点，于是我们将数据分成 4 个数据分片 (当然，这是一种粗略的划分)，“Hello Spark"在第一台机器，"Hello Hadoop"在第二台机器，"Hello Flink“在第三台机器，”Spark is amazing“在第四台机器。HadoopRDD 会帮助我们从磁盘上读取数据，在计算的时候会将数据放在内存中，并且会以分布式的方式放在内存中。
 
-在默认情况下，Spark 分片的策略，分片的大小与存储数据的 block 块的大小是相同的。假设我们现在有 4 个数据分片 (partition)，每个数据分片有 128M 左右。这里描述为"左右"的原因是，分片记录可能会跨越两个Block来存储，如果最后一条数据跨了两个Block，那么分片的时候会把最后一条数据都放在前面的一个分片中，此时分片大小会大于128M（Block块大小）。
+在默认情况下，Spark 分片的策略，**分片的大小与存储数据的 block 块的大小是相同的**。假设我们现在有 4 个数据分片 (partition)，每个数据分片有 128M 左右。这里描述为"左右"的原因是，分片记录可能会跨越两个Block来存储，如果最后一条数据跨了两个Block，那么分片的时候会把最后一条数据都放在前面的一个分片中，此时分片大小会大于128M（Block块大小）。
 
 2. **MapPartitionsRDD**
 
@@ -432,15 +430,71 @@ MapPartitionsRDD 是基于 HadoopRDD 产生的 RDD，MapPartitionsRDD 将 Hadoop
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_2.png" style="zoom: 100%;" /></center>
 
-flatMap 操作产生了一个 MapPartitionsRDD，MapPartitionsRDD 在这里面的作用：是对每个 Partition 中的每一行内容进行单词切分并合并成一个大的单词实例的集合。
+flatMap 操作产生了一个 **MapPartitionsRDD**，MapPartitionsRDD 在这里面的作用：是对每个 Partition 中的每一行内容进行单词切分并合并成一个大的单词实例的集合。
 
-三、 **Map**
+三、 Map
 
-四、 **reduceByKey**
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_3.png" style="zoom: 100%;" /></center>
 
-五、 **输出**
+先来看map操作，map 操作产生了一个 RDD：**MapPartitionsRDD**，MapPartitionsRDD 在这里面的作用为：在我们单词拆分的基础上对我们的单词计数为 1。比如将“Hello”和“Spark“变为(Hello, 1), (Spark, 1)。
+
+四、 reduceByKey
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_4.png" style="zoom: 100%;" /></center>
+
+reduceByKey对相同key进行value的统计。包括本地级别和全局级别的统计。 reduceByKey 这个步骤实际上产生了两个 RDD：**MapPartitionsRDD** 与 **ShuffledRDD**。
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_3.png" style="zoom: 100%;" /></center>
+
+**MapPartitionsRDD**：reduceByKey在MapPartitionRDD之后，首先在Local reduce级别本地进行了统计。进行本地级别 (local) 的归并操作，并且把统计后的结果按照分区策略放到不同的 File。这里的分区策略可以理解为上一个阶段的结果，将分成几个标志交给下一个极端来处理。举个例子：
+
+如本地将(Hello, 1),(Spark, 1),(Hello, 1)汇聚为(Hello, 2), (Spark, 1)进行局部统计，然后将统计的结果传给下一个阶段，如果下一个阶段Stage是3个并行度，每个Partition进行local reduce后，将自己的数据分成了3种类型传给下一个阶段。分成3种类型最简单的方式是通过HashCode按3进行取模。
+
+这个步骤发生在 Stage1 的末尾端，基于内存进行计算，减少了网络的传输，加快了计算速度。
+
+**ShuffledRDD**：接着ReduceByKey会进行Shuffle操作，Shuffle操作会产生ShuffleRDD，因为网络传输不能在内存中进行迭代（在全局进行聚合的操作），因此需要一个新的Stage来重新分类。把结果收集后，会进行全局 reduce 级别的归并操作。举个例子，对照上述流程图：
+
+前面一步假设有四个机器对这四行数据进行并行计算，并每台机器在自己内存中进行了局部聚集，对已经分好类的数据。我们从第一台机器中获取数据（Hello, 2），第二台机器获取数据（Hello, 1），第三台机器获取数据（Hello, 1），把所有的Hello都抓过来后，进行全局Reduce 在内部变成（Hello, 4），产生reduceByKey的最后结果，其他数据也类似统计。
+
+总结一下，reduceByKey 含有两个阶段：**第一个是本地级别的 Reduce，一个是全局级别的 Reduce**，第一个本地级别是我们容易忽视的。
+
+五、 输出
+
+reduceByKey之后，我们得到了数据的最后结果，需要对结果进行输出。在输出过程中，会产生**MapPartitionsRDD**，这里的输出有两种情况：**Collect**或 **saveAsTextFile**。
+
+对于Collect来说，MapPartitionsRDD的作用是把结果收集起来发送给Driver。
+
+对于saveAsTextFile，我们将 Stage2 产生的结果输出到我们 HDFS 中的时候数据的输出要符合一定的格式，而我们现在的结果只有 value，没有 Key，所以 MapPartitionsRDD 帮助我们生成相应的 Key。例如输出（Hello, 4），这里（Hello, 4）是value，而不是"Hello"是key，4是value的形式。
+
+但是我们最初在textFile读入数据时，split分片将key去掉了，只对value计算，因此最后我们需要把去掉的key弄回来。因为这里的key只对Spark框架有意义（满足格式），因此最后往HDFS写结果时，生成的key为null即可。
 
 
+
+#### 7.4.2.5 总结-DAG整体分析
+
+以DAG图的整体流程做下总结。从DAG中我们可以看出总共包含了两个阶段，Stage0 和 Stage 1。
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.5_1.png" style="zoom: 100%;" /></center>
+
+我们接下来在具体看一下每个阶段的具体详情：
+
+第一个 Stage
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.5_2.png" style="zoom: 100%;" /></center>
+
+第二个 Stage：
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.5_3.png" style="zoom: 100%;" /></center>
+
+总结一下WordCount过程中产生的RDD--
+
+在WordCount中，**第一个 Stage 产生的 RDD**：
+
+HadoopRDD、 MapPartitionsRDD、MapPartitionsRDD、MapPartitionsRDD、MapPartitionsRDD(reduceByKey所产生)
+
+**第二个 Stage 产生的 RDD**：
+
+ShuffledRDD(reduceByKey所产生)、MapPartitionsRDD
 
 ## 7.5 本章小结
 
