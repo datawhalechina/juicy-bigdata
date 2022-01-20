@@ -5,7 +5,7 @@
 ## 6.0 数据仓库
 > ps：到了数据仓库啦，崭新的饱满的和知识相濡以沫的一天，又开始啦！！！！
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.0.png)
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.0.png" style="zoom:67%;" /></center>
 
 ### 6.0.1 为什么要有数据仓库
 

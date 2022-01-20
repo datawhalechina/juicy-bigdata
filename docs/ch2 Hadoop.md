@@ -75,7 +75,7 @@
 &emsp;&emsp;或许是为了给新上任的自己先冲点业绩，加盟**Yahoo**之后，**Doug Cutting**将**NDFS**和**MapReduce**进行了升级改造，并重新命名为**Hadoop**（**NDFS**也改名为**HDFS**，全称是**Hadoop Distributed File System**）。  
 &emsp;&emsp;这就是后来大名鼎鼎的大数据框架系统**Hadoop**的由来。而**Doug Cutting**，则被人们称为**Hadoop**之父。  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.8.png)
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.8.png" /></center>
 
 &emsp;&emsp;**Hadoop**这个名字，实际上是**Doug Cutting**他儿子的黄色玩具大象的名字。所以，**Hadoop**的**Logo**，就是一只奔跑的黄色大象。突然感觉到技术大牛的生活就是如此的枯燥且朴实。  
 
@@ -99,7 +99,7 @@
 > &emsp;&emsp;以上就是Hadoop的先导内容，看完大家应该会对我们即将要学习的内容有一个不错的历史了解，接下来的知识就很硬核啦，大家冲冲冲冲冲冲！！！！！
 > &emsp;&emsp;其他的关于Hadoop的版本、历程、花边故事等等凑字数行为就不多介绍了，废话少说，直接上干货。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png)
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png" style="zoom: 50%;" /></center>
 
 
 ## 2.1 概述
@@ -172,7 +172,7 @@
 
 > 学了这么多理论，终于要实操了吗，大伙儿冲冲冲啊！！！！
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.3.png)
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.3.png" /></center>
 
 ### 2.3.1 实验准备
 
