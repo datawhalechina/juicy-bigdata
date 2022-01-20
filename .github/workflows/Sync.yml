@@ -31,4 +31,4 @@ jobs:
           gitee-username: shenhao-stu
           gitee-password: ${{ secrets.GITEE_PASSWORD }}
           gitee-repo: shenhao-stu/Big-Data
-          branch: gh-pages
+          branch: master
