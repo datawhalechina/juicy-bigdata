@@ -540,9 +540,9 @@ cd /opt/hadoop/sbin
 
 &emsp;&emsp;正常启动`hive`之后，可进入`hive shell`命令行，以下所有命令将在该环境下执行。
 
-##### 5.数据库操作
+##### 1.数据库操作
 
-###### 5.1 查看数据列表
+###### 1.1 查看数据列表
 
 &emsp;&emsp;使用如下命令，查看已有数据库：  
 ```sql
@@ -553,7 +553,7 @@ show databases;
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.1.png)
 
-###### 5.2 使用数据库
+###### 1.2 使用数据库
 
 &emsp;&emsp;使用`use`命令，指定要使用的数据库，命令格式如下：  
 ```sql
@@ -564,7 +564,7 @@ use <database_name>;
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.2.png)
 
-###### 5.3 新建数据库
+###### 1.3 新建数据库
 
 &emsp;&emsp;使用`create database`命令，新建数据库，命令格式如下：  
 ```sql
@@ -585,7 +585,7 @@ CREATE DATABASE IF NOT EXISTS hive_test
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.3.png)
 
-###### 5.4 查看数据库信息
+###### 1.4 查看数据库信息
 
 &emsp;&emsp;使用`desc database`命令，查看数据库信息，命令格式如下：  
 ```sql
@@ -601,7 +601,7 @@ DESC DATABASE EXTENDED hive_test;
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.4.png)
 
-###### 5.5 删除数据库
+###### 1.5 删除数据库
 
 &emsp;&emsp;使用`drop database`命令，删除数据库，命令格式如下：  
 ```sql
@@ -618,9 +618,9 @@ DROP DATABASE IF EXISTS hive_test CASCADE;
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.5.png)
 
-##### 6.创建表
+##### 2.创建表
 
-###### 6.1 建表语法
+###### 2.1 建表语法
 
 &emsp;&emsp;使用`create table`命令，创建表，命令格式如下：  
 ```sql
@@ -646,7 +646,7 @@ CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name     -- 
   [AS select_statement];   -- 从查询结果创建表
 ```
 
-###### 6.2 内部表
+###### 2.2 内部表
 
 &emsp;&emsp;使用以下雇员表`emp`的字段信息，在`Hive`中创建内部表：  
 
@@ -683,7 +683,7 @@ CREATE TABLE emp(
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.7.png)
 
-###### 6.3 外部表
+###### 2.3 外部表
 
 &emsp;&emsp;使用`create external table`创建`emp_external`外部表，命令如下：  
 ```sql
@@ -708,7 +708,7 @@ CREATE EXTERNAL TABLE emp_external(
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.9.png)
 
-###### 6.4 分区表
+###### 2.4 分区表
 
 &emsp;&emsp;使用 `partitioned`语句，创建`emp_partition`分区表，命令如下：  
 ```sql
@@ -730,7 +730,7 @@ CREATE EXTERNAL TABLE emp_partition(
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.10.png)
 
-###### 6.5 分桶表
+###### 2.5 分桶表
 
 &emsp;&emsp;使用`clustered sorted into`语句，创建`emp_bucket`分桶表，命令如下：  
 ```sql
@@ -752,7 +752,7 @@ CREATE EXTERNAL TABLE emp_bucket(
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.10.png)
 
-###### 6.6 倾斜表
+###### 2.6 倾斜表
 
 &emsp;&emsp;通过指定一个或者多个列经常出现的值（严重偏斜），`Hive`会自动将涉及到这些值的数据拆分为单独的文件。在查询时，如果涉及到倾斜值，它就直接从独立文件中获取数据，而不是扫描所有文件，这使得查询性能得到提升。  
 &emsp;&emsp;使用`skewed`语句，创建`emp_skewed`倾斜表，命令如下：  
@@ -775,7 +775,7 @@ CREATE EXTERNAL TABLE emp_skewed(
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.10.png)
 
-###### 6.7 临时表
+###### 2.7 临时表
 
 &emsp;&emsp;临时表仅对当前`session`可见，临时表的数据将存储在用户的暂存目录中，并在会话结束后删除。如果临时表与永久表表名相同，则对该表名的任何引用都将解析为临时表，而不是永久表。临时表还具有以下两个限制：
 
@@ -796,7 +796,7 @@ CREATE TEMPORARY TABLE emp_temp(
   ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t";
 ```
 
-###### 6.8 CTAS创建表
+###### 2.8 CTAS创建表
 
 &emsp;&emsp;使用`create table as select`语句形式，从查询语句的结果中创建表：  
 ```sql
@@ -813,7 +813,7 @@ CREATE TABLE emp_copy AS SELECT * FROM emp WHERE deptno='20';
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.13.png)
 
-###### 6.9 复制表结构
+###### 2.9 复制表结构
 
 &emsp;&emsp;使用`create like`语句形式，复制一个表的表结构，命令格式如下：  
 ```sql
@@ -833,7 +833,7 @@ CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS emp_co LIKE emp
 
 > **注**：临时表不存储在hdfs中。
 
-###### 6.10 加载数据到表
+###### 2.10 加载数据到表
 
 &emsp;&emsp;加载数据到表中属于`DML`操作，这里为了方便大家测试，先简单介绍一下加载本地数据到表中的命令，命令如下：  
 ```sql
@@ -873,9 +873,9 @@ load data local inpath "/home/datawhale/emp.txt" into table emp_partition partit
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.16.png)
 
-##### 7.修改表
+##### 3.修改表
 
-###### 7.1 重命名表
+###### 3.1 重命名表
 
 &emsp;&emsp;使用`alter table rename`语句，对表进行重命名，命令格式如下：  
 ```sql
@@ -891,7 +891,7 @@ ALTER TABLE emp_temp RENAME TO new_emp;
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.17.png)
 
-###### 7.2 修改列
+###### 3.2 修改列
 
 &emsp;&emsp;使用`alter table change column`语句，修改列的属性，命令格式如下：  
 ```sql
@@ -911,16 +911,16 @@ ALTER TABLE new_emp CHANGE sal sal_new decimal(7,2) AFTER ename;
 ALTER TABLE new_emp CHANGE mgr mgr_new INT COMMENT 'this is column mgr';
 ```
 
-###### 7.3 新增列
+###### 3.3 新增列
 
 &emsp;&emsp;使用`alter table add columns`语句形式，在`new_emp`表中新增`address`列，命令如下：
 ```sql
 ALTER TABLE new_emp ADD COLUMNS (address STRING COMMENT 'home address');
 ```
 
-##### 8.清空表/删除表
+##### 4.清空表/删除表
 
-###### 8.1 清空表
+###### 4.1 清空表
 
 &emsp;&emsp;使用`truncate table`命令，清空整个表或表指定分区中的数据，命令格式如下：  
 ```sql
@@ -935,7 +935,7 @@ TRUNCATE TABLE table_name [PARTITION (partition_column = partition_col_value,  .
 TRUNCATE TABLE emp_partition PARTITION (deptno=30);
 ```
 
-###### 8.2 删除表
+###### 4.2 删除表
 
 &emsp;&emsp;使用`drop table`命令，删除表，命令格式如下：  
 ```sql
@@ -947,9 +947,9 @@ DROP TABLE [IF EXISTS] table_name [PURGE];
 - 外部表：只会删除表的元数据，不会删除`HDFS`上的数据；
 - 删除视图引用的表时，不会给出警告（但视图已经无效了，必须由用户删除或重新创建）。
 
-##### 9.其他命令
+##### 5.其他命令
 
-###### 9.1 describe
+###### 5.1 describe
 
 &emsp;&emsp;使用`describe`命令，查看数据库属性，命令格式如下：  
 ```sql
@@ -970,7 +970,7 @@ DESCRIBE|Desc [EXTENDED|FORMATTED] table_name -- FORMATTED 以友好的展现方
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex2.19.png)
 
-###### 9.2 show
+###### 5.2 show
 
 1. **查看数据库列表**  
 

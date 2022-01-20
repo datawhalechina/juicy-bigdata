@@ -23,15 +23,6 @@
 
 以下是目录与代码更新进度，还等什么，学就完事了～
 
-## 时间安排
-
-- 一周大数据概述+Hadoop  10.25-10.31
-- 一周Hadoop                         11.1-11.7
-- 一周HDFS                             11.8-11.14
-- 一周HBase                            11.15-11.21
-- 一周Hive                               11.21-11.27
-- MapReduce和Spark待定
-
 ## 大数据处理技术导论目录
 
 * [第一章：大数据概述](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述.md)
@@ -83,9 +74,7 @@
   - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_81-大数据技术框架综述)
   - [x] [8.2 大数据分析引擎的发展简史](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_82-大数据分析引擎的发展简史)
 
-
-
-> 第二章以后的章节都配置有实验内容，即linux上的实操
+> 第二章以后的章节都配置有实验内容，使用Linux操作系统进行编程实战。
 
 ## 课程收获
 
@@ -165,10 +154,13 @@
 </table> 
 
 
-
-
 ## 关注我们
-<div style="text-align: center;"><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg"></div>
+<div align=center>
+<p>扫描下方二维码关注公众号：Datawhale</p>
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg" width = "180" height = "180">
+</div>
 
 &emsp;&emsp;Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。
 
+## LICENSE
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
