@@ -21,7 +21,7 @@
 
 有配套代码的章节，可以在项目`experiments`目录的相应章节目录下面找到。
 
-以下是目录与代码更新进度，还等什么，学就完事了～
+以下是目录，还等什么，学就完事了～
 
 ## 大数据处理技术导论目录
 
@@ -73,6 +73,7 @@
 * [第八章：大数据处理技术总结](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结)
   - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_81-大数据技术框架综述)
   - [x] [8.2 大数据分析引擎的发展简史](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_82-大数据分析引擎的发展简史)
+  - [x] [8.3 尾声](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_83-尾声)
 
 > 第二章以后的章节都配置有实验内容，使用Linux操作系统进行编程实战。
 
