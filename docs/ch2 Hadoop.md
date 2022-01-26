@@ -278,7 +278,7 @@ su datawhale # 切换为datawhale用户
 &emsp;&emsp;对于Hadoop的伪分布和全分布而言，Hadoop名称节点（NameNode）需要启动集群中所有机器的Hadoop守护进程，这个过程可以通过SSH登录来实现。Hadoop并没有提供SSH输入密码登录的形式，因此，为了能够顺利登录每台机器，需要将所有机器配置为名称节点，可以通过SSH无密码的方式登录它们。  
 &emsp;&emsp;为了实现SSH无密码登录方式，首先需要让`NameNode`生成自己的`SSH`密钥，命令如下：
 ```shell
-ssh-keygen -t rsa -p '' -f ~/.ssh/id_rsa # 在选择存放位置时，按照默认位置存放在用户目录的.ssh/路径下
+ssh-keygen -t rsa # 执行该命令后，遇到提示信息，一直按回车就可以
 ```
 
 &emsp;&emsp;`NameNode`生成密钥之后，需要将它的公共密钥发送给集群中的其他机器。我们可以将`id_dsa.pub`中的内容添加到需要SSH无密码登录的机器的`~/ssh/authorized_keys`目录下，然后就可以无密码登录这台机器了。对于无密码登录本机而言，可以执行以下命令：  
