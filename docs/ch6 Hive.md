@@ -28,25 +28,25 @@
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.0.2_1.png" style="zoom:33%;" /></center>
 
 1. 主题性  
-    &emsp;&emsp;各个业务系统的数据可能是相互分离的，但数据仓库则是**面向主题的**。数据仓库将不同的业务进行归类并分析，将数据抽象为主题，用于对应某一分析领域所涉及的分析对象。  
-    &emsp;&emsp;而操作型记录（即传统数据）对数据的划分并不适用于决策分析。在数据仓库中，基于主题的数据被划分为各自独立的领域，每个领域有各自的逻辑内涵但互不交叉，在抽象层次上对数据进行完整的、一致的和准确的描述。  
-    &emsp;&emsp;以零售业务的过程为例：将多个零售业务数据（杂货、冷冻食品、生活用品、肉类等），依据业务主题进行数据划分，可创建一个具有订单、库存和销售等多个业务领域的零售业务数仓。  
-    
+   &emsp;&emsp;各个业务系统的数据可能是相互分离的，但数据仓库则是**面向主题的**。数据仓库将不同的业务进行归类并分析，将数据抽象为主题，用于对应某一分析领域所涉及的分析对象。  
+   &emsp;&emsp;而操作型记录（即传统数据）对数据的划分并不适用于决策分析。在数据仓库中，基于主题的数据被划分为各自独立的领域，每个领域有各自的逻辑内涵但互不交叉，在抽象层次上对数据进行完整的、一致的和准确的描述。  
+   &emsp;&emsp;以零售业务的过程为例：将多个零售业务数据（杂货、冷冻食品、生活用品、肉类等），依据业务主题进行数据划分，可创建一个具有订单、库存和销售等多个业务领域的零售业务数仓。  
+   
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.0.2_2.png" style="zoom:50%;" /></center>
 
 2. 集成性  
-    &emsp;&emsp;确定主题之后，就需要获取与主题相关的数据。这些数据会分布在不同的业务过程中，因此在数据进入数仓之前，需要对这些数据的口径进行统一。  
-    &emsp;&emsp;口径统一是指，统一数据来源中的歧义、单位、字长等元素，并进行总和计算，来聚合成新的数据。  
-    &emsp;&emsp;以上述零售业务过程中的订单主题为例，对于订单主题，通常会包括三个业务过程：订单、发货和发票。这些过程会产生一些新的指标，如：销售额、发票收入等。  
+   &emsp;&emsp;确定主题之后，就需要获取与主题相关的数据。这些数据会分布在不同的业务过程中，因此在数据进入数仓之前，需要对这些数据的口径进行统一。  
+   &emsp;&emsp;口径统一是指，统一数据来源中的歧义、单位、字长等元素，并进行总和计算，来聚合成新的数据。  
+   &emsp;&emsp;以上述零售业务过程中的订单主题为例，对于订单主题，通常会包括三个业务过程：订单、发货和发票。这些过程会产生一些新的指标，如：销售额、发票收入等。  
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.0.2_3.png"  /></center>
 
 3. 非易失性  
-    &emsp;&emsp;数据仓库的目的是分析数据中的规律，因此，添加到数据仓库中的数据，需要保证其稳定，不会轻易丢失和改变。  
-    &emsp;&emsp;这里，与传统操作型数据库的区别在于：操作型数据库主要服务于日常的业务操作，产生的数据会实时更新到数据库中，以便业务应用能够迅速获得当前最新数据，不至于影响正常的业务运作。而数据仓库通常是保存历史业务数据，根据业务需要每隔一段时间将一批新的数据导入数据仓库。  
+   &emsp;&emsp;数据仓库的目的是分析数据中的规律，因此，添加到数据仓库中的数据，需要保证其稳定，不会轻易丢失和改变。  
+   &emsp;&emsp;这里，与传统操作型数据库的区别在于：操作型数据库主要服务于日常的业务操作，产生的数据会实时更新到数据库中，以便业务应用能够迅速获得当前最新数据，不至于影响正常的业务运作。而数据仓库通常是保存历史业务数据，根据业务需要每隔一段时间将一批新的数据导入数据仓库。  
 
 4. 时变性  
-    &emsp;&emsp;数据仓库是根据业务需要来建立的，代表了一个业务过程。因此数据仓库分析的结果只能反映过去的业务情况，当业务变化后，数据仓库需要跟随业务的变化而改变，以适应分析决策的需要。  
+   &emsp;&emsp;数据仓库是根据业务需要来建立的，代表了一个业务过程。因此数据仓库分析的结果只能反映过去的业务情况，当业务变化后，数据仓库需要跟随业务的变化而改变，以适应分析决策的需要。  
 
 ### 6.0.3 数据仓库的体系结构
 
@@ -96,7 +96,7 @@
 
 &emsp;&emsp;`Hive`利用`HDFS`存储数据，使用`MapReduce`查询分析数据。将`SQL`转换为`MapReduce`程序，从而完成对数据的分析决策。
 
-<center><img src="D:/%E4%B8%8A%E8%B4%A2Courses/2020_%E5%A4%A7%E4%B8%89/Big-Data/doc_imgs/ch6.1.2_emoji.png" style="zoom:80%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.1.2_emoji.png" style="zoom:50%;" /></center>
 
 ### 6.1.3 Hive与Hadoop生态系统
 
@@ -245,36 +245,36 @@ CREATE TABLE students(
 ### 6.3.3 元数据存储模块
 
 - **元数据：**  
-&emsp;&emsp;元数据（metadata）是**描述数据的数据**，对于`Hive`来说，元数据就是用来描述`HDFS`文件和表的各种对应关系（位置关系、顺序关系、分隔符）。`Hive`的元数据存储在**关系数据库**中（`Hive`内置的是`Derby`、第三方的是`MySQL`），`HDFS`中存储的是数据。在`Hive`中，所有的元数据默认存储在`Hive`内置的`Derby`数据库中，但由于`Derby`只能有一个实例，也就是说不能有多个命令行客户端同时访问，所以在实际生产环境中，通常使用` MySQL`代替`Derby`。  
-&emsp;&emsp;元数据存储模块（Metastore）是一个独立的关系数据库，通常是与`MySQL`数据库连接后创建的一个`MySQL`实例，也可以是`Hive`自带的`Derby`数据库实例，提供**元数据服务**。元数据存储模块中主要保存表模式和其他系统元数据，如表的名称、表的列及其属性、表的分区及其属性、表的属性、表中数据所在位置信息等。它提供给`Hive`操作管理访问元数据的一个服务，具体操作为`Metastore`对外提供一个服务地址，使客户端能够连接`Hive`，以此来对元数据进行访问。使用`Metastore`的好处如下：  
-    - 元数据把数据保存在关系数据库中，`Hive`提供元数据服务，通过对外的服务地址，用户能够使用客户端连接`Hive`，访问并操作元数据；
-    - 支持多个客户端的连接，而客户端无需关心数据的存储地址，实现了数据访问层面的解耦操作。
-    - 因此如果你在`Hive`上创建了一张表，然后在`presto`/`impala`/`sparksql`中都是可以直接使用的，它们会从`Metastore`中获取统一的元数据信息，同样的你在`presto`/`impala`/`sparksql`中创建一张表，在`Hive`中也可以直接使用。
+	&emsp;&emsp;元数据（metadata）是**描述数据的数据**，对于`Hive`来说，元数据就是用来描述`HDFS`文件和表的各种对应关系（位置关系、顺序关系、分隔符）。`Hive`的元数据存储在**关系数据库**中（`Hive`内置的是`Derby`、第三方的是`MySQL`），`HDFS`中存储的是数据。在`Hive`中，所有的元数据默认存储在`Hive`内置的`Derby`数据库中，但由于`Derby`只能有一个实例，也就是说不能有多个命令行客户端同时访问，所以在实际生产环境中，通常使用` MySQL`代替`Derby`。  
+	&emsp;&emsp;元数据存储模块（Metastore）是一个独立的关系数据库，通常是与`MySQL`数据库连接后创建的一个`MySQL`实例，也可以是`Hive`自带的`Derby`数据库实例，提供**元数据服务**。元数据存储模块中主要保存表模式和其他系统元数据，如表的名称、表的列及其属性、表的分区及其属性、表的属性、表中数据所在位置信息等。它提供给`Hive`操作管理访问元数据的一个服务，具体操作为`Metastore`对外提供一个服务地址，使客户端能够连接`Hive`，以此来对元数据进行访问。使用`Metastore`的好处如下：  
+	- 元数据把数据保存在关系数据库中，`Hive`提供元数据服务，通过对外的服务地址，用户能够使用客户端连接`Hive`，访问并操作元数据；
+	- 支持多个客户端的连接，而客户端无需关心数据的存储地址，实现了数据访问层面的解耦操作。
+	- 因此如果你在`Hive`上创建了一张表，然后在`presto`/`impala`/`sparksql`中都是可以直接使用的，它们会从`Metastore`中获取统一的元数据信息，同样的你在`presto`/`impala`/`sparksql`中创建一张表，在`Hive`中也可以直接使用。
 
-    <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_1.png" style="zoom: 50%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_1.png" style="zoom: 50%;" /></center>
 
 - **`Metastore`管理元数据的方式：**
 
-    1. **内嵌模式**  
-        &emsp;&emsp;`Metastore`**默认的**部署模式是`Metastore`元数据服务和`Hive`服务融合在一起。
+1. **内嵌模式**  
+&emsp;&emsp;`Metastore`**默认的**部署模式是`Metastore`元数据服务和`Hive`服务融合在一起。
 
-    <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_2.png" style="zoom:50%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_2.png" style="zoom:50%;" /></center>
 
-        &emsp;&emsp;在这种模式下，`Hive`服务（即`Hive`驱动本身）、元数据服务`Metastore`，元数据`metadata`（用于存储映射信息）都在同一个`JVM`进程中，元数据存储在内置的**Derby数据库**。当启动`HiveServer`进程时，`Derby`和`Metastore`都会启动，不需要额外启动`Metastore`服务。但是，一次只能支持一个用户访问，适用于测试场景。  
+&emsp;&emsp;在这种模式下，`Hive`服务（即`Hive`驱动本身）、元数据服务`Metastore`，元数据`metadata`（用于存储映射信息）都在同一个`JVM`进程中，元数据存储在内置的**Derby数据库**。当启动`HiveServer`进程时，`Derby`和`Metastore`都会启动，不需要额外启动`Metastore`服务。但是，一次只能支持一个用户访问，适用于测试场景。  
 
-    2. **本地模式**  
-        &emsp;&emsp;本地模式与内嵌模式的区别在于：把元数据提取出来，让`Metastore`服务与`HiveServer`主进程在同一个`JVM`进程中运行，存储元数据的数据库在单独的进程中运行。元数据一般存储在`MySQL`关系型数据库中。
+2. **本地模式**  
+&emsp;&emsp;本地模式与内嵌模式的区别在于：把元数据提取出来，让`Metastore`服务与`HiveServer`主进程在同一个`JVM`进程中运行，存储元数据的数据库在单独的进程中运行。元数据一般存储在`MySQL`关系型数据库中。
 
-    <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_3.png" style="zoom:50%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_3.png" style="zoom:50%;" /></center>
 
-        &emsp;&emsp;但是，每启动一个`Hive`服务，都会启动一个`Metastore`服务。多个人使用时，会启用多个`Metastore`服务。  
+&emsp;&emsp;但是，每启动一个`Hive`服务，都会启动一个`Metastore`服务。多个人使用时，会启用多个`Metastore`服务。  
 
-    3. **远程模式**  
-        &emsp;&emsp;既然可以把元数据存储给提取出来，也可以考虑把`Metastore`给提取出来变为单独一个进程。把`Metastore`单独进行配置，并在单独的进程中运行，可以保证全局唯一，从而保证数据访问的安全性。（即不随`Hive`的启动而启动）
+3. **远程模式**  
+&emsp;&emsp;既然可以把元数据存储给提取出来，也可以考虑把`Metastore`给提取出来变为单独一个进程。把`Metastore`单独进行配置，并在单独的进程中运行，可以保证全局唯一，从而保证数据访问的安全性。（即不随`Hive`的启动而启动）
 
-    <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_4.png" style="zoom:50%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.3.3_4.png" style="zoom:50%;" /></center>
 
-        &emsp;&emsp;其优点是把`Metastore`服务独立出来，可以安装到远程的服务器集群里，从而解耦`Hive`服务和`Metastore`服务，保证`Hive`的稳定运行。
+&emsp;&emsp;其优点是把`Metastore`服务独立出来，可以安装到远程的服务器集群里，从而解耦`Hive`服务和`Metastore`服务，保证`Hive`的稳定运行。
 
 ### 6.3.4 HQL的执行流程
 

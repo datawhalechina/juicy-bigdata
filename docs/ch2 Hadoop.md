@@ -43,7 +43,7 @@
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.4.png" style="zoom:67%;" /></center>
 
-&emsp;&emsp;相对于那些商用的搜索引擎，Nutch作为开放源代码的搜索引擎，将会更加透明，从而更值得大家信赖。所有主要的搜索引擎都采用私有的排序算法，而不会解释为什么一个网页会排在一个特定的位置。除此之外，有的搜索引擎依照网站所付的费用，而不是根据它们本身的价值进行排序。与它们不同，Nutch没有什么需要隐瞒，也没有动机去扭曲搜索的结果。Nutch将尽自己最大的努力为用户提供最好的搜索结果。（比如百度搜索，有时候前几条全是广告QAQ哈哈哈哈）  
+&emsp;&emsp;相对于那些商用的搜索引擎，Nutch作为开放源代码的搜索引擎，会更加透明，更值得大家信赖。所有主流的搜索引擎都采用私有的排序算法，而不会解释为什么一个网页会排在一个特定的位置。除此之外，有的搜索引擎依照网站所付的费用，而不是根据它们本身的价值进行排序。与它们不同，Nutch没有什么需要隐瞒，也没有动机去扭曲搜索的结果。Nutch将尽自己最大的努力为用户提供最好的搜索结果。（比如百度搜索，有时候前几条全是广告QAQ哈哈哈哈）  
 &emsp;&emsp;大批网站采用了**Nutch**平台，大大降低了技术门槛，使低成本的普通计算机取代高价的**Web**服务器成为可能。甚至有一段时间，在硅谷有了一股用**Nutch**低成本创业的潮流。  
 &emsp;&emsp;随着时间的推移，无论是**Google**还是**Nutch**，都面临搜索对象“体积”不断增大的问题。尤其是**Google**，作为互联网搜索引擎，需要存储大量的网页，并不断优化自己的搜索算法，提升搜索效率。
 
@@ -298,19 +298,19 @@ ssh localhost
 
 #### 2.3.3.4 安装单机版Hadoop
 
-&emsp;&emsp;这里使用的Hadoop版本为3.0.0。下载地址为http://archive.apache.org/dist/hadoop/core/hadoop-3.0.0/hadoop-3.0.0.tar.gz  
+&emsp;&emsp;这里使用的Hadoop版本为3.3.1。下载地址为http://archive.apache.org/dist/hadoop/core/hadoop-3.3.1/hadoop-3.3.1.tar.gz  
 &emsp;&emsp;将该文件夹解压后，可以放置到自己喜欢的位置，如`/data/hadoop`文件夹下，注意，文件夹的用户和组必须都为hadoop。
 
 ##### 1.安装Hadoop
 
-&emsp;&emsp;将`hadoop-3.0.0.tar.gz`解压缩到`/opt`目录下，命令如下：
+&emsp;&emsp;将`hadoop-3.3.1.tar.gz`解压缩到`/opt`目录下，命令如下：
 ```shell
-sudo tar -xzvf /data/hadoop/hadoop-3.0.0.tar.gz -C /opt/
+sudo tar -xzvf /data/hadoop/hadoop-3.3.1.tar.gz -C /opt/
 ```
 
-&emsp;&emsp;为了便于操作，我们也将`hadoop-3.0.0`重命名为`hadoop`，命令如下：
+&emsp;&emsp;为了便于操作，我们也将`hadoop-3.3.1`重命名为`hadoop`，命令如下：
 ```shell
-sudo mv /opt/hadoop-3.0.0/ /opt/hadoop
+sudo mv /opt/hadoop-3.3.1/ /opt/hadoop
 ```
 
 &emsp;&emsp;修改hadoop目录的所属用户和所属组，命令如下
@@ -345,12 +345,12 @@ hadoop version
 
 &emsp;&emsp;执行结果如下：
 ```log
-Hadoop 3.0.0
+Hadoop 3.3.1
 Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r c25427ceca461ee979d30edd7a4b0f50718e6533
 Compiled by andrew on 2017-12-08T19:16Z
 Compiled with protoc 2.5.0
 From source with checksum 397832cb5529187dc8cd74ad54ff22
-This command was run using /opt/hadoop/share/hadoop/common/hadoop-common-3.0.0.jar
+This command was run using /opt/hadoop/share/hadoop/common/hadoop-common-3.3.1.jar
 ```
 
 ##### 3.修改hadoop-env.sh文件配置
@@ -378,7 +378,7 @@ export JAVA_HOME=/opt/java/
 ```shell
 mkdir input
 cp etc/hadoop/*.xml input
-bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar grep input output 'dfs[a-z.]+'
+bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar grep input output 'dfs[a-z.]+'
 cat output/*
 ```
 
@@ -543,7 +543,7 @@ hadoop fs -put /home/datawhale/test /input
 
 &emsp;&emsp;执行wordcount程序，命令如下：
 ```shell
-hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar wordcount /input /out
+hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar wordcount /input /out
 ```
 
 &emsp;&emsp;通过以下命令，查看执行结果：
@@ -571,7 +571,7 @@ world!  1
 
 ### 2.3.4 Tips
 
-✅ **Hadoop3.0.0集群模式**安装请参考： [Hadoop集群模式安装.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装.md) 和 [Hadoop集群模式安装节点.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装节点.md)。	
+✅ **Hadoop3.3.1集群模式**安装请参考： [Hadoop集群模式安装.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装.md) 和 [Hadoop集群模式安装节点.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装节点.md)。	
 
 ✅ **官网安装**请参考：[Hadoop单节点集群安装](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Execution)
 

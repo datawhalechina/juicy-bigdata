@@ -15,7 +15,7 @@
 
 &emsp;&emsp;Hadoop可以通过HDFS来存储**结构化**、**半结构**甚至**非结构化**的数据，它是传统数据库的补充，是海量数据存储的最佳方法。它针对大文件的存储、批量访问和流式访问都做了优化，同时也通过多副本解决了容灾问题。  
 &emsp;&emsp;但是Hadoop的缺陷在于它只能执行**批处理**，并且只能以**顺序的方式访问数据**。这意味着，即使是最简单的工作，也必须搜索整个数据库，**无法实现对数据的随机访问**。反观传统的关系型数据库，其主要特点就在于随机访问，但它们却不能用于海量数据的存储。  
-&emsp;&emsp;在这种情况下，必须有一种新的方案来解决海量数据存储和随机访问的问题，HBase因此孕育而生！！
+&emsp;&emsp;在这种情况下，必须有一种新的方案来解决海量数据存储和随机访问的问题，HBase因此孕育而生！
 
 > 补充：HBase、Cassandra、ouchDB、Dynamo和MongoDB也能存储海量数据并支持随机访问。
 
@@ -50,7 +50,7 @@
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png" style="zoom: 67%;" /></center>
 
-&emsp;&emsp;随着Web 2.0应用的不断发展，传统的关系数据库已经无法满足需求，无论在**数据高并发**方面，还是在**高可拓展性**和**高可用性方面**，传统的关系型数据库都显得力不从心，其完善的事务机制和高效的查询机制也成为“鸡肋”。因此，包括HBase在内的非关系型数据库的逐渐崭露头角！！
+&emsp;&emsp;随着Web 2.0应用的不断发展，传统的关系数据库已经无法满足需求，无论在**数据高并发**方面，还是在**高可拓展性**和**高可用性方面**，传统的关系型数据库都显得力不从心，其完善的事务机制和高效的查询机制也成为“鸡肋”。因此，包括HBase在内的非关系型数据库的逐渐崭露头角！
 
 &emsp;&emsp;HBase与传统的关系型数据库的区别主要在于：  
 - **数据类型**：关系型数据库数据类型较为丰富，数据类型有`int`、`date`、`long`等。Hbase数据类型简单，每个数据都被存储为未经解释的字符串，用户需要自己编写程序把字符串解析成不同的数据类型。
@@ -153,7 +153,7 @@ HBase提供了众多的访问方式，详见下表。
 
 1. **传统行式数据库**  
 - 数据是按行存储的
-- 没有索引的查询使用大量I/O。在从磁盘中读取数据时，需要从磁盘中顺序扫描每个元组的完整内容，然后从每个元组中筛选出查询所需要的属性。
+- 没有索引的查询使用大量I/O。在从磁盘中读取数据时，需要从磁盘中顺序扫描每个元组的完整内容，然后从每个元组中筛选出查询所需要的属性
 - 建立索引和物理视图需要花费大量时间和资源
 - 面对查询的需求，数据库必须被大量膨胀才能满足性能要求
 
@@ -466,6 +466,8 @@ systemctl disable firewalld.service
 
 ✅**官方HBase安装指南**：[HBase伪集群分布安装](https://hbase.apache.org/book.html#quickstart_pseudo)
 
+✅**林子雨HBase2.2版本安装指南**：[HBase伪集群分布安装](http://dblab.xmu.edu.cn/blog/2442-2/)
+
 > ps：代码敲多了，感觉女人都没意思了哈哈哈，手动狗头QAQ  
 > 谈恋爱哪有学习敲代码香啊，给我继续敲！！代码使我变强，对象使我牵挂  
 > 不慌，继续学！！  
@@ -482,7 +484,7 @@ hbase shell
 
 &emsp;&emsp;启动成功后，进入HBase命令行模式，显示如下：  
 ```log
-dolphin@tools:~$ hbase shell
+datawhale@localhost:~$ hbase shell
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/opt/hbase/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]

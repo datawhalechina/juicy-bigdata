@@ -12,7 +12,7 @@
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_2.png" style="zoom: 100%;" /></center>
 
-&emsp;&emsp;Mapreduce每一个步骤发生在内存中，但产生的中间值（溢写文件）都会写入在磁盘里，下一步操作时又会将这个中间值`merge`到内存中，如此循环直到最终完成计算。  
+&emsp;&emsp;MapReduce每一个步骤发生在内存中，但产生的中间值（溢写文件）都会写入在磁盘里，下一步操作时又会将这个中间值`merge`到内存中，如此循环直到最终完成计算。  
 &emsp;&emsp;而对于Spark，每个步骤也是发生在内存之中，但产生的中间值会直接进入下一个步骤，直到所有的步骤完成之后才会将最终结果保存进磁盘。所以在使用Spark做数据分析时，较少进行很多次相对没有意义的读写，节省大量的时间。当计算步骤很多时，Spark的优势就体现出来了。
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_3.png" style="zoom: 100%;" /></center>
@@ -103,7 +103,7 @@
 
 ## 7.3 Spark架构原理
 
-&emsp;&emsp;Spark和MapReduce一样，也遵循着 **移动计算而非移动数据**这一大数据计算基本原则。MapReduce通过固定的Map与Reduce分阶段计算，而Spark的计算框架通过`DAG`来实现计算。
+&emsp;&emsp;Spark和MapReduce一样，也遵循着 **移动计算而非移动数据**这一大数据计算基本原则。MapReduce通过固定的`map`与`reduce`分阶段计算，而Spark的计算框架通过`DAG`来实现计算。
 
 ### 7.3.1 Spark计算阶段
 
@@ -148,7 +148,8 @@ rddG = rddB.join(rddF)
 
 ### 7.3.3 Spark 作业管理
 
-&emsp;&emsp;本小节主要说明 作业、计算阶段、任务的依赖和时间先后关系。  
+>本小节主要说明作业、计算阶段、任务的依赖和时间先后关系。  
+
 &emsp;&emsp;Spark的RDD有两种函数：转换函数和`action`函数。`action`函数调用之后不再返回RDD。Spark的`DAGScheduler`遇到`Shuffle`时，会生成一个计算阶段，在遇到`action`函数时，会生成一个作业（Job）。RDD里的每个数据分片，Spark都会创建一个计算任务进行处理，所以，一个计算阶段会包含多个计算任务（Task）。  
 &emsp;&emsp;一个作业至少包含一个计算阶段，每个计算阶段由多个任务组成，这些任务（Task）组成一个任务集合。  
 &emsp;&emsp;`DAGScheduler`根据代码生成DAG图，Spark的任务调度以任务为单位进行分配，将任务分配到分布式集群的不同机器上进行执行。
