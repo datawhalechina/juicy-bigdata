@@ -551,7 +551,7 @@ hadoop fs -stat %b /myhadoop2/LICENSE.txt
 ```shell
 hadoop balancer
 或
-HDFSbalancer
+hdfs balancer
 ```
 
 ##### 17. `dfsadmin`命令
@@ -573,7 +573,7 @@ hdfs dfsadmin -report
 
 3） 使用`-safemode`参数，操作安全模式：  
 ```shell
-HDFSdfsadmin -safemode <enter | leave | get | wait>
+hdfs dfsadmin -safemode <enter | leave | get | wait>
 ```
 其中：
 - `enter`：进入安全模式
@@ -583,7 +583,7 @@ HDFSdfsadmin -safemode <enter | leave | get | wait>
 
 &emsp;&emsp;例如，进入安全模式，执行命令如下：  
 ```shell
-HDFSdfsadmin -safemode enter
+hdfs dfsadmin -safemode enter
 ```
 &emsp;&emsp;执行结果如下：
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch3_ex1.18.png" style="zoom:50%;" /></center>
@@ -621,8 +621,8 @@ hadoop fs -appendToFile <local file> <hdfs file>
 ###### 18.3 `chown`命令
 &emsp;&emsp;使用`chown`命令，修改hdfs文件系统中文件的读、写、执行的权限，命令示例如下：  
 ```shell
-hadoop fs -chown user:group /shenhao
-hadoop fs -chmod 777 /shenhao
+hadoop fs -chown user:group /datawhale
+hadoop fs -chmod 777 /datawhale
 ```
 其中，参数说明如下：
 - `chown`：定义谁拥有文件
