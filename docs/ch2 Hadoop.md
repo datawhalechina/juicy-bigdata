@@ -31,9 +31,9 @@
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.3.png" style="zoom:67%;" />
 <br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px; text-align: center;">Apache软件基金会的LOGO，搞IT的应该都认识</div></center>
 
-> &emsp;&emsp;**Apache**软件基金会是专门为支持开源软件项目而办的一个非盈利性组织。它作为这个群体（或者社区）交流技术、维护软件的一个媒介，把代码重写与维护的工作有效组织起来。这些开发者们逐渐地把他们这个群体称为“Apache组织”，把这个经过不断修正并改善的服务器软件命名为Apache服务器。
+> &emsp;&emsp;**Apache**软件基金会是专门为支持开源软件项目而办的一个非盈利性组织。它作为一个群体（或者社区）交流技术、维护软件的媒介，把代码重写与维护的工作有效组织起来。这些开发者们逐渐地把他们这个群体称为“Apache组织”，把这个经过不断修正并改善的服务器软件命名为Apache服务器。
 
-&emsp;&emsp;这个命名是根据北美当地的一支**印第安部落**而来，这支部落以高超的军事素养和超人的忍耐力著称，19世纪后半期对侵占他们领土的入侵者进行了反抗。为了对这支印第安部落表示敬仰之意，取该部落名称（Apache）作为服务器名。但一提到这个命名，这里还有流传着一段有意思的故事。因为这个服务器是在NCSA HTTPd服务器的基础之上，通过众人努力，不断地修正、打补丁**（Patchy）**的产物，被戏称为“*A Patchy Server*”（一个补丁服务器）。在这里，因为“A Patchy”与“Apache”是谐音，故最后正式命名为“Apache Server”。  
+&emsp;&emsp;这个命名是根据北美当地的一支**印第安部落**而来，这支部落以高超的军事素养和超人的忍耐力著称，19世纪后半期对侵占他们领土的入侵者进行了反抗。为了对这支印第安部落表示敬仰之意，取该部落名称（Apache）作为服务器名。但一提到这个命名，这里还有一段广为流传的故事。因为这个服务器是在NCSA HTTPd服务器的基础之上，通过众人努力，不断地修正、打补丁**（Patchy）**的产物，被戏称为“*A Patchy Server*”（一个补丁服务器）。在这里，因为“A Patchy”与“Apache”是谐音，故最后正式命名为“Apache Server”。  
 
 ------
 
@@ -178,7 +178,7 @@
 
 &emsp;&emsp;在开始具体操作之前，首先需要选择一个合适的操作系统。尽管Hadoop本身可以运行在Linux、Windows以及其他一些类UNIX系统（如FreeBSD、OpenBSD、Solaris等）之上，但是，**Hadoop官方真正支持的运行平台只有Linux**。这就导致其他平台在运行Hadoop时，往往需要安装很多其他的包来提供一些Linux操作系统的功能，以配合Hadoop的执行。例如，Windows在运行Hadoop时，需要安装Cygwin等软件。  
 &emsp;&emsp;我们这里选择Linux作为Hadoop的运行平台，用于演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然，其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的小伙伴，可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。  
-&emsp;&emsp;在Linux发行版的选择上，我们倾向于使用企业级、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE和RedHat等发行版，最终选择免费的Ubuntu发行版作为推荐的操作系统，大家可以到网络上下载Ubuntu系统镜像文件进行安装（系统镜像下载地址：https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64）
+&emsp;&emsp;在Linux发行版的选择上，我们倾向于使用企业级、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE和RedHat等发行版，最终选择免费的Ubuntu发行版作为推荐的操作系统，大家可以到网络上下载Ubuntu系统镜像文件进行安装（系统镜像下载地址：https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64），✅参考教程：[2020最新版VMware安装Ubuntu20.04教程(巨细)！](https://zhuanlan.zhihu.com/p/141033713)
 
 ### 2.3.2 实验内容
 
@@ -196,10 +196,10 @@
 #### 2.3.3.1 创建Hadoop用户
 
 &emsp;&emsp;为方便操作，我们创建一个名为`datawhale`的用户来运行程序，这样可以使不同用户之间有明确的权限区别。同时，也可以防止Hadoop的配置操作影响到其他用户的使用。对于一些大的软件（如 MySQL)，在企业中也常常为其单独创建一个用户。  
-&emsp;&emsp;创建用户的命令是`useradd`，设置密码的命令为`passwd`。此外，可能部分系统还需要为用户创建文件夹，在这里不再详细说明。
+&emsp;&emsp;创建用户的命令是`adduser`：会自动为创建的用户指定主目录、系统shell版本，会在创建时输入用户密码。
+
 ```shell
-useradd datawhale # 创建datawhale用户
-passwd datawhale # 设置密码
+sudo adduser datawhale # 创建datawhale用户
 ```
 
 &emsp;&emsp;切换用户为`datawhale`用户，在该用户环境下进行操作。
@@ -277,6 +277,7 @@ su datawhale # 切换为datawhale用户
 
 &emsp;&emsp;对于Hadoop的伪分布和全分布而言，Hadoop名称节点（NameNode）需要启动集群中所有机器的Hadoop守护进程，这个过程可以通过SSH登录来实现。Hadoop并没有提供SSH输入密码登录的形式，因此，为了能够顺利登录每台机器，需要将所有机器配置为名称节点，可以通过SSH无密码的方式登录它们。  
 &emsp;&emsp;为了实现SSH无密码登录方式，首先需要让`NameNode`生成自己的`SSH`密钥，命令如下：
+
 ```shell
 ssh-keygen -t rsa # 执行该命令后，遇到提示信息，一直按回车就可以
 ```

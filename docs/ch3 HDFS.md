@@ -257,9 +257,9 @@ hadoop fs -ls -R /
 1）拷贝文件   
 &emsp;&emsp;将本地文件上传到hdfs上，命令格式如下：  
 ```shell
-hadoop fs -put <local file> <HDFSfile>
+hadoop fs -put <local file> <hdfs file>
 ```
-&emsp;&emsp;其中`<HDFSfile>`的父目录必须存在，否则命令执行失败，例如将`/opt/hadoop`的`README.txt`文件上传到hdfs文件系统根目录，命令如下：  
+&emsp;&emsp;其中`<hdfs file>`的父目录必须存在，否则命令执行失败，例如将`/opt/hadoop`的`README.txt`文件上传到hdfs文件系统根目录，命令如下：  
 ```shell
 hadoop fs -put /opt/hadoop/README.txt /
 ```
@@ -267,9 +267,9 @@ hadoop fs -put /opt/hadoop/README.txt /
 2）拷贝目录   
 &emsp;&emsp;将本地文件夹上传到hdfs的文件夹中，命令格式如下：  
 ```shell
-hadoop fs -put <local dir> <HDFSdir>
+hadoop fs -put <local dir> <hdfs dir>
 ```
-&emsp;&emsp;其中`<HDFSdir>`的父目录必须存在，否则命令执行失败。例如将`/opt/hadoop/`的`log`文件夹上传到hdfs文件系统根目录，命令如下：
+&emsp;&emsp;其中`<hdfs dir>`的父目录必须存在，否则命令执行失败。例如将`/opt/hadoop/`的`log`文件夹上传到hdfs文件系统根目录，命令如下：
 ```shell
 hadoop fs -put /opt/hadoop/logs / 
 ```
@@ -277,7 +277,7 @@ hadoop fs -put /opt/hadoop/logs /
 3）查看是否拷贝成功   
 &emsp;&emsp;查看上传文件或目录是否成功，执行如下命令：  
 ```shell
-hadoop fs -ls <HDFSfile/HDFSdir>
+hadoop fs -ls <hdfs file/hdfs dir>
 ```
 &emsp;&emsp;例如，查看刚刚上传的`README.txt`文件和`log`目录是否在hdfs根目录下存在，命令如下：  
 ```shell
@@ -291,7 +291,7 @@ hadoop fs -ls /
 1）拷贝文件或目录  
 &emsp;&emsp;将本地文件/文件夹上传到hdfs中，但本地文件/文件夹会被删除，命令格式如下：  
 ```shell
-hadoop fs -moveFromLocal <local src> <HDFSdst>
+hadoop fs -moveFromLocal <local src> <hdfs dst>
 ```
 
 &emsp;&emsp;例如，执行如下命令，上传本地文件/文件夹至hdfs中：
@@ -303,7 +303,7 @@ hadoop fs -moveFromLocal /opt/hadoop/logs /myhadoop1
 2）查看是否拷贝成功  
 &emsp;&emsp;查看上传文件或目录是否成功，执行如下命令：  
 ```shell
-hadoop fs -ls <HDFSfile/HDFSdir>
+hadoop fs -ls <hdfs file/hdfs dir>
 ```
 &emsp;&emsp;例如，查看刚刚上传的`NOTICE.txt`文件和`log`目录是否在hdfs文件系统的`/myhadoop1`目录下存在，命令如下：  
 ```shell
@@ -317,7 +317,7 @@ hadoop fs -ls /myhadoop1
 1）拷贝文件或目录到本地  
 &emsp;&emsp;将hdfs文件系统中的文件/文件夹下载到本地，命令格式如下：
 ```shell
-hadoop fs -get < HDFSfile or dir > < local file or dir>
+hadoop fs -get < hdfs file or dir > < local file or dir>
 ```
 &emsp;&emsp;例如，将hdfs文件系统中`/myhadoop1`目录下的`NOTICE.txt`和`logs`分别下载到本地路径`/opt/hadoop`目录，执行命令如下：
 ```shell
@@ -326,7 +326,7 @@ hadoop fs -get /myhadoop1/logs /opt/hadoop/
 ```
 **注意：**  
 1. 拷贝多个文件或目录到本地时，本地要为文件夹路径
-2. `local file`不能和`HDFSfile`名字不能相同，否则会提示文件已存在。
+2. `local file`不能和`hdfs file`名字不能相同，否则会提示文件已存在。
 3. 如果用户不是**root用户**， `local`路径要使用该用户文件夹下的路径，否则会出现权限问题
 
 2）查看是否成功拷贝到本地  
@@ -343,7 +343,7 @@ ls -l
 1）删除一个或多个文件  
 &emsp;&emsp;在hdfs文件系统中，删除一个或多个文件，命令格式如下：  
 ```shell
-hadoop fs -rm <HDFSfile> ...
+hadoop fs -rm <hdfs file> ...
 ```
 
 &emsp;&emsp;例如，删除hdfs文件系统中根目录下的`README.txt`文件，命令如下：  
@@ -354,7 +354,7 @@ hadoop fs -rm /README.txt
 2）删除一个或多个目录  
 &emsp;&emsp;在hdfs文件系统中，删除一个或多个目录，命令格式如下：  
 ```shell
-hadoop fs -rm -r <HDFSdir> ...
+hadoop fs -rm -r <hdfs dir> ...
 ```
 
 &emsp;&emsp;例如，删除hdfs文件系统中根目录下的`logs`目录，命令如下：  
@@ -364,6 +364,7 @@ hadoop fs -rm -r /logs
 
 3）查看是否删除成功  
 &emsp;&emsp;查看刚刚删除的`README.txt`文件和`log`目录是否在hdfs根目录下存在，命令如下：   
+
 ```shell
 hadoop fs -ls /
 ```
@@ -374,7 +375,7 @@ hadoop fs -ls /
 1）创建一个新目录  
 &emsp;&emsp;使用如下命令，在hdfs文件系统中创建一个目录，该命令只能一级一级的创建目录，如果父目录不存在，则会报错：  
 ```shell
-hadoop fs -mkdir <HDFSpath>
+hadoop fs -mkdir <hdfs path>
 ```
 
 &emsp;&emsp;例如，在hdfs文件系统的`/myhadoop1`目录下创建`test`目录，命令如下：  
@@ -385,16 +386,17 @@ hadoop fs -mkdir /myhadoop1/test
 2）创建一个新目录（`-p`选项）  
 &emsp;&emsp;使用如下命令，在hdfs文件系统中创建一个目录，如果父目录不存在，则创建该父目录：  
 ```shell
-hadoop fs -mkdir -p <HDFSdir> ...
+hadoop fs -mkdir -p <hdfs dir> ...
 ```
 
 &emsp;&emsp;例如，在hdfs文件系统创建`/myhadoop1/test`目录，命令如下：  
 ```shell
-hadoop fs -mkdir /myhadoop2/test
+hadoop fs -mkdir -p /myhadoop2/test
 ```
 
 3）查询目录  
 &emsp;&emsp;查看刚刚创建的`/myhadoop1/test`和`/myhadoop2/test`目录是否存在，命令如下：   
+
 ```shell
 hadoop fs -ls /
 hadoop fs -ls /myhadoop1
@@ -411,7 +413,7 @@ hadoop fs -ls /myhadoop2
 
 &emsp;&emsp;使用如下命令，在hdfs文件系统上进行文件或目录的拷贝，如果目标文件不存在，则命令执行失败，相当于给文件重命名并保存，源文件还存在：
 ```shell
-hadoop fs -cp <HDFSfile or dir>... <HDFSdir>
+hadoop fs -cp <hdfs file or dir>... <hdfs dir>
 ```
 
 &emsp;&emsp;按照下面的步骤，使用`cp`命令，将`/LICENSE.txt`拷贝到`/myhadoop1`目录下：  
@@ -443,7 +445,7 @@ hadoop fs -ls /myhadoop1
 
 &emsp;&emsp;使用如下命令，在hdfs文件系统上进行文件或目录的移动，如果目标文件不存在，则命令执行失败，相当于给文件重命名并保存，源文件不存在；源路径有多个时，目标路径必须为目录，且必须存在：  
 ```shell
-hadoop fs -mv <HDFSfile or dir>... <HDFSdir>
+hadoop fs -mv <hdfs file or dir>... <hdfs dir>
 ```
 **注意：**跨文件系统的移动（local到hdfs或者反过来）都是不允许的。  
 
@@ -466,7 +468,7 @@ hadoop fs -ls /myhadoop2
 
 &emsp;&emsp;使用如下命令，统计hdfs对应路径下的目录个数，文件个数，文件总计大小：   
 ```shell
-hadoop fs -count <HDFSpath>
+hadoop fs -count <hdfs path>
 ```
 
 &emsp;&emsp;例如，查看`/myhadoop1/logs`目录下的目录个数，文件个数，文件总计大小，命令如下：  
@@ -514,7 +516,7 @@ hadoop fs -du -s -h /myhadoop2
 
 &emsp;&emsp;使用如下命令，改变一个文件在hdfs文件系统中的副本个数，数字3表示所设置的副本个数，其中，`-R`选项可以对一个目录下的所有目录和文件递归执行改变副本个数的操作：  
 ```shell
-hadoop fs -setrep -R 3 <HDFSpath>
+hadoop fs -setrep -R 3 <hdfs path>
 ```
 
 &emsp;&emsp;例如，对hdfs文件系统中`/myhadoop1`目录下的所有目录和文件递归执行，设置为3个副本，命令如下：  
@@ -527,7 +529,7 @@ hadoop fs -setrep -R 3 /myhadoop1
 ##### 15. `stat`命令
 &emsp;&emsp;使用如下命令，查看对应路径的状态信息： 
 ```shell
-hdoop fs -stat [format] < HDFSpath >
+hdoop fs -stat [format] < hdfs path >
 ```
 &emsp;&emsp;其中，`[format]`可选参数有：
 - `%b`：文件大小
@@ -558,12 +560,12 @@ HDFSbalancer
 
 1）使用`-help`参数，查看相关的帮助：  
 ```shell
-HDFSdfsadmin -help
+hdfs dfsadmin -help
 ```
 
 2） 使用`-report`参数，查看文件系统的基本数据：  
 ```shell
-HDFSdfsadmin -report
+hdfs dfsadmin -report
 ```
 
 &emsp;&emsp;执行结果如下：
@@ -610,7 +612,7 @@ HDFSdfsadmin -safemode enter
 
 &emsp;&emsp;将本地文件内容追加到hdfs文件系统中的文本文件里，命令格式如下：  
 ```shell
-hadoop fs -appendToFile <local file> <HDFSfile>
+hadoop fs -appendToFile <local file> <hdfs file>
 ```
 
 &emsp;&emsp;执行示例如下：  
