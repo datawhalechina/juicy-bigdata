@@ -289,7 +289,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 ##### 1.文本数据准备
 &emsp;&emsp;首先需要进入spark安装目录：
 ```
-cd /export/server/spark
+cd /opt/spark
 ```
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_2.png" style="zoom: 100%;" /></center>
 
