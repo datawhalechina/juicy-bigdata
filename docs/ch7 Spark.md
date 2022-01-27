@@ -287,6 +287,12 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 &emsp;&emsp;WordCount在MapReduce章节（第5章5.3节）已经提过。这里再次学习WordCount的案例（编写单词记数代码），从数据流动的角度来详细了解Spark RDD是如何进行数据处理的。
 
 ##### 1.文本数据准备
+&emsp;&emsp;首先需要进入spark安装目录：
+```
+cd /export/server/spark
+```
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_2.png" style="zoom: 100%;" /></center>
+
 
 &emsp;&emsp;建立一个文本文件`hello_spark.txt`，将该文件放到文件目录` data/wordcount/`中，文本内容如下：  
 ```
@@ -298,19 +304,24 @@ Spark is amazing
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_1.png" style="zoom: 100%;" /></center>
 
-##### 2.配置Spark为本地模式运行
+##### 2.本地模式启动spark-shell
+&emsp;&emsp; 通过进入bin目录，启动spark-shell的本地环境，指定核数为2个
+```
+bin/spark-shell --master local[2]
+```
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_3.png" style="zoom: 100%;" /></center>
 
-&emsp;&emsp;创建Spark的配置对象`SparkConf`，设置Spark程序运行时的配置信息，如：通过`setMaster`设置程序需要连接的Spark集群中的master的链接，如果设置为`local`，则代表Spark程序将采用本地模式运行，这里，配置为本地模式，具体代码如下：  
+
+##### 3.创建SparkContext对象
+&emsp;&emsp;SparkContext是Spark程序所有功能的唯一入口。不管是使用`scala`，还是`python`语言编程，都必须有一个SparkContext。
+
+&emsp;&emsp; Spark-shell中会**默认为我们创建了SparkContext入口**，无需再进行创建。后续可以直接用sc来进行编码。
+
+&emsp;&emsp; 如果你并未通过spark-shell，创建SparkContext的方法如下：（使用spark-shell的可以跳过这段）
 ```scala
 val conf = new SparkConf() // 创建SparkConf对象
 conf.setAppName("First Spark App") //设置app应用名称，在程序运行的监控解面可以看到名称
 conf.setMaster("local") //本地模式运行
-```
-
-##### 3.创建SparkContext对象
-
-&emsp;&emsp;SparkContext是Spark程序所有功能的唯一入口。不管是使用`scala`，还是`python`语言编程，都必须有一个SparkContext，具体代码如下：  
-```scala
 val sc = new SparkContext(conf) // 创建SparkContext对象，通过传入SparkConf实例来定制Spark运行的具体参数和配置信息
 ```
 
@@ -351,7 +362,7 @@ wordCountOdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + "�
 
 &emsp;&emsp;执行结果如下：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_2.png" style="zoom: 100%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_4.png" style="zoom: 100%;" /></center>
 
 #### 7.4.2.4 WordCount在RDD的运行原理
 
