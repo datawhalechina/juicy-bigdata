@@ -154,14 +154,24 @@
 </tbody>
 </table> 
 
+## 内部评审
+| 章节号 | 标题                        | 审核人                               |
+| :----- | --------------------------- | ------------------------------------ |
+| **1**  | 大数据概述                  | 王嘉鹏、伊小雪、毛自翔、萌弟、边圣陶 |
+| **2**  | 大数据处理架构Hadoop        | 伊小雪、萌弟、王嘉鹏                 |
+| **3**  | Hadoop分布式文件系统        | 伊小雪、萌弟、边圣陶、王洲烽         |
+| **4**  | 分布式数据库HBase           | 毛自翔、伊小雪、萌弟、边圣陶         |
+| **5**  | 分布式并行编程模型MapReduce | 毛自翔、伊小雪、萌弟、边圣陶         |
+| **6**  | 数据仓库Hive                | 毛自翔、伊小雪、边圣陶、王洲烽       |
+| **7**  | Spark                       | 毛自翔、萌弟、边圣陶、王洲烽         |
+| **8**  | 大数据处理技术总结          | 毛自翔、王洲烽                       |
 
-## 关注我们
+## **关注我们**
 <div align=center>
 <p>扫描下方二维码关注公众号：Datawhale</p>
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg" width = "180" height = "180">
 </div>
+**&emsp;&emsp;Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。**
 
-&emsp;&emsp;Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。
-
-## LICENSE
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+## **LICENSE**
+**<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。**
