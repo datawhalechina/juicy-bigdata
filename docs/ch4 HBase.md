@@ -17,7 +17,7 @@
 &emsp;&emsp;但是Hadoop的缺陷在于它只能执行**批处理**，并且只能以**顺序的方式访问数据**。这意味着，即使是最简单的工作，也必须搜索整个数据库，**无法实现对数据的随机访问**。反观传统的关系型数据库，其主要特点就在于随机访问，但它们却不能用于海量数据的存储。  
 &emsp;&emsp;在这种情况下，必须有一种新的方案来解决海量数据存储和随机访问的问题，HBase因此孕育而生！
 
-> 补充：HBase、Cassandra、ouchDB、Dynamo和MongoDB也能存储海量数据并支持随机访问。
+> 补充：Cassandra、ouchDB、Dynamo和MongoDB也能存储海量数据并支持随机访问。
 
 ### 4.0.2 HBase VS 传统数据库
 
@@ -39,7 +39,7 @@
 - **面向文档数据库**：此类数据库可存放并获取文档，可以是XML、JSON、BSON等格式，这些文档具备可描述性（self-describing），呈现分层的树状结构（hierarchical tree data structure），可以包含映射表、集合和纯量值。数据库中的文档彼此相似，但不必完全相同。文档数据库所存放的文档，就相当于键值数据库所存放的“值”。文档数据库可视为其值可查的键值数据库。
   - 代表软件：**MongoDB**
 
-- **图形数据库**：图形数据库顾名思义，就是一种存储图形关系的数据库。图形数据库是NoSQL数据库的一种类型，可以用于存储实体之间的关系信息。最常见例子就是社会网络中人与人之间的关系。
+- **图形数据库**：图形数据库顾名思义，就是一种存储图形关系的数据库。图形数据库是[NoSQL数据库](https://blog.csdn.net/qq_14927217/article/details/73835463)的一种类型，可以用于存储实体之间的关系信息。最常见例子就是社会网络中人与人之间的关系。
   - 代表软件：**Neo4J**、ArangoDB、OrientDB、FlockDB、GraphDB、InfiniteGraph、Titan和Cayley等
   
 - **搜索引擎数据库**：搜索引擎数据库是一类专门用于数据内容搜索的非关系数据库。搜索引擎数据库使用索引对数据中的相似特征进行归类，并提高搜索能力。搜索引擎数据库经过优化，以处理可能内容很长的半结构化或非结构化数据，它们通常提供专业的方法，例如全文搜索、复杂搜索表达式和搜索结果排名等。 
@@ -190,9 +190,9 @@ HBase提供了众多的访问方式，详见下表。
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_1.png)
 
 **生成Region的过程：**
-1. 开始只有一个Region，随着数据不断的插入，Region越来越大。当达到一定的阈值时，开始分裂成两个新的Region；
-2. 随着表中行的数量继续增加，就会分裂出越来越多的Region；
-3. Region拆分操作非常快，因为拆分之后的Region读取的仍然是原存储文件，直到“合并”过程把存储文件异步地写到独立的文件之后，才会读取新文件。
+1. 开始只有一个Region，随着数据不断的插入，Region越来越大。当达到一定的阈值时，开始分裂成两个新的Region
+2. 随着表中行的数量继续增加，就会分裂出越来越多的Region
+3. Region拆分操作非常快，因为拆分之后的Region读取的仍然是原存储文件，直到“合并”过程把存储文件异步地写到独立的文件之后，才会读取新文件
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_2.png)
 
@@ -276,7 +276,7 @@ HBase提供了众多的访问方式，详见下表。
 
 ### 4.4.4 HLog工作原理
 
-&emsp;&emsp;在分布式环境下，必须考虑到系统出错的情形，比如当Region服务器发生故障时，`MemStore`缓存中的数据（还没有写入文件）会全部丢失。因此，HBase来用`HLog`来保证系统发生故障时能够恢复到正确的状态，`HLog`具有以下特点：  
+&emsp;&emsp;在分布式环境下，必须考虑到系统出错的情形，比如当Region服务器发生故障时，`MemStore`缓存中的数据（还没有写入文件）会全部丢失。因此，HBase用`HLog`来保证系统发生故障时能够恢复到正确的状态，`HLog`具有以下特点：  
 
 - HBase系统为每个Region服务器配置了一个`HLog`文件，它是一种预写式日志（Write Ahead Log）。
 - 用户更新数据必须首先写入日志后，才能写入`MemStore`缓存，并且，直到`MemStore`缓存内容对应的日志已经写入磁盘后，该缓存内容才能被刷写到磁盘。
@@ -369,6 +369,10 @@ sudo vim /opt/hbase/conf/hbase-site.xml
         <name>hbase.rootdir</name>
         <value>hdfs://localhost:9000/hbase</value>
     </property>
+    <property>
+        <name>hbase.unsafe.stream.capability.enforce</name>
+        <value>false</value>
+    </property>
 </configuration>
 ```
 &emsp;&emsp;使用`Shift+:`，输入`wq`后回车，保存并退出。
@@ -380,9 +384,11 @@ sudo vim /opt/hbase/conf/hbase-site.xml
 sudo vim /opt/hbase/conf/hbase-env.sh
 ```
 
-&emsp;&emsp;在文件中找到`# export JAVA_HOME=/usr/java/jdk1.9.0/`一行，并修改为以下内容：
+&emsp;&emsp;配置`JAVA_HOME`，`HBASE_CLASSPATH`，`HBASE_MANAGES_ZK`。`hbase-env.sh`中本来就存在这些变量的配置，大家只需要删除前面的`#`并修改配置内容即可(`#`代表注释)，或者直接在文件中增加以下内容：
 ```shell
-export JAVA_HOME=/opt/java/
+export JAVA_HOME=/opt/java/ # JDK的安装目录
+export HBASE_CLASSPATH=/opt/hbase/conf # 本机HBase安装目录下的conf目录
+export HBASE_MANAGES_ZK=true # 由HBase自己管理zookeeper，不需要单独的zookeeper
 ```
 &emsp;&emsp;使用`Shift+:`，输入`wq`后回车，保存并退出。
 
@@ -398,7 +404,7 @@ cd /opt/hadoop/sbin/
 ./start-all.sh
 ```
 
-&emsp;&emsp;执行`jsp`命令检查`hadoop`是否启动成功，出现了6个进程，则表示正常启动，可以得到如下类似结果：
+&emsp;&emsp;执行`jps`命令检查`hadoop`是否启动成功，出现了6个进程，则表示正常启动，可以得到如下类似结果：
 ```log
 2261 Jps
 1317 DataNode
@@ -412,10 +418,11 @@ cd /opt/hadoop/sbin/
 
 &emsp;&emsp;启动HBase，命令如下：
 ```shell
+cd /opt/hadoop/sbin/
 start-hbase.sh
 ```
 
-&emsp;&emsp;执行`jsp`命令检查HBase是否启动成功，新增了3个进程（`HQuorumPeer`、`HMaster`和`HRegionServer`），则表示正常启动，可得到如下类似结果：
+&emsp;&emsp;执行`jps`命令检查HBase是否启动成功，新增了3个进程（`HQuorumPeer`、`HMaster`和`HRegionServer`），则表示正常启动，可得到如下类似结果：
 
 ```shell
 2261 Jps
@@ -466,7 +473,7 @@ systemctl disable firewalld.service
 
 ✅**官方HBase安装指南**：[HBase伪集群分布安装](https://hbase.apache.org/book.html#quickstart_pseudo)
 
-✅**林子雨HBase2.2版本安装指南**：[HBase伪集群分布安装](http://dblab.xmu.edu.cn/blog/2442-2/)
+✅**林子雨HBase2.2版本安装指南**：[HBase2.2安装](http://dblab.xmu.edu.cn/blog/2442-2/)
 
 > ps：代码敲多了，感觉女人都没意思了哈哈哈，手动狗头QAQ  
 > 谈恋爱哪有学习敲代码香啊，给我继续敲！！代码使我变强，对象使我牵挂  

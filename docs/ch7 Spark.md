@@ -174,7 +174,7 @@ rddG = rddB.join(rddF)
 **前提条件：**  
 
 1. 完成Java运行环境部署（详见第2章Java安装）
-2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
+2. 完成Hadoop 3.3.1的单点部署（详见第2章安装单机版Hadoop）
 
 #### 7.4.1.2 实验内容
 
@@ -275,7 +275,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 **前提条件：**  
 
 1. 完成Java运行环境部署（详见第2章Java安装）
-2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
+2. 完成Hadoop 3.3.1的单点部署（详见第2章安装单机版Hadoop）
 3. 完成Spark Local模式的部署（详见本章Spark Local模式的安装）
 
 #### 7.4.2.2 实验内容

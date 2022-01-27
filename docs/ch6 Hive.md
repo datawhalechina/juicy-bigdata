@@ -494,6 +494,13 @@ schematool -initSchema -dbType mysql
 
 ![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6_ex1.3.png)
 
+&emsp;&emsp;如果运行此步时报错，`schematool:未找到命令...`，需要重新`source`一下全局变量：
+
+```shell
+source /etc/profile
+```
+
+
 ##### 8.启动Hadoop
 
 &emsp;&emsp;进入/opt/hadoop/bin目录，启动`Hadoop`，命令如下：  
