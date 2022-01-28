@@ -27,7 +27,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 我： 你可以说是，也可以说不是。 其实这只是MapReduce的一部分，MapReduce的强大在于分布式计算。
 ```
 
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.2.png" style="zoom:67%;" />                     	<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.3.png" style="zoom:67%;" />
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.0.2_3.png" style="zoom:67%;" /></center>
 
 ```log
 妻子： 分布式计算？ 那是什么？请给我解释下吧。
