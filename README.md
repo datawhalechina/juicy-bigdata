@@ -98,6 +98,22 @@
 4. 《Spark快速大数据分析》
 5. 《Spark SQL内核剖析》
 
+## 环境安装
+
+- Java 8
+
+- Hadoop 3.1.1
+
+- HBase 2.3.5 or 2.4.8
+
+- Mysql 8.0.27
+
+- Hive 2.3.9
+
+- Spark 3.2.0
+
+**安装包下载地址**：https://datawhale.feishu.cn/drive/folder/fldcnvODsgRWbyqVW9ApavEVEJg   密码: hO38
+
 ## 致谢
 
 感谢以下Datawhale成员对项目推进作出的贡献(排名不分先后)：

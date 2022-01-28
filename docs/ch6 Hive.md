@@ -304,7 +304,7 @@ CREATE TABLE students(
 **前提条件：**  
 
 1. 完成Java运行环境部署（详见第2章Java安装）
-2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
+2. 完成Hadoop 3.3.1的单点部署（详见第2章安装单机版Hadoop）
 
 #### 6.4.1.2 实验内容
 
