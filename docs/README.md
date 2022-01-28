@@ -114,7 +114,7 @@
 <tbody>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">沈豪</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士在读，项目负责人，参与前五章内容构建 </td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士在读，项目负责人，参与前五章内容构建</td>
     <td>
         <a href="https://www.zhihu.com/people/shenhao-63">知乎</a>,
         <a href="https://github.com/shenhao-stu">Github</a>
@@ -156,16 +156,58 @@
 
 ## 内部评审
 
-| 章节号 | 标题                        | 审核人                               |
-| :----- | --------------------------- | ------------------------------------ |
-| 1      | 大数据概述                  | 王嘉鹏、伊小雪、毛自翔、萌弟、边圣陶 |
-| 2      | 大数据处理架构Hadoop        | 伊小雪、萌弟、王嘉鹏                 |
-| 3      | Hadoop分布式文件系统        | 伊小雪、萌弟、边圣陶、王洲烽         |
-| 4      | 分布式数据库HBase           | 毛自翔、伊小雪、萌弟、边圣陶         |
-| 5      | 分布式并行编程模型MapReduce | 毛自翔、伊小雪、萌弟、边圣陶         |
-| 6      | 数据仓库Hive                | 毛自翔、伊小雪、边圣陶、王洲烽       |
-| 7      | Spark                       | 毛自翔、萌弟、边圣陶、王洲烽         |
-| 8      | 大数据处理技术总结          | 毛自翔、王洲烽                       |
+<table align="center" style="width:80%;">
+  <caption><b>内部评审名单</b></caption>
+<thead>
+  <tr>
+    <th>章节号</th>
+    <th>标题</th>
+    <th>审核人</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">1</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据概述</td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王嘉鹏、伊小雪、毛自翔、萌弟、边圣陶</span></td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">2</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据处理架构Hadoop</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">伊小雪、萌弟、王嘉鹏</span></td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">3</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">Hadoop分布式文件系统</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">伊小雪、萌弟、边圣陶、王洲烽</span></td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">4</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">分布式数据库HBase</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、伊小雪、萌弟、边圣陶</span></td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">5</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">分布式并行编程模型MapReduce毛自翔、伊小雪、萌弟、边圣陶</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、伊小雪、萌弟、边圣陶</span></td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">6</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">数据仓库Hive</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、伊小雪、边圣陶、王洲烽</span></td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">7</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">Spark</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、萌弟、边圣陶、王洲烽</span></td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">8</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据处理技术总结</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、王洲烽</span></td>
+  </tr>
+</tbody>
+</table> 
 
 ## 关注我们
 <div align=center>
