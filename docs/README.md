@@ -38,11 +38,26 @@
 1. 《大数据处理技术原理与应用 第三版》——林子雨
 2. Big Data US SanDiego
 3. 《Hadoop权威指南》
-3. 《Hive编程指南》
-2. 《维度建模权威指南(第3版)》
-3. 《大数据处理之道》
-4. 《Spark快速大数据分析》
-5. 《Spark SQL内核剖析》
+4. 《Hive编程指南》
+5. 《维度建模权威指南(第3版)》
+6. 《大数据处理之道》
+7. 《Spark快速大数据分析》
+
+## 环境安装
+
+- Java 8
+
+- Hadoop 3.1.1
+
+- HBase 2.3.5 or 2.4.8
+
+- Mysql 8.0.27
+
+- Hive 2.3.9
+
+- Spark 3.2.0
+
+**安装包下载地址**：https://datawhale.feishu.cn/drive/folder/fldcnvODsgRWbyqVW9ApavEVEJg   密码: hO38
 
 ## 致谢
 
