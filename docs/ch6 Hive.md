@@ -104,7 +104,12 @@
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch6.1.3.png" alt="image-20211225161347381" style="zoom:33%;" /></center>
 
+- **Hive与Hadoop生态的联系**
+
 &emsp;&emsp;`HDFS`作为高可靠的底层存储方式，可以存储海量数据。`MapReduce`对这些海量数据进行批处理，实现高性能计算。`Hive`架构位于`MapReduce` 、`HDFS`之上，其自身并不存储和处理数据，而是分别借助于`HDFS`和`MapReduce`实现数据的存储和处理，用`HiveQL`语句编写的处理逻辑，最终都要转换成`MapReduce`任务来运行。`Pig`可以作为`Hive`的替代工具，它是一种数据流语言和运行环境，适用于在`Hadoop`平台上查询半结构化数据集，常用于数据抽取（`ETL`）部分，即将外部数据装载到`Hadoop`集群中，然后转换为用户需要的数据格式。  
+
+- **Hive与HBase的区别**
+
 &emsp;&emsp;`HBase`是一个面向列式存储、分布式、可伸缩的数据库，它可以提供数据的实时访问功能，而`Hive`只能处理静态数据，主要是`BI`报表数据。就设计初衷而言，在`Hadoop`上设计`Hive`，是为了减少复杂`MapReduce`应用程序的编写工作，在`Hadoop`上设计`HBase`是为了实现对数据的实时访问。所以，`HBase`与`Hive`的功能是互补的，它实现了`Hive`不能提供的功能。
 
 ### 6.1.4 Hive与传统数据库的对比
