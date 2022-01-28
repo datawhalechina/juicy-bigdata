@@ -95,9 +95,6 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.3.png" style="zoom: 67%;" /></center>
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.4.png" style="zoom:67%;" /></center>
-
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.5.png" style="zoom: 80%;" /></center>
 
 > **这里再给出一个简单WordCount实例**
 
@@ -105,7 +102,10 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 - 对于`Map`函数的输入`<k1,v1>`而言，其具体**输入数据**就是`<某一行文本在文件中的偏移位置，该行文本的内容>`。用户可以自己编写`Map`函数处理过程，把文件中的一行读取后解析出每个单词，**输出**一批中间结果`<单词，出现次数>`；
 - 然后，把这些中间结果作为`Reduce`函数的**输入**，`Reduce`函数的具体处理过程也是由用户自己编写的，用户可以将相同单词的出现次数进行累加，**输出每个单词出现的总次数**。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.6.png" style="zoom:80%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.4.png" style="zoom:67%;" /></center>
+
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.5.png" style="zoom: 80%;" /></center>
+
 
 ## 5.2 MapReduce的工作流程
 

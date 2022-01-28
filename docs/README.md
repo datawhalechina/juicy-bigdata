@@ -23,60 +23,6 @@
 
 以下是目录，还等什么，学就完事了～
 
-## 大数据处理技术导论目录
-
-* [第一章：大数据概述](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述.md)
-  - [x] [1.1 大数据时代](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_1-1-大数据时代)
-  - [x] [1.2 大数据的概念](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_12-大数据的概念)
-  - [x] [1.3大数据的应用](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_13-大数据的应用)
-  - [x] [1.4 大数据关键技术](https://shenhao-stu.github.io/Big-Data/#/ch1%20大数据概述?id=_14-大数据关键技术)
-* [第二章：Hadoop](https://shenhao-stu.github.io/Big-Data/#/ch2%20Hadoop)
-  - [x] [2.0 Hadoop的前世今生](https://shenhao-stu.github.io/Big-Data/#/ch2%20Hadoop?id=_20-hadoop的前世今生)
-  - [x] [2.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch2%20Hadoop?id=_21-概述)
-  - [x] [2.3 Hadoop的安装与使用](https://shenhao-stu.github.io/Big-Data/#/ch2%20Hadoop?id=_23-hadoop的安装与应用)
-  - [x] [2.4 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch2%20Hadoop?id=_24-本章小结)
-* [第三章：HDFS](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS)
-  - [x] [3.0 产生的背景](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_30-产生的背景)
-  - [x] [3.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_31-概述)
-  - [x] [3.2 HDFS的体系结构](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_32-hdfs的体系结构)
-  - [x] [3.3 HDFS的存储原理](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_33-hdfs的存储原理)
-  - [x] [3.4 HDFS的数据读写过程](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_34-hdfs的数据读写过程)
-  - [x] [3.5 HDFS编程实战](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_35-hdfs编程实战)
-  - [x] [3.6 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch3%20HDFS?id=_36-本章小结)
-* [第四章：HBase](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase)
-  - [x] [4.0 产生的背景](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_40-产生的背景)
-  - [x] [4.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_41-概述)
-  - [x] [4.2 HBase 数据模型](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_42-hbase-数据模型)
-  - [x] [4.3 HBase 的实现原理](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_43-hbase-的实现原理)
-  - [x] [4.4 HBase 运行机制](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_44-hbase-运行机制)
-  - [x] [4.5 HBase 编程实战](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_45-hbase-编程实战)
-  - [x] [4.6 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch4%20HBase?id=_46-本章小结)
-* [第五章：MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce)
-  - [x] [5.0 洋葱辣椒酱与MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_50-洋葱辣椒酱与mapreduce)
-  - [x] [5.1 概述](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_51-概述)
-  - [x] [5.2 MapReduce的工作流程](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_52-mapreduce的工作流程)
-  - [x] [5.3 以Wordcount为例理解MapReduce](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_53-以wordcount为例理解mapreduce)
-  - [x] [5.4 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce?id=_54-本章小结)
-* [第六章：Hive](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive)
-  - [x] [6.0 数据仓库](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_60-数据仓库)
-  - [x] [6.1 Hive 基本概念](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_61-hive-基本概念)
-  - [x] [6.2 Hive 核心概念](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_62-Hive-核心概念)
-  - [x] [6.3 Hive 系统结构](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_63-hive-系统结构)
-  - [x] [6.4 Hive 编程实战](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_64-hive-编程实战)
-  - [x] [6.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch6%20Hive?id=_65-本章小结)
-* [第七章：Spark](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark)
-  - [x] [7.0 引言](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_70-引言)
-  - [x] [7.1 Spark 概述](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_71-spark-概述)
-  - [x] [7.2 Spark 编程模型](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_72-spark-编程模型)
-  - [x] [7.4 Spark 编程实战](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_74-spark-编程实战)
-  - [x] [7.5 本章小结](https://shenhao-stu.github.io/Big-Data/#/ch7%20Spark?id=_75-本章小结)
-* [第八章：大数据处理技术总结](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结)
-  - [x] [8.1 大数据技术框架综述](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_81-大数据技术框架综述)
-  - [x] [8.2 大数据分析引擎的发展简史](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_82-大数据分析引擎的发展简史)
-  - [x] [8.3 尾声](https://shenhao-stu.github.io/Big-Data/#/ch8%20大数据处理技术总结?id=_83-尾声)
-
-> 第二章以后的章节都配置有实验内容，使用Linux操作系统进行编程实战。
-
 ## 课程收获
 
 通过本教程的学习，你将能够学习到：
@@ -153,63 +99,10 @@
   </tr>
 </tbody>
 </table> 
-
-## 内部评审
-
-<table align="center" style="width:80%;">
-  <caption><b>内部评审名单</b></caption>
-<thead>
-  <tr>
-    <th>章节号</th>
-    <th>标题</th>
-    <th>审核人</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">1</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据概述</td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王嘉鹏、伊小雪、毛自翔、萌弟、边圣陶</span></td>
-  </tr>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">2</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据处理架构Hadoop</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">伊小雪、萌弟、王嘉鹏</span></td>
-  </tr>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">3</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">Hadoop分布式文件系统</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">伊小雪、萌弟、边圣陶、王洲烽</span></td>
-  </tr>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">4</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">分布式数据库HBase</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、伊小雪、萌弟、边圣陶</span></td>
-  </tr>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">5</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">分布式并行编程模型MapReduce毛自翔、伊小雪、萌弟、边圣陶</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、伊小雪、萌弟、边圣陶</span></td>
-  </tr>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">6</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">数据仓库Hive</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、伊小雪、边圣陶、王洲烽</span></td>
-  </tr>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">7</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">Spark</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、萌弟、边圣陶、王洲烽</span></td>
-  </tr>
-  <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">8</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据处理技术总结</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">毛自翔、王洲烽</span></td>
-  </tr>
-</tbody>
-</table> 
+最后，也感谢伊小雪、毛自翔、萌弟、边圣陶参与本课程的内部评审！
 
 ## 关注我们
+
 <div align=center>
 <p>扫描下方二维码关注公众号：Datawhale</p>
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg" width = "180" height = "180">
