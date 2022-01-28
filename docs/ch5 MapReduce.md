@@ -104,7 +104,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.4.png" style="zoom:67%;" /></center>
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.5.png" style="zoom: 80%;" /></center>
+<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch5.1.5.png" style="zoom: 67%;" /></center>
 
 
 ## 5.2 MapReduce的工作流程
