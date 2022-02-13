@@ -423,7 +423,7 @@ sudo cp /usr/share/java/mysql-connector-java-8.0.27.jar /opt/hive/lib/
 
 &emsp;&emsp;使用`chown`命令，更改`jar`包的所属用户和用户组，将其改为`datawhale`用户和`datawhale`用户组，命令如下：  
 ```shell
-sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-8.0.27.jar
+sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-java-8.0.27.jar
 ```
 
 ##### 8.修改hive配置文件
