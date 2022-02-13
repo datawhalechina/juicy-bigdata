@@ -2,7 +2,7 @@
 <img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="250">
 </div>
 
-# 大数据处理技术导论 Big Data
+# 妙趣横生大数据 Juicy Big Data
 
 [![](https://img.shields.io/github/watchers/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/watchers)
 [![](https://img.shields.io/github/stars/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/stargazers)
@@ -11,7 +11,7 @@
 ![](https://img.shields.io/github/repo-size/datawhalechina/juicy-bigdata.svg?style=flat)
 [![](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/Sync.yml/badge.svg?branch=master)](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/CI.yml)
 
-本项目《大数据处理技术导论》是Datawhale:whale:数据科学小组近期推动的一个重点项目。
+本项目《妙趣横生大数据》是Datawhale:whale:大数据技术相关内容的导论课程。
 
 当今的时代处处充斥着大数据的影子，大数据技术也为信息技术发展带来了重大的变革，并深刻影响着人们生活的方方面面。而我们旨在带领大家走进大数据时代的浪潮中，理解并能够使用目前主流的大数据处理架构Hadoop解决相应的问题，从小白到实践者。
 

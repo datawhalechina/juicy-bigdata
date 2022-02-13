@@ -297,6 +297,8 @@ cat /home/datawhale/.ssh/id_rsa.pub >> /home/datawhale/.ssh/authorized_keys
 ssh localhost
 ```
 
+&emsp;&emsp;**注**：如果遇到ssh连接localhost被拒绝，可能是没有安装`openssh-server`。✅参考博文：[ssh连接localhost被拒绝](https://blog.csdn.net/XiaoPANGXia/article/details/53412180?utm_source=blogkpcl11)
+
 #### 2.3.3.4 安装单机版Hadoop
 
 &emsp;&emsp;这里使用的Hadoop版本为3.3.1。下载地址为http://archive.apache.org/dist/hadoop/core/hadoop-3.3.1/hadoop-3.3.1.tar.gz  

@@ -294,7 +294,7 @@ cd /opt/spark
 <center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_2.png" style="zoom: 100%;" /></center>
 
 
-&emsp;&emsp;建立一个文本文件`hello_spark.txt`，将该文件放到文件目录` data/wordcount/`中，文本内容如下：  
+&emsp;&emsp;建立一个文本文件`helloSpark.txt`，将该文件放到文件目录` data/wordcount/`中，文本内容如下：  
 ```
 Hello Spark Hello Scala
 Hello Hadoop
@@ -331,7 +331,8 @@ val sc = new SparkContext(conf) // 创建SparkContext对象，通过传入SparkC
 
 &emsp;&emsp;根据具体的数据来源，如HDFS，通过SparkContext来创建RDD。创建的方式有三种：根据外部数据源、根据Scala集合、由其他的RDD操作转换。数据会被RDD划分为一系列的Partitions，分配到每个Partition的数据属于一个Task的处理范畴，具体代码如下：  
 ```scala
-val lines = sc.textFile("data/helloSpark.txt", 1) // 读取本地文件并设置为一个Partition
+val lines = sc.textFile("file:///opt/spark/data/wordcount/helloSpark.txt", 1) // 读取本地文件并设置为一个Partition
+//也可以将helloSpark.txt上传到hdfs中，直接读取hdfs中的文件，此时path路径不需要加"file://"前缀
 ```
 
 ##### 5.对数据进行转换处理

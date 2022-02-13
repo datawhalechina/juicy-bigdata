@@ -18,7 +18,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
         with:
-          source-repo: "git@github.com:shenhao-stu/Big-Data.git"
+          source-repo: "git@github.com:datawhalechina/juicy-bigdata.git"
           destination-repo: "git@gitee.com:shenhao-stu/Big-Data.git"
 
   reload-pages:
