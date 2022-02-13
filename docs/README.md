@@ -1,5 +1,5 @@
 <div align=center>
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="250">
+<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="400">
 </div>
 
 # 妙趣横生大数据 Juicy Big Data {docsify-ignore-all}
