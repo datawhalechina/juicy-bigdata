@@ -4,12 +4,12 @@
 
 # 大数据处理技术导论 Big Data {docsify-ignore-all}
 
-[![](https://img.shields.io/github/watchers/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/watchers)
-[![](https://img.shields.io/github/stars/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/stargazers)
-[![](https://img.shields.io/github/forks/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/network/members)
-[![](https://img.shields.io/github/issues-pr-closed-raw/shenhao-stu/Big-Data.svg?style=flat)](https://github.com/shenhao-stu/Big-Data/issues)
-![](https://img.shields.io/github/repo-size/shenhao-stu/Big-Data.svg?style=flat)
-[![](https://github.com/shenhao-stu/Big-Data/actions/workflows/Sync.yml/badge.svg?branch=master)](https://github.com/shenhao-stu/Big-Data/actions/workflows/CI.yml)
+[![](https://img.shields.io/github/watchers/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/watchers)
+[![](https://img.shields.io/github/stars/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/stargazers)
+[![](https://img.shields.io/github/forks/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/network/members)
+[![](https://img.shields.io/github/issues-pr-closed-raw/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/issues)
+![](https://img.shields.io/github/repo-size/datawhalechina/juicy-bigdata.svg?style=flat)
+[![](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/Sync.yml/badge.svg?branch=master)](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/CI.yml)
 
 本项目《大数据处理技术导论》是Datawhale:whale:数据科学小组近期推动的一个重点项目。
 
@@ -17,7 +17,7 @@
 
 ## 食用方法
 
-:whale: 推荐使用 [**Big Data Github在线阅读**](https://shenhao-stu.github.io/Big-Data/) 或 [**Big Data Gitee在线阅读**](https://shenhao-stu.gitee.io/big-data/) 进行学习。
+:whale: 推荐使用 [**Big Data Github在线阅读**](https://datawhalechina.github.io/juicy-bigdata/) 或 [**Big Data Gitee在线阅读**](https://shenhao-stu.gitee.io/big-data/) 进行学习。
 
 有配套代码的章节，可以在项目`experiments`目录的相应章节目录下面找到。
 
@@ -46,15 +46,10 @@
 ## 环境安装
 
 - Java 8
-
 - Hadoop 3.1.1
-
 - HBase 2.3.5 or 2.4.8
-
 - Mysql 8.0.27
-
 - Hive 2.3.9
-
 - Spark 3.2.0
 
 **安装包下载地址**：https://datawhale.feishu.cn/drive/folder/fldcnvODsgRWbyqVW9ApavEVEJg   密码: hO38
@@ -75,7 +70,7 @@
 <tbody>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">沈豪</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士在读，项目负责人，参与前五章内容构建</td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士在读，项目负责人，参与前五章内容构建</span></td>
     <td>
         <a href="https://www.zhihu.com/people/shenhao-63">知乎</a>,
         <a href="https://github.com/shenhao-stu">Github</a>

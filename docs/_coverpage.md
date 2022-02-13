@@ -1,5 +1,5 @@
 <div align=center>
-<img src="https://raw.githubusercontent.com/shenhao-stu/Big-Data/master/doc_imgs/logo.png" width="250">
+<img src="https://raw.githubusercontent.com/datawhalechina/juicy-bigdata/master/doc_imgs/logo.png" width="250">
 </div>
 
 
