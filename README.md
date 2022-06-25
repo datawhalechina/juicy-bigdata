@@ -1,5 +1,5 @@
 <div align=center>
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="400">
+<img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/logo.png" width="400">
 </div>
 
 
@@ -170,7 +170,7 @@
 ## 关注我们
 <div align=center>
 <p>扫描下方二维码关注公众号：Datawhale</p>
-<img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg" width = "180" height = "180">
+<img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/datawhale_qrcode.jpeg" width = "180" height = "180">
 </div>
 &emsp;&emsp;Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。
 

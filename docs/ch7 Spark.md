@@ -6,16 +6,16 @@
 &emsp;&emsp;我们再次拿出5.1章节中辣椒酱的demo（没印象的同学移步[这里](https://shenhao-stu.github.io/Big-Data/#/ch5%20MapReduce)），来简单看下Spark和MapReduce在处理问题的方式上有什么区别。  
 &emsp;&emsp;在介绍这个之前，必须要了解什么是内存和磁盘。**内存和磁盘两者都是存储设备**，但内存储存的是我们正在使用的资源，磁盘储存的是我们暂时用不到的资源。可以把磁盘理解为一个仓库，而内存是进出这个仓库的通道。仓库（磁盘）很大，而通道（内存）很小，通道就很容易塞满。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_1.png" style="zoom: 50%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_1.png" style="zoom: 50%;" /></center>
 
 &emsp;&emsp;假设把磁盘作为冰箱，内存为做饭时的操作台：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_2.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_2.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;MapReduce每一个步骤发生在内存中，但产生的中间值（溢写文件）都会写入在磁盘里，下一步操作时又会将这个中间值`merge`到内存中，如此循环直到最终完成计算。  
 &emsp;&emsp;而对于Spark，每个步骤也是发生在内存之中，但产生的中间值会直接进入下一个步骤，直到所有的步骤完成之后才会将最终结果保存进磁盘。所以在使用Spark做数据分析时，较少进行很多次相对没有意义的读写，节省大量的时间。当计算步骤很多时，Spark的优势就体现出来了。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_3.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.0_3.png" style="zoom: 100%;" /></center>
 
 ## 7.1 Spark概述
 
@@ -28,7 +28,7 @@
 &emsp;&emsp;而当Spark出现后，性能比MapReduce快了100多倍。因为有了Spark，才对MapReduce不满，才觉得MapReduce慢。而不是觉得MapReduce慢，所以诞生了Spark。真实世界中的因果关系并非是顺承的，**我们常常意识不到问题的存在，直到有大神解决了这些问题**。
 
 &emsp;&emsp;附上Spark框架发展历史中**重要的时间点**：
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.1.png" style="zoom: 80%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.1.png" style="zoom: 80%;" /></center>
 
 ### 7.1.2 Spark与Hadoop、MapReduce、HDFS的关系
 
@@ -38,7 +38,7 @@
 &emsp;&emsp;Spark在这样的背景下产生，它不像Hadoop一样采取磁盘读写，而是**基于性能更高的内存存储来进行数据存储和读写**（这里说的是计算数据的存储，而非持久化的存储）。但是Spark并非完美，缺乏对数据存储这一块的支持，即没有分布式文件系统，必须依赖外部的数据源，这个依赖可以是Hadoop系统的HDFS，也可以是其他的分布式文件系统，甚至可以是MySQL或本地文件系统。  
 &emsp;&emsp;基于以上分析，我们可以得出**结论**：Hadoop和Spark两者都是大数据框架，但是各自存在的目的不同。Hadoop实质上是一个**分布式数据基础设施**，它将巨大的数据集分派到一个集群中的多个节点**进行存储**，并具有**计算处理**的功能。Spark则不会进行分布式数据的**存储**，是**计算**分布式数据的工具，可以部分看做是MapReduce的竞品（**准确的说是SparkCore**）。综上所示，见下图：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.2_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.2_1.png" style="zoom: 100%;" /></center>
 
 ### 7.1.3 Spark生态体系
 
@@ -48,7 +48,7 @@
 
 &emsp;&emsp;以Spark为基础，有支持SQL语句的`SparkSQL`，有支持流计算的`Spark Streaming`，有支持机器学习的`MLlib`，还有支持图计算的`GraphX`。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.3_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.1.3_1.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;利用这些产品，Spark技术栈支撑了大数据分析、大数据机器学习等各种大数据应用场景。
 
@@ -68,7 +68,7 @@
 
 &emsp;&emsp;RDD共有五大特性，我们将对每一种特性进行介绍：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.4_1.jpg" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.2.4_1.jpg" style="zoom: 100%;" /></center>
 
 **一、分区**
 
@@ -111,7 +111,7 @@
 &emsp;&emsp;Spark比MapReduce快100 多倍。因为某些机器学习算法可能需要进行大量的迭代计算，产生数万个计算阶段，这些计算阶段在一个应用中处理完成，而不是像MapReduce那样需要启动数万个应用，因此极大地提高了运行效率。  
 &emsp;&emsp;DAG是有向无环图，即是说**不同阶段的依赖关系是有向**的，计算过程只能沿着依赖关系方向执行，被依赖的阶段执行完成之前，依赖的阶段不能开始执行，同时，这个依赖关系不能是环形依赖，否则就造成死循环。下面这张图描述了一个典型的Spark运行DAG的不同阶段：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.1_1.png" style="zoom: 50%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.1_1.png" style="zoom: 50%;" /></center>
 
 &emsp;&emsp;从图上看，整个应用被切分成3个阶段，阶段3需要依赖阶段1和阶段2，阶段1和阶段2互不依赖。Spark在执行调度时，先执行阶段1和阶段2，完成以后再执行阶段3。如果有更多的阶段，Spark的策略是一样的。**Spark大数据应用的计算过程**为：Spark会根据程序初始化DAG，由DAG再建立依赖关系，根据依赖关系顺序执行各个计算阶段。  
 &emsp;&emsp;**Spark 作业调度执行核心是DAG**，由DAG可以得出 **整个应用就被切分成哪些阶段**以及**每个阶段的依赖关系**。再根据每个阶段要处理的数据量生成相应的任务集合（TaskSet），每个任务都分配一个任务进程去处理。  
@@ -130,12 +130,12 @@ rddG = rddB.join(rddF)
 
 &emsp;&emsp;可以看到，共有4个转换函数，但是只有3个阶段。看起来并不是RDD上的每个转换函数都会生成一个计算阶段。那**RDD的计算阶段是怎样来进行划分**的呢？
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 50%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_1.png" style="zoom: 50%;" /></center>
 
 &emsp;&emsp;再看下上图，我们发现了一个规律，当 **RDD之间的转换连接线呈现多对多交叉连接**的时候，就会产生新的阶段。图中每个RDD里面都包含多个小块，每个小块都表示RDD的一个分片。  
 &emsp;&emsp;**一个RDD表示一个数据集，一个数据集中的多个数据分片需要进行分区传输，写入到另一个数据集的不同分片中**。这种涉及到数据分区交叉传输的操作，是否在MapReduce中也有印象？我们来回忆下MapReduce的过程：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_2.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.2_2.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;MapReduce把这种从数据集跨越，由多个分区传输的过程，叫做**Shuffle**。同样，Spark也需要通过`Shuffle`将数据进行重新组合，把相同`key`的数据放一起。由于会进行新的聚合、关联等操作，所以Spark每次`Shuffle`都会产生新的计算阶段。而每次计算时，需要的数据都是由前面一个或多个计算阶段产生的，所以计算阶段需要依赖关系，必须等待前面的阶段执行完毕后，才能进行`Shuffle`。  
 &emsp;&emsp;**Spark中计算阶段划分的依据是Shuffle**，而不是操作函数的类型，并不是所有的函数都有`Shuffle`过程。比如Spark计算阶段示例图中，RDD B和RDD F进行join后，得到RDD G。**RDD B不需要Shuffle**，因为RDD B在上一个阶段中，已经进行了数据分区，分区数和分区key不变，就不需要进行`Shuffle`。而RDD F的分区数不同，就需要进行`Shuffle`。Spark把**不需要Shuffle**的依赖，称为**窄依赖**。**需要Shuffle**的依赖，称为**宽依赖**。`Shuffle`是Spark最重要的一个环节，只有通过`Shuffle`，相关数据才能互相计算，从而构建起复杂的应用逻辑。  
@@ -158,7 +158,7 @@ rddG = rddB.join(rddF)
 
 &emsp;&emsp;Spark支持多种部署方案（Standalone、Yarn、Mesos等），不同的部署方案核心功能和运行流程基本一样，只是不同组件角色命名不同。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.4_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.3.4_1.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;**首先**，Spark在自己的`JVM`进程里启动应用程序，即`Driver`进程。启动后，`Driver`调用`SparkContext`初始化执行配置和输入数据。再由`SparkContext`启动`DAGScheduler`构造执行的DAG图，切分成计算任务这样的最小执行单位。  
 &emsp;&emsp;**接着**，`Driver`向`Cluster Manager`请求计算资源，用于`DAG`的分布式计算。`ClusterManager`收到请求以后，将`Driver`的主机地址等信息通知给集群的所有计算节点`Worker`。  
@@ -188,7 +188,7 @@ rddG = rddB.join(rddF)
 
 &emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[Spark下载](https://spark.apache.org/downloads.html)），下载[spark-3.2.0-bin-without-hadoop.tgz](https://www.apache.org/dyn/closer.lua/spark/spark-3.2.0/spark-3.2.0-bin-without-hadoop.tgz)。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex1.1.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex1.1.png)
 
 &emsp;&emsp;将安装包放置本地指定目录，如`/data/hadoop/`下。解压安装包至`/opt`目录下，命令如下：  
 ```shell
@@ -199,7 +199,7 @@ sudo tar -zxvf /data/hadoop/spark-3.2.0-bin-without-hadoop.tgz -C /opt/
 
 ##### 2.更改文件夹名和所属用户
 
-&emsp;&emsp;使用`mv`命令，将文件名改为`hive`，命令如下：  
+&emsp;&emsp;使用`mv`命令，将文件名改为`spark`，命令如下：  
 ```shell
 sudo mv /opt/spark-3.2.0-bin-without-hadoop/ /opt/spark
 ```
@@ -263,7 +263,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 ```
 &emsp;&emsp;过滤后的运行结果如下，可以得到$\pi$的5位小数近似值：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex1.2.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_ex1.2.png)
 
 &emsp;&emsp;至此，`Spark`安装部署完成，本次实验结束啦！
 
@@ -291,7 +291,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 ```
 cd /opt/spark
 ```
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_2.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_2.png" style="zoom: 100%;" /></center>
 
 
 &emsp;&emsp;建立一个文本文件`helloSpark.txt`，将该文件放到文件目录` data/wordcount/`中，文本内容如下：  
@@ -302,14 +302,14 @@ Hello Flink
 Spark is amazing
 ```
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_1.png" style="zoom: 100%;" /></center>
 
 ##### 2.本地模式启动spark-shell
 &emsp;&emsp; 通过进入bin目录，启动spark-shell的本地环境，指定核数为2个
 ```
 bin/spark-shell --master local[2]
 ```
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_3.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_3.png" style="zoom: 100%;" /></center>
 
 
 ##### 3.创建SparkContext对象
@@ -363,13 +363,13 @@ wordCountOdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + "�
 
 &emsp;&emsp;执行结果如下：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_4.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.3_4.png" style="zoom: 100%;" /></center>
 
 #### 7.4.2.4 WordCount在RDD的运行原理
 
 #####  1.textFile操作
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_1.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_1.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;在`textFile`操作之后，产生了两个RDD：**HadoopRDD** 和 **MapPartitionRDD**。
 
@@ -383,23 +383,23 @@ wordCountOdered.collect.foreach(wordNumberPair => println(wordNumberPair._1 + "�
 
 ##### 2.flatMap操作
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_2.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_2.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;flatMap操作产生了一个**MapPartitionsRDD**，其作用是对每个Partition中的每一行内容进行单词切分，并合并成一个大的单词实例的集合。
 
 ##### 3.map操作
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_3.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_3.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;map操作产生了一个**MapPartitionsRDD**，其作用是在单词拆分的基础上，对单词计数为1。例如将“Hello”和“Spark“变为`(Hello, 1)`,`(Spark, 1)`。
 
 ##### 4.reduceByKey操作
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_4.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_4.png" style="zoom: 100%;" /></center>
 
 &emsp;&emsp;reduceByKey操作是对相同`key`进行`value`的统计。包括本地级别和全局级别的统计。 该操作实际上产生了两个 RDD：**MapPartitionsRDD**与**ShuffledRDD**。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_3.png" style="zoom: 100%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7.4.2.4_3.png" style="zoom: 100%;" /></center>
 
 - MapPartitionsRDD  
 &emsp;&emsp;reduceByKey在MapPartitionRDD之后，首先，进行本地级别（local）的归并操作，把统计后的结果按照分区策略放到不同的分布式文件中。  

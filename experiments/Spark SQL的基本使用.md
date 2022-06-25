@@ -28,7 +28,7 @@ spark-shell
 
 &emsp;&emsp;启动后终端显示如下：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp2.1.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp2.1.png)
 
 &emsp;&emsp;如上出现了 Scala> 表明进入了Scala的Shell
 
@@ -96,7 +96,7 @@ val caseClassDS = Seq(Emp("ALLEN", 300.0, 30, 7499, "1981-02-20 00:00:00", "SALE
 caseClassDS.show()
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp2.4.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp2.4.png)
 
 ###### 2.3 由RDD创建DataFrame
 

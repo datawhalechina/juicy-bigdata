@@ -9,7 +9,7 @@
 >
 > HBase给我冲冲冲！！！！！
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.0.png" style="zoom:80%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.0.png" style="zoom:80%;" /></center>
 
 ### 4.0.1 Hadoop的局限
 
@@ -48,7 +48,7 @@
 ------
 &emsp;&emsp;**补充了那么多冷知识，那我们来看一下为什么传统数据库不能适应如今大数据的时代呢？**
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png" style="zoom: 67%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png" style="zoom: 67%;" /></center>
 
 &emsp;&emsp;随着Web 2.0应用的不断发展，传统的关系数据库已经无法满足需求，无论在**数据高并发**方面，还是在**高可拓展性**和**高可用性方面**，传统的关系型数据库都显得力不从心，其完善的事务机制和高效的查询机制也成为“鸡肋”。因此，包括HBase在内的非关系型数据库的逐渐崭露头角！
 
@@ -70,7 +70,7 @@
 &emsp;&emsp;HBase旨在提供对大量结构化数据的快速随机访问。它利用Hadoop文件系统（HDFS）提供的容错功能，同时作为Hadoop生态系统的一部分，提供对Hadoop文件系统中的数据的随机**实时**读写访问。  
 &emsp;&emsp;在Hadoop生态系统中，HBase利用Hadoop MapReduce来处理HBase中的海量数据，实现高性能计算；利用ZooKeeper作为协同服务，实现稳定服务和失败恢复；使用HDFS作为高可靠的底层存储，利用廉价集群提供海量数据存储能力。（当然，HBase也可以直接使用本地文件系统而不用HDFS作为底层数据存储方式。）Sqoop为HBase提供了高效、便捷的RDBMS数据导入功能，Pig和Hive为HBase提供了高层语言支持。
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.1.1.png" alt="Hadoop生态系统" style="zoom:50%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.1.1.png" alt="Hadoop生态系统" style="zoom:50%;" /></center>
 
 ### 4.1.2 HBase 访问接口
 
@@ -110,7 +110,7 @@ HBase提供了众多的访问方式，详见下表。
 
 &emsp;&emsp;下面用一个示例为阐释HBase的数据模型，下图为一张用来存储学生信息的HBase表：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.2.png" style="zoom:50%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.2.png" style="zoom:50%;" /></center>
 
 &emsp;&emsp;学号作为行键来唯一标识每个学生，表中设计了列族`Info`来保存学生相关信息，列族`Info`中包含3个列——`name`、`major`和`email`，分别用来保存学生的姓名、专业和电子邮件信息。  
 &emsp;&emsp;学号为`201505003`的学生存在两个版本的电子邮件地址，时间戳分别为`ts1=1174184619081`和`ts2=1174184620720`，时间戳较大的版本的数据是最新的数据。
@@ -120,13 +120,13 @@ HBase提供了众多的访问方式，详见下表。
 &emsp;&emsp;HBase使用坐标来定位表中的数据，也就是说，每个值都通过坐标来访问。HBase中需要根据行键、列族、列限定符和时间戳来确定一个单元格，因此，可以视为一个“四维坐标”，即 `[行键, 列族, 列限定符, 时间戳]`。  
 &emsp;&emsp;如果把所有坐标看成一个整体，视为“键”，把四维坐标对应的单元格中的数据视为“值”，那么，HBase可以看成一个键值数据库。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.3.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.3.png)
 
 ### 4.2.4 概念视图
 
 &emsp;&emsp;在HBase的概念视图中，一个表可以视为一个稀疏、多维的映射关系。下表是一个存储网页的HBase表的片段：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.4.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.4.png)
 
 - 行键是一个反向`URL`，由于HBase是按照行键的字典序来排序存储数据的，采用这种方式可以让来自同一个网站的数据内容都存在相邻的位置，在按照行键的值进行水平分区时，就可以尽量把来自同一个网站的数据分到同一个分区（Region）中。
 - 列族`content`用来存储网页内容。
@@ -143,13 +143,13 @@ HBase提供了众多的访问方式，详见下表。
 
 > **注意：**在概念视图中，我们可以发现，有些列是空的。但是在物理视图中， 这些空的列不会被存储。如果请求这些空白的单元格的时候，会返回`null`值。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.5.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.5.png)
 
 ### 4.2.6 面向列的存储
 
 &emsp;&emsp;我们通过一个简单例子，看看列式存储与行式存储方式的具体差别。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.6.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2.6.png)
 
 1. **传统行式数据库**  
 - 数据是按行存储的
@@ -167,7 +167,7 @@ HBase提供了众多的访问方式，详见下表。
 
 > ps：乍一看HBase这玩意是挺好的，但是他内部是如何实现工作的呢，且听下面分说
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2_emoji.png" style="zoom:80%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.2_emoji.png" style="zoom:80%;" /></center>
 
 ## 4.3 HBase的实现原理
 
@@ -187,14 +187,14 @@ HBase提供了众多的访问方式，详见下表。
 
 &emsp;&emsp;在一个HBase中，存储了很多的表。对于每个HBase表而言，表中的行是根据行键的值的字典序进行维护的，表中包含的行的数量可能非常庞大，无法存储在一台机器上，需要分布存储到多台机器上。因此，需要根据行键的值对表中的行进行分区。每个行区间构成一个分区，被称为Region。Region包含了位于某个值域区间内的所有数据，是负载均衡和数据分发的基本单位。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_1.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_1.png)
 
 **生成Region的过程：**
 1. 开始只有一个Region，随着数据不断的插入，Region越来越大。当达到一定的阈值时，开始分裂成两个新的Region
 2. 随着表中行的数量继续增加，就会分裂出越来越多的Region
 3. Region拆分操作非常快，因为拆分之后的Region读取的仍然是原存储文件，直到“合并”过程把存储文件异步地写到独立的文件之后，才会读取新文件
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_2.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.2_2.png)
 
 其中：
 - 每个Region默认大小是100MB到200MB（2006年以前的硬件配置），每个Region的最佳大小取决于单台服务器的有效处理能力，目前每个Region最佳大小建议1GB-2GB（2013年以后的硬件配置)
@@ -215,7 +215,7 @@ HBase提供了众多的访问方式，详见下表。
 
 &emsp;&emsp;综上所述，HBase使用类似B+树的三层结构来保存Region位置信息，详见下图：
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.3.png" style="zoom:50%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.3.3.png" style="zoom:50%;" /></center>
 
 &emsp;&emsp;三层结构的特点：
 - 为了加快访问速度，`.META.`表的全部Region都会被保存在内存中
@@ -229,12 +229,12 @@ HBase提供了众多的访问方式，详见下表。
 
 ### 4.4.1 HBase系统架构
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.1.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.1.png)
 
 - **客户端**：客户端包含访问HBase的接口，同时在缓存中维护着已经访问过的`Region`位置信息，用来加快后续数据访问过程。
 - **Zookeeper服务器**：Zookeeper可以帮助选举出一个Master作为集群的总管，并保证在任何时刻总有唯一一个Master在运行，这就避免了Master的“单点失效”问题。同时，Zookeeper也是一个很好的集群管理工具，被大量用于分布式计算，提供配置维护、域名服务、分布式同步、组服务等。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.1_zookeeper.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.1_zookeeper.png)
 
 - **Master服务器**：主服务器Master主要负责表和Region的管理工作：
   - 管理用户对表的增加、删除、修改、查询等操作
@@ -272,7 +272,7 @@ HBase提供了众多的访问方式，详见下表。
 
 &emsp;&emsp;`StoreFile`的合并和分裂过程见下图：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.3.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.4.3.png)
 
 ### 4.4.4 HLog工作原理
 
@@ -321,7 +321,7 @@ sudo tar -zxvf /data/hadoop/hbase-2.3.5-bin.tar.gz -C /opt/
 
 &emsp;&emsp;安装包解压成功后，在`/opt`目录下将会产生`hbase-2.3.5`目录，如下图所示：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.1.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.1.png)
 
 &emsp;&emsp;将`hbase-2.3.5`目录更名为`hbase`，命令如下：
 ```shell
@@ -436,7 +436,7 @@ start-hbase.sh
 2444 HRegionServer
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.2.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.2.png)
 
 **Tips：**
 - 如果HMaster启动后瞬间消失，请查看`/opt/hbase/logs`日志文件。  
@@ -479,7 +479,7 @@ systemctl disable firewalld.service
 > 谈恋爱哪有学习敲代码香啊，给我继续敲！！代码使我变强，对象使我牵挂  
 > 不慌，继续学！！  
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.2_emoji.png" style="zoom:80%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.2_emoji.png" style="zoom:80%;" /></center>
 
 ##### 8.启动HBase Shell
 
@@ -504,7 +504,7 @@ Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
 hbase(main):001:0>
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.3.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.3.png)
 
 ##### 9.创建表（`create`命令）
 
@@ -521,7 +521,7 @@ hbase(main):009:0> create 'student','info','addr'
 => Hbase::Table - student
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.4.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.4.png)
 
 ##### 10.添加数据（`put`命令）
 
@@ -534,7 +534,7 @@ put 'student','2','info:sex','man'
 ```
 
 &emsp;&emsp;执行结果如下：  
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.5.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.5.png)
 
 ##### 11.查看表内容（`scan`命令）
 
@@ -554,7 +554,7 @@ ROW                   COLUMN+CELL
 2 row(s) in 0.0200 seconds
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.6.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.6.png)
 
 ##### 12.查询数据（`get`命令）
 
@@ -573,7 +573,7 @@ info:name            timestamp=1531207642229, value=zeno
 3 row(s) in 0.0480 seconds
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.7.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.7.png)
 
 ##### 13.修改内容（`put`命令）
 
@@ -598,7 +598,7 @@ info:name            timestamp=1531207642229, value=zeno
 3 row(s) in 0.0520 seconds
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.8.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.8.png)
 
 ##### 14.添加列族（`alter`命令）
 
@@ -614,7 +614,7 @@ describe 'student'
 
 &emsp;&emsp;执行结果如下：  
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.9.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.9.png)
 
 ##### 15.删除列族（`alter`命令）
 
@@ -625,7 +625,7 @@ alter 'student', NAME => 'nation', METHOD => 'delete'
 
 &emsp;&emsp;执行结果如下：
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.10.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.10.png)
 
 ##### 16.删除表（`disable`命令）
 
@@ -649,7 +649,7 @@ hbase(main):019:0> drop 'student'
 0 row(s) in 2.2770 seconds
 ```
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.11.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex1.11.png)
 
 ### 4.5.2 实验二：常用的HBase操作
 
@@ -676,45 +676,45 @@ hbase(main):019:0> drop 'student'
 
 > ⚠：请根据给定的表，自行完成插入数据的操作，不提供代码。
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu.png)
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu_answer.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_stu_answer.png)
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_course.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_course.png)
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_course_answer.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_course_answer.png)
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_SC.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_SC.png)
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_SC_answer.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.2_SC_answer.png)
 
 
 ##### 2.编程实现以下指定功能，并用Hadoop提供的HBase Shell命令完成任务
 
 1. 使用`list`命令，列出HBase所有的表的相关信息，如表名、创建时间等
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.1.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.1.png)
 
 2. 使用`scan`命令，打印`Course`表的所有记录数据
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.2.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.2.png)
 
 3. 向已经创建好的表添加和删除指定的列族或列  
 - 使用`alter`命令，添加列族
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.3_add.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.3_add.png)
 
 - 使用`alter '表名','列族',METHOD=>'delete'`语句，删除列族 
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.3_del.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.3_del.png)
 
 4. 使用`truncate`命令，清空指定的表的所有记录数据
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.4.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.4.png)
 
 5. 使用`count`命令，统计表的行数
 
-![](https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.5.png)
+![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4_ex2.1.5.png)
 
 ## 4.6 本章小结
 
@@ -723,6 +723,6 @@ hbase(main):019:0> drop 'student'
 
 > ps：MapReduce，Hadoop生态系统的又一大基石，兄弟们，上高地的时候到了，准备冲冲冲
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.6.1.png" style="zoom:80%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.6.1.png" style="zoom:80%;" /></center>
 
-<center><img src="https://gitee.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.6.2.png" style="zoom:80%;" /></center>
+<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch4.6.2.png" style="zoom:80%;" /></center>
