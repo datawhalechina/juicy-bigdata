@@ -25,7 +25,7 @@ spark-shell
 
 &emsp;&emsp;启动后终端显示如下：
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp2.1.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp2.1.png)
 
 &emsp;&emsp;如上出现了 Scala> 表明进入了Scala的Shell
 
@@ -43,7 +43,7 @@ val rdd1 = sc.parallelize(Array(1,2,3,4,5,6,7,8))
 val rdd2 = sc.tsptFile("file:///opt/spark/README.md")
 ```
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.1.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.1.png)
 
 ##### 3.Transformation转换
 
@@ -117,7 +117,7 @@ rdd3.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.2.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.2.png)
 
 ##### 6.练习2
 
@@ -134,7 +134,7 @@ rdd2.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.3.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.3.png)
 
 ##### 7.练习3
 
@@ -158,7 +158,7 @@ rdd4.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.4.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.4.png)
 
 ##### 8.练习4
 
@@ -184,7 +184,7 @@ rdd5.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.5.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.5.png)
 
 ##### 9.练习5
 
@@ -202,7 +202,7 @@ rdd3.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.6.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.6.png)
 
 ##### 10.练习6
 
@@ -219,7 +219,7 @@ rdd2
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.7.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.7.png)
 
 ##### 11.练习7
 
@@ -242,4 +242,4 @@ rdd5.collect
 
 &emsp;&emsp;运行上述代码后，显示如下：  
 
-![](https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch7_sp3.8.png)
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch7_sp3.8.png)

@@ -4,7 +4,7 @@
 
 > &emsp;&emsp;本课程主要介绍大数据( Big Data) 的基本概念、影响和应用领域，还介绍了大数据处理架构Hadoop。朋友们上船啦，我们开始大数据的冒险之旅喽，大家握好船桨准备出发！！！！！
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch1.1.png" style="zoom:80%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch1.1.png" style="zoom:80%;" /></center>
 
 &emsp;&emsp;大数据时代悄然来临，带来了信息技术发展的巨大变革，并深刻影响着社会生产和人民生活的方方面面。全球范围内，世界各国政府均高度重视大数据技术的研究和产业的发展，纷纷把大数据上升为国家战略加以重点推进。企业和学术机构纷纷加大技术、资金和人员投入力度，加强对大数据关键技术的研发与应用，以期在“第三次信息化浪潮”中占得先机、引领市场。大数据已经不是“镜中花、水中月”，它的影响力和作用力正迅速触及社会的每个角落，所到之处，或是颠覆，或是提升，都让人们深切感受到了大数据实实在在的威力。
 
@@ -86,4 +86,4 @@
 
 > 看完了第一章大数据概述，是不是感觉意犹未尽，放心吧，后边的内容很精彩！！！！！希望大家带着轻松愉快的态度去学习，积极面对困难，持久化学习！！！
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch1.2.png" style="zoom:80%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch1.2.png" style="zoom:80%;" /></center>

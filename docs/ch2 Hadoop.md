@@ -14,7 +14,7 @@
 &emsp;&emsp;作为一个码农，必须得承认，Google的伟大是目前国内多家互联网公司无法比拟的，至少在学术研究方面。Google可以说是在分布式系统方面的领军企业。Google在2004年提出MapReduce框架，颠覆了整个计算机界，以至于后来的风靡一时、目前在国内使用的Hadoop系统，也是以此为基础发展而来。**在接下来几年的时间，Google陆续发表了各种先进的操作系统，引领着整个世界的分布式系统发展，能够达到处理每秒PB级的数据。**  
 &emsp;&emsp;数据不会说谎，这家1998年才成立的高科技公司，用了十几年，做出了几十年的成绩。伟大需要用时间去评判，需要影响力的积累，Google现在可能不能被称之为伟大。**但是我们有理由相信，如果Google一直坚持不作恶的原则，未来一定会在人类科技及生活的发展历史上画下浓墨重彩的一笔。**
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.1.png" style="zoom:67%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.1.png" style="zoom:67%;" /></center>
 
 ------
 
@@ -22,13 +22,12 @@
 
 &emsp;&emsp;Lucene的目的是为软件开发人员提供一个简单易用的工具包，以方便在目标系统中实现全文检索的功能，或者是以此为基础，建立起完整的全文检索引擎。Lucene在全文检索领域是一个经典的祖先，现在很多检索引擎都是在其基础上创建的，思想是相通的。  
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.2.png" style="zoom:67%;">
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.2.png" style="zoom:67%;">
 <br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px; text-align: center;">左为Doug Cutting，右为Lucene的LOGO</div></center>
-
 &emsp;&emsp;**Lucene**是用**JAVA**写成的，目标是为各种中小型应用软件加入全文检索功能。因为好用而且开源（代码公开），非常受程序员们的欢迎。  
 &emsp;&emsp;早期的时候，这个项目被发布在**Doug Cutting**的个人网站和**SourceForge**（一个开源软件网站）。后来，**2001**年底，**Lucene**成为**Apache**软件基金会**jakarta**项目的一个子项目。
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.3.png" style="zoom:67%;" />
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.3.png" style="zoom:67%;" />
 <br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px; text-align: center;">Apache软件基金会的LOGO，搞IT的应该都认识</div></center>
 
 > &emsp;&emsp;**Apache**软件基金会是专门为支持开源软件项目而办的一个非盈利性组织。它作为一个群体（或者社区）交流技术、维护软件的媒介，把代码重写与维护的工作有效组织起来。这些开发者们逐渐地把他们这个群体称为“Apache组织”，把这个经过不断修正并改善的服务器软件命名为Apache服务器。
@@ -41,13 +40,13 @@
 
 &emsp;&emsp;**Nutch**是一个建立在**Lucene**核心之上的网页搜索应用程序，可以开箱即用。它在**Lucene**的基础上加了网络爬虫和一些网页相关的功能，目的就是从一个简单的站内检索推广到全球网络的搜索上，就像**Google**一样。**Nutch**在业界的影响力比**Lucene**更大。  
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.4.png" style="zoom:67%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.4.png" style="zoom:67%;" /></center>
 
 &emsp;&emsp;相对于那些商用的搜索引擎，Nutch作为开放源代码的搜索引擎，会更加透明，更值得大家信赖。所有主流的搜索引擎都采用私有的排序算法，而不会解释为什么一个网页会排在一个特定的位置。除此之外，有的搜索引擎依照网站所付的费用，而不是根据它们本身的价值进行排序。与它们不同，Nutch没有什么需要隐瞒，也没有动机去扭曲搜索的结果。Nutch将尽自己最大的努力为用户提供最好的搜索结果。（比如百度搜索，有时候前几条全是广告QAQ哈哈哈哈）  
 &emsp;&emsp;大批网站采用了**Nutch**平台，大大降低了技术门槛，使低成本的普通计算机取代高价的**Web**服务器成为可能。甚至有一段时间，在硅谷有了一股用**Nutch**低成本创业的潮流。  
 &emsp;&emsp;随着时间的推移，无论是**Google**还是**Nutch**，都面临搜索对象“体积”不断增大的问题。尤其是**Google**，作为互联网搜索引擎，需要存储大量的网页，并不断优化自己的搜索算法，提升搜索效率。
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.5.png" style="zoom:67%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.5.png" style="zoom:67%;" /></center>
 
 ### 后来的后来\~\~\~\~ {docsify-ignore}
 
@@ -56,12 +55,12 @@
 &emsp;&emsp;**2003**年，**Google**发表了一篇技术学术论文，公开介绍了自己的谷歌文件系统**GFS**（**Google File System**）。这是**Google**公司为了存储海量搜索数据而设计的专用文件系统。  
 &emsp;&emsp;第二年，也就是**2004**年，**Doug Cutting**基于**Google**的**GFS**论文，实现了**分布式文件存储系统**，并将它命名为**NDFS**（**Nutch Distributed File System**）。
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.6.png" style="zoom:67%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.6.png" style="zoom:67%;" /></center>
 
 &emsp;&emsp;还是**2004**年，**Google**又发表了一篇技术学术论文，介绍自己的**MapReduce**编程模型，主要用于大规模数据集（大于**1TB**）的并行分析运算。  
 &emsp;&emsp;第二年（**2005**年），**Doug Cutting**又基于**MapReduce**，在**Nutch**搜索引擎实现了上述功能。
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.7.png" style="zoom:67%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.7.png" style="zoom:67%;" /></center>
 
 &emsp;&emsp;**2006**年，当时依然很厉害的**Yahoo**（雅虎）公司，招安了**Doug Cutting**。  
 &emsp;&emsp;雅虎这个名字对于现在的年轻人来说可能并不熟悉，但是它在70、80后一代中可是家喻户晓。雅虎创始人杨致远是那个时代年轻人心中的偶像，是中国互联网的领路人，马云的贵人和好友。雅虎是门户网站形式的创造者，搜索引擎的开拓者，它引领了世界互联网行业的发展！
@@ -75,22 +74,22 @@
 &emsp;&emsp;或许是为了给新上任的自己先冲点业绩，加盟**Yahoo**之后，**Doug Cutting**将**NDFS**和**MapReduce**进行了升级改造，并重新命名为**Hadoop**（**NDFS**也改名为**HDFS**，全称是**Hadoop Distributed File System**）。  
 &emsp;&emsp;这就是后来大名鼎鼎的大数据框架系统**Hadoop**的由来。而**Doug Cutting**，则被人们称为**Hadoop**之父。  
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.8.png" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.8.png" /></center>
 
 &emsp;&emsp;**Hadoop**这个名字，实际上是**Doug Cutting**他儿子的黄色玩具大象的名字。所以，**Hadoop**的**Logo**，就是一只奔跑的黄色大象。突然感觉到技术大牛的生活就是如此的枯燥且朴实。  
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.9.png" style="zoom:67%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.9.png" style="zoom:67%;" /></center>
 
 ------
 
 &emsp;&emsp;我们继续往下说，还是**2006**年，Google又发论文了。这次，介绍了自己的**BigTable**。这是一种分布式数据存储系统，一种用来处理海量数据的非关系型数据库。  
 &emsp;&emsp;**Doug Cutting**当然没有放过，在自己的**Hadoop**系统里面，引入了**BigTable**，并命名为**HBase**。
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.10.png" style="zoom: 80%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.10.png" style="zoom: 80%;" /></center>
 
 &emsp;&emsp;好吧，反正就是紧跟**Google**时代步伐，你出什么，我学什么。所以，**Hadoop**的核心部分，基本上都有**Google**的影子。  
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.11.png" style="zoom:80%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.11.png" style="zoom:80%;" /></center>
 
 &emsp;&emsp;时间来到**2008**年**1**月，**Hadoop**成功上位，正式成为**Apache**基金会的顶级项目。  
 &emsp;&emsp;同年**2**月，**Yahoo**宣布建成了一个拥有**1**万个内核的**Hadoop**集群，并将自己的搜索引擎产品部署在上面。  
@@ -99,7 +98,7 @@
 > &emsp;&emsp;以上就是Hadoop的先导内容，看完大家应该会对我们即将要学习的内容有一个不错的历史了解，接下来的知识就很硬核啦，大家冲冲冲冲冲冲！！！！！
 > &emsp;&emsp;其他的关于Hadoop的版本、历程、花边故事等等凑字数行为就不多介绍了，废话少说，直接上干货。
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.0.12.png" style="zoom: 50%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.12.png" style="zoom: 50%;" /></center>
 
 
 ## 2.1 概述
@@ -138,7 +137,7 @@
 
 &emsp;&emsp;经过多年发展，Hadoop项目不断完善和成熟，目前已经包含多个子项目，逐渐形成一个丰富的Hadoop生态系统。  
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.2.png" style="zoom:50%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.2.png" style="zoom:50%;" /></center>
 
 - Common  
     &emsp;&emsp;Common是为Hadoop其他子项目提供支持的常用工具，它主要包括**FileSystem、RPC和串行化库**，它们为在廉价的硬件上搭建云计算环境提供了基本的服务，并为运行在该平台上的软件开发提供了所需的API。
@@ -172,7 +171,7 @@
 
 > 学了这么多理论，终于要实操了吗，大伙儿冲冲冲啊！！！！
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch2.3.png" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.3.png" /></center>
 
 ### 2.3.1 实验准备
 

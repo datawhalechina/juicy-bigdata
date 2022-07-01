@@ -8,13 +8,13 @@
 &emsp;&emsp;不管你是否从事大数据行业，都有必要了解下大数据的发展。从第一章到第七章，相信我们已经对**大数据基本组件的使用**有所了解。实际上，一套大数据的解决方案通常会包含有多个重要的组件，一般来说，大数据框架在总体上分为**存储引擎**和**计算分析引擎**。存储引擎通常用来存储海量数据，而分析引擎通常用来分析海量数据。  
 &emsp;&emsp;针对存储引擎，详见第三章的`HDFS`、第四章的`HBase`；针对计算分析引擎，详见第五章的`MapReduce`，第六章的`Hive`，第七章的`Spark`。下图包含常用的存储引擎和分析引擎用到的技术（后续课程将会详细介绍相关技术）：
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch8.1.png"/></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch8.1.png"/></center>
 
 ## 8.2 大数据分析引擎的发展简史
 
 &emsp;&emsp;笔者根据大数据处理引擎出现时间，绘制了一张简图，用于总结过去20年间，大数据分析引擎的发展简史和未来方向：
 
-<center><img src="https://github.com/shenhao-stu/Big-Data/raw/master/doc_imgs/ch8.2.png"/></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch8.2.png"/></center>
 
 &emsp;&emsp;值得说明的是，该时间标注的是技术出现的时间。在生产环境中，这些技术得到大量运用的时间要比出现时间晚5-10年左右。
 
