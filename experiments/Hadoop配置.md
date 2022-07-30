@@ -29,7 +29,7 @@ Linux Centos 6
 #### 实验内容
 
 在Linux系统的服务器上，安装Hadoop3.0.0集群模式。
-![image-20210324200229210](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200229210.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200229210.png)
 
 ##### 1.安装jdk
 
@@ -66,7 +66,7 @@ sudo leafpad /etc/profile
 export JAVA_HOME=/opt/java
 export PATH=$JAVA_HOME/bin:$PATH
 ```
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200407803.png" alt="image-20210324200407803" style="zoom:67%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200407803.png" style="zoom:67%;" />
 保存并关闭编辑器
 
 让环境变量生效。
@@ -82,7 +82,7 @@ java -version
 ```
 
 正常结果显示如下
-![image-20210324200646610](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200646610.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200646610.png)
 ```
 java version "1.8.0_161"
 Java(TM) SE Runtime Environment (build 1.8.0_161-b12)
@@ -138,7 +138,7 @@ hadoop version
 ```
 
 正常结果显示如下
-![image-20210324200549213](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200549213.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200549213.png)
 
 ```
 Hadoop 3.0.0
@@ -332,7 +332,7 @@ hdfs namenode -format
 /opt/hadoop/sbin/start-all.sh
 ```
 
-![image-20210328180809748](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328180809748.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328180809748.png)
 
 ##### 17.查看Hadoop进程
 
@@ -341,7 +341,7 @@ hdfs namenode -format
 `jps`
 
 输出结果必须包含6个进程，结果如下：
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200752332.png" alt="image-20210324200752332" style="zoom: 67%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200752332.png" style="zoom: 67%;" />
 
 ```
 2529 DataNode
@@ -411,7 +411,7 @@ hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.ja
 ```
 hadoop fs -ls /dolphin/out/
 ```
-![image-20210324202518121](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324202518121.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324202518121.png)
 如果列表中结果包含”_SUCCESS“文件，代码集群运行成功。
 
 查看具体的执行结果，可以用如下命令：
@@ -419,7 +419,7 @@ hadoop fs -ls /dolphin/out/
 ```
 hadoop fs -text /dolphin/out/part-r-00000
 ```
-![image-20210324202554101](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324202554101.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324202554101.png)
 到此，集群安装完成。
 
 ---
@@ -434,7 +434,7 @@ hadoop fs -text /dolphin/out/part-r-00000
 
 - **外网IP slave**
 
-![image-20210328180401241](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328180401241.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328180401241.png)
 
 **/opt/hadoop/sbin/start-dfs.sh**
 

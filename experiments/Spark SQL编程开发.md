@@ -25,7 +25,7 @@ Linux Ubuntu 16.04
 
 启动后终端显示如下：
 
-![image-20210611110343254](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611110343.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611110343.png)
 
 如上出现了 Scala> 表明进入了Scala的Shell
 
@@ -59,7 +59,7 @@ RDD转化为DataFrame
 
 执行后，显示如下：
 
-![image-20210611110624754](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611110624.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611110624.png)
 
 #### 5.使用sql方式查询数据
 
@@ -73,7 +73,7 @@ RDD转化为DataFrame
 
 查询结果如下：
 
-![image-20210611110947229](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611110947.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611110947.png)
 
 #### 6.读取文件
 
@@ -88,7 +88,7 @@ spark的安装包中有测试文件，这里我们使用people.json文件来实�
 
 执行后显示如下
 
-![image-20210611111037644](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111037.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111037.png)
 
 #### 7.查询
 
@@ -98,7 +98,7 @@ spark的安装包中有测试文件，这里我们使用people.json文件来实�
 
 执行后显示如下
 
-![image-20210611111058097](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111058.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111058.png)
 
 查询某列所有数据，相当于sql中的select name from table
 
@@ -106,7 +106,7 @@ spark的安装包中有测试文件，这里我们使用people.json文件来实�
 
 执行后显示如下
 
-![image-20210611111132507](C:\Users\56550\AppData\Roaming\Typora\typora-user-images\image-20210611111132507.png)
+![](C:\Users\56550\AppData\Roaming\Typora\typora-user-images\image-20210611111132507.png)
 
 查询某几列所有的数据，并对列进行计算，相当于sql中的 select name, age + 10 from table
 
@@ -114,7 +114,7 @@ spark的安装包中有测试文件，这里我们使用people.json文件来实�
 
 执行后显示如下：
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111213.png"/>
+<img src="https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111213.png"/>
 
 #### 8.条件过滤
 
@@ -124,7 +124,7 @@ spark的安装包中有测试文件，这里我们使用people.json文件来实�
 
 执行后显示如下：
 
-![image-20210611111357447](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111357.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111357.png)
 
 #### 9.聚合
 
@@ -134,7 +134,7 @@ spark的安装包中有测试文件，这里我们使用people.json文件来实�
 
 执行后显示如下：
 
-![image-20210611111421584](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111421.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111421.png)
 
 #### 10.存储文件
 
@@ -152,7 +152,7 @@ Spark SQL支持将数据存储为很多格式，如csv，json，text，parquet�
 
 执行后显示如下
 
-![image-20210611111506959](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111507.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111507.png)
 
 
 至此，本次实验结束啦。

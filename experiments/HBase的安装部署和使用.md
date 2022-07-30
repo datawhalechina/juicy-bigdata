@@ -29,7 +29,7 @@ Linux Ubuntu 16.04 前提条件：
 
 安装包解压成功后，在“/opt”目录下将会产生"hbase-2.3.5"目录。
 
-![image-20210423132920566](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210423132920566.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210423132920566.png)
 
 运行下面命令，将hbase-2.3.5目录更名为hbase
 
@@ -137,7 +137,7 @@ dolphin@tools:~$ jps
 2444 HRegionServer
 ```
 
-![image-20210424184916381](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424184916381.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424184916381.png)
 
 如果HMaster、HRegionServer和HQuorumPeer进程都出现了，说明HBase安装成功。
 
@@ -166,7 +166,7 @@ Version 1.2.6, rUnknown, Mon May 29 02:25:32 CDT 2017
 hbase(main):001:0>
 ```
 
-![image-20210424185145181](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424185145181.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424185145181.png)
 
 #### 10.创建表
 
@@ -183,7 +183,7 @@ hbase(main):001:0>
 => Hbase::Table - student
 ```
 
-![image-20210424204131514](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424204131514.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424204131514.png)
 
 #### 11.put添加数据
 
@@ -197,7 +197,7 @@ hbase中的put命令用于向表中添加数据，下面我们向student表中�
 
 `put 'student','2','info:sex','man'`
 
-执行后显示如下：![image-20210424204210160](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424204210160.png)
+执行后显示如下：![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424204210160.png)
 
 #### 12.查看表内容
 
@@ -217,7 +217,7 @@ ROW                   COLUMN+CELL
 2 row(s) in 0.0200 seconds
 ```
 
-![image-20210424204236526](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424204236526.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424204236526.png)
 
 #### 13.查询
 
@@ -236,7 +236,7 @@ info:name            timestamp=1531207642229, value=zeno
 3 row(s) in 0.0480 seconds
 ```
 
-![image-20210424204259759](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424204259759.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424204259759.png)
 
 #### 14.修改内容
 
@@ -263,16 +263,16 @@ info:name            timestamp=1531207642229, value=zeno
 3 row(s) in 0.0520 seconds
 ```
 
-![image-20210424204339528](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424204339528.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424204339528.png)
 
 #### 15.添加列族
 
-![image-20210424203357381](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203357381.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203357381.png)
 **这里可以指定NAME => 'nation' or 'NAME' => 'nation'**
 
 #### 16.删除列族
 
-![image-20210424203434915](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203434915.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203434915.png)
 
 #### 17.删除表
 
@@ -296,5 +296,5 @@ hbase(main):019:0> drop 'student'
 0 row(s) in 2.2770 seconds
 ```
 
-![image-20210424204432165](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424204432165.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424204432165.png)
 

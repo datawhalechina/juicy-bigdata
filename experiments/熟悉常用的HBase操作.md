@@ -15,40 +15,40 @@ Linux Ubuntu 16.04 前提条件：
 
 ##### （1）列出HBase所有的表的相关信息，如表名、创建时间等：
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424202829293.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424202829293.png)
 
 ##### （2） 在终端打印出指定的表的所有记录数据：
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424202902922.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424202902922.png)
 
 ##### （3） 向已经创建好的表添加和删除指定的列族或列：
 
 ###### 添加列族：
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203357381.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203357381.png)
 
 ###### 删除列族：
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203434915.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203434915.png)
 
 ##### （4） 清空指定的表的所有记录数据：
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424202937956.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424202937956.png)
 
 ##### （5） 统计表的行数
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424202129997.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424202129997.png)
 
 #### 2、现有以下关系型数据库中的表和数据，要求将其转换为适合于HBase存储的表并插入数据：
 
-![image-20210424203641556](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203641556.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203641556.png)
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424202055666.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424202055666.png)
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203659572.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203659572.png)
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203041505.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203041505.png)
 
-![image-20210424203733666](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203733666.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203733666.png)
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210424203019817.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210424203019817.png)

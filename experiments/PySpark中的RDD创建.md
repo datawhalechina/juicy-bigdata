@@ -24,7 +24,7 @@
 
 ## 4. 研究流程图
 
-![image-20210610145017053](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145017.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145017.png)
 
 ## 5. 实验步骤
 
@@ -68,7 +68,7 @@ raw_data = sc.textFile(data_file)
 raw_data.count()
 ```
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145234.png" alt="image-20210610145234613" style="zoom: 67%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145234.png" style="zoom: 67%;" />
 
 我们还可以检查数据中的前几个条目。
 
@@ -76,7 +76,7 @@ raw_data.count()
 raw_data.take(5)
 ```
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145323.png" alt="image-20210610145323289" style="zoom:67%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145323.png" style="zoom:67%;" />
 
 在接下来的实验中，我们将使用这些原始数据来了解不同的Spark转换和操作。****
 
@@ -95,7 +95,7 @@ data = sc.parallelize(a)
 data.count()
 ```
 
-![image-20210610145510708](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145510.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145510.png)
 
 和上面一样，我们可以访问RDD上的前几个元素。
 
@@ -103,4 +103,4 @@ data.count()
 data.take(5)
 ```
 
-![image-20210610145537127](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145537.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610145537.png)

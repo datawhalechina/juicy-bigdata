@@ -52,7 +52,7 @@ df.show()
 
 &emsp;&emsp;需要注意的是 `spark-shell` 启动后会自动创建一个名为 `spark` 的 `SparkSession`，在命令行中可以直接引用即可，结果显示如下：  
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/ch7_sp2.2.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/ch7_sp2.2.png)
 
 &emsp;&emsp;其中`emp.json`的内容在本仓库的[resources](https://github.com/shenhao-stu/Big-Data/tree/master/resources) 目录下 。
 
@@ -77,7 +77,7 @@ val ds = spark.read.json("file:///home/datawhale/emp.json").as[Emp]
 ds.show()
 ```
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/ch7_sp2.3.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/ch7_sp2.3.png)
 
 2. 由内部数据集创建
 

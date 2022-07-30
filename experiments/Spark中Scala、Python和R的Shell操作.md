@@ -27,7 +27,7 @@ Scala是Spark默认的语言，在命令行终端中输入下面的命令即可�
 
 启动后终端显示如下：
 
-![image-20210610124835335](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610124835.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610124835.png)
 
 如上出现了 Scala> 表明进入了Scala的Shell
 
@@ -48,9 +48,9 @@ Scala是Spark默认的语言，在命令行终端中输入下面的命令即可�
 
 执行后显示如下，表明单词统计案例完成。
 
-![image-20210610133415236](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610133415.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610133415.png)
 
-![image-20210610125549021](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610125549.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610125549.png)
 
 > 关于代码的说明：
 > sc是SparkContext对象，该对象是提交Spark程序的入口
@@ -68,7 +68,7 @@ Scala是Spark默认的语言，在命令行终端中输入下面的命令即可�
 
 启动后显示如下
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610134049.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610134049.png)
 
 
 如上出现了 >>> 表明进入了Python的Shell
@@ -85,7 +85,7 @@ pythonLines.collect()
 
 执行后显示如下：
 
-![image-20210610140148643](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140148.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140148.png)
 
 关于代码的说明：
 
@@ -107,7 +107,7 @@ pythonLines.collect()
 
 执行后显示如下：
 
-![image-20210610140334065](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140334.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140334.png)
 
 如上显示 > 表明进入了R语言的Shell
 
@@ -123,7 +123,7 @@ pythonLines.collect()
 
 执行后显示如下
 
-![image-20210610140501522](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140501.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140501.png)
 
 只显示某一列数据
 
@@ -131,7 +131,7 @@ pythonLines.collect()
 
 执行后显示如下
 
-![image-20210610140550468](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140550.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140550.png)
 
 过滤数据
 
@@ -139,7 +139,7 @@ pythonLines.collect()
 
 执行后显示如下
 
-![image-20210610140625909](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140625.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610140625.png)
 
 
 至此，本次实验结束啦

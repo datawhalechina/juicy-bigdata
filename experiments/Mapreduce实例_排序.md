@@ -54,7 +54,7 @@ Starting nodemanagers
 
 显示信息如下
 
-![image-20210414105217189](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414105217189.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414105217189.png)
 
 运行状态中出现DataNode、NameNode、NodeManager、ResourceManager说明Hadoop启动运行正常
 
@@ -64,45 +64,45 @@ Starting nodemanagers
 
 中途会弹出如下窗口
 
-![image-20210414105355475](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414105355475.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414105355475.png)
 
 点击"ok"进入eclipse界面
 
 进入eclipse界面后，如下图所示，点击window-->Preferences
 
-![image-20210414105502062](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414105502062.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414105502062.png)
 
 接着如下图所示，选择Hadoop Map/Reduce，点击图中图标2给出的相关内容，最后依次点击图标3，图标4
 
-![image-20210414105613957](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414105613957.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414105613957.png)
 
 进入eclipse界面后，点击window-->show view-->other-->mapreduce tools-->map/reduce locations，过程如下图所示
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414105818799.png" alt="image-20210414105818799" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414105818799.png" style="zoom:50%;" />
 
 
 
 上述操作完成后，界面下方会显示如下图标
 
-![image-20210414110001131](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414110001131.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414110001131.png)
 
 点击图上图标2，在新弹出的窗口中按如下内容填写
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414110050768.png" alt="image-20210414110050768" style="zoom:67%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414110050768.png" style="zoom:67%;" />
 
 填写完成后点击Finish
 
 此时，点击界面右上方，如下图所示的图标
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414111827945.png" alt="image-20210414111827945" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414111827945.png" style="zoom:50%;" />
 
 如下图所示，选择Map/Reduce
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414111856470.png" alt="image-20210414111856470" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414111856470.png" style="zoom:50%;" />
 
 在界面左侧显示如下信息
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414111908080.png" alt="image-20210414111908080" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414111908080.png" style="zoom:50%;" />
 
 到此，基于 Eclipse 的 MapReduce 开发环境搭建完成
 
@@ -112,15 +112,15 @@ Starting nodemanagers
 
 首先在eclipse界面当中，依次点击file-->new-->project进入以下界面
 
-![image-20210414112018225](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112018225.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112018225.png)
 
 双击Map/Reducer Project选项，弹出以下窗口，按下图所示，填写相关信息，创建一个test工程
 
-![image-20210414112031285](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112031285.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112031285.png)
 
 信息填写完成后，点击finish，完成创建，此时在eclipse界面左侧的Project Explorer下可以看到我们新建的工程，如下图所示
 
-![image-20210414112040348](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112040348.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112040348.png)
 
 这就是创建一个工程的方法，后期需要创建工程时，只需修改上方过程中的工程名
 
@@ -128,13 +128,13 @@ Starting nodemanagers
 
 test工程创建完成后，右击该工程的src，依次点击new-->Package，弹出以下窗口，根据下图所示，填写包名。
 
-![image-20210414112056636](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112056636.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112056636.png)
 
 
 
 填写完成后点击"finish"，此时sort包创建完成，如下图所示在eclipse界面左上方的工程目录下的src下可以看到创建的sort包
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112147835.png" alt="image-20210414112147835" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112147835.png" style="zoom:50%;" />
 
 这就是创建一个包的方法，后期在某工程下需要创建包时，只需修改上方过程中的包名
 
@@ -142,11 +142,11 @@ test工程创建完成后，右击该工程的src，依次点击new-->Package，
 
 包创建完后，右击在sort包，依次点击new-->class弹出以下界面，按下图所示，填写类的名称
 
-![image-20210414112202026](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112202026.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112202026.png)
 
 类名填写完成后，点击finish，完成类的创建，如下图所示，在sort包下可以看到一个Sort类，同时eclipse主界面上弹出Sort类的编辑窗口
 
-![image-20210414112218535](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112218535.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112218535.png)
 
 这就是创建一个类的方法，后期在创建类的时候，只需要修改上方过程中类的名称即可
 
@@ -214,17 +214,17 @@ test工程创建完成后，右击该工程的src，依次点击new-->Package，
 
 如下图如所示，在DFS locations下的myhadoop下的文件标志上右击，点击Create new directory，创建新路径
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112349128.png" alt="image-20210414112349128" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112349128.png" style="zoom:50%;" />
 
 如下图所示，输入创建的路径名称，然后点击"ok",完成创建
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112400302.png" alt="image-20210414112400302" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112400302.png" style="zoom:50%;" />
 
 右击myhadoop下的文件标志，点击Refresh,进行刷新
 
 如下图所示，刷新后，在Hadoop上创建的目录就会显示出来
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112657724.png" alt="image-20210414112657724" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112657724.png" style="zoom:50%;" />
 
 输入以下命令，回车，将本地的file1.txt文件上传的/sort/input/目录下
 
@@ -244,15 +244,15 @@ test工程创建完成后，右击该工程的src，依次点击new-->Package，
 
 如下图所示，在eclipse中打开Sort.java类文件，右击界面，依次点击Run As-->Java Application,运行程序。
 
-![image-20210414112823104](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112823104.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112823104.png)
 
 如果运行成功，显示如下
 
-![image-20210414112835891](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414112835891.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414112835891.png)
 
 右击DFS locations下的mahadoop下的sort文件，点击Refresh,进行刷新，显示如下信息，双击打开part-r-00000文件，显示如下
 
-![image-20210414113002895](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414113002895.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414113002895.png)
 
 出现以上信息，说明排序成功
 
@@ -262,11 +262,11 @@ test工程创建完成后，右击该工程的src，依次点击new-->Package，
 
 首先，创建一个IntPair类，右击sort包，依次点击new-->class弹出以下界面，按下图所示，填写类的名称
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414113123227.png" alt="image-20210414113123227" style="zoom:67%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414113123227.png" style="zoom:67%;" />
 
 再创建一个rank类，右击sort包，依次点击new-->class弹出以下界面，按下图所示，填写类的名称
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414113159227.png" alt="image-20210414113159227" style="zoom:50%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414113159227.png" style="zoom:50%;" />
 
 类创建完成后，依次点击file-->open file-->Desktop-->IntPair.txt，在eclipse中打开IntPair.txt文件
 
@@ -336,7 +336,7 @@ BAD_ID=0
 
 右击DFS locations下的myhadoop下的rank文件，点击Refresh,进行刷新，显示如下信息，双击打开part-r-00000文件，显示如下。
 
-![image-20210414113734312](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414113734312.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414113734312.png)
 
 
 出现以上信息，说明排序成功
@@ -347,7 +347,7 @@ BAD_ID=0
 
 首先，创建一个rank1类，右击sort包，依次点击new-->class弹出以下界面，按下图所示，填写类的名称
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414113938828.png" alt="image-20210414113938828" style="zoom:67%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414113938828.png" style="zoom:67%;" />
 
 类创建完成后，依次点击file-->open file-->Desktop-->rank1.txt，在eclipse中打开rank1.txt文件
 
@@ -421,7 +421,7 @@ WRONG_LENGTH=0
 
 右击DFS locations下的myhadoop下的rank1文件，点击Refresh,进行刷新，显示如下信息
 
-![image-20210414114147467](https://gitee.com/shenhao-stu/picgo/raw/master/Others/image-20210414114147467.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Others/image-20210414114147467.png)
 
 双击打开part-r-00000文件，显示如下
 

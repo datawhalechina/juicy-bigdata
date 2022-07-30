@@ -58,7 +58,7 @@ Linux Ubuntu 16.04
 
 如下，6个进程都出现了，表明Hadoop启动成功
 
-![image-20210507113338055](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511234649.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511234649.png)
 
 #### 5.启动hive
 
@@ -118,7 +118,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210511235116593](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235116.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235116.png)
 
 #### 8.导入方式一：本地文件导入到Hive表
 
@@ -134,7 +134,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210511235211742](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235211.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235211.png)
 
 #### 9.查看数据
 
@@ -144,7 +144,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210511235306545](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235306.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235306.png)
 
 查看testB表的数据
 
@@ -152,7 +152,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210511235319496](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235319.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235319.png)
 
 #### 10.导入方式二：Hive表导入到Hive表
 
@@ -164,7 +164,7 @@ CREATE TABLE testB (
 
 执行后部分日志显示如下：
 
-![image-20210511235434722](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235434.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235434.png)
 
 动态导入分区表数据，需要开启hive设置
 
@@ -176,7 +176,7 @@ CREATE TABLE testB (
 
 执行后部分日志显示如下：
 
-![image-20210511235637932](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235638.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235638.png)
 
 #### 11.查看此时testA表的信息
 
@@ -186,7 +186,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210511235757884](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235757.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235757.png)
 
 查看testA的分区信息
 
@@ -194,7 +194,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210511235846864](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235846.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511235846.png)
 
 #### 12.导入方式三：HDFS文件导入到Hive表
 
@@ -212,7 +212,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210512000212213](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000212.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000212.png)
 
 导入HDFS上的数据，这里相当于给testA添加了一个新的分区数据
 
@@ -220,7 +220,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210512000401562](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000401.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000401.png)
 
 查看testA的数据
 
@@ -228,7 +228,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210512000428353](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000428.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000428.png)
 
 #### 13.导入方式四：创建表的过程中从其他表导入
 
@@ -238,7 +238,7 @@ CREATE TABLE testB (
 
 执行后部分日志显示如下：
 
-![image-20210512000512097](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000512.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000512.png)
 
 查看testC的数据
 
@@ -246,7 +246,7 @@ CREATE TABLE testB (
 
 执行后显示如下：
 
-![image-20210512000535125](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000535.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000535.png)
 
 #### 14.导出方式一：导出到本地文件系统
 
@@ -257,7 +257,7 @@ HQL会启动Mapreduce完成，这里的/home/dolphin/Desktop/output就是Mapredu
 
 执行后部分日志显示如下：
 
-![image-20210512000805879](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000805.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000805.png)
 
 注意：hive导出数据到指定的文件夹，会覆盖原文件内容，若不存在就创建文件夹和文件
 
@@ -267,7 +267,7 @@ HQL会启动Mapreduce完成，这里的/home/dolphin/Desktop/output就是Mapredu
 
 执行后显示如下：
 
-![image-20210512001048815](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001048.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001048.png)
 
 #### 15.导出方式二：导出到HDFS
 
@@ -278,7 +278,7 @@ HQL会启动Mapreduce完成，这里的/home/dolphin/Desktop/output就是Mapredu
 
 执行后部分日志显示如下：
 
-![image-20210512000954401](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000954.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512000954.png)
 
 在命令行终端下输入如下命令，查看导出的数据
 
@@ -286,7 +286,7 @@ HQL会启动Mapreduce完成，这里的/home/dolphin/Desktop/output就是Mapredu
 
 执行后显示如下：
 
-![image-20210512001108917](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001108.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001108.png)
 
 #### 16.导出方式三：采用hive的-e参数来导出数据。
 
@@ -302,7 +302,7 @@ HQL会启动Mapreduce完成，这里的/home/dolphin/Desktop/output就是Mapredu
 
 如下下图所示
 
-![image-20210512001210801](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001210.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001210.png)
 
 #### 17.导出方式四：采用hive的-f参数来导出数据。
 
@@ -330,7 +330,7 @@ HQL会启动Mapreduce完成，这里的/home/dolphin/Desktop/output就是Mapredu
 
 如下下图所示
 
-![image-20210512001259253](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001259.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512001259.png)
 
 
 
@@ -339,16 +339,16 @@ HQL会启动Mapreduce完成，这里的/home/dolphin/Desktop/output就是Mapredu
 - data3为外部表通过insert一个内部表的数据
 - data2为外部表直接load文件（内部表也是直接load同样的文件）
 
-![image-20210512011049832](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011206.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011206.png)
 
 内部表删除的时候，user/hive/warehouse/dolphin.db/内部表目录也删除了
 
-![image-20210512011143487](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011143.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011143.png)
 
 外部表删除的时候，目录和文件都没有删除。
 
 如果外部表是用内部表的data进行insert的，即使内部表被删除了，user/hive/warehouse/dolphin.db/外部表数据依旧存在。
 
-![image-20210512011158613](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011158.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011158.png)
 
 所以外部表应该也是移动了一份数据到user/hive/warehouse/dolphin.db/外部表目录中。

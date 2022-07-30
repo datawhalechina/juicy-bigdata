@@ -54,7 +54,7 @@ raw_data.take(5)
 
 现在我们将数据文件加载到 `raw_data` RDD中。
 
-![image-20210610170055935](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610170056.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610170056.png)
 
 ### 步骤3 `filter` 转换
 这个转换可以应用于RDDs，以便只保留满足特定条件的元素。
@@ -65,7 +65,7 @@ raw_data.take(5)
 normal_raw_data = raw_data.filter(lambda x: 'normal.' in x)
 ```
 
-![image-20210610170409593](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610170409.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610170409.png)
 
 现在我们可以计算在新的RDD中有多少个元素。
 
@@ -78,7 +78,7 @@ print("There are {} 'normal.' interactions".format(normal_count))
 print("Count completed in {} seconds".format(round(tt,3)))
 ```
 
-![image-20210610171228409](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610171228.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610171228.png)
 
 ### 步骤4 `map` 转换
 通过使用Spark中的`map`转换，我们可以对RDD中的每个元素应用一个函数。Python的`lambdas`对这一点特别有表现力。
@@ -94,7 +94,7 @@ print("Parse completed in {} seconds".format(round(tt,3)))
 pprint(head_rows[0])
 ```
 
-![image-20210610171623188](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610171623.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610171623.png)
 
 如果我们取很多元素而不是前几个呢？
 
@@ -105,7 +105,7 @@ tt = time() - t0
 print("Parse completed in {} seconds".format(round(tt,3)))
 ```
 
-![image-20210610171758638](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610171758.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610171758.png)
 
 **使用 `map` 和预定义函数**
 当然，我们可以使用带有`map`的预定义函数。
@@ -121,7 +121,7 @@ head_rows = key_csv_data.take(5)
 pprint(head_rows[0])
 ```
 
-![image-20210610172058421](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610172058.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610172058.png)
 
 ### 步骤5 `collect` 动作 `action`
 到目前为止，我们已经使用了`actions`中的`count`和`take`
@@ -136,7 +136,7 @@ tt = time() - t0
 print("Data collected in {} seconds".format(round(tt,3)))
 ```
 
-![image-20210610172751115](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610172751.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610172751.png)
 
 作为组合前面所有内容的最后一个示例，我们希望收集所有`normal.`交互作为键值对。
 
@@ -160,7 +160,7 @@ print("Data collected in {} seconds".format(round(tt,3)))
 print("There are {} 'normal' interactions". format(normal_count))
 ```
 
-![image-20210610173058843](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610173058.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610173058.png)
 
 ## PySpark中的RDDs Aggregations操作
 
@@ -200,9 +200,9 @@ print("Total duration for 'attack' interactions is %s"\
     %(total_attack_duration))
 ```
 
-![image-20210610174843888](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610174843.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610174843.png)
 
-![image-20210610174914098](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610174914.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610174914.png)
 
 我们可以更进一步，使用计数来计算持续时间的平均值。
 
@@ -216,7 +216,7 @@ print("Mean duration for 'attack' interactions is %s"\
     %(round(total_attack_duration/float(attack_count),3)))
 ```
 
-![image-20210610175034171](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610175034.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610175034.png)
 
 我们有一个第一个(而且过于简单)的方法来识别attack interactions。
 
@@ -237,7 +237,7 @@ print("Mean duration for 'normal' interactions is %s"\
     %(round(normal_sum_count[0]/float(normal_sum_count[1]),3)))
 ```
 
-![image-20210610184255373](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610184255.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610184255.png)
 
 在上一步骤的聚合中，累加器的第一个元素保存总和，而第二个元素保存计数。
 
@@ -256,9 +256,9 @@ print("Mean duration for 'attack' interactions is %s"\
     %(round(attack_sum_count[0]/float(attack_sum_count[1]),3)))
 ```
 
-![image-20210610184332227](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610184332.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610184332.png)
 
-![image-20210610185730787](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610185730.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610185730.png)
 
 ## PySpark中的RDDs key value操作
 
@@ -279,7 +279,7 @@ key_value_data = csv_data.map(lambda x: (x[41], x)) # x[41] contains the network
 key_value_data.take(1)
 ```
 
-![image-20210610190144525](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190144.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190144.png)
 
 ### 步骤9 具有键/值对RDDs的数据聚合
 
@@ -296,7 +296,7 @@ durations_by_key = key_value_duration.reduceByKey(lambda x, y: x + y)
 durations_by_key.collect()
 ```
 
-![image-20210610190227067](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190227.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190227.png)
 
 我们对键/值对有一个特定的计数操作。
 
@@ -305,7 +305,7 @@ counts_by_key = key_value_data.countByKey()
 counts_by_key
 ```
 
-![image-20210610190332863](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190332.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190332.png)
 
 **使用`combineByKey`**
 
@@ -323,7 +323,7 @@ sum_counts = key_value_duration.combineByKey(
 sum_counts.collectAsMap()
 ```
 
-![image-20210610190427588](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190427.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190427.png)
 
 我们可以看到，参数与前一个实验中传递给`aggregate`的参数非常相似。与每种类型关联的结果都是成对的。如果我们想要得到平均值，我们需要在收集结果之前做除法。
 
@@ -335,4 +335,4 @@ for tag in sorted(duration_means_by_type, key=duration_means_by_type.get, revers
     print (tag, duration_means_by_type[tag])
 ```
 
-![image-20210610190824184](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190824.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610190824.png)

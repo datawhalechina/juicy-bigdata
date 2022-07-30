@@ -29,13 +29,13 @@ Linux Centos 6
 
   `./start-dfs.sh`
 
-  ![image-20210326122222326](https://i.loli.net/2021/03/26/jyqps8vO1GWxdc4.png)
+  ![](https://i.loli.net/2021/03/26/jyqps8vO1GWxdc4.png)
 
 ##### 2. 用jps查看HDFS是否启动
 
 `jps`
 
-![image-20210326122736762](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210326122736762.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210326122736762.png)
 
 我们可以看到相关进程，都已经启动。
 
@@ -49,7 +49,7 @@ Linux Centos 6
 
 `hadoop fs -ls /`
 
-![image-20210326123127674](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210326123127674.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210326123127674.png)
 
 ##### 4. ls 命令
 
@@ -61,7 +61,7 @@ Linux Centos 6
 
 `hadoop fs -ls -R /`
 
-![image-20210326124327389](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210326124327389.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210326124327389.png)
 
 ##### 5. put 命令
 
@@ -79,7 +79,7 @@ Linux Centos 6
 
 `hadoop fs -ls /`
 
-![image-20210326125840807](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210326125840807.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210326125840807.png)
 
 如果拷贝文件和目录成功，你将会看到 /logs 和 /REAME.txt
 
@@ -101,7 +101,7 @@ Linux Centos 6
 
 如果拷贝文件和目录成功，你将会看到 /logs 和 /NOTICE.txt
 
-![image-20210326130117258](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210326130117258.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210326130117258.png)
 
 ##### 7. get 命令
 
@@ -125,7 +125,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `ls -l`
 
-![image-20210326130225990](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210326130225990.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210326130225990.png)
 
 如果拷贝文件和目录成功，你将会看到 logs 和 NOTICE.txt
 
@@ -173,7 +173,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -ls /myhadoop2`
 
-![image-20210326130527696](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210326130527696.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210326130527696.png)
 
 如果创建目录成功，你将会看到 /myhadoop1/test 和 /myhadoop2/test
 
@@ -205,7 +205,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -ls /myhadoop1`
 
-![image-20210328120303473](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328120303473.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328120303473.png)
 
 如果拷贝成功，你将会看到 LICENSE.txt 文件
 
@@ -233,7 +233,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 如果拷贝成功，你将会看到 /myhadoop2/LICENSE.txt 文件
 
-![image-20210328120539882](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328120539882.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328120539882.png)
 
 ##### 12. count 命令
 
@@ -247,9 +247,9 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `1 8 128199 /myhadoop1/logs`
 
-![image-20210328120715221](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328120715221.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328120715221.png)
 
-![image-20210328122017712](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328122017712.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328122017712.png)
 
 ##### 13. du 命令
 
@@ -273,7 +273,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -du -s -h /myhadoop2`
 
-![image-20210328122230795](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328122230795.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328122230795.png)
 
 >第一列标示该目录下总文件大小
 >
@@ -281,7 +281,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 >
 >第三列标示你查询的目录
 
-![image-20210328124349144](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328124349144.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328124349144.png)
 
 ##### 14. setrep 命令
 
@@ -293,7 +293,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hadoop fs -setrep -R 3 /myhadoop1`
 
-![image-20210328122422486](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328122422486.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328122422486.png)
 
 ##### 15. stat 命令
 
@@ -317,7 +317,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 显示为文件大小， 如下：
 
-![image-20210328122533216](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328122533216.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328122533216.png)
 
 ##### 16. balancer 命令
 
@@ -343,7 +343,7 @@ local file不能和 hdfs file名字不能相同，否则会提示文件已存在
 
 `hdfs dfsadmin -report`
 
-![image-20210328123146369](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328123146369.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328123146369.png)
 
 **hdfs dfsadmin -safemode < enter | leave | get | wait >**
 
@@ -357,11 +357,11 @@ wait：等待离开安全模式
 
 `hdfs dfsadmin -safemode enter`
 
-![image-20210328123230322](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328123230322.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328123230322.png)
 
 ##### 18. 其他 命令
 
-![image-20210328124810316](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328124810316.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328124810316.png)
 
 ###### 18.1 cat 命令
 
@@ -374,7 +374,7 @@ wait：等待离开安全模式
 
 > hadoop fs -tail -f **根据文件描述符进行追踪，当文件改名或被删除，追踪停止**
 
-![image-20210328125119748](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328125119748.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328125119748.png)
 
 ###### 18.2 appendToFile 命令
 
@@ -384,7 +384,7 @@ wait：等待离开安全模式
 hadoop fs -appendToFile /本地文件 /hdfs中的文件
    ```
 
-![image-20210328125642993](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328125642993.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328125642993.png)
 
 ###### 18.3 chown 命令
 

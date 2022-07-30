@@ -42,7 +42,7 @@ Linux Ubuntu 16.04
 
 启动成功显示如下
 
-![](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113111.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113111.png)
 
 #### 3.指定元数据数据库类型并初始化Schema
 
@@ -84,7 +84,7 @@ schemaTool completed
 
 如下，6个进程都出现了，表明Hadoop启动成功
 
-![image-20210507113338055](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113338.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210507113338.png)
 
 #### 5.启动hive
 
@@ -113,7 +113,7 @@ hive>
 
 执行后显示如下：
 
-![image-20210507113505481](C:\Users\56550\AppData\Roaming\Typora\typora-user-images\image-20210507113505481.png)
+![](C:\Users\56550\AppData\Roaming\Typora\typora-user-images\image-20210507113505481.png)
 
 #### 7.查看已有的数据库,并使用dolphin数据库
 
@@ -121,7 +121,7 @@ hive>
 
 执行后显示如下：
 
-![image-20210507113547926](C:\Users\56550\AppData\Roaming\Typora\typora-user-images\image-20210507113547926.png)
+![](C:\Users\56550\AppData\Roaming\Typora\typora-user-images\image-20210507113547926.png)
 
 `use dolphin;`
 
@@ -144,19 +144,19 @@ row format delimited
 fields terminated by ',';
 ```
 
-![image-20210511190445268](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190448.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190448.png)
 
 #### 9.向分区表partition_table导入数据
 
 我们已经在本地准备好数据集dome1.txt，输入以下命令，回车
 
-![image-20210511190711419](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190711.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190711.png)
 
 `load data local inpath '/home/dolphin/Desktop/dome1.txt' into table partition_table partition(city="beijing");`
 
 执行后显示如下：
 
-![image-20210511190820190](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190820.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190820.png)
 
 查看partition_table表中的数据，输入以下命令，回车
 
@@ -164,7 +164,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511190936935](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190936.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511190936.png)
 
 #### 10.增加分区
 
@@ -178,13 +178,13 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511191110704](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191202.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191202.png)
 
 导入**新增**的分区数据，输入以下命令，回车，如果没导入数据执行select * from partition_table不会出现hangzhou，和原先的一样。
 
-![image-20210511230227815](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511230227.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511230227.png)
 
-![image-20210511191308382](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191308.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191308.png)
 
 `load data local inpath '/home/dolphin/Desktop/dome2.txt' into table partition_table partition(city="hangzhou");`
 
@@ -192,7 +192,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511191558304](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191558.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511191558.png)
 
 #### 11.创建名为partition_table1的动态分区表
 
@@ -213,7 +213,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511192724689](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511192724.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511192724.png)
 
 查看此时partition_table1的分区，输入以下命令，回车
 
@@ -221,7 +221,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511192855681](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511192855.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511192855.png)
 
 向表partition_table1导入数据
 
@@ -229,7 +229,7 @@ fields terminated by ',';
 
 注意：hive此时会执行Mapreduce任务，等待任务结束。 部分日志如下
 
-![image-20210511193043986](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193044.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193044.png)
 
 #### 12.查看动态分区表partition_table1
 
@@ -239,7 +239,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511193117701](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193117.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193117.png)
 
 查看partition_table1的数据
 
@@ -247,7 +247,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511193143435](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193143.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193143.png)
 
 #### 13.在HDFS上查看partition_table1的数据
 
@@ -257,7 +257,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511193351558](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193351.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193351.png)
 
 查看**hive的分区数据**在HDFS上的状态
 
@@ -265,7 +265,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511193510586](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193510.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193510.png)
 
 查看**partition_table1表在“beijing”分区**的数据
 
@@ -273,7 +273,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511193618044](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193618.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511193618.png)
 
 #### 14.创建一个外部分区表partition_table2
 
@@ -286,7 +286,7 @@ fields terminated by ',';
 
 执行后显示如下：
 
-![image-20210511194123431](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194123.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194123.png)
 
 导入数据：
 
@@ -302,7 +302,7 @@ BUG的问题：插入分区字段名必须跟创建表分区字段名相同。
 
 执行后部分日志显示如下：
 
-![image-20210511194650192](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194650.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194650.png)
 
 查看数据：
 
@@ -310,7 +310,7 @@ BUG的问题：插入分区字段名必须跟创建表分区字段名相同。
 
 执行后显示如下：
 
-![image-20210511194738708](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194738.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194738.png)
 
 #### 15.删除内部分区表和外部分区表
 
@@ -321,7 +321,7 @@ alter table partition_table2 drop partition(city="beijing");
 
 执行后显示如下：
 
-![image-20210511194957908](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194957.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511194957.png)
 
 #### 16.查看表的数据
 
@@ -331,7 +331,7 @@ alter table partition_table2 drop partition(city="beijing");
 
 执行后显示如下：
 
-![image-20210511195114927](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195114.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195114.png)
 
 #### 17.查看表的分区信息
 
@@ -343,7 +343,7 @@ alter table partition_table2 drop partition(city="beijing");
 
 执行后显示如下：
 
-![image-20210511195219306](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195219.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195219.png)
 
 查看表分区信息
 
@@ -353,15 +353,15 @@ alter table partition_table2 drop partition(city="beijing");
 
 执行后显示如下：
 
-![image-20210511195449248](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195449.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195449.png)
 
 `select * from partition_table2;`
 
-![image-20210511233510771](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511233510.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511233510.png)
 
 #### 15-17总结操作
 
-![image-20210511233433242](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511233433.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511233433.png)
 
 #### 18.在HDFS查看两张表格的数据
 
@@ -372,13 +372,13 @@ hadoop fs -ls /user/hive/warehouse/dolphin.db/partition_table2/
 
 执行后显示如下：
 
-![image-20210511195614791](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195614.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195614.png)
 
 `hadoop fs -cat /user/hive/warehouse/dolphin.db/partition_table2/city=beijing/000000_0`
 
 执行后显示如下：
 
-![image-20210511195705559](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195705.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210511195705.png)
 
 #### 结论：
 
@@ -402,17 +402,17 @@ hadoop fs -ls /user/hive/warehouse/dolphin.db/partition_table2/
 - data3为外部表通过insert一个内部表的数据
 - data2为外部表直接load文件（内部表也是直接load同样的文件）
 
-![image-20210512011049832](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011206.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011206.png)
 
 内部表删除的时候，user/hive/warehouse/dolphin.db/内部表目录也删除了
 
-![image-20210512011143487](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011143.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011143.png)
 
 外部表删除的时候，目录和文件都没有删除。
 
 如果外部表是用内部表的data进行insert的，即使内部表被删除了，user/hive/warehouse/dolphin.db/外部表数据依旧存在。
 
-![image-20210512011158613](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011158.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512011158.png)
 
 所以外部表应该也是移动了一份数据到user/hive/warehouse/dolphin.db/外部表目录中。
 

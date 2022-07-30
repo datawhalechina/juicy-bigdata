@@ -69,11 +69,11 @@
 
   如下图所示，找到左上角Example项目下src目录后，右击，选择New，在点击Class。
 
-  ![image-20210328215256838](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328215256838.png)
+  ![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328215256838.png)
 
   此时会弹出New Java Class对话框，如下图，填写Package为com.dolphin，填写Name为Example，再点击右下角Finish。此时Example类已经创建完成。
 
-  ![image-20210328215326942](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328215326942.png)
+  ![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328215326942.png)
 
 - 7.导入Hadoop Jar包
 
@@ -81,7 +81,7 @@
 
   点击后会弹出Properties for Example对话框，如下图所示，点击Libraries后，再点击Add External JARs... 此时弹出JAR Selection对话框，找到根目录下/apps/hadoop/share/hadoop/common目录，选中hadoop-common-3.0.0.jar后，再点击OK
 
-  ![image-20210328215346700](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328215346700.png)
+  ![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328215346700.png)
 
   
 
@@ -109,7 +109,7 @@
   hdfs://localhost:8020/mydir delete success!
   ```
 
-  ![image-20210328214901423](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210328214901423.png)
+  ![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210328214901423.png)
 
 - 10.运行内容
 

@@ -19,7 +19,7 @@
 
 ## 4. 研究流程图
 
-![image-20210611111836200](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111836.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611111836.png)
 
 本实验将引入Spark功能，以结构化的方式处理数据。基本上，一切都围绕着*Data Frame*的概念，并使用*SQL语言*查询它们。
 我们将看到在其他数据分析生态系统(例如R和Python/ panda)中非常流行的数据框架抽象在执行探索性数据分析时是如何非常强大的。
@@ -121,7 +121,7 @@ tcp_interactions = sqlContext.sql("""
 tcp_interactions.show()
 ```
 
- ![image-20210611112241165](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112315.png)
+ ![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112315.png)
 
 SQL查询的结果是RDDs并支持所有正常的RDD操作。
 
@@ -133,7 +133,7 @@ for ti_out in tcp_interactions_out.collect():
     print(ti_out)
 ```
 
-![image-20210611112339798](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112340.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112340.png)
 
 我们可以很容易地使用`printSchema`查看我们的数据结构。
 
@@ -141,7 +141,7 @@ for ti_out in tcp_interactions_out.collect():
 interactions_df.printSchema()
 ```
 
-![image-20210611112416430](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112416.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112416.png)
 
 ### 步骤4 查询作为`DataFrame`操作
 
@@ -159,7 +159,7 @@ tt = time() - t0
 print("Query performed in {} seconds".format(round(tt, 3)))
 ```
 
-![image-20210611112449077](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112449.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112449.png)
 
 现在，假设我们想要计算有多少交互持续时间超过1秒，没有从目的地传输数据，按协议类型分组。我们可以只添加到前面的过滤器调用。
 
@@ -175,7 +175,7 @@ tt = time() - t0
 print("Query performed in {} seconds".format(round(tt, 3)))
 ```
 
-![image-20210611112517757](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112517.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112517.png)
 
 我们可以使用它来执行一些[探索性数据分析](http://en.wikipedia.org/wiki/Exploratory_data_analysis)。
 让我们来计算一下我们有多少攻击和正常的交互。首先，我们需要将label列添加到数据中。
@@ -212,7 +212,7 @@ tt = time() - t0
 print("Query performed in {} seconds".format(round(tt, 3)))
 ```
 
-![image-20210611112609256](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112609.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112609.png)
 
 现在，我们要根据标签和协议类型对它们进行计数，以便了解协议类型在检测交互是否为攻击时有多重要。
 
@@ -225,7 +225,7 @@ tt = time() - t0
 print("Query performed in {} seconds".format(round(tt, 3)))
 ```
 
-![image-20210611112650853](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112651.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112651.png)
 
 乍一看，与其他协议类型相比，*udp*交互在网络攻击中所占的比例较低。
 
@@ -241,7 +241,7 @@ tt = time() - t0
 print("Query performed in {} seconds".format(round(tt, 3)))
 ```
 
-![image-20210611112725371](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112725.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210611112725.png)
 
 我们将看到这个新的分割与确定网络交互是否为攻击有多么相关。
 

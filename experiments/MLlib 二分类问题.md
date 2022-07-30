@@ -70,7 +70,7 @@ df = spark.read.csv('bank.csv', header=True, inferSchema=True)
 df.printSchema()
 ```
 
-![image-20210610191431253](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191431.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191431.png)
 
 输入变量：
 - age, job, marital, education, default, balance, housing, loan, contact, day, month, duration, campaign, pdays, previous, poutcome.
@@ -85,7 +85,7 @@ df.printSchema()
 pd.DataFrame(df.take(5), columns=df.columns).transpose()
 ```
 
-![image-20210610191456266](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191456.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191456.png)
 
 #### 3.2 查看数据标签
 
@@ -93,7 +93,7 @@ pd.DataFrame(df.take(5), columns=df.columns).transpose()
 df.groupby('deposit').count().toPandas()
 ```
 
-![image-20210610191521914](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191521.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191521.png)
 
 #### 3.3 数值变量的汇总统计信息
 
@@ -102,7 +102,7 @@ numeric_features = [t[0] for t in df.dtypes if t[1] == 'int']
 df.select(numeric_features).describe().toPandas().transpose()
 ```
 
-![image-20210610191539905](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191540.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191540.png)
 
 #### 3.4 变量的相关性检验
 
@@ -123,7 +123,7 @@ for i in range(n):
     h.set_xticks(())
 ```
 
-![image-20210610191603881](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191604.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191604.png)
 
 很明显，没有高度相关的自变量。因此，我们将保留所有的变量。然而，日列和月列并不是很有用，我们将删除这两列。
 
@@ -135,7 +135,7 @@ cols = df.columns
 df.printSchema()
 ```
 
-![image-20210610191627354](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191627.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191627.png)
 
 #### 3.5 为机器学习准备数据
 
@@ -182,13 +182,13 @@ df = df.select(selectedCols)
 df.printSchema()
 ```
 
-![image-20210610191725223](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191725.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191725.png)
 
 ```python
 pd.DataFrame(df.take(5), columns=df.columns).transpose()
 ```
 
-![image-20210610191751237](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191751.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191751.png)
 
 将数据随机分成训练集和测试集。设置随机种子的保证实验重复性一致。
 
@@ -198,7 +198,7 @@ print("Training Dataset Count: " + str(train.count()))
 print("Test Dataset Count: " + str(test.count()))
 ```
 
-![image-20210610191816125](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191816.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191816.png)
 
 ### 步骤4 逻辑回归
 
@@ -220,7 +220,7 @@ plt.ylabel('Beta Coefficients')
 plt.show()
 ```
 
-![image-20210610191931761](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191931.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191931.png)
 
 ```python
 trainingSummary = lrModel.summary
@@ -235,7 +235,7 @@ plt.show()
 print('Training set areaUnderROC: ' + str(trainingSummary.areaUnderROC))
 ```
 
-![image-20210610191945703](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191945.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610191945.png)
 
 精度和召回 Precision and Recall
 
@@ -247,7 +247,7 @@ plt.xlabel('Recall')
 plt.show()
 ```
 
-![image-20210610192003847](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192003.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192003.png)
 
 设置模型阈值，使F-Measure最大化
 
@@ -259,7 +259,7 @@ plt.xlabel('Threshold')
 plt.show()
 ```
 
-![image-20210610192021501](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192021.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192021.png)
 
 对测试集进行预测
 
@@ -268,7 +268,7 @@ predictions = lrModel.transform(test)
 predictions.select('age', 'job', 'label', 'rawPrediction', 'prediction', 'probability').show(10)
 ```
 
-![image-20210610192047876](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192047.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192047.png)
 
 评估我们的逻辑回归模型
 
@@ -279,13 +279,13 @@ evaluator = BinaryClassificationEvaluator()
 print('Test Area Under ROC', evaluator.evaluate(predictions))
 ```
 
-![image-20210610192115676](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192115.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192115.png)
 
 ```python
 evaluator.getMetricName()
 ```
 
-![image-20210610192132344](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192132.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192132.png)
 
 模型训练的很好。
 
@@ -308,7 +308,7 @@ predictions = cvModel.transform(test)
 print('Test Area Under ROC', evaluator.evaluate(predictions))
 ```
 
-![image-20210610192158554](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192158.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192158.png)
 
 ### 步骤5 决策树分类器
 
@@ -321,7 +321,7 @@ predictions = dtModel.transform(test)
 predictions.select('age', 'job', 'label', 'rawPrediction', 'prediction', 'probability').show(10)
 ```
 
-![image-20210610192225051](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192225.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192225.png)
 
 评估我们的决策树模型
 
@@ -330,7 +330,7 @@ evaluator = BinaryClassificationEvaluator()
 print("Test Area Under ROC: " + str(evaluator.evaluate(predictions, {evaluator.metricName: "areaUnderROC"})))
 ```
 
-![image-20210610192246221](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192246.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192246.png)
 
 ### 步骤6 随机森林分类器
 
@@ -341,16 +341,16 @@ predictions = rfModel.transform(test)
 predictions.select('age', 'job', 'label', 'rawPrediction', 'prediction', 'probability').show(10)
 ```
 
-![image-20210610192316244](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192316.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192316.png)
 
 ```python
 evaluator = BinaryClassificationEvaluator()
 print("Test Area Under ROC: " + str(evaluator.evaluate(predictions, {evaluator.metricName: "areaUnderROC"})))
 ```
 
-![image-20210610192348677](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192348.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192348.png)
 
-![image-20210610192412608](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192412.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192412.png)
 
 ### 步骤7 Gradient-boosted树分类器
 
@@ -361,19 +361,19 @@ predictions = gbtModel.transform(test)
 predictions.select('age', 'job', 'label', 'rawPrediction', 'prediction', 'probability').show(10)
 ```
 
-![image-20210610192440463](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192440.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192440.png)
 
 ```python
 evaluator = BinaryClassificationEvaluator()
 print("Test Area Under ROC: " + str(evaluator.evaluate(predictions, {evaluator.metricName: "areaUnderROC"})))	
 ```
 
-![image-20210610192455152](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192455.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192455.png)
 
 Gradient-boosted树获得了最好的结果，我们将尝试使用`ParamGridBuilder`和`CrossValidator`对这个模型进行调优。
 在此之前，我们可以使用explainParams()打印所有params及其定义的列表，以了解哪些params可用于调优。	
 
-![image-20210610192517926](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192518.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192518.png)
 
 ```python
 
@@ -391,7 +391,7 @@ predictions = cvModel.transform(test)
 evaluator.evaluate(predictions)
 ```
 
-![image-20210610192532484](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192532.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610192532.png)
 
 总之，我们学习了如何使用PySpark和MLlib pipeline API构建一个二进制分类应用程序。
 

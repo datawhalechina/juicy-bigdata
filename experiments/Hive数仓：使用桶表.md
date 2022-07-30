@@ -84,7 +84,7 @@ Linux Ubuntu 16.04
 
 执行后显示如下：
 
-![image-20210512002355914](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512002355.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512002355.png)
 
 #### 8.查看分桶表具体信息
 
@@ -94,7 +94,7 @@ Linux Ubuntu 16.04
 
 执行后显示如下：
 
-![image-20210512002423100](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512002423.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512002423.png)
 
 我们从上面观察表的基本结构，列，属性，存储位置，导入导出依赖，分桶数量，等等
 
@@ -110,11 +110,11 @@ Linux Ubuntu 16.04
 
 `load data local inpath '/home/dolphin/Desktop/bucket.txt' overwrite into table bucket;`
 
-<img src="https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003204.png" alt="image-20210512003204278" style="zoom:33%;" />
+<img src="https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003204.png" style="zoom:33%;" />
 
 执行后显示如下：
 
-![image-20210512002805185](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003050.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003050.png)
 
 #### 10.查看表bucket数据
 
@@ -124,7 +124,7 @@ Linux Ubuntu 16.04
 
 执行后部分日志显示如下：
 
-![image-20210512003113773](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003113.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003113.png)
 
 查看数据在HDFS上的分布
 
@@ -134,7 +134,7 @@ Linux Ubuntu 16.04
 
 执行后部分日志显示如下：
 
-![image-20210512003234973](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003235.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003235.png)
 
 我们看到虽然设置了强制分桶，但实际bucket表下面只有一个bucket.txt一个文件
 分桶也就是分区，分区数量等于文件数，所以上面方法并没有成功分桶。
@@ -153,7 +153,7 @@ Linux Ubuntu 16.04
 
 执行后显示如下：
 
-![image-20210512003434672](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003434.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003434.png)
 
 #### 12.插入数据到分桶表
 
@@ -169,7 +169,7 @@ Linux Ubuntu 16.04
 
 执行后显示如下：
 
-![image-20210512003512625](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003512.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003512.png)
 
 将过渡表中的数据插入新建的分桶表
 
@@ -179,9 +179,9 @@ Linux Ubuntu 16.04
 
 由于我们设置了强制分桶机制，在这里我们可以看到MarReduce任务中启动了**4个Reduce**
 
-![image-20210512003810626](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003810.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003810.png)
 
-![image-20210512003917778](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003917.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512003917.png)
 
 #### 13.查询bucket_2的信息
 
@@ -193,7 +193,7 @@ Linux Ubuntu 16.04
 
 执行后显示如下：
 
-![image-20210512004145083](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004145.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004145.png)
 
 查看bucket_2中的分桶中的数据
 
@@ -201,7 +201,7 @@ Linux Ubuntu 16.04
 
 执行后部分日志显示如下：
 
-![image-20210512004210109](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004210.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004210.png)
 
 #### 14.hive中查询分桶表中的数据
 
@@ -211,7 +211,7 @@ Linux Ubuntu 16.04
 
 执行后显示如下：
 
-![image-20210512004254415](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004254.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004254.png)
 
 #### 15.修改桶表中bueket数量
 
@@ -221,7 +221,7 @@ Linux Ubuntu 16.04
 
 执行后部分日志显示如下：
 
-![image-20210512004423284](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004423.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004423.png)
 
 观察日志发现，表格已经分成20个桶
 
@@ -236,7 +236,7 @@ Y必须为分桶数量的倍数或者因子
 
 执行后部分日志显示如下：
 
-![image-20210512004518545](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004518.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004518.png)
 
 #### 16.删除分桶表bucket_2
 
@@ -246,7 +246,7 @@ Y必须为分桶数量的倍数或者因子
 
 执行后显示如下：
 
-![image-20210512004543275](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004543.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210512004543.png)
 
 
 

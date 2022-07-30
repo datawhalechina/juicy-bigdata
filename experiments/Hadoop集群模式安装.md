@@ -8,7 +8,7 @@ Linux Ubuntu 16.04
 
 在Linux系统的服务器上，安装Hadoop3.0.0集群模式。
 
-![image-20210324200229210](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200229210.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200229210.png)
 
 #### 1.安装jdk
 
@@ -34,7 +34,7 @@ sudo chown -R dolphin.dolphin /opt/java
 
 #### 2.下面来修改环境变量
 
-![image-20210324200407803](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200407803.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200407803.png)
 
 ```
 sudo leafpad /etc/profile
@@ -64,7 +64,7 @@ java -version
 
 正常结果显示如下
 
-![image-20210324200646610](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200646610.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200646610.png)
 
 ```
 java version "1.8.0_161"
@@ -124,7 +124,7 @@ hadoop version
 
 正常结果显示如下
 
-![image-20210324200549213](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324200549213.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200549213.png)
 
 ```
 Hadoop 3.0.0
@@ -413,7 +413,7 @@ hadoop fs -ls /dolphin/out/
 
 如果列表中结果包含”_SUCCESS“文件，代码集群运行成功。
 
-![image-20210324202518121](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324202518121.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324202518121.png)
 
 查看具体的执行结果，可以用如下命令：
 
@@ -421,7 +421,7 @@ hadoop fs -ls /dolphin/out/
 hadoop fs -text /dolphin/out/part-r-00000
 ```
 
-![image-20210324202554101](https://gitee.com/shenhao-stu/picgo/raw/master/Other/image-20210324202554101.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324202554101.png)
 
 到此，集群安装完成。
 

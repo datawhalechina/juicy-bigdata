@@ -38,7 +38,7 @@ RDD（Resilient Distributed Dataset）叫做分布式数据集，是Spark中最�
 
 `val rdd2 = sc.textFile("file:///apps/spark/README.md")`
 
-![image-20210610141241388](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141241.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141241.png)
 
 ### RDD编程Scala API
 
@@ -118,7 +118,7 @@ RDD中的所有转换都是***延迟加载***的，也就是说，它们并不�
 
 运行上述代码后，显示如下：
 
-![image-20210610141954210](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141954.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610141954.png)
 
 #### 8.练习2
 
@@ -135,7 +135,7 @@ rdd2.collect
 
 运行上述代码后，显示如下：
 
-![image-20210610142258309](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142258.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142258.png)
 
 #### 9.练习3
 
@@ -167,7 +167,7 @@ rdd4.collect
 
 运行上述代码后，显示如下：
 
-![image-20210610142616109](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142616.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610142616.png)
 
 #### 10.练习4
 
@@ -201,7 +201,7 @@ rdd5.collect
 
 运行上述代码后，显示如下：
 
-![image-20210610143111346](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143111.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143111.png)
 
 #### 11.练习5
 
@@ -221,7 +221,7 @@ rdd3.collect
 
 运行上述代码后，显示如下：
 
-![image-20210610143442207](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143442.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143442.png)
 
 #### 12.练习6
 
@@ -240,7 +240,7 @@ rdd2
 
 运行上述代码后，显示如下：
 
-![image-20210610143603133](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143603.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610143603.png)
 
 #### 13.练习7
 
@@ -268,4 +268,4 @@ rdd5.collect
 
 运行上述代码后，显示如下：
 
-![image-20210610144112137](https://gitee.com/shenhao-stu/picgo/raw/master/DataWhale/20210610144112.png)
+![](https://github.com/shenhao-stu/picgo/raw/master/DataWhale/20210610144112.png)
