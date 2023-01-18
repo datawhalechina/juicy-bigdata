@@ -29,7 +29,7 @@ sudo mv /opt/jdk1.8.0_161/ /opt/java
 修改java目录的所属用户和所属组：
 
 ```
-sudo chown -R dolphin.dolphin /opt/java
+sudo chown -R datawhale.datawhale /opt/java
 ```
 
 #### 2.下面来修改环境变量
@@ -37,7 +37,7 @@ sudo chown -R dolphin.dolphin /opt/java
 ![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324200407803.png)
 
 ```
-sudo leafpad /etc/profile
+sudo vim /etc/profile
 ```
 
 末端添加如下内容：
@@ -89,7 +89,7 @@ sudo mv /opt/hadoop-3.0.0/ /opt/hadoop
 修改hadoop目录的所属用户和所属组：
 
 ```
-sudo chown -R dolphin.dolphin /opt/hadoop
+sudo chown -R datawhale.datawhale /opt/hadoop
 ```
 
 
@@ -97,7 +97,7 @@ sudo chown -R dolphin.dolphin /opt/hadoop
 #### 4.下面来修改环境变量
 
 ```
-sudo leafpad /etc/profile
+sudo vim /etc/profile
 ```
 
 末端添加如下内容：
@@ -138,7 +138,7 @@ This command was run using /opt/hadoop/share/hadoop/common/hadoop-common-3.0.0.j
 #### 5.修改hadoop hadoop-env.sh文件配置
 
 ```
-leafpad /opt/hadoop/etc/hadoop/hadoop-env.sh
+vim /opt/hadoop/etc/hadoop/hadoop-env.sh
 ```
 
 末端添加如下内容：
@@ -152,7 +152,7 @@ export JAVA_HOME=/opt/java/
 #### 6.修改hadoop core-site.xml文件配置
 
 ```
-leafpad /opt/hadoop/etc/hadoop/core-site.xml
+vim /opt/hadoop/etc/hadoop/core-site.xml
 ```
 
 添加下面配置到`<configuration>与</configuration>`标签之间。
@@ -169,7 +169,7 @@ leafpad /opt/hadoop/etc/hadoop/core-site.xml
 #### 7.修改hadoop hdfs-site.xml文件配置
 
 ```
-leafpad /opt/hadoop/etc/hadoop/hdfs-site.xml
+vim /opt/hadoop/etc/hadoop/hdfs-site.xml
 ```
 
 添加下面配置到`<configuration>与</configuration>`标签之间。
@@ -186,7 +186,7 @@ leafpad /opt/hadoop/etc/hadoop/hdfs-site.xml
 #### 8.修改hadoop yarn-site.xml文件配置
 
 ```
-leafpad /opt/hadoop/etc/hadoop/yarn-site.xml
+vim /opt/hadoop/etc/hadoop/yarn-site.xml
 ```
 
 添加下面配置到`<configuration>与</configuration>`标签之间。
@@ -207,7 +207,7 @@ leafpad /opt/hadoop/etc/hadoop/yarn-site.xml
 #### 9.mapred-site.xml文件配置
 
 ```
-leafpad /opt/hadoop/etc/hadoop/mapred-site.xml
+vim /opt/hadoop/etc/hadoop/mapred-site.xml
 ```
 
 添加下面配置到`<configuration>与</configuration>`标签之间。
@@ -224,7 +224,7 @@ leafpad /opt/hadoop/etc/hadoop/mapred-site.xml
 #### 10.修改hadoop workers文件配置
 
 ```
-leafpad /opt/hadoop/etc/hadoop/workers
+vim /opt/hadoop/etc/hadoop/workers
 ```
 
 覆盖写入主节点映射名和从节点映射名：
@@ -242,7 +242,7 @@ slave2
 查看master ip地址
 
 ```
-ifconfig eth0|sed -n '2p'|awk -F " " '{print $2}'|awk -F ":" '{print $2}'
+ip addr    
 ```
 
 记录下显示的ip，例：172.18.0.4
@@ -254,7 +254,7 @@ ifconfig eth0|sed -n '2p'|awk -F " " '{print $2}'|awk -F ":" '{print $2}'
 编辑/etc/hosts文件：
 
 ```
-sudo leafpad /etc/hosts
+sudo vim /etc/hosts
 ```
 
 添加master IP地址对应本机映射名和其它节点IP地址对应映射名(如下只是样式，请写入实验时您的正确IP)：
@@ -267,7 +267,7 @@ sudo leafpad /etc/hosts
 
 #### 12.创建公钥
 
-在dolphin用户下创建公钥：
+在datawhale用户下创建公钥：
 
 ```
 ssh-keygen -t rsa
@@ -275,7 +275,7 @@ ssh-keygen -t rsa
 
 出现如下内容：
 
-Enter file in which to save the key (/home/dolphin/.ssh/id_rsa):
+Enter file in which to save the key (/home/datawhale/.ssh/id_rsa):
 
 回车即可，出现如下内容：
 
@@ -286,7 +286,7 @@ Enter same passphrase again:
 
 #### 13.拷贝公钥
 
-提示：命令执行过程中需要输入“yes”和密码“dolphin”。三台节点请依次执行完成。
+提示：命令执行过程中需要输入“yes”和密码“datawhale”。三台节点请依次执行完成。
 
 ```
 ssh-copy-id master
@@ -298,6 +298,16 @@ ssh-copy-id slave1
 
 ```
 ssh-copy-id slave2
+```
+
+修改文件权限：（master和slave均需修改）
+
+```
+chmod 700 /home/datawhale/.ssh
+```
+
+```
+chmod 700 /home/datawhale/.ssh/*
 ```
 
 测试连接是否正常：
@@ -332,6 +342,12 @@ hdfs namenode -format
 
 ```
 /opt/hadoop/sbin/start-all.sh
+```
+
+重新启动前记得要先关闭
+
+```
+/opt/hadoop/sbin/stop-all.sh
 ```
 
 #### 17.查看Hadoop进程
@@ -374,41 +390,41 @@ firefox http://master:8088
 利用Hadoop自带的WordCount示例程序进行检查集群；在主节点进行如下操作，创建HDFS目录：
 
 ```
-hadoop fs -mkdir /dolphin/
+hadoop fs -mkdir /datawhale/
 ```
 
 ```
-hadoop fs -mkdir /dolphin/input
+hadoop fs -mkdir /datawhale/input
 ```
 
 创建测试文件
 
 ```
-leafpad /home/dolphin/test
+vim /home/datawhale/test
 ```
 
 添加下面文字
 
-`dolphin`
+`datawhale`
 
 保存并关闭编辑器
 
 将测试文件上传到到Hadoop HDFS集群目录：
 
 ```
-hadoop fs -put /home/dolphin/test /dolphin/input
+hadoop fs -put /home/datawhale/test /datawhale/input
 ```
 
 执行wordcount程序：
 
 ```
-hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.0.0.jar wordcount /dolphin/input/ /dolphin/out/
+hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar wordcount /datawhale/input/ /datawhale/out/
 ```
 
 查看执行结果：
 
 ```
-hadoop fs -ls /dolphin/out/
+hadoop fs -ls /datawhale/out/
 ```
 
 如果列表中结果包含”_SUCCESS“文件，代码集群运行成功。
@@ -418,7 +434,7 @@ hadoop fs -ls /dolphin/out/
 查看具体的执行结果，可以用如下命令：
 
 ```
-hadoop fs -text /dolphin/out/part-r-00000
+hadoop fs -text /datawhale/out/part-r-00000
 ```
 
 ![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324202554101.png)
