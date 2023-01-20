@@ -1,6 +1,6 @@
 # Chapter4 分布式数据库HBase
 
-> shenhao
+> shenhao  王洲烽
 
 ## 4.0 产生的背景
 
@@ -299,7 +299,7 @@ HBase提供了众多的访问方式，详见下表。
 
 #### 4.5.1.1 实验准备
 
-**实验环境：**Linux Ubuntu 20.04     
+**实验环境：**Linux Ubuntu 22.04     
 **前提条件：**  
 1. 完成Java运行环境部署（详见第2章Java安装）
 2. 完成Hadoop 3.3.1的单点部署（详见第2章安装单机版Hadoop）
@@ -314,18 +314,18 @@ HBase提供了众多的访问方式，详见下表。
 
 &emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[HBase下载](https://hbase.apache.org/downloads.html)），下载hbase 2.3.5的安装包到本地指定目录，如/data/hadoop/下。运行下面的命令，解压安装包至`/opt`目录下：
 ```shell
-sudo tar -zxvf /data/hadoop/hbase-2.3.5-bin.tar.gz -C /opt/
+sudo tar -zxvf /data/hadoop/hbase-2.4.8-bin.tar.gz -C /opt/
 ```
 
 ##### 2.更改文件夹名和所属用户
 
-&emsp;&emsp;安装包解压成功后，在`/opt`目录下将会产生`hbase-2.3.5`目录，如下图所示：
+&emsp;&emsp;安装包解压成功后，在`/opt`目录下将会产生`hbase-2.4.8`目录，如下图所示：
 
 ![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch4_ex1.1.png)
 
-&emsp;&emsp;将`hbase-2.3.5`目录更名为`hbase`，命令如下：
+&emsp;&emsp;将`hbase-2.4.8`目录更名为`hbase`，命令如下：
 ```shell
-sudo mv /opt/hbase-2.3.5/ /opt/hbase
+sudo mv /opt/hbase-2.4.8/ /opt/hbase
 ```
 &emsp;&emsp;改变hbase目录所属用户为`datawhale`，用户组为`datawhale`，命令如下：
 ```shell
@@ -366,8 +366,12 @@ sudo vim /opt/hbase/conf/hbase-site.xml
         <value>true</value>
     </property>
     <property>
+        <name>hbase.zookeeper.property.dataDir</name>
+        <value>/opt/hadoop/zookeeper</value>
+    </property>
+    <property>
         <name>hbase.rootdir</name>
-        <value>hdfs://localhost:9000/hbase</value>
+        <value>hdfs://master:9000/hbase</value>
     </property>
     <property>
         <name>hbase.unsafe.stream.capability.enforce</name>
@@ -439,7 +443,8 @@ start-hbase.sh
 ![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch4_ex1.2.png)
 
 **Tips：**
-- 如果HMaster启动后瞬间消失，请查看`/opt/hbase/logs`日志文件。  
+
+- 如果HMaster启动后瞬间消失，请查看`/opt/hbase/logs`日志文件。  一般为 hadoop 的 core-site.xml 和 hbase的hbase-site.xml 中的hdfs的路径不匹配，修改一致即可
 - 如果出现`connection failed`，注意虚拟机环回IP的通信问题以及防火墙是否关闭！！！  
 
 1. 关闭防火墙  
@@ -522,6 +527,70 @@ hbase(main):009:0> create 'student','info','addr'
 ```
 
 ![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch4_ex1.4.png)
+
+- 有时会报错ServerNotRunningYetException: Server is not running yet，解决办法：
+
+
+第一步：先看当前用户是否对hbase有权限，一般使用hbase目录的所有者操作hbase
+
+```
+sudo chmod 777 /opt/hbase/*
+```
+
+第二步：看hadoop是否处于安全模式，若处于则关闭安全模式
+
+```
+hdfs dfsadmin -safemode get     #查看是否处于安全模式
+
+hdfs dfsadmin -safemode leave   #关闭安全模式
+```
+
+如果还无法解决，则是`slf4j-log4j12-1.7.30.jar`在Hadoop和hbase都存在 同时启动出现占用情况导致服务无法访问的问题
+
+```
+cd /opt/hbase/lib/client-facing-thirdparty/
+ls
+rm slf4j-log4j12-1.7.30.jar
+```
+
+然后再hbase的 `hbase-env.sh`中将 `export HBASE_DISABLE_HADOOP_CLASSPATH_LOOKUP="true"` 注释去掉 可以把 引号也删除，若配置文件没有这个信息则直接插入即可，该配置表示，启动时告诉HBase是否应该包含Hadoop的lib， 默认值为false，表示包含Hadoop的lib。
+
+
+
+- 有时会报错Master is initializing，出现该问题的原因是因为重新安装hbase时，旧的元数据信息没有删除，使用zookeeper删除后hbase元数据后重启hbase即可。解决方法：
+
+```
+cd /opt/hbase/bin
+
+hbase zkcli      #启动zookeeper
+```
+
+查看目录 / ,可以看到hbase
+
+```
+ls /
+```
+
+再查看/hbase目录中的内容，可发现有mete-region-server文件
+
+```
+ls /hbase
+```
+
+执行删除命令（rmr命令无效的话使用delete命令）
+
+```
+rmr /hbase/meta-region-server
+```
+
+quit退出后，关闭hbase
+
+```
+hbase-daemons.sh stop master
+stop-hbase.sh
+```
+
+重启hbase后问题解决。
 
 ##### 10.添加数据（`put`命令）
 
@@ -655,10 +724,11 @@ hbase(main):019:0> drop 'student'
 
 #### 4.5.2.1 实验准备
 
-**实验环境：**Linux Ubuntu 20.04   
+**实验环境：**Linux Ubuntu 22.04   
 **前提条件：**  
+
 1. 完成Java运行环境部署（详见第2章Java安装）
-2. 完成Hadoop 3.0.0的单点部署（详见第2章安装单机版Hadoop）
+2. 完成Hadoop 3.3.1的单点部署（详见第2章安装单机版Hadoop）
 
 #### 4.5.2.2 实验内容
 
