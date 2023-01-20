@@ -148,6 +148,14 @@
     </td>
   </tr>
   <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">蒋志政</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">太原理工大学数据科学与大数据技术本科生，主要贡献者</span></td>
+    <td>
+        <a href="gezelligheid@aliyun.com">邮箱</a>,
+        <a href="https://github.com/gezelligheid0314">Github</a>
+    </td>
+  </tr>  
+  <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王嘉鹏</span></td>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">小米大数据开发工程师，Datawhale成员，主要贡献者</span></td>
     <td>
