@@ -167,7 +167,7 @@
 - Zookeeper  
     &emsp;&emsp;Zookeeper是一个为分布式应用所涉及的开源协调服务，主要为用户**提供同步、配置管理、分组和命名等服务**，减轻分布式应用程序所承担的协调任务，Zookeeper的文件系统使用了我们所熟悉的**目录树结构**，Zookeeper是主要使用Java语言编写，同时支持C语言。
 
-## 2.3 Hadoop的安装与应用
+## 2.3 实验一：Hadoop3.3.1伪分布式安装
 
 > 学了这么多理论，终于要实操了吗，大伙儿冲冲冲啊！！！！
 
@@ -176,8 +176,14 @@
 ### 2.3.1 实验准备
 
 &emsp;&emsp;在开始具体操作之前，首先需要选择一个合适的操作系统。尽管Hadoop本身可以运行在Linux、Windows以及其他一些类UNIX系统（如FreeBSD、OpenBSD、Solaris等）之上，但是，**Hadoop官方真正支持的运行平台只有Linux**。这就导致其他平台在运行Hadoop时，往往需要安装很多其他的包来提供一些Linux操作系统的功能，以配合Hadoop的执行。例如，Windows在运行Hadoop时，需要安装Cygwin等软件。  
-&emsp;&emsp;我们这里选择Linux作为Hadoop的运行平台，用于演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然，其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的小伙伴，可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。  
-&emsp;&emsp;在Linux发行版的选择上，我们倾向于使用企业级、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE和RedHat等发行版，最终选择免费的Ubuntu发行版作为推荐的操作系统，大家可以到网络上下载Ubuntu系统镜像文件进行安装（系统镜像下载地址：https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64），✅参考教程：[2020最新版VMware安装Ubuntu20.04教程(巨细)！](https://zhuanlan.zhihu.com/p/141033713)
+
+我们这里选择Linux作为Hadoop的运行平台，用于演示在计算机上如何安装Hadoop、运行程序并得到最终结果。当然，其他平台仍然可以作为开发平台使用。对于正在使用Windows操作系统的小伙伴，可以通过在Windows操作系统中安装Linux虚拟机的方式完成实验。
+
+在Linux发行版的选择上，我们倾向于使用企业级、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE和RedHat等发行版，最终选择免费的Ubuntu发行版作为推荐的操作系统。
+
+大家可以到网络上下载Ubuntu系统镜像文件进行安装（系统镜像下载地址：https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64），
+
+✅参考教程：[2020最新版VMware安装Ubuntu20.04教程(巨细)！](https://zhuanlan.zhihu.com/p/141033713)
 
 ### 2.3.2 实验内容
 
@@ -575,17 +581,330 @@ world!  1
 
 ### 2.3.4 Tips
 
-✅ **Hadoop3.3.1集群模式**安装请参考： [Hadoop集群模式安装.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装.md) 和 [Hadoop集群模式安装节点.md](https://gitee.com/shenhao-stu/Big-Data/blob/master/experiments/Hadoop集群模式安装节点.md)。	
-
 ✅ **官网安装**请参考：[Hadoop单节点集群安装](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html#Execution)
 
 ✅ **安装问题**：[Hadoop中DataNode没有启动](https://www.cnblogs.com/mtime2004/p/10008325.html)  
 
 >`VERSION`参考查询目录：`tmp/hadoop-datawhale/dfs/data/current/VERSION`
 
-## 2.4 本章小结
+## 2.4 实验二：Hadoop3.3.1集群模式安装
+
+java与hadoop的安装与伪分布式流程一致，此处不再赘述，后面的配置文件有所不同。
+
+#### 2.4.1 修改hadoop hadoop-env.sh文件配置
+
+```
+vim /opt/hadoop/etc/hadoop/hadoop-env.sh
+```
+
+末端添加如下内容：
+
+```
+export JAVA_HOME=/opt/java/
+```
+
+保存并关闭编辑器
+
+#### 2.4.2 修改hadoop core-site.xml文件配置
+
+```
+vim /opt/hadoop/etc/hadoop/core-site.xml
+```
+
+添加下面配置到`<configuration>与</configuration>`标签之间。
+
+```
+<property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://master:9000</value>
+</property>
+```
+
+保存并关闭编辑器
+
+#### 2.4.3 修改hadoop hdfs-site.xml文件配置
+
+```
+vim /opt/hadoop/etc/hadoop/hdfs-site.xml
+```
+
+添加下面配置到`<configuration>与</configuration>`标签之间。
+
+```
+<property>
+    <name>dfs.replication</name>
+    <value>3</value>
+</property>
+```
+
+保存并关闭编辑器
+
+#### 2.4.4 修改hadoop yarn-site.xml文件配置
+
+```
+vim /opt/hadoop/etc/hadoop/yarn-site.xml
+```
+
+添加下面配置到`<configuration>与</configuration>`标签之间。
+
+```
+<property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+</property>
+<property>
+    <name>yarn.nodemanager.env-whitelist</name>
+   <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+</property>
+```
+
+保存并关闭编辑器
+
+#### 2.4.5 mapred-site.xml文件配置
+
+```
+vim /opt/hadoop/etc/hadoop/mapred-site.xml
+```
+
+添加下面配置到`<configuration>与</configuration>`标签之间。
+
+```
+<property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+</property>
+```
+
+保存并关闭编辑器
+
+#### 2.4.6 修改hadoop workers文件配置
+
+```
+vim /opt/hadoop/etc/hadoop/workers
+```
+
+覆盖写入主节点映射名和从节点映射名：
+
+```
+master
+slave1
+slave2
+```
+
+保存并关闭编辑器
+
+#### 2.4.7 修改hosts文件
+
+查看master ip地址
+
+```
+ip addr    
+```
+
+记录下显示的ip，例：172.18.0.4
+
+打开slave1 节点，做如上操作，记录下显示的ip，例：172.18.0.3
+
+打开slave2 节点，做如上操作，记录下显示的ip，例：172.18.0.2
+
+编辑/etc/hosts文件：
+
+```
+sudo vim /etc/hosts
+```
+
+添加master IP地址对应本机映射名和其它节点IP地址对应映射名(如下只是样式，请写入实验时您的正确IP)：
+
+```
+172.18.0.4 master
+172.18.0.3 slave1
+172.18.0.2 slave2
+```
+
+#### 2.4.8 创建公钥
+
+在datawhale用户下创建公钥：（若上边做伪分布式时已生成过密钥则不必再做）
+
+```
+ssh-keygen -t rsa
+```
+
+出现如下内容：
+
+Enter file in which to save the key (/home/datawhale/.ssh/id_rsa):
+
+回车即可，出现如下内容：
+
+Enter passphrase (empty for no passphrase):
+
+直接回车，出现内容：
+
+Enter same passphrase again:
+
+直接回车，创建完成。
+
+#### 2.4.9 拷贝公钥
+
+提示：命令执行过程中需要输入“yes”和密码“datawhale”。三台节点请依次执行完成。
+
+```
+ssh-copy-id master
+```
+
+```
+ssh-copy-id slave1
+```
+
+```
+ssh-copy-id slave2
+```
+
+修改文件权限：（master和slave均需修改）
+
+```
+chmod 700 /home/datawhale/.ssh
+```
+
+```
+chmod 700 /home/datawhale/.ssh/*
+```
+
+测试连接是否正常：
+
+```
+ssh master
+```
+
+#### 2.4.10 拷贝文件到所有从节点
+
+```
+scp -r /opt/java/ /opt/hadoop/ slave1:/tmp/
+```
+
+```
+scp -r /opt/java/ /opt/hadoop/ slave2:/tmp/
+```
+
+至此，主节点配置完成。
+
+现在，请去slave1和slave2依次完成节点配置。
+
+以下内容在所有从节点配置完成之后回来继续进行!
+
+#### 2.4.11 格式化分布式文件系统
+
+```
+hdfs namenode -format
+```
+
+#### 2.4.12 启动Hadoop
+
+```
+/opt/hadoop/sbin/start-all.sh
+```
+
+重新启动前记得要先关闭
+
+```
+/opt/hadoop/sbin/stop-all.sh
+```
+
+#### 2.4.13 查看Hadoop进程
+
+在hadoop主节点执行：
+
+`jps`
+
+输出结果必须包含6个进程，结果如下：
+
+```
+2529 DataNode
+2756 SecondaryNameNode
+3269 NodeManager
+3449 Jps
+2986 ResourceManager
+2412 NameNode
+```
+
+在hadoop从节点执行同样的操作：
+
+`jps`
+
+输出结果必须包含3个进程，具体如下：
+
+```
+2529 DataNode
+3449 Jps
+2412 NameNode
+```
+
+#### 2.4.14 在命令行中输入以下代码，打开Hadoop WebUI管理界面：
+
+```
+firefox http://master:8088
+```
+
+#### 2.4.15 测试HDFS集群以及MapReduce任务程序
+
+利用Hadoop自带的WordCount示例程序进行检查集群；在主节点进行如下操作，创建HDFS目录：
+
+```
+hadoop fs -mkdir /datawhale/
+```
+
+```
+hadoop fs -mkdir /datawhale/input
+```
+
+创建测试文件
+
+```
+vim /home/datawhale/test
+```
+
+添加下面文字
+
+`datawhale`
+
+保存并关闭编辑器
+
+将测试文件上传到到Hadoop HDFS集群目录：
+
+```
+hadoop fs -put /home/datawhale/test /datawhale/input
+```
+
+执行wordcount程序：
+
+```
+hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar wordcount /datawhale/input/ /datawhale/out/
+```
+
+查看执行结果：
+
+```
+hadoop fs -ls /datawhale/out/
+```
+
+如果列表中结果包含”_SUCCESS“文件，代码集群运行成功。
+
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324202518121.png)
+
+查看具体的执行结果，可以用如下命令：
+
+```
+hadoop fs -text /datawhale/out/part-r-00000
+```
+
+![](https://github.com/shenhao-stu/picgo/raw/master/Other/image-20210324202554101.png)
+
+到此，集群安装完成。
+
+
+
+## 2.5 本章小结
 
 &emsp;&emsp;Hadoop被视为事实上的大数据处理标准，本章主要介绍了Hadoop的发展历程，并阐述了Hadoop的高可靠性、高效性、高可扩展性、高容错性、成本低、运行在Linux平台上、支持多种编程语言等特性。  
 &emsp;&emsp;Hadoop目前已经在各个领域得到了广泛的应用，如雅虎、Facebook、百度、淘宝、网易等公司都建立了自己的Hadoop集群。  
 &emsp;&emsp;经过多年发展，Hadoop项目已经变得非常成熟和完善，包括Common、Avro、Zookeeper、HDFS、MapReduce、HBase、Hive、Chukwa、Pig等子项目。其中，HDFS和 MapReduce是Hadoop的两大核心组件。  
-&emsp;&emsp;本章最后通过一个实验，讲解了如何在Linux系统下安装和配置Hadoop，并通过`WordCount`程序验证已部署的Hadoop集群，这个部分是后续章节实践环节的基础。
+&emsp;&emsp;本章最后通过两个个实验，讲解了如何在Linux系统下安装和配置Hadoop，并通过`WordCount`程序验证已部署的Hadoop集群。
