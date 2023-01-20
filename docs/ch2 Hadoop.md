@@ -181,7 +181,7 @@
 
 ### 2.3.2 实验内容
 
-**实验环境：**Linux Ubuntu 20.04  
+**实验环境：**Linux Ubuntu 22.04  
 **实验要求：**在Linux系统的虚拟机上安装Hadoop软件，基本安装配置主要包括以下几个步骤：
 
 1. 创建Hadoop用户
@@ -214,20 +214,21 @@ su datawhale # 切换到datawhale用户
 
 ##### 1.安装jdk
 
-&emsp;&emsp;将`/data/hadoop`目录下`jdk-8u161-linux-x64.tar.gz`解压缩到`/opt`目录下。
+&emsp;&emsp;将`/data/hadoop`目录下`jdk-8u311-linux-x64.tar.gz`解压缩到`/opt`目录下。
 ```shell
-sudo tar -xzvf /data/hadoop/jdk-8u161-linux-x64.tar.gz -C /opt
+sudo tar -xzvf /data/hadoop/jdk-8u311-linux-x64.tar.gz -C /opt
 ```
 
 &emsp;&emsp;其中，`tar -xzvf` 对文件进行解压缩，-C 指定解压后，将文件放到/opt目录下。  
 
 > **注意：**如果`sudo`命令无法使用，请直接切换到`root`用户，`su root`或`sudo -i`。但要注意，以下步骤需要切换到`datawhale`用户下进行操作：
+>
 > - ssh登录权限设置
 > - Hadoop伪分布安装中的5、6、7、8、9步骤。
 
-&emsp;&emsp;下面将`jdk1.8.0_161`目录重命名为`java`，执行如下命令：
+&emsp;&emsp;下面将`jdk1.8.0_311`目录重命名为`java`，执行如下命令：
 ```shell
-sudo mv /opt/jdk1.8.0_161/ /opt/java
+sudo mv /opt/jdk1.8.0_311/ /opt/java
 ```
 
 &emsp;&emsp;修改`java`目录的所属用户：
@@ -262,14 +263,15 @@ java -version
 
 &emsp;&emsp;执行结果如下：
 ```shell
-java version "1.8.0_161"
-Java(TM) SE Runtime Environment (build 1.8.0_161-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.161-b12, mixed mode)
+java version "1.8.0_311"
+Java(TM) SE Runtime Environment (build 1.8.0_311-b11)
+Java HotSpot(TM) 64-Bit Server VM (build 25.311-b11, mixed mode)
 ```
 
 #### 2.3.3.3 SSH登录权限设置
 
 **注意：**需要切换为datawhale用户，命令如下：
+
 ```shell
 su datawhale # 切换为datawhale用户
 ```
@@ -350,7 +352,7 @@ hadoop version
 Hadoop 3.3.1
 Source code repository https://git-wip-us.apache.org/repos/asf/hadoop.git -r c25427ceca461ee979d30edd7a4b0f50718e6533
 Compiled by andrew on 2017-12-08T19:16Z
-Compiled with protoc 2.5.0
+Compiled with protoc 3.7.1
 From source with checksum 397832cb5529187dc8cd74ad54ff22
 This command was run using /opt/hadoop/share/hadoop/common/hadoop-common-3.3.1.jar
 ```
