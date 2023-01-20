@@ -280,8 +280,11 @@ Enter file in which to save the key (/home/datawhale/.ssh/id_rsa):
 回车即可，出现如下内容：
 
 Enter passphrase (empty for no passphrase):
+
 直接回车，出现内容：
+
 Enter same passphrase again:
+
 直接回车，创建完成。
 
 #### 13.拷贝公钥
