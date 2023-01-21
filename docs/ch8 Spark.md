@@ -170,7 +170,7 @@ rddG = rddB.join(rddF)
 
 #### 8.4.1.1 实验准备
 
-**实验环境：**Linux Ubuntu 20.04  
+**实验环境：**Linux Ubuntu 22.04  
 **前提条件：**  
 
 1. 完成Java运行环境部署（详见第2章Java安装）
@@ -271,7 +271,7 @@ bin/run-example SparkPi 2>&1 | grep "Pi is"
 
 #### 8.4.2.1 实验准备
 
-**实验环境：**Linux Ubuntu 20.04  
+**实验环境：**Linux Ubuntu 22.04  
 **前提条件：**  
 
 1. 完成Java运行环境部署（详见第2章Java安装）
