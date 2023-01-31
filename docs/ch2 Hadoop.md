@@ -181,9 +181,21 @@
 
 在Linux发行版的选择上，我们倾向于使用企业级、稳定的操作系统作为实验的系统环境，同时，考虑到易用性以及是否免费等方面的问题，我们排除了OpenSUSE和RedHat等发行版，最终选择免费的Ubuntu发行版作为推荐的操作系统。
 
-大家可以到网络上下载Ubuntu系统镜像文件进行安装（系统镜像下载地址：https://ubuntu.com/download/desktop/thank-you?version=20.04.3&architecture=amd64），
+**Windows：**
+
+系统镜像下载链接：https://mirror.bjtu.edu.cn/ubuntu-releases/22.04.1/ubuntu-22.04.1-desktop-amd64.iso
 
 ✅参考教程：[2020最新版VMware安装Ubuntu20.04教程(巨细)！](https://zhuanlan.zhihu.com/p/141033713)
+
+**Mac：**
+
+下载VMware：https://customerconnect.vmware.com/cn/downloads/get-download?downloadGroup=FUS-PUBTP-2021H1
+
+系统镜像下载链接：http://old-releases.ubuntu.com/releases/22.04/ubuntu-22.04-live-server-arm64.iso
+
+✅参考教程：[Mac M1芯片 安装vmware 和ubuntu 以及换源全过程](https://blog.csdn.net/nuomituansama/article/details/125909957)
+
+:key:：教程以Windows版为主，Mac版后续操作可能略有不同，自行百度
 
 ### 2.3.2 实验内容
 
