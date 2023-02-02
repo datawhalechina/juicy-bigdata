@@ -3,7 +3,7 @@
 </div>
 
 
-# 妙趣横生大数据 Juicy Big Data
+# 妙趣横生大数据 Juicy Big Data  {docsify-ignore-all}
 
 [![](https://img.shields.io/github/watchers/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/watchers)
 [![](https://img.shields.io/github/stars/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/stargazers)
