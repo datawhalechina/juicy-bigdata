@@ -522,7 +522,7 @@ cd /opt/hadoop
 
 <img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201341148.png" alt="image-20230117201341148" style="zoom: 67%;" />
 
-如果HDFS中已经存在目录“/user/hadoop/output”，则使用如下命令删除该目录：
+如果HDFS中已经存在“/user/hadoop/output”，则使用如下命令删除：
 
 ```
 ./bin/hdfs dfs -rm -r /user/hadoop/output 
@@ -531,7 +531,7 @@ cd /opt/hadoop
 现在，就可以在Linux系统中，使用hadoop jar命令运行程序，命令如下：
 
 ```
-./bin/hadoop jar ./myapp/WordCount.jar /input /output
+./bin/hadoop jar ./myapp/WordCount.jar /input output
 ```
 
 上面命令执行以后，当运行顺利结束时，屏幕上会显示类似如下的信息：
@@ -552,7 +552,7 @@ cd /opt/hadoop
 
 <img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201621438.png" alt="image-20230117201621438" style="zoom:80%;" />
 
-至此，词频统计程序顺利运行结束。需要注意的是，如果要再次运行WordCount.jar，需要首先删除HDFS中的output目录，否则会报错。
+至此，词频统计程序顺利运行结束。需要注意的是，如果要再次运行WordCount.jar，需要首先删除HDFS中的output文件，否则会报错。
 
 #### 6.问题与讨论
 
