@@ -20,7 +20,7 @@
 
 :whale: 推荐使用 [**Big Data Github在线阅读**](https://datawhalechina.github.io/juicy-bigdata/) 进行学习。
 
-有配套代码的章节，可以在项目`experiments`目录的相应章节目录下面找到。
+`docs`目录下为章节主要内容（理论+实验），`experiments`目录下为每个章节配套的补充小实验，`resources`目录下为相关资源。
 
 以下是目录，还等什么，学就完事了～
 
