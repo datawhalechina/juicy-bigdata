@@ -1,4 +1,4 @@
-# Chapter7 数据仓库Hive
+# 第七章 数据仓库Hive
 
 > 王嘉鹏，shenhao
 

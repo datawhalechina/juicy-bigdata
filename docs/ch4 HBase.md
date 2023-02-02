@@ -1,4 +1,4 @@
-# Chapter4 分布式数据库HBase
+# 第四章 分布式数据库HBase
 
 > shenhao  王洲烽
 
