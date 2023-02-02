@@ -24,6 +24,7 @@
 
 <center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch2.0.2.png" style="zoom:67%;">
 <br/><div style="color:orange; border-bottom: 1px solid #d9d9d9;display: inline-block;color: #000;padding: 2px; text-align: center;">左为Doug Cutting，右为Lucene的LOGO</div></center>
+
 &emsp;&emsp;**Lucene**是用**JAVA**写成的，目标是为各种中小型应用软件加入全文检索功能。因为好用而且开源（代码公开），非常受程序员们的欢迎。  
 &emsp;&emsp;早期的时候，这个项目被发布在**Doug Cutting**的个人网站和**SourceForge**（一个开源软件网站）。后来，**2001**年底，**Lucene**成为**Apache**软件基金会**jakarta**项目的一个子项目。
 
