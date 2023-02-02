@@ -127,7 +127,7 @@
 - Java 8
 - Hadoop 3.3.1
 - HBase 2.3.5 or 2.4.8
-- Mysql 8.0.27
+- Mysql 8.0.32
 - Hive 2.3.9
 - Spark 3.2.0
 
