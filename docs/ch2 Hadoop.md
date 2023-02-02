@@ -226,9 +226,9 @@ su datawhale # 切换到datawhale用户
 
 #### 2.3.3.2 Java的安装
 
-&emsp;&emsp;由于Hadoop本身是使用Java语言编写的，因此Hadoop的开发和运行都需要Java的支持，一般要求Java 6或者更新的版本。对于Ubuntu 20.04本身，系统上可能已经预装了Java 7，JDK版本为openjdk，路径为`/usr/lib/jvm/java-1.7.0-openjdk`，后文中需要配置的 `JAVA_HOME` 环境变量就可以设置为这个值。  
+&emsp;&emsp;由于Hadoop本身是使用Java语言编写的，因此Hadoop的开发和运行都需要Java的支持，一般要求Java 6或者更新的版本。对于Ubuntu 22.04本身，系统上可能已经预装了Java 7，JDK版本为openjdk，路径为`/usr/lib/jvm/java-1.7.0-openjdk`，后文中需要配置的 `JAVA_HOME` 环境变量就可以设置为这个值。  
 &emsp;&emsp;对于Hadoop而言，采用更为广泛应用的Oracle公司的Java版本，在功能上可能会更稳定一些，因此用户也可以根据自己的爱好安装Oracle版本的Java。在安装过程中，请记住JDK的文件路径，即`JAVA_HOME`的位置，这个路径的设置将用在后文Hadoop的配置文件中，目的是让Hadoop程序可以找到相关的Java工具。  
-&emsp;&emsp;比如我们在`/data/hadoop`目录中下载了`jdk-8u161-linux-x64.tar.gz`。
+&emsp;&emsp;比如我们在`/data/hadoop`目录中下载了`jdk-8u311-linux-x64.tar.gz`。（**相关安装包下载地址已提供，见readme文件**）
 
 ##### 1.安装jdk
 
@@ -320,7 +320,8 @@ ssh localhost
 
 #### 2.3.3.4 安装单机版Hadoop
 
-&emsp;&emsp;这里使用的Hadoop版本为3.3.1。下载地址为http://archive.apache.org/dist/hadoop/core/hadoop-3.3.1/hadoop-3.3.1.tar.gz  
+&emsp;&emsp;这里使用的Hadoop版本为3.3.1。下载地址为http://archive.apache.org/dist/hadoop/core/hadoop-3.3.1/hadoop-3.3.1.tar.gz  （或者在readme文件中提供的链接地址下载也可）
+
 &emsp;&emsp;将该文件夹解压后，可以放置到自己喜欢的位置，如`/data/hadoop`文件夹下，注意，文件夹的用户和组必须都为hadoop。
 
 ##### 1.安装Hadoop
