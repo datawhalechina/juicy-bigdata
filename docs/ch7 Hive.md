@@ -316,7 +316,7 @@ CREATE TABLE students(
 
 ##### 1.解压安装包
 
-&emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[Hive下载](https://dlcdn.apache.org/hive/)），下载hive 2.3.9的安装包到本地指定目录，如`/data/hadoop/`下。解压安装包至`/opt`目录下，命令如下：
+&emsp;&emsp;通过官网下载地址（✅**官网下载地址**：[Hive下载](https://dlcdn.apache.org/hive/)），下载hive 2.3.9的安装包到本地指定目录，如`/data/hadoop/`下。（使用readme文件中提供的链接下载也可）解压安装包至`/opt`目录下，命令如下：
 ```shell
 sudo tar -zxvf /data/hadoop/apache-hive-2.3.9-bin.tar.gz -C /opt/
 ```
@@ -356,7 +356,7 @@ source /etc/profile
 
 ##### 4.安装MySQL
 
-&emsp;&emsp;在Ubuntu 20.04版本中，源仓库中`MySQL`的默认版本已经更新到8.0，因此可以直接安装，命令如下：  
+&emsp;&emsp;在Ubuntu 22.04版本中，源仓库中`MySQL`的默认版本已经更新到8.0，因此可以直接安装，命令如下：  
 ```shell
 sudo apt-get update  #更新软件源
 sudo apt-get install mysql-server  #安装mysql
@@ -398,22 +398,22 @@ flush privileges;  -- 刷新mysql系统权限关系表
 
 ✅**官网下载地址**：[MySQL JDBC下载](https://dev.mysql.com/downloads/connector/j/)
 
-&emsp;&emsp;选择合适的系统以及系统版本，会自动出现最新的安装包，注意下载的是`deb`格式的，可以使用`cpkg`命令安装。这里选择`Ubuntu Linux 20.04`版本的`Connector/J 8.0.27`。  
+&emsp;&emsp;选择合适的系统以及系统版本，会自动出现最新的安装包，注意下载的是`deb`格式的，可以使用`cpkg`命令安装。这里选择`Ubuntu Linux 22.04`版本的`Connector/J 8.0.32`。  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex1.2.png" style="zoom: 33%;" /></center>
+<center><img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201621438999.png" style="zoom: 50%;" /></center>
 
 &emsp;&emsp;下载`MySQL JDBC`到本地的目录（如`~/Download`目录）下，并使用`cpkg`命令安装，命令如下：
 
 ```shell
 cd ~/Download  #切换到你的文件所在目录下
-sudo dpkg -i mysql-connector-java_8.0.27-1ubuntu20.04_all.deb  #安装mysql-connector-java
+sudo dpkg -i mysql-connector-java_8.0.32-1ubuntu22.04_all.deb  #安装mysql-connector-java
 ```
 
 ##### 7.导入MySQL JDBC jar包到`hive/lib`目录下
 
 &emsp;&emsp;使用`cp`命令，将`jar`包到`/opt/hive/lib`目录下，命令如下：  
 ```shell
-sudo cp /usr/share/java/mysql-connector-java-8.0.27.jar /opt/hive/lib/
+sudo cp /usr/share/java/mysql-connector-java-8.0.32.jar /opt/hive/lib/
 ```
 
 > **注意**：
@@ -423,7 +423,7 @@ sudo cp /usr/share/java/mysql-connector-java-8.0.27.jar /opt/hive/lib/
 
 &emsp;&emsp;使用`chown`命令，更改`jar`包的所属用户和用户组，将其改为`datawhale`用户和`datawhale`用户组，命令如下：  
 ```shell
-sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-java-8.0.27.jar
+sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-java-8.0.32.jar
 ```
 
 ##### 8.修改hive配置文件
@@ -540,7 +540,7 @@ cd /opt/hadoop/sbin
 **前提条件：**  
 
 1. 完成Java运行环境部署（详见第2章Java安装）
-2. 完成Hadoop 3.0.0的单点部署，并**正常启动**（详见第2章安装单机版Hadoop）
+2. 完成Hadoop 3.3.1的单点部署，并**正常启动**（详见第2章安装单机版Hadoop）
 3. MySQL数据库安装完成，并**正常启动**（详见实验一）
 4. Hive单点部署完成，并**正常启动**（详见实验一）
 
