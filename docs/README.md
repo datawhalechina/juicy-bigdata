@@ -168,14 +168,6 @@
     </td>
   </tr>
   <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">刘洋</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">中科院数学与系统科学研究院研究生，Datawhale成员，主要贡献者</span></td>
-    <td>
-        <a href="https://www.zhihu.com/people/ming-ren-19-34">知乎</a>,
-        <a href="https://github.com/liu-yang-maker">Github</a>
-    </td>
-  </tr>
-  <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王洲烽</span></td>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">太原理工大学数据科学与大数据技术本科生，Datawhale成员，主要贡献者</span></td>
     <td>
@@ -196,6 +188,14 @@
     <td>
         <a href="https://blog.csdn.net/qq_29027865">CSDN</a>,
         <a href="https://github.com/ditingdapeng">Github</a>
+    </td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">刘洋</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">中科院数学与系统科学研究院研究生，Datawhale成员，主要贡献者</span></td>
+    <td>
+        <a href="https://www.zhihu.com/people/ming-ren-19-34">知乎</a>,
+        <a href="https://github.com/liu-yang-maker">Github</a>
     </td>
   </tr>
   <tr>
