@@ -4,6 +4,7 @@ HBase 2.3.5 or 2.4.8
 Mysql 8.0.32
 Hive 2.3.9
 Spark 3.2.0
+其余安装包地址见教程内部链接
 
 安装包下载地址：https://datawhale.feishu.cn/drive/folder/fldcnvODsgRWbyqVW9ApavEVEJg 
 密码: hO38
