@@ -211,6 +211,8 @@
 
 ### 2.3.3 实验步骤
 
+**注意：课程里默认是把安装包下载到`/data/hadoop`文件夹下，并解压到`/opt`下**
+
 #### 2.3.3.1 创建Hadoop用户
 
 &emsp;&emsp;为方便操作，我们创建一个名为`datawhale`的用户来运行程序，这样可以使不同用户之间有明确的权限区别。同时，也可以防止Hadoop的配置操作影响到其他用户的使用。对于一些大的软件（如 MySQL)，在企业中也常常为其单独创建一个用户。  
@@ -230,6 +232,8 @@ su datawhale # 切换到datawhale用户
 &emsp;&emsp;由于Hadoop本身是使用Java语言编写的，因此Hadoop的开发和运行都需要Java的支持，一般要求Java 6或者更新的版本。对于Ubuntu 22.04本身，系统上可能已经预装了Java 7，JDK版本为openjdk，路径为`/usr/lib/jvm/java-1.7.0-openjdk`，后文中需要配置的 `JAVA_HOME` 环境变量就可以设置为这个值。  
 &emsp;&emsp;对于Hadoop而言，采用更为广泛应用的Oracle公司的Java版本，在功能上可能会更稳定一些，因此用户也可以根据自己的爱好安装Oracle版本的Java。在安装过程中，请记住JDK的文件路径，即`JAVA_HOME`的位置，这个路径的设置将用在后文Hadoop的配置文件中，目的是让Hadoop程序可以找到相关的Java工具。  
 &emsp;&emsp;比如我们在`/data/hadoop`目录中下载了`jdk-8u311-linux-x64.tar.gz`。（**相关安装包下载地址已提供，见readme文件**）
+
+**注意：课程里默认是把安装包下载到`/data/hadoop`文件夹下，并解压到`/opt`下**
 
 ##### 1.安装jdk
 

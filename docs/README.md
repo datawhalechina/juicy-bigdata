@@ -151,6 +151,8 @@
 
 **安装包下载地址**：https://datawhale.feishu.cn/drive/folder/fldcnvODsgRWbyqVW9ApavEVEJg   密码: hO38
 
+**注意：课程里默认是把安装包下载到`/data/hadoop`文件夹下，并解压到`/opt`下**
+
 ## 致谢
 
 感谢以下Datawhale成员对项目推进作出的贡献(排名不分先后)：
