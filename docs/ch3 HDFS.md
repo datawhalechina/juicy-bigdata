@@ -148,7 +148,7 @@ HDFS副本的存放策略是：
 
 ### 3.4.1 写数据的过程
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2_write.png" style="zoom:33%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1_read.png" style="zoom:33%;" /></center>
 
 ![img](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1.png)
 
@@ -159,7 +159,6 @@ HDFS副本的存放策略是：
 4. 客户端向输出流`FSDataOutputStream`中写入的数据，会首先被分成一个个的分包，这些分包被放入`DFSOutputStream`对象的内部队列。输出流`FSDataOutputStream`会向名称节点申请保存文件和副本数据块的若干个数据节点，这些数据节点形成一个数据流管道。队列中的分包最后被打包成数据包，发往数据流管道中的第一个数据节点，第一个数据节点将数据包发送给第二个数据节点，第二个数据节点将数据包发送给第三个数据节点，这样，数据包会流经管道上的各个数据节点（即**流水线复制策略**）。
 5. 因为各个数据节点位于不同机器上，数据需要通过网络发送，因此，为了保证所有数据节点的数据都是准确的，接收到数据的数据节点要向发送者发送“确认包”（ACK Packet）。确认包沿着数据流管道逆流而上，从数据流管道依次经过各个数据节点并最终发往客户端，当客户端收到应答时，它将对应的分包从内部队列移除。不断执行第3~5步，直到数据全部写完。
 6. 客户端调用`close()`方法关闭输出流，此时开始，客户端不会再向输出流中写入数据，所以，当`DFSOutputStream`对象内部队列中的分包都收到应答以后，就可以使用`ClientProtocol.complete()`方法通知名称节点关闭文件，完成一次正常的写文件过程。
-
 
 ### 3.4.2 读数据的过程
 
