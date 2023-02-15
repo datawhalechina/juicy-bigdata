@@ -148,7 +148,7 @@ HDFS副本的存放策略是：
 
 ### 3.4.1 读数据的过程
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1_read.png" style="zoom:33%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2_write.png" style="zoom:33%;" /></center>
 
 ![img](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1.png)
 
@@ -163,7 +163,7 @@ HDFS副本的存放策略是：
 
 ### 3.4.2 写数据的过程
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2_write.png" style="zoom:33%;" /></center>
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1_read.png" style="zoom:33%;" /></center>
 
 ![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2.png)
 
