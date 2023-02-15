@@ -146,11 +146,26 @@ HDFS副本的存放策略是：
 
 > 说明：以下图片引用自博客：[翻译经典 HDFS原理讲解漫画](https://blog.csdn.net/hudiefenmu/article/details/37655491)
 
-### 3.4.1 读数据的过程
+### 3.4.1 写数据的过程
 
 <center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1_read.png" style="zoom:33%;" /></center>
 
 ![img](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1.png)
+
+**具体流程：**
+1. 客户端通过 `FileSystem.create()` 创建文件。相应地，在HDFS文件系统中， `DistributedFile System`具体实现了`FileSystem`。因此，调用`create()`方法后，`DistributedFileSystem`会创建输出流对象`FSDataOutputStream`，对于`HDFS`而言，具体的输出流就是`DFSOutputStream`。
+2. 然后，`DistributedFileSystem`通过RPC远程调用名称节点，在文件系统的命名空间中创建一个新的文件。名称节点会执行一些检查，比如文件是否已经存在，客户端是否有权限创建文件等。检查通过之后，名称节点会构造一个新文件，并添加文件信息。远程方法调用结束后，`DistributedFileSystem`会利用`DFSOutputStream`来实例化`FSDataOutputStream`，返回给客户端，客户端使用这个输出流写入数据。
+3. 获得输出流`FSDataOutputStream`以后，客户端调用输出流的`write()`方法向HDFS对应的文件写入数据。
+4. 客户端向输出流`FSDataOutputStream`中写入的数据，会首先被分成一个个的分包，这些分包被放入`DFSOutputStream`对象的内部队列。输出流`FSDataOutputStream`会向名称节点申请保存文件和副本数据块的若干个数据节点，这些数据节点形成一个数据流管道。队列中的分包最后被打包成数据包，发往数据流管道中的第一个数据节点，第一个数据节点将数据包发送给第二个数据节点，第二个数据节点将数据包发送给第三个数据节点，这样，数据包会流经管道上的各个数据节点（即**流水线复制策略**）。
+5. 因为各个数据节点位于不同机器上，数据需要通过网络发送，因此，为了保证所有数据节点的数据都是准确的，接收到数据的数据节点要向发送者发送“确认包”（ACK Packet）。确认包沿着数据流管道逆流而上，从数据流管道依次经过各个数据节点并最终发往客户端，当客户端收到应答时，它将对应的分包从内部队列移除。不断执行第3~5步，直到数据全部写完。
+6. 客户端调用`close()`方法关闭输出流，此时开始，客户端不会再向输出流中写入数据，所以，当`DFSOutputStream`对象内部队列中的分包都收到应答以后，就可以使用`ClientProtocol.complete()`方法通知名称节点关闭文件，完成一次正常的写文件过程。
+
+
+### 3.4.2 读数据的过程
+
+<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2_write.png" style="zoom:33%;" /></center>
+
+![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2.png)
 
 **具体流程：**
 1. 客户端通过 `FileSystem.open()` 打开文件，相应地，在HDFS文件系统中，`DistributedFileSystem`具体实现了`FileSystem`。因此，调用`open()`方法后，`DistributedFileSystem`会创建输入流`FSDataInputStream`，对于HDFS而言，具体的输入流就是`DFSInputStream`。
@@ -160,20 +175,6 @@ HDFS副本的存放策略是：
 5. 输入流通过`getBlockLocations()`方法查找下一个数据块（如果客户端缓存中已经包含了该数据块的位置信息，就不需要调用该方法）。
 6. 找到该数据块的最佳数据节点，读取数据。
 7. 当客户端读取完毕数据的时候，调用`FSDataInputStream`的`close()`函数，关闭输入流。需要注意的是，在读取数据的过程中，如果客户端与数据节点通信时出现错误，就会尝试连接包含此数据块的下一个数据节点。
-
-### 3.4.2 写数据的过程
-
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2_write.png" style="zoom:33%;" /></center>
-
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2.png)
-
-**具体流程：**
-1. 客户端通过 `FileSystem.create()` 创建文件。相应地，在HDFS文件系统中， `DistributedFile System`具体实现了`FileSystem`。因此，调用`create()`方法后，`DistributedFileSystem`会创建输出流对象`FSDataOutputStream`，对于`HDFS`而言，具体的输出流就是`DFSOutputStream`。
-2. 然后，`DistributedFileSystem`通过RPC远程调用名称节点，在文件系统的命名空间中创建一个新的文件。名称节点会执行一些检查，比如文件是否已经存在，客户端是否有权限创建文件等。检查通过之后，名称节点会构造一个新文件，并添加文件信息。远程方法调用结束后，`DistributedFileSystem`会利用`DFSOutputStream`来实例化`FSDataOutputStream`，返回给客户端，客户端使用这个输出流写入数据。
-3. 获得输出流`FSDataOutputStream`以后，客户端调用输出流的`write()`方法向HDFS对应的文件写入数据。
-4. 客户端向输出流`FSDataOutputStream`中写入的数据，会首先被分成一个个的分包，这些分包被放入`DFSOutputStream`对象的内部队列。输出流`FSDataOutputStream`会向名称节点申请保存文件和副本数据块的若干个数据节点，这些数据节点形成一个数据流管道。队列中的分包最后被打包成数据包，发往数据流管道中的第一个数据节点，第一个数据节点将数据包发送给第二个数据节点，第二个数据节点将数据包发送给第三个数据节点，这样，数据包会流经管道上的各个数据节点（即**流水线复制策略**）。
-5. 因为各个数据节点位于不同机器上，数据需要通过网络发送，因此，为了保证所有数据节点的数据都是准确的，接收到数据的数据节点要向发送者发送“确认包”（ACK Packet）。确认包沿着数据流管道逆流而上，从数据流管道依次经过各个数据节点并最终发往客户端，当客户端收到应答时，它将对应的分包从内部队列移除。不断执行第3~5步，直到数据全部写完。
-6. 客户端调用`close()`方法关闭输出流，此时开始，客户端不会再向输出流中写入数据，所以，当`DFSOutputStream`对象内部队列中的分包都收到应答以后，就可以使用`ClientProtocol.complete()`方法通知名称节点关闭文件，完成一次正常的写文件过程。
 
 ### 3.4.3 HDFS故障类型和其检测方法
 
