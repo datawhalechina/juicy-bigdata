@@ -14,7 +14,7 @@
 
 
 
-### 6.1.3 HDFS中DataNode挂掉如何处理？
+### 6.1.3 HDFS中NameNode挂掉如何处理？
 
 
 
