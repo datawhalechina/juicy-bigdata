@@ -15,7 +15,7 @@
 妻子： 好吧。
 ```
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.0.1.png" style="zoom: 67%;" /></center>
+<center><img src="images/ch05/ch5.0.1.png" style="zoom: 67%;" /></center>
 
 ```log
 我：现在，假设你想用薄荷、洋葱、番茄、辣椒、大蒜弄一瓶混合辣椒酱。你会怎么做呢？
@@ -27,7 +27,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 我： 你可以说是，也可以说不是。 其实这只是MapReduce的一部分，MapReduce的强大在于分布式计算。
 ```
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.0.2_3.png" style="zoom:67%;" /></center>
+<center><img src="images/ch05/ch5.0.2_3.png" style="zoom:67%;" /></center>
 
 ```log
 妻子： 分布式计算？ 那是什么？请给我解释下吧。
@@ -42,11 +42,11 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 我：现在你会看到MapReduce遗漏的阶段——搅拌阶段。MapReduce将所有输出的蔬菜碎都搅拌在了一起，这些蔬菜碎都是在以key为基础的map操作下产生的。搅拌将自动完成，你可以假设key是一种原料的名字，就像洋葱一样。所以全部的洋葱keys都会搅拌在一起，并转移到研磨洋葱的研磨器里。这样，你就能得到洋葱辣椒酱了。同样地，所有的番茄也会被转移到标记着番茄的研磨器里，并制造出番茄辣椒酱。
 ```
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.0.4.png" style="zoom: 67%;" /></center>
+<center><img src="images/ch05/ch5.0.4.png" style="zoom: 67%;" /></center>
 
 > 小故事讲完啦，相信大家对MapReduce都有了个初步的了解，下面正式进入MapReduce的学习！！！大家冲冲冲，这部分知识是满满的干货。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.0.5.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.0.5.png" style="zoom:80%;" /></center>
 
 ## 5.1 概述
 
@@ -58,7 +58,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 &emsp;&emsp;分布式并行编程与传统的程序开发方式有很大的区别。传统的程序都是以单指令、单数据流的方式顺序执行，虽然这种方式比较符合人类的思维习惯，但是，这种程序的性能受到单台机器性能的限制，可扩展性较差。**分布式并行程序可以运行在由大量计算机构成的集群上，从而可以充分利用集群的并行处理能力，同时，通过向集群中增加新的计算节点，就可以很容易实现集群计算能力的扩充。**  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.1.1.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.1.1.png" style="zoom:80%;" /></center>
 
 &emsp;&emsp;谷歌公司最先提出了分布式并行编程模型MapReduce，Hadoop MapReduce是它的开源实现。谷歌的MapReduce运行在分布式文件系统GFS上，与谷歌类似，Hadoop MapReduce运行在分布式文件系统HDFS上。相对而言，**Hadoop MapReduce要比谷歌MapReduce的使用门槛低很多，程序员即使没有任何分布式程序开发经验，也可以很轻松地开发出分布式程序并部署到计算机集群中。**
 
@@ -67,7 +67,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 &emsp;&emsp;MapReduce将复杂的、运行于大规模集群上的并行计算过程高度抽象到了两个函数：`Map`和`Reduce`，这两个函数及其核心思想都源自函数式编程语言。  
 &emsp;&emsp;MapReduce设计的一个理念就是**“计算向数据靠拢”**，而不是“数据向计算靠拢"，因为数据需要**大量的网络传输开销**，尤其是在大规模数据环境下，这种开销尤为惊人，所以，移动计算要比移动数据更加经济。在这种理念下，只要有可能，一个集群中的**MapReduce框架就会将Map程序就近地在HDFS数据所在的节点运行，即将计算节点和存储节点放在一起运行，从而减少了节点间的数据移动开销。**
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.1.2.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.1.2.png" style="zoom:80%;" /></center>
 
 &emsp;&emsp;MapReduce框架采用了Master/Slave架构，包括一个Master和若干个Slave，**Master**上运行**JobTracker**，**Slave**上运行 **TaskTracker**。用户提交的每个计算作业，会被划分成若干个任务。  
 
@@ -93,7 +93,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > **这里看起来好枯燥╮(╯▽╰)╭ ， 举个栗子方便理解，啦啦啦啦啦啦！**
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.1.3.png" style="zoom: 67%;" /></center>
+<center><img src="images/ch05/ch5.1.3.png" style="zoom: 67%;" /></center>
 
 
 > **这里再给出一个简单WordCount实例**
@@ -102,16 +102,16 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 - 对于`Map`函数的输入`<k1,v1>`而言，其具体**输入数据**就是`<某一行文本在文件中的偏移位置，该行文本的内容>`。用户可以自己编写`Map`函数处理过程，把文件中的一行读取后解析出每个单词，**输出**一批中间结果`<单词，出现次数>`；
 - 然后，把这些中间结果作为`Reduce`函数的**输入**，`Reduce`函数的具体处理过程也是由用户自己编写的，用户可以将相同单词的出现次数进行累加，**输出每个单词出现的总次数**。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.1.4.png" style="zoom:67%;" /></center>
+<center><img src="images/ch05/ch5.1.4.png" style="zoom:67%;" /></center>
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.1.5.png" style="zoom: 67%;" /></center>
+<center><img src="images/ch05/ch5.1.5.png" style="zoom: 67%;" /></center>
 
 
 ## 5.2 MapReduce的工作流程
 
 > ps：编者警告，以下内容十分硬核，建议买杯咖啡慎入，希望大家能坚持学下去，加油加油！！
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.0.png" style="zoom:67%;" /></center>
+<center><img src="images/ch05/ch5.2.0.png" style="zoom:67%;" /></center>
 
 ### 5.2.1 工作流程概述
 
@@ -120,7 +120,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 &emsp;&emsp;**首先会被拆分成许多个Map任务在多台机器上并行执行，**每个`Map`任务通常运行在数据存储的节点上，这样，计算和数据就可以放在一起运行，不需要额外的数据传输开销。当`Map`任务结束后，会生成以`<key,value>`形式表示的许多中间结果。  
 &emsp;&emsp;然后，这些中间结果会被分发到多个`Reduce`任务在多台机器上**并行执行**，**具有相同key**的`<key,value>`会被发送到同一个`Reduce`任务那里，`Reduce`任务会对中间结果进行汇总计算得到最后结果，并输出到分布式文件系统中。
 
-![image-20211202203840694](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.1.png)
+![image-20211202203840694](images/ch05/ch5.2.1.png)
 
 > &emsp;&emsp;不同的Map任务之间不会进行通信，不同的Reduce任务之间也不会发生任何信息交换；用户不能显式地从一台机器向另一台继机器发送消息，所有的数据交换都是通过MapReduce框架自身去实现的。  
 > &emsp;&emsp;在MapReduce的整个执行过程中，**Map任务的输入文件、Reduce任务的处理结果**都是保存在**分布式文件系统**中的，而**Map任务**处理得到的**中间结果**则保存在**本地存储**（如磁盘）中。
@@ -135,11 +135,11 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 5. `Reduce`以一系列`<key,value-list>`中间结果作为输入，执行用户定义的逻辑，输出结果给`OutputFormat`模块。
 6. `OutputFormat`模块会验证输出目录是否已经存在，以及输出结果类型是否符合配置文件中的配置类型，如果都满足，就输出`Reduce`的结果到分布式文件系统。
 
-![MapReduce的执行过程](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.2.png)
+![MapReduce的执行过程](images/ch05/ch5.2.2.png)
 
 > 坚持坚持，这才刚开始，学习使我快乐！！
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.2_emoji.png" style="zoom:67%;" /></center>
+<center><img src="images/ch05/ch5.2.2_emoji.png" style="zoom:67%;" /></center>
 
 ### 5.2.3 Shuffle过程详解
 
@@ -148,11 +148,11 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 &emsp;&emsp;`Shuffle`过程是MapReduce整个工作流程的核心环节，理解`Shuffle`过程的基本原理，对于理解MapReduce流程至关重要。  
 &emsp;&emsp;所谓`Shuffle`，是指针对`Map`输出结果进行分区、排序和合并等处理，并交给`Reduce`的过程。因此，**Shuffle过程**分为**Map端的操作**和**Reduce端的操作**。
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.3.1.1.png)
+![](images/ch05/ch5.2.3.1.1.png)
 
 1. 在`Map`端的Shuffle过程。`Map`的输出结果首先被写入缓存，当缓存满时，就启动溢写操作，把缓存中的数据写入磁盘文件，并清空缓存。当启动溢写操作时，首先需要把缓存中的数据进行分区，然后对每个分区的数据进行排序（Sort）和合并（Combine），之后再写入磁盘文件。每次溢写操作会生成一个新的磁盘文件，随着`Map`任务的执行，磁盘中就会生成多个溢写文件。在`Map`任务全部结束之前，这些溢写文件会被归并（Merge）成一个大的磁盘文件，然后，通知相应的`Reduce`任务来领取属于自己需要处理的数据。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.3.1.2.png" style="zoom:50%;" /></center>
+<center><img src="images/ch05/ch5.2.3.1.2.png" style="zoom:50%;" /></center>
 
 2. 在`Reduce`端的Shuffle过程。`Reduce`任务从`Map`端的不同`Map`机器领回属于自己需要处理的那部分数据，然后，对数据进行归并（Merge）后交给`Reduce`处理。
 
@@ -184,13 +184,13 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 > 如果把这段知识肝完，请自称为肝帝 ╮(╯▽╰)╭
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.3_emoji1.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.2.3_emoji1.png" style="zoom:80%;" /></center>
 
 #### 5.2.3.3 Reduce端的Shuffle过程
 
 &emsp;&emsp;相对于`Map`端而言，`Reduce`端的Shuffle过程非常简单，只需要从`Map`端读取结果，然后执行归并操作，最后输送给`Reduce`任务进行处理，具体执行流程如下：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.3.3.1.png)
+![](images/ch05/ch5.2.3.3.1.png)
 
 1. “领取”数据  
     &emsp;&emsp;`Map`端的`Shuffle`过程结束后，所有`Map`输出结果都保存在`Map`机器的本地磁盘上，`Reduce`任务需要把这些数据“领取”（Fetch）回来，存放到自己所在机器的本地磁盘上。因此，在每个`Reduce`任务真正开始之前，它大部分时间都在从`Map`端把属于自己处理那些分区的数据“领取”过来。  
@@ -205,11 +205,11 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 3. 把数据输入`Reduce`任务  
 &emsp;&emsp;磁盘中经过多轮归并后得到的若干个大文件，不会继续归并成一个新的大文件，而是直接输入给`Reduce`任务，这样可以减少磁盘读写开销。由此，整个`Shuffle`过程顺利结束。接下来，`Reduce`任务会执行`Reduce`函数中定义的各种映射，输出最终结果，并保存到分布式文件系统中。
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.3.3.2.png)
+![](images/ch05/ch5.2.3.3.2.png)
 
 > emmmmmmm，笔者吐槽，以上内容实在是太太太太太硬核了，估计今天吃完饭憋得上厕所都难受，大家都是打工人，自然感同身受。没事没事没事，下面`WordCount`的例子就有很多生动形象的图啦，很好理解的！！！大家坚持住，看完睡个好觉，红红火火恍恍惚惚哈哈哈。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.2.3_emoji2.png" style="zoom:67%;" /></center>
+<center><img src="images/ch05/ch5.2.3_emoji2.png" style="zoom:67%;" /></center>
 
 ## 5.3 以`WordCount`为例理解MapReduce
 
@@ -222,21 +222,21 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 ### 5.3.1 首先放一张`WordCount`实现过程图来控场
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.1.png" style="zoom: 80%;" /></center>
+<center><img src="images/ch05/ch5.3.1.png" style="zoom: 80%;" /></center>
 
 &emsp;&emsp;那么问题来了，MapReduce是如何对这些**大批量的数据**进行处理计算的呢？  
 &emsp;&emsp;答案当然是我们的`old friend`——`HDFS`  
 &emsp;&emsp;看到这里，不知道朋友们有没有回想起HDFS的知识呢？ 还记得NameNode和DataNode吗？  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.2.png" style="zoom:67%;" /></center>
+<center><img src="images/ch05/ch5.3.2.png" style="zoom:67%;" /></center>
 
 ### 5.3.2 简易版MapReduce工作流程
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.3.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.3.png" style="zoom:80%;" /></center>
 
 ### 5.3.3 数据分片
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.4.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.4.png" style="zoom:80%;" /></center>
 
 **MapReduce的工作流程：**
 - `Inputformat`的作用：加载、读取HDFS中的文件，对输入进行格式验证；将大文件切分成许多分片`split`，但**此切分仅是逻辑上的切分，即逻辑定义每个`split`的起点和长度，并非真正意义的物理切分。**
@@ -246,35 +246,35 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 1. `WordCount`的数据分片  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.5.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.5.png" style="zoom:80%;" /></center>
 
 2. `split`的`Map`流程  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.6.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.6.png" style="zoom:80%;" /></center>
 
 3. `Reduce`流程  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.7.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.7.png" style="zoom:80%;" /></center>
 
 4. `WordCount`的`Map`流程  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.8.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.8.png" style="zoom:80%;" /></center>
 
 5. `WordCount`的`Reduce`流程  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.9.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.9.png" style="zoom:80%;" /></center>
 
 6. `Shuffle`过程  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.10.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.10.png" style="zoom:80%;" /></center>
 
 ### 5.3.5 详细版MapReduce工作流程
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.11.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.11.png" style="zoom:80%;" /></center>
 
 ### 5.3.6 MapReduce的体系结构
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.12.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.12.png" style="zoom:80%;" /></center>
 
 #### 5.3.6.1 Client（客户端）
 
@@ -301,7 +301,7 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 > 终于结束了，笔者表示也编累了呜呜呜，希望大家能够理解这部分知识，好好运用MapReduce这项神器。  
 > ps：能够认真学完的朋友们都是超人，勇敢坚持战胜困难的人生才更美丽！！！！
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch5.3.13.png" style="zoom:80%;" /></center>
+<center><img src="images/ch05/ch5.3.13.png" style="zoom:80%;" /></center>
 
 ## 5.4 实验一：Mapreduce实例——WordCount
 
@@ -325,25 +325,25 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
 首先，启动Eclipse，启动以后会弹出如下图所示界面，提示设置工作空间（workspace）。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117200805431.png" alt="image-20230117200805431" style="zoom: 67%;" />
+<img src="images/ch05/ch5_ex1.1.png" style="zoom: 67%;" />
 
 可以直接采用默认的设置“/home/hadoop/workspace”，点击“OK”按钮。 Eclipse启动以后，呈现的界面如下图所示。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117200819950.png" alt="image-20230117200819950" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.2.png" style="zoom:80%;" />
 
 选择“File–>New–>Java Project”菜单，开始创建一个Java工程，弹出如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117200830364.png" alt="image-20230117200830364" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.3.png" style="zoom:80%;" />
 
   在“Project name”后面输入工程名称“WordCount”，选中“Use default location”，让这个Java工程的所有文件都保存到“/home/hadoop/workspace/WordCount”目录下。在“JRE”这个选项卡中，选择当前已经安装好的JDK：java。然后，点击界面底部的“Next>”按钮。
 
 #### 2.为项目添加需要用到的JAR包
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117200838895.png" alt="image-20230117200838895" style="zoom: 80%;" />
+<img src="images/ch05/ch5_ex1.4.png" style="zoom: 80%;" />
 
 在这个界面中加载该Java工程所需要用到的JAR包，这些JAR包中包含了与Hadoop相关的Java API。点击界面中的“Libraries”选项卡，然后，点击界面右侧的“Add External JARs…”按钮，弹出如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117200849515.png" alt="image-20230117200849515" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.5.png" style="zoom:80%;" />
 
 为了编写一个MapReduce程序，一般需要向Java工程中添加以下JAR包：
 
@@ -356,21 +356,21 @@ Reduce（化简）:在这一阶段，你将各种蔬菜碎都放入研磨机里�
 
  全部添加完毕以后，就可以点击界面右下角的“Finish”按钮，完成Java工程WordCount的创建。具体如下图所示。 
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117200903526.png" alt="image-20230117200903526" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.6.png" style="zoom:80%;" />
 
 #### 3.编写Java应用程序
 
 下面编写一个Java应用程序，即WordCount.java。在Eclipse工作界面左侧的“Package Explorer”面板中（如下图所示），找到刚才创建好的工程名称“WordCount”，然后在该工程名称上点击鼠标右键，在弹出的菜单中选择“New–>Class”菜单，再选择“New–>Class”菜单以后会出现如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201004151.png" alt="image-20230117201004151" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.7.png" style="zoom:80%;" />
 
 在该界面中，只需要在“Name”后面输入新建的Java类文件的名称，这里采用名称“WordCount”，其他都可以采用默认设置。然后，点击界面右下角“Finish”按钮，出现如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201012165.png" alt="image-20230117201012165" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.8.png" style="zoom:80%;" />
 
   可以看出，Eclipse自动创建了一个名为“WordCount.java”的源代码文件，清空该文件里面的代码，然后在该文件中输入完整的词频统计程序代码，具体如下：
 
-```
+```java
 import java.io.IOException;  
 import java.util.Iterator;  
 import java.util.StringTokenizer;  
@@ -442,115 +442,108 @@ public static class IntSumReducer extends Reducer<Text, IntWritable, Text, IntWr
 
 现在编译上面编写的代码。可以直接点击Eclipse工作界面上部的运行程序的快捷按钮，当把鼠标移动到该按钮上时，在弹出的菜单中选择“Run as”，继续在弹出来的菜单中选择“Java Application”，如下图所示。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201028788.png" alt="image-20230117201028788" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.9.png" style="zoom:80%;" />
 
 然后，会弹出如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201036533.png" alt="image-20230117201036533" style="zoom:67%;" />
+<img src="images/ch05/ch5_ex1.10.png" alt="image-20230117201036533" style="zoom:67%;" />
 
 点击界面右下角的“OK”按钮，开始运行程序。程序运行结束后，会在底部的“Console”面板中显示运行结果信息（如下图所示）。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201044062.png" alt="image-20230117201044062" style="zoom:67%;" />
+<img src="images/ch05/ch5_ex1.11.png" style="zoom:67%;" />
 
 下面把Java应用程序打包生成JAR包，部署到Hadoop平台上运行。现在可以把词频统计程序放在“/opt/hadoop/myapp”目录下。如果该目录不存在，可以使用如下命令创建：
 
-```
+```shell
 cd /opt/hadoop 
-
 mkdir myapp 
 ```
 
 首先，请在Eclipse工作界面左侧的“Package Explorer”面板中，在工程名称“WordCount”上点击鼠标右键，在弹出的菜单中选择“Export”，然后，会弹出如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201130324.png" alt="image-20230117201130324" style="zoom: 80%;" />
+<img src="images/ch05/ch5_ex1.12.png" style="zoom: 80%;" />
 
 在该界面中，选择“Runnable JAR file”，然后，点击“Next>”按钮，弹出如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201144602.png" alt="image-20230117201144602" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.13.png" style="zoom:80%;" />
 
 在该界面中，“Launch configuration”用于设置生成的JAR包被部署启动时运行的主类，需要在下拉列表中选择刚才配置的类“WordCount-WordCount”。在“Export destination”中需要设置JAR包要输出保存到哪个目录，这里设置为“/usr/local/hadoop/myapp/WordCount.jar”。在“Library handling”下面选择“Extract required libraries into generated JAR”。然后，点击“Finish”按钮，会出现如下图所示界面。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201153013.png" alt="image-20230117201153013" style="zoom:67%;" />
+<img src="images/ch05/ch5_ex1.14.png" style="zoom:67%;" />
 
   可以忽略该界面的信息，直接点击界面右下角的“OK”按钮，启动打包过程。打包过程结束后，会出现一个警告信息界面，如下图所示。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201159270.png" alt="image-20230117201159270" style="zoom:67%;" />
+<img src="images/ch05/ch5_ex1.15.png" style="zoom:67%;" />
 
   可以忽略该界面的信息，直接点击界面右下角的“OK”按钮。至此，已经顺利把WordCount工程打包生成了WordCount.jar。
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201206005.png" alt="image-20230117201206005" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.16.png" style="zoom:80%;" />
 
 #### 5.运行程序
 
 在运行程序之前，需要启动Hadoop，命令如下：
 
-```
+```shell
 cd /opt/hadoop/sbin 
-
 ./start-all.sh 
 ```
 
- 
-
 在启动Hadoop之后，需要首先删除HDFS中与当前Linux用户datawhale对应的input和output目录（即HDFS中的“/user/datawhale/input”和“/user/datawhale/output”目录），这样确保后面程序运行不会出现问题，具体命令如下：
 
-```
+```shell
 cd /opt/hadoop 
-
 ./bin/hdfs dfs -rm -r /input 
-
 ./bin/hdfs dfs -rm -r /output
 ```
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201232946.png" alt="image-20230117201232946" style="zoom:67%;" />
+<img src="images/ch05/ch5_ex1.17.png" style="zoom:67%;" />
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201238052.png" alt="image-20230117201238052" style="zoom:67%;" />
+<img src="images/ch05/ch5_ex1.18.png" style="zoom:67%;" />
 
 然后，再在HDFS中新建与当前Linux用户datawhale对应的input目录，即“/user/ datawhale /input”目录，具体命令如下：
 
-```
+```shell
 ./bin/hdfs dfs -mkdir /input 
 ```
 
 然后，把之前在第7.1节中在Linux本地文件系统中新建的两个文件wordfile1.txt和wordfile2.txt（假设这两个文件位于“/opt/hadoop/mytext”目录下，并且里面包含了一些英文语句），上传到HDFS中的“/user/datawhale/input”目录下，命令如下：
 
-```
+```shell
 ./bin/hdfs dfs -put /opt/hadoop/mytext/wordfile1.txt /input 
-
 ./bin/hdfs dfs -put /opt/hadoop/mytext/wordfile2.txt /input 
 ```
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201341148.png" alt="image-20230117201341148" style="zoom: 67%;" />
+<img src="images/ch05/ch5_ex1.19.png" style="zoom: 67%;" />
 
 如果HDFS中已经存在“/user/hadoop/output”，则使用如下命令删除：
 
-```
+```shell
 ./bin/hdfs dfs -rm -r /user/hadoop/output 
 ```
 
 现在，就可以在Linux系统中，使用hadoop jar命令运行程序，命令如下：
 
-```
+```shell
 ./bin/hadoop jar ./myapp/WordCount.jar /input output
 ```
 
 上面命令执行以后，当运行顺利结束时，屏幕上会显示类似如下的信息：
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201504791.png" alt="image-20230117201504791" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.20.png" style="zoom:80%;" />
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201517246.png" alt="image-20230117201517246" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.21.png" style="zoom:80%;" />
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201527189.png" alt="image-20230117201527189" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.22.png" style="zoom:80%;" />
 
 词频统计结果已经被写入了HDFS的“/user/datawhale/output”目录中，可以执行如下命令查看词频统计结果：
 
-```
+```shell
 ./bin/hdfs dfs -cat /output/* 
 ```
 
 上面命令执行后，会在屏幕上显示如下词频统计结果：
 
-<img src="https://github.com/wzfer/picgo/raw/master/juicy-bigdata/experiments_imgs/image-20230117201621438.png" alt="image-20230117201621438" style="zoom:80%;" />
+<img src="images/ch05/ch5_ex1.23.png" style="zoom:80%;" />
 
 至此，词频统计程序顺利运行结束。需要注意的是，如果要再次运行WordCount.jar，需要首先删除HDFS中的output文件，否则会报错。
 

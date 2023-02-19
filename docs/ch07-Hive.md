@@ -5,13 +5,13 @@
 ## 7.0 数据仓库
 > ps：到了数据仓库啦，崭新的饱满的和知识相濡以沫的一天，又开始啦！！！！
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.0.png" style="zoom:67%;" /></center>
+<center><img src="images/ch06/ch6.0.png" style="zoom:67%;" /></center>
 
 ### 7.0.1 为什么要有数据仓库
 
 &emsp;&emsp;在引入数据仓库之前，我们先来聊聊为什么会产生数据仓库呢！！
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.0.1.png" style="zoom:33%;" /></center>
+<center><img src="images/ch06/ch6.0.1.png" style="zoom:33%;" /></center>
 
 &emsp;&emsp;数据的作用有两个：操作型记录的保存和分析型决策的制定。
 - 操作型记录的保存意味着企业通常不必维护历史数据，只需修改数据以反映最新的状态；
@@ -25,21 +25,21 @@
 &emsp;&emsp;随着信息技术的普及和企业信息化建设步伐的加快，企业逐步认识到建立企业范围内的统一数据存储的重要性，越来越多的企业已经建立或正在着手建立企业数据仓库。企业数据仓库有效集成了来自不同部门、不同地理位置、具有不同格式的数据，为企业管理决策者提供了企业范围内的单一数据视图，从而为综合分析和科学决策奠定了坚实的基础。  
 &emsp;&emsp;如下图所示，数据仓库的主要特征是：**主题性**、**集成性**、**非易失性**、**时变性**。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.0.2_1.png" style="zoom:33%;" /></center>
+<center><img src="images/ch06/ch6.0.2_1.png" style="zoom:33%;" /></center>
 
 1. 主题性  
    &emsp;&emsp;各个业务系统的数据可能是相互分离的，但数据仓库则是**面向主题的**。数据仓库将不同的业务进行归类并分析，将数据抽象为主题，用于对应某一分析领域所涉及的分析对象。  
    &emsp;&emsp;而操作型记录（即传统数据）对数据的划分并不适用于决策分析。在数据仓库中，基于主题的数据被划分为各自独立的领域，每个领域有各自的逻辑内涵但互不交叉，在抽象层次上对数据进行完整的、一致的和准确的描述。  
    &emsp;&emsp;以零售业务的过程为例：将多个零售业务数据（杂货、冷冻食品、生活用品、肉类等），依据业务主题进行数据划分，可创建一个具有订单、库存和销售等多个业务领域的零售业务数仓。  
    
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.0.2_2.png" style="zoom:50%;" /></center>
+<center><img src="images/ch06/ch6.0.2_2.png" style="zoom:50%;" /></center>
 
 2. 集成性  
    &emsp;&emsp;确定主题之后，就需要获取与主题相关的数据。这些数据会分布在不同的业务过程中，因此在数据进入数仓之前，需要对这些数据的口径进行统一。  
    &emsp;&emsp;口径统一是指，统一数据来源中的歧义、单位、字长等元素，并进行总和计算，来聚合成新的数据。  
    &emsp;&emsp;以上述零售业务过程中的订单主题为例，对于订单主题，通常会包括三个业务过程：订单、发货和发票。这些过程会产生一些新的指标，如：销售额、发票收入等。  
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.0.2_3.png"  /></center>
+<center><img src="images/ch06/ch6.0.2_3.png"  /></center>
 
 3. 非易失性  
    &emsp;&emsp;数据仓库的目的是分析数据中的规律，因此，添加到数据仓库中的数据，需要保证其稳定，不会轻易丢失和改变。  
@@ -52,7 +52,7 @@
 
 &emsp;&emsp;数据仓库的体系结构通常包含4个层次：数据源、数据存储和管理、数据服务以及数据应用。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.0.3.png" style="zoom:33%;" /></center>
+<center><img src="images/ch06/ch6.0.3.png" style="zoom:33%;" /></center>
 
 - 数据源：数据仓库的数据来源，包括外部数据、现有业务系统和文档资料等。
 - 数据存储和管理：为数据提供的存储和管理，包括数据仓库、数据集市、数据仓库监视、运行与维护工具和元数据管理等。
@@ -69,14 +69,14 @@
 
 ## 7.1 Hive基本概念
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.1.png" style="zoom:33%;" /></center>
+<center><img src="images/ch06/ch6.1.png" style="zoom:33%;" /></center>
 
 ### 7.1.1 概述
 
 &emsp;&emsp;**Hive是建立在Hadoop之上的一种数仓工具**。该工具的功能是将**结构化**、**半结构化**的数据文件映射为一张**数据库表**，基于数据库表，提供了一种类似`SQL`的查询模型（`HQL`），用于访问和分析存储在`Hadoop`文件中的大型数据集。  
 &emsp;&emsp;`Hive`本身并不具备存储功能，其核心是将`HQL`转换为`MapReduce`程序，然后将程序提交到`Hadoop`集群中执行。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.1.1.png" style="zoom: 50%;" /></center>
+<center><img src="images/ch06/ch6.1.1.png" style="zoom: 50%;" /></center>
 
 **特点**：  
 1. 简单、容易上手（提供了类似`SQL`的查询语言`HiveQL`），使得精通`SQL`却不了解`Java` 编程的人也能很好地进行大数据分析；
@@ -87,7 +87,7 @@
 
 ### 7.1.2 产生背景
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.1.2.png" style="zoom: 50%;" /></center>
+<center><img src="images/ch06/ch6.1.2.png" style="zoom: 50%;" /></center>
 
 &emsp;&emsp;`Hive`的产生背景主要有两个：  
 
@@ -96,13 +96,13 @@
 
 &emsp;&emsp;`Hive`利用`HDFS`存储数据，使用`MapReduce`查询分析数据。将`SQL`转换为`MapReduce`程序，从而完成对数据的分析决策。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.1.2_emoji.png" style="zoom:50%;" /></center>
+<center><img src="images/ch06/ch6.1.2_emoji.png" style="zoom:50%;" /></center>
 
 ### 7.1.3 Hive与Hadoop生态系统
 
 &emsp;&emsp;下图描述了当采用`MapReduce`作为执行引擎时，`Hive`与`Hadoop`生态系统中其他组件的关系。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.1.3.png" alt="image-20211225161347381" style="zoom:33%;" /></center>
+<center><img src="images/ch06/ch6.1.3.png" alt="image-20211225161347381" style="zoom:33%;" /></center>
 
 - **Hive与Hadoop生态的联系**
 
@@ -146,7 +146,7 @@
 
 - **分析**：写`SQL`的前提是对表进行操作，而不能是针对文件。那么需要记录文件和表之间的对应关系，关系示意图如下：
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.1.4.png" style="zoom:50%;" /></center>
+<center><img src="images/ch06/ch6.1.4.png" style="zoom:50%;" /></center>
 
 &emsp;&emsp;要实现上图所示的文件和表的对应关系，关键在于**实现表和文件的映射**，那么需要记录的信息包括：  
 - 表是对应于哪个文件的，即表的位置信息；
@@ -182,7 +182,7 @@
 
 &emsp;&emsp;`Hive`中基本数据类型遵循以下的层次结构，按照这个层次结构，子类型到祖先类型允许隐式转换。例如`INT`类型的数据允许隐式转换为`BIGINT`类型。额外注意的是：按照类型层次结构，允许将`STRING`类型隐式转换为`DOUBLE`类型。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.2.1.png" style="zoom:33%;" /></center>
+<center><img src="images/ch06/ch6.2.1.png" style="zoom:33%;" /></center>
 
 - **复杂类型**
 
@@ -234,7 +234,7 @@ CREATE TABLE students(
 
 &emsp;&emsp;`Hive`主要由用户接口模块、驱动模型以及元数据存储模块3个模块组成，其系统架构如下图所示：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.3.png)
+![](images/ch06/ch6.3.png)
 
 ### 7.3.1 用户接口模块
 
@@ -256,28 +256,28 @@ CREATE TABLE students(
 	- 支持多个客户端的连接，而客户端无需关心数据的存储地址，实现了数据访问层面的解耦操作。
 	- 因此如果你在`Hive`上创建了一张表，然后在`presto`/`impala`/`sparksql`中都是可以直接使用的，它们会从`Metastore`中获取统一的元数据信息，同样的你在`presto`/`impala`/`sparksql`中创建一张表，在`Hive`中也可以直接使用。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.3.3_1.png" style="zoom: 50%;" /></center>
+<center><img src="images/ch06/ch6.3.3_1.png" style="zoom: 50%;" /></center>
 
 - **`Metastore`管理元数据的方式：**
 
 1. **内嵌模式**  
 &emsp;&emsp;`Metastore`**默认的**部署模式是`Metastore`元数据服务和`Hive`服务融合在一起。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.3.3_2.png" style="zoom:50%;" /></center>
+<center><img src="images/ch06/ch6.3.3_2.png" style="zoom:50%;" /></center>
 
 &emsp;&emsp;在这种模式下，`Hive`服务（即`Hive`驱动本身）、元数据服务`Metastore`，元数据`metadata`（用于存储映射信息）都在同一个`JVM`进程中，元数据存储在内置的**Derby数据库**。当启动`HiveServer`进程时，`Derby`和`Metastore`都会启动，不需要额外启动`Metastore`服务。但是，一次只能支持一个用户访问，适用于测试场景。  
 
 2. **本地模式**  
 &emsp;&emsp;本地模式与内嵌模式的区别在于：把元数据提取出来，让`Metastore`服务与`HiveServer`主进程在同一个`JVM`进程中运行，存储元数据的数据库在单独的进程中运行。元数据一般存储在`MySQL`关系型数据库中。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.3.3_3.png" style="zoom:50%;" /></center>
+<center><img src="images/ch06/ch6.3.3_3.png" style="zoom:50%;" /></center>
 
 &emsp;&emsp;但是，每启动一个`Hive`服务，都会启动一个`Metastore`服务。多个人使用时，会启用多个`Metastore`服务。  
 
 3. **远程模式**  
 &emsp;&emsp;既然可以把元数据存储给提取出来，也可以考虑把`Metastore`给提取出来变为单独一个进程。把`Metastore`单独进行配置，并在单独的进程中运行，可以保证全局唯一，从而保证数据访问的安全性。（即不随`Hive`的启动而启动）
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.3.3_4.png" style="zoom:50%;" /></center>
+<center><img src="images/ch06/ch6.3.3_4.png" style="zoom:50%;" /></center>
 
 &emsp;&emsp;其优点是把`Metastore`服务独立出来，可以安装到远程的服务器集群里，从而解耦`Hive`服务和`Metastore`服务，保证`Hive`的稳定运行。
 
@@ -372,7 +372,7 @@ sudo service mysql restart  #重启
 
 &emsp;&emsp;执行结果如下：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex1.1.png)
+![](images/ch06/ch6_ex1.1.png)
 
 **注意**：安装时没有提示输入root账户密码，默认是空，可以执行以下命令设置密码为`123456`：  
 
@@ -486,7 +486,7 @@ systemctl status mysql
 
 &emsp;&emsp;执行结果如下：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex1.1.png)
+![](images/ch06/ch6_ex1.1.png)
 
 ##### 10.指定元数据数据库类型并初始化Schema
 
@@ -497,7 +497,7 @@ schematool -initSchema -dbType mysql
 
 &emsp;&emsp;初始化成功后，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex1.3.png)
+![](images/ch06/ch6_ex1.3.png)
 
 &emsp;&emsp;如果运行此步时报错，`schematool:未找到命令...`，需要重新`source`一下全局变量：
 
@@ -516,19 +516,19 @@ cd /opt/hadoop/sbin
 
 &emsp;&emsp;使用`jps`命令检验hadoop是否启动成功，如果6个进程都启动，表示启动成功，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex1.4.png)
+![](images/ch06/ch6_ex1.4.png)
 
 ##### 9.启动Hive
 
 &emsp;&emsp;执行`hive`命令，启动`Hive`，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex1.5.png)
+![](images/ch06/ch6_ex1.5.png)
 
 ##### 10.检验Hive是否成功部署
 
 &emsp;&emsp;在`hive shell`命令行下，执行`show databases;`命令，显示已有的数据库，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex1.6.png)
+![](images/ch06/ch6_ex1.6.png)
 
 &emsp;&emsp;至此，`Hive`安装部署完成，本次实验结束啦！
 
@@ -563,7 +563,7 @@ show databases;
 
 &emsp;&emsp;执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.1.png)
+![](images/ch06/ch6_ex2.1.png)
 
 ###### 1.2 使用数据库
 
@@ -574,7 +574,7 @@ use <database_name>;
 
 &emsp;&emsp;使用`datawhale`数据库，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.2.png)
+![](images/ch06/ch6_ex2.2.png)
 
 ###### 1.3 新建数据库
 
@@ -595,7 +595,7 @@ CREATE DATABASE IF NOT EXISTS hive_test
 
 &emsp;&emsp;执行结果如下：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.3.png)
+![](images/ch06/ch6_ex2.3.png)
 
 ###### 1.4 查看数据库信息
 
@@ -611,7 +611,7 @@ DESC DATABASE EXTENDED hive_test;
 
 &emsp;&emsp;执行结果如下：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.4.png)
+![](images/ch06/ch6_ex2.4.png)
 
 ###### 1.5 删除数据库
 
@@ -628,7 +628,7 @@ DROP DATABASE IF EXISTS hive_test CASCADE;
 
 &emsp;&emsp;执行结果如下：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.5.png)
+![](images/ch06/ch6_ex2.5.png)
 
 ##### 2.创建表
 
@@ -689,11 +689,11 @@ CREATE TABLE emp(
 
 &emsp;&emsp;执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.6.png)
+![](images/ch06/ch6_ex2.6.png)
 
 &emsp;&emsp;hdfs文件系统中的存储位置如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.7.png)
+![](images/ch06/ch6_ex2.7.png)
 
 ###### 2.3 外部表
 
@@ -714,11 +714,11 @@ CREATE EXTERNAL TABLE emp_external(
 
 &emsp;&emsp;使用 `desc emp_external` 命令，查看`emp_external`表的详细信息，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.8.png)
+![](images/ch06/ch6_ex2.8.png)
 
 &emsp;&emsp;hdfs文件系统中的存储位置如下所示：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.9.png)
+![](images/ch06/ch6_ex2.9.png)
 
 ###### 2.4 分区表
 
@@ -740,7 +740,7 @@ CREATE EXTERNAL TABLE emp_partition(
 
 &emsp;&emsp;hdfs文件系统中的存储位置如下所示：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.10.png)
+![](images/ch06/ch6_ex2.10.png)
 
 ###### 2.5 分桶表
 
@@ -762,7 +762,7 @@ CREATE EXTERNAL TABLE emp_bucket(
 
 &emsp;&emsp;hdfs文件系统中的存储位置如下所示：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.10.png)
+![](images/ch06/ch6_ex2.10.png)
 
 ###### 2.6 倾斜表
 
@@ -785,7 +785,7 @@ CREATE EXTERNAL TABLE emp_skewed(
 
 &emsp;&emsp;hdfs文件系统中的存储位置如下所示：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.10.png)
+![](images/ch06/ch6_ex2.10.png)
 
 ###### 2.7 临时表
 
@@ -817,13 +817,13 @@ CREATE TABLE emp_copy AS SELECT * FROM emp WHERE deptno='20';
 
 &emsp;&emsp;执行命令如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.11.png)
+![](images/ch06/ch6_ex2.11.png)
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.12.png)
+![](images/ch06/ch6_ex2.12.png)
 
 &emsp;&emsp;hdfs文件系统中的存储位置如下所示：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.13.png)
+![](images/ch06/ch6_ex2.13.png)
 
 ###### 2.9 复制表结构
 
@@ -841,7 +841,7 @@ CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS emp_co LIKE emp
 
 &emsp;&emsp;执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.14.png)
+![](images/ch06/ch6_ex2.14.png)
 
 > **注**：临时表不存储在hdfs中。
 
@@ -873,7 +873,7 @@ load data local inpath "/home/datawhale/emp.txt" into table emp;
 
 &emsp;&emsp;加载后可使用`select * from emp`查询该表的数据，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.15.png)
+![](images/ch06/ch6_ex2.15.png)
 
 &emsp;&emsp;如果使用分区表加载数据，需要增加字段`partition(deptno=30)`，或者可以修改`hive`的默认配置配置为动态分区，可以**参考**[Hive数仓：操作分区表](https://github.com/shenhao-stu/Big-Data/tree/master/experiments/Hive数仓：操作分区表.md)。  
 &emsp;&emsp;使用分区表加载`emp.txt`数据，命令如下：  
@@ -883,7 +883,7 @@ load data local inpath "/home/datawhale/emp.txt" into table emp_partition partit
 
 &emsp;&emsp;hdfs文件系统中的存储位置如下所示：
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.16.png)
+![](images/ch06/ch6_ex2.16.png)
 
 ##### 3.修改表
 
@@ -901,7 +901,7 @@ ALTER TABLE emp_temp RENAME TO new_emp;
 
 &emsp;&emsp;执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.17.png)
+![](images/ch06/ch6_ex2.17.png)
 
 ###### 3.2 修改列
 
@@ -970,7 +970,7 @@ DESCRIBE|Desc DATABASE [EXTENDED] db_name;  -- EXTENDED 是否显示额外属性
 
 &emsp;&emsp;查看`datawhale`库的属性，执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.18.png)
+![](images/ch06/ch6_ex2.18.png)
 
 
 &emsp;&emsp;也可用于查看表的属性，命令格式如下：
@@ -980,7 +980,7 @@ DESCRIBE|Desc [EXTENDED|FORMATTED] table_name -- FORMATTED 以友好的展现方
 
 &emsp;&emsp;查看`emp`表的属性，命令如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.19.png)
+![](images/ch06/ch6_ex2.19.png)
 
 ###### 5.2 show
 
@@ -998,7 +998,7 @@ SHOW DATABASES like 'datawhale*';
 
 &emsp;&emsp;`LIKE`子句允许使用正则表达式进行过滤，但是`SHOW`语句当中的`LIKE`子句只支持 `*`（通配符）和 `|`（条件或）两个符号。例如 `employees`，`emp *`，`emp * | * ees`，所有这些都将匹配名为`employees`的数据库。
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.20.png)
+![](images/ch06/ch6_ex2.20.png)
 
 2. **查看表的列表**  
 
@@ -1015,7 +1015,7 @@ SHOW TABLES IN 'datawhale';
 
 &emsp;&emsp;执行结果如下：  
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6_ex2.21.png)
+![](images/ch06/ch6_ex2.21.png)
 
 3. **查看视图列表**  
 
@@ -1045,4 +1045,4 @@ SHOW CREATE TABLE ([db_name.]table_name|view_name);
 > ps：多用脑，多思考，这一章内容很干，希望大家足够肝。  
 > 保护眼睛，保护头发，好好学习，天天向上
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch6.5.png" style="zoom:80%;" /></center>
+<center><img src="images/ch06/ch6.5.png" style="zoom:80%;" /></center>

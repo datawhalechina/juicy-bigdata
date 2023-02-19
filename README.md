@@ -1,7 +1,6 @@
 <div align=center>
-<img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/logo.png" width="400">
+<img src="images/logo.png" width="400">
 </div>
-
 
 # 妙趣横生大数据 Juicy Big Data
 
@@ -22,88 +21,26 @@
 
 **项目结构：**
 
-├─docs--------------------------------------------------章节主要内容（理论+实验）
-
-├─experiments-------------------------------------- 每个章节配套的补充小实验
-
-└─resources-------------------------------------------相关资源
+<pre>
+├─docs---------------------------------------------章节主要内容（理论+实验）  
+├─experiments--------------------------------------每个章节配套的补充小实验  
+└─resources----------------------------------------相关资源  
+</pre>
 
 以下是目录，还等什么，学就完事了～
 
 ## 大数据处理技术导论目录
 
-* [第一章：大数据概述](https://datawhalechina.github.io/juicy-bigdata/#/ch1%20大数据概述.md)
-  - [x] [1.1 大数据时代](https://datawhalechina.github.io/juicy-bigdata/#/ch1%20大数据概述?id=_1-1-大数据时代)
-  - [x] [1.2 大数据的概念](https://datawhalechina.github.io/juicy-bigdata/#/ch1%20大数据概述?id=_12-大数据的概念)
-  - [x] [1.3大数据的应用](https://datawhalechina.github.io/juicy-bigdata/#/ch1%20大数据概述?id=_13-大数据的应用)
-  - [x] [1.4 大数据关键技术](https://datawhalechina.github.io/juicy-bigdata/#/ch1%20大数据概述?id=_14-大数据关键技术)
-  
-* [第二章：Hadoop](https://datawhalechina.github.io/juicy-bigdata/#/ch2%20Hadoop)
-  - [x] [2.0 Hadoop的前世今生](https://datawhalechina.github.io/juicy-bigdata/#/ch2%20Hadoop?id=_20-hadoop的前世今生)
-  - [x] [2.1 概述](https://datawhalechina.github.io/juicy-bigdata/#/ch2%20Hadoop?id=_21-概述)
-  - [x] [2.3 Hadoop的安装与使用](https://datawhalechina.github.io/juicy-bigdata/#/ch2%20Hadoop?id=_23-hadoop的安装与应用)
-  - [x] [2.4 本章小结](https://datawhalechina.github.io/juicy-bigdata/#/ch2%20Hadoop?id=_24-本章小结)
-  
-* [第三章：HDFS](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS)
-  - [x] [3.0 产生的背景](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS?id=_30-产生的背景)
-  - [x] [3.1 概述](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS?id=_31-概述)
-  - [x] [3.2 HDFS的体系结构](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS?id=_32-hdfs的体系结构)
-  - [x] [3.3 HDFS的存储原理](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS?id=_33-hdfs的存储原理)
-  - [x] [3.4 HDFS的数据读写过程](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS?id=_34-hdfs的数据读写过程)
-  - [x] [3.5 HDFS编程实战](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS?id=_35-hdfs编程实战)
-  - [x] [3.6 本章小结](https://datawhalechina.github.io/juicy-bigdata/#/ch3%20HDFS?id=_36-本章小结)
-  
-* [第四章：HBase](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase)
-  - [x] [4.0 产生的背景](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase?id=_40-产生的背景)
-  - [x] [4.1 概述](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase?id=_41-概述)
-  - [x] [4.2 HBase 数据模型](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase?id=_42-hbase-数据模型)
-  - [x] [4.3 HBase 的实现原理](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase?id=_43-hbase-的实现原理)
-  - [x] [4.4 HBase 运行机制](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase?id=_44-hbase-运行机制)
-  - [x] [4.5 HBase 编程实战](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase?id=_45-hbase-编程实战)
-  - [x] [4.6 本章小结](https://datawhalechina.github.io/juicy-bigdata/#/ch4%20HBase?id=_46-本章小结)
-  
-* [第五章：MapReduce](https://datawhalechina.github.io/juicy-bigdata/#/ch5%20MapReduce)
-  - [x] [5.0 洋葱辣椒酱与MapReduce](https://datawhalechina.github.io/juicy-bigdata/#/ch5%20MapReduce?id=_50-洋葱辣椒酱与mapreduce)
-  - [x] [5.1 概述](https://datawhalechina.github.io/juicy-bigdata/#/ch5%20MapReduce?id=_51-概述)
-  - [x] [5.2 MapReduce的工作流程](https://datawhalechina.github.io/juicy-bigdata/#/ch5%20MapReduce?id=_52-mapreduce的工作流程)
-  - [x] [5.3 以Wordcount为例理解MapReduce](https://datawhalechina.github.io/juicy-bigdata/#/ch5%20MapReduce?id=_53-以wordcount为例理解mapreduce)
-  - [x] [5.4 本章小结](https://datawhalechina.github.io/juicy-bigdata/#/ch5%20MapReduce?id=_54-本章小结)
-  
-* [第六章：期中大作业](https://datawhalechina.github.io/juicy-bigdata/#/ch6%20期中大作业)
-  
-  - [x] [6.1 面试题](https://datawhalechina.github.io/juicy-bigdata/#/ch6%20期中大作业?id=_61-面试题)
-  - [x] [6.2 实战](https://datawhalechina.github.io/juicy-bigdata/#/ch6%20期中大作业?id=_62-实战)
-  
-* [第七章：Hive](https://datawhalechina.github.io/juicy-bigdata/#/ch7%20Hive)
-  
-  - [x] [7.0 数据仓库](https://datawhalechina.github.io/juicy-bigdata/#/ch7%20Hive?id=_70-数据仓库)
-  - [x] [7.1 Hive 基本概念](https://datawhalechina.github.io/juicy-bigdata/#/ch7%20Hive?id=_71-hive-基本概念)
-  - [x] [7.2 Hive 核心概念](https://datawhalechina.github.io/juicy-bigdata/#/ch7%20Hive?id=_72-Hive-核心概念)
-  - [x] [7.3 Hive 系统结构](https://datawhalechina.github.io/juicy-bigdata/#/ch7%20Hive?id=_73-hive-系统结构)
-  - [x] [7.4 Hive 编程实战](https://datawhalechina.github.io/juicy-bigdata/#/ch7%20Hive?id=_74-hive-编程实战)
-  - [x] [7.5 本章小结](https://datawhalechina.github.io/juicy-bigdata/#/ch7%20Hive?id=_75-本章小结)
-  
-* [第八章：Spark](https://datawhalechina.github.io/juicy-bigdata/#/ch8%20Spark)
-  
-  - [x] [8.0 引言](https://datawhalechina.github.io/juicy-bigdata/#/ch8%20Spark?id=_80-引言)
-  - [x] [8.1 Spark 概述](https://datawhalechina.github.io/juicy-bigdata/#/ch8%20Spark?id=_81-spark-概述)
-  - [x] [8.2 Spark 编程模型](https://datawhalechina.github.io/juicy-bigdata/#/ch8%20Spark?id=_82-spark-编程模型)
-  - [x] [8.3 Spark 架构原理](https://datawhalechina.github.io/juicy-bigdata/#/ch8%20Spark?id=_83-spark-架构原理)
-  - [x] [8.4 Spark 编程实战](https://datawhalechina.github.io/juicy-bigdata/#/ch8%20Spark?id=_84-spark-编程实战)
-  - [x] [8.5 本章小结](https://datawhalechina.github.io/juicy-bigdata/#/ch8%20Spark?id=_85-本章小结)
-  
-* [第九章：大数据处理技术总结](https://datawhalechina.github.io/juicy-bigdata/#/ch9%20大数据处理技术总结)
-  
-  - [x] [9.1 大数据技术框架综述](https://datawhalechina.github.io/juicy-bigdata/#/ch9%20大数据处理技术总结?id=_91-大数据技术框架综述)
-  - [x] [9.2 大数据分析引擎的发展简史](https://datawhalechina.github.io/juicy-bigdata/#/ch9%20大数据处理技术总结?id=_92-大数据分析引擎的发展简史)
-  - [x] [9.3 尾声](https://datawhalechina.github.io/juicy-bigdata/#/ch9%20大数据处理技术总结?id=_93-尾声)
-  
-* [第十章：期末大作业](https://datawhalechina.github.io/juicy-bigdata/#/ch10%20期末大作业)
-  
-  - [x] [10.1 面试题](https://datawhalechina.github.io/juicy-bigdata/#/ch10%20期末大作业?id=_101-面试题)
-  - [x] [10.2 实战](https://datawhalechina.github.io/juicy-bigdata/#/ch10%20期末大作业?id=_102-实战)
-  
-  
+* [第一章：大数据概述](https://datawhalechina.github.io/juicy-bigdata/#/ch01-bigdata-introduction)
+* [第二章：Hadoop](https://datawhalechina.github.io/juicy-bigdata/#/ch02-Hadoop)
+* [第三章：HDFS](https://datawhalechina.github.io/juicy-bigdata/#/ch03-HDFS)
+* [第四章：HBase](https://datawhalechina.github.io/juicy-bigdata/#/ch04-HBase)
+* [第五章：MapReduce](https://datawhalechina.github.io/juicy-bigdata/#/ch05-MapReduce)
+* [第六章：期中大作业](https://datawhalechina.github.io/juicy-bigdata/#/ch06-Homework01)
+* [第七章：Hive](https://datawhalechina.github.io/juicy-bigdata/#/ch07-Hive)
+* [第八章：Spark](https://datawhalechina.github.io/juicy-bigdata/#/ch08-Spark)
+* [第九章：大数据处理技术总结](https://datawhalechina.github.io/juicy-bigdata/#/ch09-bigdata-summary)
+* [第十章：期末大作业](https://datawhalechina.github.io/juicy-bigdata/#/ch10-Homework02)
 
 > 第二章以后的章节都配置有实验内容，使用Linux操作系统进行编程实战。
 
@@ -207,7 +144,7 @@
 ## 关注我们
 <div align=center>
 <p>扫描下方二维码关注公众号：Datawhale</p>
-<img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/datawhale_qrcode.jpeg" width = "180" height = "180">
+<img src="images/datawhale_qrcode.jpeg" width = "180" height = "180">
 </div>
 &emsp;&emsp;Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。
 

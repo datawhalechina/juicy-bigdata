@@ -10,7 +10,7 @@
 
 > ps：这一部分可是重点哈，敲黑板敲黑板！！！！都支棱起来支棱起来，好好学习冲冲冲~~~
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.0.png" style="zoom: 67%;" /></center>
+<center><img src="images/ch03/ch3.0.png" style="zoom: 67%;" /></center>
 
 ## 3.1 概述
 
@@ -23,11 +23,11 @@
 &emsp;&emsp;分布式文件系统的设计一般采用**“客户机/服务器”（Client/Server）**，客户端以特定的通信协议通过网络与服务器建立连接，提出文件访问请求，客户端和服务器可以通过设置访问权，来限制请求方对底层数据存储块的访问。  
 &emsp;&emsp;分布式文件系统在**物理结构**上是由计算机集群中的多个节点构成的，如下图所示，这些节点分为两类：一类叫“**主节点**”（Master Node），或者也被称为“**名称节点**"（NameNode）；另一类叫“**从节点**"（Worker Node），或者也被称为“**数据节点**"（DataNode）：
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.1.1.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3.1.1.png" style="zoom:50%;" /></center>
 
 - **名称节点：**负责文件和目录的创建、删除和重命名等，同时管理着数据节点和文件块的映射关系，因此客户端只有访问名称节点才能找到请求的文件块所在的位置，从而到相应位置读取所需的文件块；
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.1.1_namenode.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3.1.1_namenode.png" style="zoom:50%;" /></center>
 
 - **数据节点：**负责数据的存储和读取。在存储时，由名称节点分配存储位置，然后由客户端把数据直接写入相应数据节点；在读取时，客户端从名称节点获得数据节点和文件块的映射关系，然后就可以到相应位置访问文件块。数据节点也要根据名称节点的命令创建、删除数据块和冗余复制。
 
@@ -65,7 +65,7 @@
 
 &emsp;&emsp;用户在使用HDFS时，仍然可以像在普通文件系统中那样，使用文件名去存储和访问文件。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.2.png" style="zoom: 50%;" /></center>
+<center><img src="images/ch03/ch3.2.png" style="zoom: 50%;" /></center>
 
 &emsp;&emsp;实际上，在系统内部，一个文件会被切分成若干个数据块，这些数据块被分布存储到若干个数据节点上。当客户端需要访问一个文件时，首先把文件名发送给名称节点，名称节点根据文件名找到对应的数据块（一个文件可能包括多个数据块），再根据每个数据块信息找到实际存储在各个数据块的数据节点的位置，并把数据节点位置发送给客户端，最后客户端直接访问这些数据节点获取数据。在整个访问过程中，名称节点并不参与数据的传输。这种设计方式，使得各个文件的数据能够在不同的数据节点上实现并发访问，大大提高了数据访问速度。
 
@@ -76,7 +76,7 @@
 
 &emsp;&emsp;为了保证系统的**容错性**和**可用性**，HDFS采用了**多副本方式**对数据进行冗余存储，通常**一个数据块的多个副本会被分布到不同的数据节点上**。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.3.1.png" style="zoom: 67%;" /></center>
+<center><img src="images/ch03/ch3.3.1.png" style="zoom: 67%;" /></center>
 
 &emsp;&emsp;这种多副本方式具有以下 3 个优点：  
 - **加快数据传输速度：**当多个客户端需要同时访问同一个文件时，可以让各个客户端分别从不同的数据块副本中读取数据，这就大大加快了数据传输速度，实现了并行操作。
@@ -98,7 +98,7 @@
 
 &emsp;&emsp;**HDFS默认的冗余复制因子是 3**，每一个文件会被同时保存到 3 个地方，其中两份副本放在同一个机架的不同机器上面，第三个副本放在不同机架的机器上面。
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.3.2.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3.3.2.png" style="zoom:50%;" /></center>
 
 HDFS副本的存放策略是：
 1. 如果是在集群内发起写操作请求，则把第1个副本放置在发起写操作请求的数据节点上，实现就近写入数据。如果是来自集群外部的写操作，则从集群内部挑选一台磁盘空间较为充足、CPU不太忙的数据节点，作为第1个副本的存放地。
@@ -142,15 +142,15 @@ HDFS副本的存放策略是：
 
 > ps：读写过程很重要哟，大家注意点又到重点啦，敲黑板✖2
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1_emoij.png" style="zoom:80%;" /></center>
+<center><img src="images/ch03/ch3.4.1_emoij.png" style="zoom:80%;" /></center>
 
 > 说明：以下图片引用自博客：[翻译经典 HDFS原理讲解漫画](https://blog.csdn.net/hudiefenmu/article/details/37655491)
 
 ### 3.4.1 读数据的过程
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2_write.png" style="zoom:33%;" /></center>
+<center><img src="images/ch03/ch3.4.2_write.png" style="zoom:33%;" /></center>
 
-![img](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1.png)
+![img](images/ch03/ch3.4.1.png)
 
 **具体流程：**
 1. 客户端通过 `FileSystem.open()` 打开文件，相应地，在HDFS文件系统中，`DistributedFileSystem`具体实现了`FileSystem`。因此，调用`open()`方法后，`DistributedFileSystem`会创建输入流`FSDataInputStream`，对于HDFS而言，具体的输入流就是`DFSInputStream`。
@@ -163,9 +163,9 @@ HDFS副本的存放策略是：
 
 ### 3.4.2 写数据的过程
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.1_read.png" style="zoom:33%;" /></center>
+<center><img src="images/ch03/ch3.4.1_read.png" style="zoom:33%;" /></center>
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.2.png)
+![](images/ch03/ch3.4.2.png)
 
 **具体流程：**
 1. 客户端通过 `FileSystem.create()` 创建文件。相应地，在HDFS文件系统中， `DistributedFile System`具体实现了`FileSystem`。因此，调用`create()`方法后，`DistributedFileSystem`会创建输出流对象`FSDataOutputStream`，对于`HDFS`而言，具体的输出流就是`DFSOutputStream`。
@@ -177,19 +177,19 @@ HDFS副本的存放策略是：
 
 ### 3.4.3 HDFS故障类型和其检测方法
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.3_1.png)
+![](images/ch03/ch3.4.3_1.png)
 
 #### 3.4.3.1 读写故障的处理
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.3_2.png)
+![](images/ch03/ch3.4.3_2.png)
 
 #### 3.4.3.2 DataNode 故障处理
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.3_3.png)
+![](images/ch03/ch3.4.3_3.png)
 
 #### 3.4.3.3 副本布局策略
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.4.3_4.png)
+![](images/ch03/ch3.4.3_4.png)
 
 ## 3.5 HDFS编程实战
 
@@ -218,11 +218,11 @@ cd /opt/hadoop/sbin/
 ```
 
 &emsp;&emsp;执行结果如下：
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.1.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.1.png" style="zoom:50%;" /></center>
 
 ##### 2.查看HDFS进程
 &emsp;&emsp;输入`jps`命令可以查看所有的`Java`进程，正常启动后，可以得到如下类似结果：
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.2.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.2.png" style="zoom:50%;" /></center>
 
 ##### 3.验证HDFS运行状态
 
@@ -236,7 +236,7 @@ hadoop fs -mkdir /myhadoop1
 hadoop fs -ls /
 ```
 &emsp;&emsp;执行结果如下：
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.3.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.3.png" style="zoom:50%;" /></center>
 
 ##### 4.`ls`命令
 
@@ -250,7 +250,7 @@ hadoop fs -ls /
 hadoop fs -ls -R /
 ```
 &emsp;&emsp;执行结果如下：
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.4.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.4.png" style="zoom:50%;" /></center>
 
 ##### 5.`put`命令
 
@@ -284,7 +284,7 @@ hadoop fs -ls <hdfs file/hdfs dir>
 hadoop fs -ls /
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.5.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.5.png" style="zoom:50%;" /></center>
 
 ##### 6.`moveFromLocal`命令
 
@@ -310,7 +310,7 @@ hadoop fs -ls <hdfs file/hdfs dir>
 hadoop fs -ls /myhadoop1
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.6.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.6.png" style="zoom:50%;" /></center>
 
 ##### 7.`get`命令
 
@@ -336,7 +336,7 @@ cd /opt/hadoop
 ls -l
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.7.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.7.png" style="zoom:50%;" /></center>
 
 ##### 8. `rm`命令
 
@@ -403,11 +403,11 @@ hadoop fs -ls /myhadoop1
 hadoop fs -ls /myhadoop2
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.8.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.8.png" style="zoom:50%;" /></center>
 
 > ps:命令好多，不过都很硬核，嘤嘤嘤，各位看官，要坚持看下去哟
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.8_emoji.png" style="zoom:80%;" /></center>
+<center><img src="images/ch03/ch3_ex1.8_emoji.png" style="zoom:80%;" /></center>
 
 ##### 10.`cp`命令
 
@@ -439,7 +439,7 @@ hadoop fs -cp /LICENSE.txt /myhadoop1
 hadoop fs -ls /myhadoop1
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.9.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.9.png" style="zoom:50%;" /></center>
 
 ##### 11. `mv`命令
 
@@ -462,7 +462,7 @@ hadoop fs -mv /myhadoop1/LICENSE.txt /myhadoop2
 hadoop fs -ls /myhadoop2
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.10.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.10.png" style="zoom:50%;" /></center>
 
 ##### 12.`count`命令
 
@@ -476,7 +476,7 @@ hadoop fs -count <hdfs path>
 hadoop fs -count /myhadoop1/logs
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.12.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.12.png" style="zoom:50%;" /></center>
 
 ##### 13. `du`命令
 
@@ -503,14 +503,14 @@ hadoop fs -du -h /myhadoop2
 hadoop fs -du -s -h /myhadoop2
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.13.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.13.png" style="zoom:50%;" /></center>
 
 &emsp;&emsp;**执行结果说明：**  
 - 第一列：表示该目录下总文件大小
 - 第二列：表示该目录下所有文件在集群上的总存储大小，该大小和副本数相关，设置的默认副本数为3 ，所以第二列的是第一列的三倍 （第二列内容 = 文件大小 $\times$ 副本数）
 - 第三列：表示查询的目录
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.14.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.14.png" style="zoom:50%;" /></center>
 
 ##### 14.`setrep`命令
 
@@ -524,7 +524,7 @@ hadoop fs -setrep -R 3 <hdfs path>
 hadoop fs -setrep -R 3 /myhadoop1
 ```
 &emsp;&emsp;执行结果如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.15.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.15.png" style="zoom:50%;" /></center>
 
 ##### 15. `stat`命令
 &emsp;&emsp;使用如下命令，查看对应路径的状态信息： 
@@ -543,7 +543,7 @@ hdoop fs -stat [format] < hdfs path >
 hadoop fs -stat %b /myhadoop2/LICENSE.txt
 ```
 &emsp;&emsp;执行结果如下：
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.16.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.16.png" style="zoom:50%;" /></center>
 
 ##### 16.`balancer`命令
 
@@ -569,7 +569,7 @@ hdfs dfsadmin -report
 ```
 
 &emsp;&emsp;执行结果如下：
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.17.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.17.png" style="zoom:50%;" /></center>
 
 3） 使用`-safemode`参数，操作安全模式：  
 ```shell
@@ -586,11 +586,11 @@ hdfs dfsadmin -safemode <enter | leave | get | wait>
 hdfs dfsadmin -safemode enter
 ```
 &emsp;&emsp;执行结果如下：
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.18.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.18.png" style="zoom:50%;" /></center>
 
 ##### 18. 其他命令
 
-![](https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.19.png)
+![](images/ch03/ch3_ex1.19.png)
 
 ###### 18.1 `cat`命令
 
@@ -616,7 +616,7 @@ hadoop fs -appendToFile <local file> <hdfs file>
 ```
 
 &emsp;&emsp;执行示例如下：  
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3_ex1.21.png" style="zoom:50%;" /></center>
+<center><img src="images/ch03/ch3_ex1.21.png" style="zoom:50%;" /></center>
 
 ###### 18.3 `chown`命令
 &emsp;&emsp;使用`chown`命令，修改hdfs文件系统中文件的读、写、执行的权限，命令示例如下：  
@@ -637,4 +637,4 @@ hadoop fs -chmod 777 /datawhale
 >
 > 嘿嘿，这边又有一个看网课敲代码学傻的人\~\~\~\~
 
-<center><img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/ch3.5.png" style="zoom:80%;" /></center>
+<center><img src="images/ch03/ch3.5.png" style="zoom:80%;" /></center>
