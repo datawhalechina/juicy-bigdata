@@ -211,7 +211,7 @@ HDFS副本的存放策略是：
 
 ##### 1.启动Hadoop的HDFS相关进程
 
-&emsp;&emsp;启动Hadoop的HDFS服务，使用**root用户**执行如下命令：
+&emsp;&emsp;启动Hadoop的HDFS服务，使用**普通用户datawhale**执行如下命令：
 ```shell
 cd /opt/hadoop/sbin/
 ./start-dfs.sh
