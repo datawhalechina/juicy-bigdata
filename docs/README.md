@@ -10,7 +10,6 @@
 [![](https://img.shields.io/github/forks/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/network/members)
 [![](https://img.shields.io/github/issues-pr-closed-raw/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/issues)
 ![](https://img.shields.io/github/repo-size/datawhalechina/juicy-bigdata.svg?style=flat)
-[![](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/Sync.yml/badge.svg?branch=master)](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/CI.yml)
 
 本项目《妙趣横生大数据》是Datawhale:whale:大数据技术相关内容的导论课程。
 
