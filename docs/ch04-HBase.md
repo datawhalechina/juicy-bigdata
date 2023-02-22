@@ -422,7 +422,7 @@ cd /opt/hadoop/sbin/
 
 &emsp;&emsp;启动HBase，命令如下：
 ```shell
-cd /opt/hadoop/sbin/
+cd /opt/hbase/sbin/
 start-hbase.sh
 ```
 
