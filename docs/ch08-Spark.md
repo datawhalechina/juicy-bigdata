@@ -319,6 +319,10 @@ bin/spark-shell --master local[2]
 
 &emsp;&emsp; 如果你并未通过spark-shell，创建SparkContext的方法如下：（使用spark-shell的可以跳过这段）
 ```scala
+// 首先 import 必要的包，否则会报错
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+
 val conf = new SparkConf() // 创建SparkConf对象
 conf.setAppName("First Spark App") //设置app应用名称，在程序运行的监控解面可以看到名称
 conf.setMaster("local") //本地模式运行
