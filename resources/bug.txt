@@ -1,7 +1,0 @@
-无法显示namenode
-/opt/hadoop/sbin/stop-all.sh
-rm -rf /opt/hadoop/logs
-rm -rf /tmp/hadoop-shenhao/
-rm -rf /tmp/hadoop-yarn-shenhao/
-hdfs namenode -format
-/opt/hadoop/sbin/start-all.sh

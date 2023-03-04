@@ -1,15 +1,15 @@
 <div align=center>
-<img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/logo.png" width="400">
+<img src="images/logo.png" width="400">
 </div>
 
-# 妙趣横生大数据 Juicy Big Data {docsify-ignore-all}
+
+# 妙趣横生大数据 Juicy Big Data  {docsify-ignore-all}
 
 [![](https://img.shields.io/github/watchers/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/watchers)
 [![](https://img.shields.io/github/stars/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/stargazers)
 [![](https://img.shields.io/github/forks/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/network/members)
 [![](https://img.shields.io/github/issues-pr-closed-raw/datawhalechina/juicy-bigdata.svg?style=flat)](https://github.com/datawhalechina/juicy-bigdata/issues)
 ![](https://img.shields.io/github/repo-size/datawhalechina/juicy-bigdata.svg?style=flat)
-[![](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/Sync.yml/badge.svg?branch=master)](https://github.com/datawhalechina/juicy-bigdata/actions/workflows/CI.yml)
 
 本项目《妙趣横生大数据》是Datawhale:whale:大数据技术相关内容的导论课程。
 
@@ -17,11 +17,43 @@
 
 ## 食用方法
 
-:whale: 推荐使用 [**Big Data Github在线阅读**](https://datawhalechina.github.io/juicy-bigdata/) 或 [**Big Data Gitee在线阅读**](https://shenhao-stu.gitee.io/big-data/) 进行学习。
+:whale: 推荐使用 [**Big Data Github在线阅读**](https://datawhalechina.github.io/juicy-bigdata/) 进行学习。
 
-有配套代码的章节，可以在项目`experiments`目录的相应章节目录下面找到。
+**项目结构：**
+<pre>
+├─docs---------------------------------------------章节主要内容（理论+实验）  
+├─experiments--------------------------------------每个章节配套的补充小实验  
+└─resources----------------------------------------相关资源  
+</pre>
+
+- 建议自学时长: 22天
+- 自学形式:以教材内容为主，学习与总结知识点；以课后实验为辅，尝试完成实验，巩固知识理论。
+- 学习安排
+  - Task01 (3天) ：阅读第1章大数据概论、第2章Hadoop内容，总结知识点，选做其中Hadoop安装环境配置实验。（提前做第六章期中大作业内容，后面几个Task同上）
+  - Task02 (3天) ：阅读第3章HDFS内容，总结知识点，选做其中HDFS操作实验。
+  - Task03 (3天) ：阅读第4章HBase内容，选做其中HBase安装与操作实验。
+  - Task04 (3天) ：阅读第5章Mapreduce内容，选做其中WordCount实验。
+  - Task05 (2天) ：阅读第6章期中大作业（必做，提前阅读并完成）
+  - Task06 (3天) ：阅读第7章Hive内容，选做其中Hive相关实验。（提前做第十章期末大作业内容，后面同上）
+  - Task07 (3天) ：阅读第8章Spark内容、选做其中Spark实验。
+  - Task08 (2天) ：阅读第9章大数据技处理技术总结内容、并完成第10章期末大作业（必做，提前阅读并完成）
 
 以下是目录，还等什么，学就完事了～
+
+## 大数据处理技术导论目录
+
+* [第一章：大数据概述](https://datawhalechina.github.io/juicy-bigdata/#/ch01-bigdata-introduction)
+* [第二章：Hadoop](https://datawhalechina.github.io/juicy-bigdata/#/ch02-Hadoop)
+* [第三章：HDFS](https://datawhalechina.github.io/juicy-bigdata/#/ch03-HDFS)
+* [第四章：HBase](https://datawhalechina.github.io/juicy-bigdata/#/ch04-HBase)
+* [第五章：MapReduce](https://datawhalechina.github.io/juicy-bigdata/#/ch05-MapReduce)
+* [第六章：期中大作业](https://datawhalechina.github.io/juicy-bigdata/#/ch06-Homework01)
+* [第七章：Hive](https://datawhalechina.github.io/juicy-bigdata/#/ch07-Hive)
+* [第八章：Spark](https://datawhalechina.github.io/juicy-bigdata/#/ch08-Spark)
+* [第九章：大数据处理技术总结](https://datawhalechina.github.io/juicy-bigdata/#/ch09-bigdata-summary)
+* [第十章：期末大作业](https://datawhalechina.github.io/juicy-bigdata/#/ch10-Homework02)
+
+> 第二章以后的章节都配置有实验内容，使用Linux操作系统进行编程实战。
 
 ## 课程收获
 
@@ -42,17 +74,20 @@
 5. 《维度建模权威指南(第3版)》
 6. 《大数据处理之道》
 7. 《Spark快速大数据分析》
+8. 牛客网部分面试题
 
 ## 环境安装
 
 - Java 8
-- Hadoop 3.1.1
+- Hadoop 3.3.1
 - HBase 2.3.5 or 2.4.8
-- Mysql 8.0.27
+- Mysql 8.0.32
 - Hive 2.3.9
 - Spark 3.2.0
 
 **安装包下载地址**：https://datawhale.feishu.cn/drive/folder/fldcnvODsgRWbyqVW9ApavEVEJg   密码: hO38
+
+**注意：课程里默认是把安装包下载到`/data/hadoop`文件夹下，并解压到`/opt`下**
 
 ## 致谢
 
@@ -77,14 +112,6 @@
     </td>
   </tr>
   <tr>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">刘洋</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">中科院数学与系统科学研究院研究生，Datawhale成员，主要贡献者</span></td>
-    <td>
-        <a href="https://www.zhihu.com/people/ming-ren-19-34">知乎</a>,
-        <a href="https://github.com/liu-yang-maker">Github</a>
-    </td>
-  </tr>
-  <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王洲烽</span></td>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">太原理工大学数据科学与大数据技术本科生，Datawhale成员，主要贡献者</span></td>
     <td>
@@ -93,11 +120,26 @@
     </td>
   </tr>
   <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">蒋志政</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">太原理工大学数据科学与大数据技术本科生，主要贡献者</span></td>
+    <td>
+        <a href="https://github.com/gezelligheid0314">Github</a>
+    </td>
+  </tr>  
+  <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王嘉鹏</span></td>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">小米大数据开发工程师，Datawhale成员，主要贡献者</span></td>
     <td>
         <a href="https://blog.csdn.net/qq_29027865">CSDN</a>,
         <a href="https://github.com/ditingdapeng">Github</a>
+    </td>
+  </tr>
+  <tr>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">刘洋</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">中科院数学与系统科学研究院研究生，Datawhale成员，主要贡献者</span></td>
+    <td>
+        <a href="https://www.zhihu.com/people/ming-ren-19-34">知乎</a>,
+        <a href="https://github.com/liu-yang-maker">Github</a>
     </td>
   </tr>
   <tr>
@@ -111,13 +153,12 @@
 </table> 
 最后，也感谢伊小雪、毛自翔、萌弟、边圣陶参与本课程的内部评审！
 
-## 关注我们
 
+## 关注我们
 <div align=center>
 <p>扫描下方二维码关注公众号：Datawhale</p>
-<img src="https://cdn.jsdelivr.net/gh/shenhao-stu/Big-Data/doc_imgs/datawhale_qrcode.jpeg" width = "180" height = "180">
+<img src="images/datawhale_qrcode.jpeg" width = "180" height = "180">
 </div>
-
 &emsp;&emsp;Datawhale是一个专注AI领域的开源组织，以“for the learner，和学习者一起成长”为愿景，构建对学习者最有价值的开源学习社区。关注我们，一起学习成长。
 
 ## LICENSE
