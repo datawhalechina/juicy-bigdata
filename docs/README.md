@@ -105,7 +105,7 @@
 <tbody>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">沈豪</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士在读，项目负责人，参与前五章内容构建</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士，项目负责人，参与前五章内容构建</span></td>
     <td>
         <a href="https://www.zhihu.com/people/shenhao-63">知乎</a>,
         <a href="https://github.com/shenhao-stu">Github</a>
@@ -113,7 +113,7 @@
   </tr>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王洲烽</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">太原理工大学数据科学与大数据技术本科生，Datawhale成员，主要贡献者</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">国防科技大学计算机研究生，Datawhale成员，主要贡献者</span></td>
     <td>
         <a href="https://blog.csdn.net/wangzhouf">CSDN</a>,
         <a href="https://github.com/wzfer">Github</a>
@@ -121,7 +121,7 @@
   </tr>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">蒋志政</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">太原理工大学数据科学与大数据技术本科生，主要贡献者</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">电子科技大学计算机研究生，主要贡献者</span></td>
     <td>
         <a href="https://github.com/gezelligheid0314">Github</a>
     </td>
@@ -144,7 +144,7 @@
   </tr>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">胡锐锋</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">国网大数据平台研发工程师，Datawhale成员，主要贡献者</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据平台研发工程师，Datawhale成员，主要贡献者</span></td>
     <td>
         <a href="https://github.com/Relph1119">Github</a>
     </td>
