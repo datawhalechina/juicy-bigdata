@@ -91,7 +91,7 @@
 <tbody>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">沈豪</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士在读，项目负责人，参与前五章内容构建</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">复旦大学网安博士，项目负责人，参与前五章内容构建</span></td>
     <td>
         <a href="https://www.zhihu.com/people/shenhao-63">知乎</a>,
         <a href="https://github.com/shenhao-stu">Github</a>
