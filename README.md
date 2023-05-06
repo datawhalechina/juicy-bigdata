@@ -130,7 +130,7 @@
   </tr>
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">胡锐锋</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">国网大数据平台研发工程师，Datawhale成员，主要贡献者</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">大数据平台研发工程师，Datawhale成员，主要贡献者</span></td>
     <td>
         <a href="https://github.com/Relph1119">Github</a>
     </td>
