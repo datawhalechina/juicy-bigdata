@@ -406,14 +406,14 @@ flush privileges;  -- 刷新mysql系统权限关系表
 
 ```shell
 cd ~/Download  #切换到你的文件所在目录下
-sudo dpkg -i mysql-connector-java_8.0.32-1ubuntu22.04_all.deb  #安装mysql-connector-java
+sudo dpkg -i mysql-connector-java_8.0.32-1ubuntu22.04_all.deb  #安装mysql-connector-java #注意java版本可能为java-8.0.27
 ```
 
 ##### 7.导入MySQL JDBC jar包到`hive/lib`目录下
 
 &emsp;&emsp;使用`cp`命令，将`jar`包到`/opt/hive/lib`目录下，命令如下：  
 ```shell
-sudo cp /usr/share/java/mysql-connector-java-8.0.32.jar /opt/hive/lib/
+sudo cp /usr/share/java/mysql-connector-java-8.0.32.jar /opt/hive/lib/ #注意java版本可能为java-8.0.27
 ```
 
 > **注意**：
@@ -423,7 +423,7 @@ sudo cp /usr/share/java/mysql-connector-java-8.0.32.jar /opt/hive/lib/
 
 &emsp;&emsp;使用`chown`命令，更改`jar`包的所属用户和用户组，将其改为`datawhale`用户和`datawhale`用户组，命令如下：  
 ```shell
-sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-java-8.0.32.jar
+sudo chown datawhale:datawhale /opt/hive/lib/mysql-connector-java-8.0.32.jar #注意java版本可能为java-8.0.27
 ```
 
 ##### 8.修改hive配置文件
@@ -565,18 +565,7 @@ show databases;
 
 ![](images/ch06/ch6_ex2.1.png)
 
-###### 1.2 使用数据库
-
-&emsp;&emsp;使用`use`命令，指定要使用的数据库，命令格式如下：  
-```sql
-use <database_name>;
-```
-
-&emsp;&emsp;使用`datawhale`数据库，执行结果如下：  
-
-![](images/ch06/ch6_ex2.2.png)
-
-###### 1.3 新建数据库
+###### 1.2 新建数据库
 
 &emsp;&emsp;使用`create database`命令，新建数据库，命令格式如下：  
 ```sql
@@ -586,7 +575,7 @@ CREATE (DATABASE|SCHEMA) [IF NOT EXISTS] database_name   -- DATABASE|SCHEMA 是�
   [WITH DBPROPERTIES (property_name=property_value, ...)]; -- 指定额外属性
 ```
 
-&emsp;&emsp;创建`hive_test`数据库，命令如下：  
+&emsp;&emsp;创建`hive_test`或`datawhale`数据库，命令如下：  
 ```sql
 CREATE DATABASE IF NOT EXISTS hive_test
   COMMENT 'hive database for test'
@@ -596,6 +585,17 @@ CREATE DATABASE IF NOT EXISTS hive_test
 &emsp;&emsp;执行结果如下：
 
 ![](images/ch06/ch6_ex2.3.png)
+
+###### 1.3 使用数据库
+
+&emsp;&emsp;使用`use`命令，指定要使用的数据库，命令格式如下：  
+```sql
+use <database_name>;
+```
+
+&emsp;&emsp;使用`datawhale`数据库，执行结果如下：  
+
+![](images/ch06/ch6_ex2.2.png)
 
 ###### 1.4 查看数据库信息
 
@@ -807,45 +807,7 @@ CREATE TEMPORARY TABLE emp_temp(
   )
   ROW FORMAT DELIMITED FIELDS TERMINATED BY "\t";
 ```
-
-###### 2.8 CTAS创建表
-
-&emsp;&emsp;使用`create table as select`语句形式，从查询语句的结果中创建表：  
-```sql
-CREATE TABLE emp_copy AS SELECT * FROM emp WHERE deptno='20';
-```
-
-&emsp;&emsp;执行命令如下：  
-
-![](images/ch06/ch6_ex2.11.png)
-
-![](images/ch06/ch6_ex2.12.png)
-
-&emsp;&emsp;hdfs文件系统中的存储位置如下所示：
-
-![](images/ch06/ch6_ex2.13.png)
-
-###### 2.9 复制表结构
-
-&emsp;&emsp;使用`create like`语句形式，复制一个表的表结构，命令格式如下：  
-```sql
-CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name  -- 创建表表名
-   LIKE existing_table_or_view_name  -- 被复制表的表名
-   [LOCATION hdfs_path]; -- 存储位置
-```
-
-&emsp;&emsp;通过复制`emp`表，创建`emp_co`表，命令如下：  
-```sql
-CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS emp_co LIKE emp
-```
-
-&emsp;&emsp;执行结果如下：  
-
-![](images/ch06/ch6_ex2.14.png)
-
-> **注**：临时表不存储在hdfs中。
-
-###### 2.10 加载数据到表
+###### 2.8 加载数据到表
 
 &emsp;&emsp;加载数据到表中属于`DML`操作，这里为了方便大家测试，先简单介绍一下加载本地数据到表中的命令，命令如下：  
 ```sql
@@ -884,6 +846,43 @@ load data local inpath "/home/datawhale/emp.txt" into table emp_partition partit
 &emsp;&emsp;hdfs文件系统中的存储位置如下所示：
 
 ![](images/ch06/ch6_ex2.16.png)
+
+###### 2.9 CTAS创建表
+
+&emsp;&emsp;使用`create table as select`语句形式，从查询语句的结果中创建表：  
+```sql
+CREATE TABLE emp_copy AS SELECT * FROM emp WHERE deptno='20';
+```
+
+&emsp;&emsp;执行命令如下：  
+
+![](images/ch06/ch6_ex2.11.png)
+
+![](images/ch06/ch6_ex2.12.png)
+
+&emsp;&emsp;hdfs文件系统中的存储位置如下所示：
+
+![](images/ch06/ch6_ex2.13.png)
+
+###### 2.10 复制表结构
+
+&emsp;&emsp;使用`create like`语句形式，复制一个表的表结构，命令格式如下：  
+```sql
+CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS] [db_name.]table_name  -- 创建表表名
+   LIKE existing_table_or_view_name  -- 被复制表的表名
+   [LOCATION hdfs_path]; -- 存储位置
+```
+
+&emsp;&emsp;通过复制`emp`表，创建`emp_co`表，命令如下：  
+```sql
+CREATE TEMPORARY EXTERNAL TABLE IF NOT EXISTS emp_co LIKE emp
+```
+
+&emsp;&emsp;执行结果如下：  
+
+![](images/ch06/ch6_ex2.14.png)
+
+> **注**：临时表不存储在hdfs中。
 
 ##### 3.修改表
 
