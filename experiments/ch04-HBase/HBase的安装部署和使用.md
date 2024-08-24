@@ -117,7 +117,6 @@ dolphin@tools:/opt/hadoop/sbin$ jps
 
 运行下面的命令，启动HBase
 
-`cd /opt/hbase/bin/`
 `start-hbase.sh`
 
 检验HBase是否启动成功
