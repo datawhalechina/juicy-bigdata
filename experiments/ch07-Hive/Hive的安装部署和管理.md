@@ -59,11 +59,11 @@ export PATH=$PATH:$HIVE_HOME/bin
 
 复制jar包到/app/hive/lib目录下
 
-`sudo cp /data/hadoop/mysql-connector-java-5.1.7-bin.jar /opt/hive/lib/ #注意版本可能为java_8.0.32`
+`sudo cp /data/hadoop/mysql-connector-java-5.1.7-bin.jar /opt/hive/lib/ #注意java版本`
 
 更改jar包所属用户和用户组
 
-`sudo chown dolphin:dolphin /opt/hive/lib/mysql-connector-java-5.1.7-bin.jar #注意版本可能为java_8.0.32`
+`sudo chown dolphin:dolphin /opt/hive/lib/mysql-connector-java-5.1.7-bin.jar #注意java版本`
 
 ##### 6.修改hive配置文件
 
