@@ -114,7 +114,7 @@
   </tr>  
   <tr>
     <td><span style="font-weight:normal;font-style:normal;text-decoration:none">王嘉鹏</span></td>
-    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">小米大数据开发工程师，Datawhale成员，主要贡献者</span></td>
+    <td><span style="font-weight:normal;font-style:normal;text-decoration:none">云原生/大数据开发工程师，Datawhale成员，主要贡献者</span></td>
     <td>
         <a href="https://blog.csdn.net/qq_29027865">CSDN</a>,
         <a href="https://github.com/ditingdapeng">Github</a>
